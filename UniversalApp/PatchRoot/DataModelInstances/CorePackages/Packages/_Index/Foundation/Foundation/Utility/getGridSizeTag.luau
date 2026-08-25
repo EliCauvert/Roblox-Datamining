@@ -1,12 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(p0)
-	if typeof(p0) == "number" then
-		return `col-{p0}`
+return function(p1)
+	if typeof(p1) == "number" then
+		return `col-{p1}`
 	end
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		if typeof(v) == "number" then
 			table.insert(t, `{i}-col-{v}`)
 		end

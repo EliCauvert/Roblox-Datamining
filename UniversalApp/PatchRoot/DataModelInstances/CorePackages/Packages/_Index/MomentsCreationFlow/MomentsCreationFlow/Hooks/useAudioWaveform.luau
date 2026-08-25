@@ -12,46 +12,46 @@ local function _(value)
 	return `rbxassetid://{value}`
 end
 
-local function normalizeWaveform(p0)
-	local var5 = 0
+local function normalizeWaveform(p1)
+	local var1 = 0
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		local maxValue = math.max(0, v)
 		table.insert(t, maxValue)
-		var5 = math.max(var5, maxValue)
+		var1 = math.max(var1, maxValue)
 	end
-	if var5 == 0 then
+	if var1 == 0 then
 		return t
 	end
 	local t_1 = {}
 	
 	for i_1, v_1 in t do
-		table.insert(t_1, v_1 / var5)
+		table.insert(t_1, v_1 / var1)
 	end
 	return t_1
 end
 
 return function(p1, p2)
 	-- upvalues: reactModule (ref), segmentSelectorWidth (ref), waveformWidth (ref), waveformPadding (ref), useEffect (ref), localPlayer (ref), normalizeWaveform (ref)
-	local var9, var10 = reactModule.useState({})
-	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useMemo(function()
+	local var1, var2 = reactModule.useState({})
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: segmentSelectorWidth (copy), waveformWidth (copy), waveformPadding (copy), p2 (ref)
 		return segmentSelectorWidth / (waveformWidth + waveformPadding) / p2
 	end, { p2 })
-	local var13 = reactModule.useMemo(function()
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref)
 		return `rbxassetid://{p1}`
 	end, { p1 })
 	useEffect(function()
-		-- upvalues: var13 (ref), var11 (ref), localPlayer (copy)
+		-- upvalues: var5 (ref), var3 (ref), localPlayer (copy)
 		local audioWaveform = Instance.new("Folder")
 		audioWaveform.Name = "AudioWaveform"
 		local audioPlayer = Instance.new("AudioPlayer")
-		audioPlayer.Asset = var13
+		audioPlayer.Asset = var5
 		audioPlayer.Parent = audioWaveform
-		var11.current = audioPlayer
+		var3.current = audioPlayer
 		audioWaveform.Parent = localPlayer:WaitForChild("PlayerGui")
 		
 		return function()
@@ -59,24 +59,24 @@ return function(p1, p2)
 			audioWaveform:Destroy()
 		end
 	end, { p1, p2 })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), var12 (ref), var10 (ref), normalizeWaveform (copy)
-		local current = var11.current
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var4 (ref), var2 (ref), normalizeWaveform (copy)
+		local current = var3.current
 		
 		if current and current.IsReady then
 			task.spawn(function()
-				-- upvalues: current (ref), var12 (copy), var10 (copy), normalizeWaveform (copy)
-				var10(normalizeWaveform(current:GetWaveformAsync(NumberRange.new(0, current.TimeLength), var12 * current.TimeLength)))
+				-- upvalues: current (ref), var4 (copy), var2 (copy), normalizeWaveform (copy)
+				var2(normalizeWaveform(current:GetWaveformAsync(NumberRange.new(0, current.TimeLength), var4 * current.TimeLength)))
 			end)
 		end
 	end, {})
 	useEffect(function()
-		-- upvalues: var11 (ref), var14 (ref)
-		local current = var11.current
+		-- upvalues: var3 (ref), var6 (ref)
+		local current = var3.current
 		local t = {}
 		
 		if current then
-			table.insert(t, current:GetPropertyChangedSignal("IsReady"):Connect(var14))
+			table.insert(t, current:GetPropertyChangedSignal("IsReady"):Connect(var6))
 		end
 		return function()
 			-- upvalues: t (ref)
@@ -86,5 +86,5 @@ return function(p1, p2)
 		end
 	end, {})
 	
-	return var9
+	return var1
 end

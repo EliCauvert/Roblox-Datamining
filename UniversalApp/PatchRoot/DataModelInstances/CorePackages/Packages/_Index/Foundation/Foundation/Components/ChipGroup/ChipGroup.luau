@@ -33,28 +33,28 @@ local t = {
 	variant = chipGroupVariantModule.Row
 }
 
-local function Scrim(p0)
+local function Scrim(p1)
 	-- upvalues: useBackgroundStyle (ref), reactModule (ref), viewModule (ref)
 	return reactModule.createElement(viewModule, {
-		LayoutOrder = p0.LayoutOrder,
-		Size = UDim2.new(0, p0.width, 1, 0),
+		LayoutOrder = p1.LayoutOrder,
+		Size = UDim2.new(0, p1.width, 1, 0),
 		backgroundStyle = useBackgroundStyle(),
-		testId = p0.testId
+		testId = p1.testId
 	}, {
-		UIGradient = reactModule.createElement("UIGradient", { Transparency = p0.gradient })
+		UIGradient = reactModule.createElement("UIGradient", { Transparency = p1.gradient })
 	})
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useChipGroupVariantsModule (ref), flagsModule (ref), reactModule (ref), chipModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref), useClippingRectModule (ref), scrollViewModule (ref), visibilityModule (ref), Scrim (ref), numberSequence (ref), numberSequence_1 (ref)
-	local var19 = withDefaultsModule(p1, t)
-	local var20 = useChipGroupVariantsModule(useTokensModule(), var19.variant, var19.size)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useChipGroupVariantsModule(useTokensModule(), var1.variant, var1.size)
 	
 	if flagsModule.FoundationUnifiedScrimScrolling then
-		local size = var19.size
+		local size = var1.size
 		local t_1 = {}
 		
-		for i, v in var19.chips do
+		for i, v in var1.chips do
 			t_1[`Chip{i}`] = reactModule.createElement(chipModule, {
 				text = v.text,
 				leading = v.leading,
@@ -64,50 +64,50 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				variant = v.variant,
 				size = size,
 				LayoutOrder = i,
-				testId = `{var19.testId}--chip-{i}`
+				testId = `{var1.testId}--chip-{i}`
 			})
 		end
-		local var22 = reactModule.createElement(viewModule, {
+		local var3 = reactModule.createElement(viewModule, {
 			tag = "auto-xy",
 			layout = {
 				FillDirection = Enum.FillDirection.Horizontal,
-				Padding = UDim.new(0, var20.gap),
-				Wraps = var20.isWrapped
+				Padding = UDim.new(0, var2.gap),
+				Wraps = var2.isWrapped
 			}
 		}, t_1)
 		
-		return if var20.isWrapped then reactModule.createElement(viewModule, withCommonPropsModule(var19, { tag = "size-full-0 auto-y", ref = p2 }), { ChipContainer = var22 }) else reactModule.createElement(overflowScrollContainerModule, withCommonPropsModule(var19, { size = var19.size, ref = p2 }), { ChipContainer = var22 })
+		return if var2.isWrapped then reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "size-full-0 auto-y", ref = p2 }), { ChipContainer = var3 }) else reactModule.createElement(overflowScrollContainerModule, withCommonPropsModule(var1, { size = var1.size, ref = p2 }), { ChipContainer = var3 })
 	else
-		local var23, var24 = reactModule.useBinding(false)
-		local var25, var26 = reactModule.useBinding(false)
-		local var27 = reactModule.useRef(nil)
-		local var28 = useClippingRectModule(var27)
-		local var29 = reactModule.useCallback(function(p3)
-			-- upvalues: var20 (ref), var24 (ref), var26 (ref)
-			if var20.hasScrim and p3.AbsoluteWindowSize.X ~= 0 then
-				var24(p3.CanvasPosition.X ~= 0)
-				var26(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
+		local var4, var5 = reactModule.useBinding(false)
+		local var6, var7 = reactModule.useBinding(false)
+		local var8 = reactModule.useRef(nil)
+		local var9 = useClippingRectModule(var8)
+		local var10 = reactModule.useCallback(function(p1)
+			-- upvalues: var2 (ref), var5 (ref), var7 (ref)
+			if var2.hasScrim and p1.AbsoluteWindowSize.X ~= 0 then
+				var5(p1.CanvasPosition.X ~= 0)
+				var7(p1.AbsoluteWindowSize.X + p1.CanvasPosition.X < p1.AbsoluteCanvasSize.X - 1)
 				
 				return
 			end
-		end, { var20.hasScrim })
-		local var30 = reactModule.useCallback(function()
-			-- upvalues: var27 (ref), var29 (ref)
-			if var27.current then
-				var29(var27.current)
+		end, { var2.hasScrim })
+		local var11 = reactModule.useCallback(function()
+			-- upvalues: var8 (ref), var10 (ref)
+			if var8.current then
+				var10(var8.current)
 			end
-		end, { var19.onAbsoluteSizeChanged, var29 })
-		local var31 = reactModule.useCallback(function()
-			-- upvalues: var27 (ref), var29 (ref)
-			if var27.current then
-				var29(var27.current)
+		end, { var1.onAbsoluteSizeChanged, var10 })
+		local var12 = reactModule.useCallback(function()
+			-- upvalues: var8 (ref), var10 (ref)
+			if var8.current then
+				var10(var8.current)
 			end
-		end, { var19.onAbsolutePositionChanged, var29 })
-		local size = var19.size
-		local scrimWidth = var20.scrimWidth
+		end, { var1.onAbsolutePositionChanged, var10 })
+		local size = var1.size
+		local scrimWidth = var2.scrimWidth
 		local t_1 = {}
 		
-		for i, v in var19.chips do
+		for i, v in var1.chips do
 			t_1[`Chip{i}`] = reactModule.createElement(chipModule, {
 				text = v.text,
 				leading = v.leading,
@@ -117,14 +117,14 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				variant = v.variant,
 				size = size,
 				LayoutOrder = i,
-				testId = `{var19.testId}--chip-{i}`
+				testId = `{var1.testId}--chip-{i}`
 			})
 		end
-		local var33 = withCommonPropsModule(var19, { tag = "size-full-0 auto-y", ref = p2 })
-		var33.onAbsoluteSizeChanged = var30
-		var33.onAbsolutePositionChanged = var31
+		local var13 = withCommonPropsModule(var1, { tag = "size-full-0 auto-y", ref = p2 })
+		var13.onAbsoluteSizeChanged = var11
+		var13.onAbsolutePositionChanged = var12
 		
-		return reactModule.createElement(viewModule, var33, {
+		return reactModule.createElement(viewModule, var13, {
 			ScrollView = reactModule.createElement(scrollViewModule, {
 				tag = "size-full-0 auto-y",
 				scroll = {
@@ -132,41 +132,41 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					AutomaticCanvasSize = Enum.AutomaticSize.X,
 					CanvasSize = UDim2.fromScale(0, 1),
 					ScrollingDirection = Enum.ScrollingDirection.X,
-					ScrollingEnabled = not var20.isWrapped,
+					ScrollingEnabled = not var2.isWrapped,
 					scrollBarVisibility = visibilityModule.None
 				},
 				layout = {
 					FillDirection = Enum.FillDirection.Horizontal,
-					Padding = UDim.new(0, var20.gap),
-					Wraps = var20.isWrapped
+					Padding = UDim.new(0, var2.gap),
+					Wraps = var2.isWrapped
 				},
-				ClipsDescendants = var20.isWrapped,
-				scrollingFrameRef = var27,
-				onCanvasPositionChanged = if var20.hasScrim then var29 else nil,
-				onAbsoluteCanvasSizeChanged = if var20.hasScrim then var29 else nil,
-				onAbsoluteWindowSizeChanged = if var20.hasScrim then var29 else nil
+				ClipsDescendants = var2.isWrapped,
+				scrollingFrameRef = var8,
+				onCanvasPositionChanged = if var2.hasScrim then var10 else nil,
+				onAbsoluteCanvasSizeChanged = if var2.hasScrim then var10 else nil,
+				onAbsoluteWindowSizeChanged = if var2.hasScrim then var10 else nil
 			}, t_1),
-			ScrimWrapper = if var20.hasScrim then reactModule.createElement(viewModule, {
+			ScrimWrapper = if var2.hasScrim then reactModule.createElement(viewModule, {
 				tag = "row flex-between",
 				ZIndex = 2,
-				Size = var28:map(function(p4)
+				Size = var9:map(function(p1)
 					-- upvalues: scrimWidth (ref)
-					return UDim2.fromOffset(p4.Max.X - p4.Min.X, scrimWidth)
+					return UDim2.fromOffset(p1.Max.X - p1.Min.X, scrimWidth)
 				end),
 				AnchorPoint = Vector2.new(0.5, 0),
 				Position = UDim2.fromScale(0.5, 0)
 			}, {
-				ScrimStart = var23 and reactModule.createElement(Scrim, {
+				ScrimStart = var4 and reactModule.createElement(Scrim, {
 					LayoutOrder = 1,
 					gradient = numberSequence,
 					width = scrimWidth,
-					testId = `{var19.testId}--scrim-start`
+					testId = `{var1.testId}--scrim-start`
 				}),
-				ScrimEnd = var25 and reactModule.createElement(Scrim, {
+				ScrimEnd = var6 and reactModule.createElement(Scrim, {
 					LayoutOrder = 2,
 					gradient = numberSequence_1,
 					width = scrimWidth,
-					testId = `{var19.testId}--scrim-end`
+					testId = `{var1.testId}--scrim-end`
 				})
 			}) else nil
 		})

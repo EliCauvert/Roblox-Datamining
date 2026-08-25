@@ -9,16 +9,16 @@ local _ = require(foundation.Enums.ControlState)
 local _ = require(foundation.Enums.InputSize)
 local useBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVariants)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokensModule (ref), useBaseMenuItemVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref)
-	local var7 = useBaseMenuItemVariantsModule(useTokensModule(), p0.size, false)
+	local var1 = useBaseMenuItemVariantsModule(useTokensModule(), p1.size, false)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p0, {
-		tag = `row align-y-center {var7.container.tag}`,
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
+		tag = `row align-y-center {var1.container.tag}`,
 		padding = {
-			left = UDim.new(0, if p0.menuHasCheck == true then (var7.container.paddingLeftWithCheck or 0) + (var7.title.checkColumnWidth or 0) else var7.container.paddingLeftWithoutCheck or 0),
-			right = UDim.new(0, var7.container.paddingRight or 0)
+			left = UDim.new(0, if p1.menuHasCheck == true then (var1.container.paddingLeftWithCheck or 0) + (var1.title.checkColumnWidth or 0) else var1.container.paddingLeftWithoutCheck or 0),
+			right = UDim.new(0, var1.container.paddingRight or 0)
 		},
-		ref = p1
-	}), reactModule.createElement(textModule, { Text = p0.text, tag = var7.title.tag }))
+		ref = p2
+	}), reactModule.createElement(textModule, { Text = p1.text, tag = var1.title.tag }))
 end))

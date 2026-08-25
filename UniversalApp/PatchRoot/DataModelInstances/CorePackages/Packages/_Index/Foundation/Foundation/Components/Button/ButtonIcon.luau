@@ -16,46 +16,46 @@ local useTextSizeOffsetModule = require(foundation.Providers.Style.useTextSizeOf
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local usePresentationContext = require(foundation.Providers.Style.PresentationContext).usePresentationContext
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokensModule (ref), useTextSizeOffsetModule (ref), getIconScaleModule (ref), usePresentationContext (ref), useButtonVariantsModule (ref), isBuilderOrMigratedIcon (ref), reactModule (ref), textModule (ref), isMigrated (ref), uiblox (ref), builderIconsModule (ref), imageModule (ref)
-	local disabledTransparencyBinding = p0.disabledTransparencyBinding
-	local textTransparencyBinding = p0.textTransparencyBinding
-	local var10 = useTokensModule()
-	local var11 = useTextSizeOffsetModule()
-	local var12, var13 = getIconScaleModule(p0.icon, p0.size)
-	local var14 = usePresentationContext()
-	local var15 = useButtonVariantsModule(var10, p0.size, p0.variant, if var14 then var14.colorNamespace else nil)
+	local disabledTransparencyBinding = p1.disabledTransparencyBinding
+	local textTransparencyBinding = p1.textTransparencyBinding
+	local var1 = useTokensModule()
+	local var2 = useTextSizeOffsetModule()
+	local var3, var4 = getIconScaleModule(p1.icon, p1.size)
+	local var5 = usePresentationContext()
+	local var6 = useButtonVariantsModule(var1, p1.size, p1.variant, if var5 then var5.colorNamespace else nil)
 	
-	return if p0.icon then if isBuilderOrMigratedIcon(p0.icon) then reactModule.createElement(textModule, {
+	return if p1.icon then if isBuilderOrMigratedIcon(p1.icon) then reactModule.createElement(textModule, {
 		tag = "position-center-center anchor-center-center",
-		Text = if isMigrated(p0.icon) then uiblox[p0.icon].name else p0.icon,
+		Text = if isMigrated(p1.icon) then uiblox[p1.icon].name else p1.icon,
 		fontStyle = {
-			Font = builderIconsModule.Font[if isMigrated(p0.icon) then uiblox[p0.icon].variant else builderIconsModule.IconVariant.Regular],
-			FontSize = var15.icon.size.Y.Offset
+			Font = builderIconsModule.Font[if isMigrated(p1.icon) then uiblox[p1.icon].variant else builderIconsModule.IconVariant.Regular],
+			FontSize = var6.icon.size.Y.Offset
 		},
-		Size = var15.icon.size,
-		textStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p2)
-			-- upvalues: var15 (ref)
+		Size = var6.icon.size,
+		textStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p1)
+			-- upvalues: var6 (ref)
 			return {
-				Color3 = var15.content.style.Color3,
-				Transparency = p2[2] + p2[1]
-			}
-		end),
-		testId = `{p0.testId}--icon`
-	}, {
-		UITextSizeConstraint = if var11 > 0 then reactModule.createElement("UITextSizeConstraint", { MaxTextSize = var15.icon.size.Y.Offset }) else nil
-	}) else reactModule.createElement(imageModule, {
-		tag = "position-center-center anchor-center-center",
-		Image = p0.icon,
-		Size = if var12 then UDim2.fromOffset(var12.X, var12.Y) else var15.icon.size,
-		imageStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p1)
-			-- upvalues: var15 (ref)
-			return {
-				Color3 = var15.content.style.Color3,
+				Color3 = var6.content.style.Color3,
 				Transparency = p1[2] + p1[1]
 			}
 		end),
-		scale = var13,
-		testId = `{p0.testId}--icon`
+		testId = `{p1.testId}--icon`
+	}, {
+		UITextSizeConstraint = if var2 > 0 then reactModule.createElement("UITextSizeConstraint", { MaxTextSize = var6.icon.size.Y.Offset }) else nil
+	}) else reactModule.createElement(imageModule, {
+		tag = "position-center-center anchor-center-center",
+		Image = p1.icon,
+		Size = if var3 then UDim2.fromOffset(var3.X, var3.Y) else var6.icon.size,
+		imageStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p1)
+			-- upvalues: var6 (ref)
+			return {
+				Color3 = var6.content.style.Color3,
+				Transparency = p1[2] + p1[1]
+			}
+		end),
+		scale = var4,
+		testId = `{p1.testId}--icon`
 	}) else nil
 end

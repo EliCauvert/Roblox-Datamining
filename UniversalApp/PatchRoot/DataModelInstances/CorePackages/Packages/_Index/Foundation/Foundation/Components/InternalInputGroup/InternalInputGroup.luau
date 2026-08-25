@@ -17,25 +17,25 @@ local t = {
 	placement = inputPlacementModule.Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useInputGroupVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), inputGroupContextModule (ref), textModule (ref)
-	local var12 = withDefaultsModule(p0, t)
-	local var13 = useInputGroupVariantsModule(useTokensModule(), var12.size)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useInputGroupVariantsModule(useTokensModule(), var1.size)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var12, { tag = var13.container.tag, ref = p1 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = var2.container.tag, ref = p2 }), {
 		InputGroupContext = reactModule.createElement(inputGroupContextModule.Provider, {
 			value = reactModule.useMemo(function()
-				-- upvalues: var12 (ref)
-				return { size = var12.size, placement = var12.placement }
-			end, { var12.size, var12.placement })
+				-- upvalues: var1 (ref)
+				return { size = var1.size, placement = var1.placement }
+			end, { var1.size, var1.placement })
 		}, {
-			GroupLabel = if var12.legend == nil or var12.legend == "" then nil else reactModule.createElement(textModule, {
+			GroupLabel = if var1.legend == nil or var1.legend == "" then nil else reactModule.createElement(textModule, {
 				LayoutOrder = 0,
-				Text = var12.legend,
-				tag = var13.legend.tag,
-				testId = `{var12.testId}--label`
+				Text = var1.legend,
+				tag = var2.legend.tag,
+				testId = `{var1.testId}--label`
 			}),
-			Children = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var13.children.tag }, var12.children)
+			Children = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var2.children.tag }, var1.children)
 		})
 	})
 end))

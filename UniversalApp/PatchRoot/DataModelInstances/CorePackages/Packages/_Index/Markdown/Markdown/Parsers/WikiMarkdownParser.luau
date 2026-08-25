@@ -9,25 +9,25 @@ local indexTreeModule = require(script.Parent.IndexTree)
 local defaultParserOptionsModule = require(script.Parent.DefaultParserOptions)
 local t = {}
 
-function t.safeParse(p0, p1)
+function t.safeParse(p1, p2)
 	-- upvalues: t (ref)
 	local ok, status = xpcall(function()
-		-- upvalues: t (copy), p0 (ref), p1 (ref)
-		return t.parse(p0, p1)
-	end, function(p2)
-		return `{p2}\n{debug.traceback()}`
+		-- upvalues: t (copy), p1 (ref), p2 (ref)
+		return t.parse(p1, p2)
+	end, function(p1)
+		return `{p1}\n{debug.traceback()}`
 	end)
 	
 	return ok, status
 end
 
-function t.parse(p3, p4)
+function t.parse(p1, p2)
 	-- upvalues: dashModule (ref), defaultParserOptionsModule (ref), unindentTagsModule (ref), tokenizeModule (ref), buildTreeModule (ref), postProcessTreeModule (ref), indexTreeModule (ref)
-	local var9 = dashModule.joinDeep(defaultParserOptionsModule, p4 or {})
-	local var10 = buildTreeModule(tokenizeModule(unindentTagsModule(p3)), var9)
-	var10.children = postProcessTreeModule(var10, var9)
+	local var1 = dashModule.joinDeep(defaultParserOptionsModule, p2 or {})
+	local var2 = buildTreeModule(tokenizeModule(unindentTagsModule(p1)), var1)
+	var2.children = postProcessTreeModule(var2, var1)
 	
-	return indexTreeModule(var10)
+	return indexTreeModule(var2)
 end
 
 return t

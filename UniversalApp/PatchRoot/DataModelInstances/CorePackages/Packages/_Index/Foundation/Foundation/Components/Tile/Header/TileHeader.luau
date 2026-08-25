@@ -9,54 +9,54 @@ local useTileModule = require(foundation.Components.Tile.useTile)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 
-local function getTypographyComponent(p0, p1, p2, p3, p4, p5, p6)
+local function getTypographyComponent(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: reactModule (ref), skeletonModule (ref), useTextSizeOffsetModule (ref), textModule (ref)
-	local var11, var12, var13, var14
+	local var1, var2, var3, var4
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	
-	if typeof(p0) == "string" then
-		var11 = p0
-		var12 = p1
-		var13 = p2
-		var14 = p4
-	elseif p0.isLoading then
+	if typeof(p1) == "string" then
+		var1 = p1
+		var2 = p2
+		var3 = p3
+		var4 = p5
+	elseif p1.isLoading then
 		return reactModule.createElement(skeletonModule, {
-			Size = UDim2.new(1 / p5, 0, 0, p1.FontSize),
-			LayoutOrder = p5
+			Size = UDim2.new(1 / p6, 0, 0, p2.FontSize),
+			LayoutOrder = p6
 		})
 	end
-	var11 = p0.text
-	var12 = p0.fontStyle or p1
-	var13 = p0.colorStyle or p2
-	var14 = p0.numLines or p4
-	assert(var12 ~= nil, "fontStyle cannot be nil")
-	assert(var13 ~= nil, "colorStyle cannot be nil")
-	assert(var14 ~= nil, "numLines cannot be nil")
-	var12.LineHeight = 1
+	var1 = p1.text
+	var2 = p1.fontStyle or p2
+	var3 = p1.colorStyle or p3
+	var4 = p1.numLines or p5
+	assert(var2 ~= nil, "fontStyle cannot be nil")
+	assert(var3 ~= nil, "colorStyle cannot be nil")
+	assert(var4 ~= nil, "numLines cannot be nil")
+	var2.LineHeight = 1
 	
 	return reactModule.createElement(textModule, {
-		fontStyle = var12,
-		textStyle = var13,
-		Text = var11,
-		TextXAlignment = p3,
+		fontStyle = var2,
+		textStyle = var3,
+		Text = var1,
+		TextXAlignment = p4,
 		TextTruncate = Enum.TextTruncate.AtEnd,
-		TextWrapped = var14 <= 1,
-		Size = UDim2.new(1, 0, 0, var14 * (var12.FontSize + (useTextSizeOffsetModule() or 0)) * var12.LineHeight),
-		LayoutOrder = p5,
-		testId = p6
+		TextWrapped = var4 <= 1,
+		Size = UDim2.new(1, 0, 0, var4 * (var2.FontSize + (useTextSizeOffsetModule() or 0)) * var2.LineHeight),
+		LayoutOrder = p6,
+		testId = p7
 	})
 end
 
 local t = { TextXAlignment = Enum.TextXAlignment.Left }
 
-return function(p7)
+return function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTileModule (ref), getTypographyComponent (ref), reactModule (ref), viewModule (ref)
-	local var15 = withDefaultsModule(p7, t)
-	local var16 = useTokensModule()
-	local var17 = useTileModule()
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = useTileModule()
 	
 	return reactModule.createElement(viewModule, {
 		tag = "gap-xxsmall size-full-0 auto-y",
@@ -66,9 +66,9 @@ return function(p7)
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
-		testId = `{var17.testId}--header`
+		testId = `{var3.testId}--header`
 	}, {
-		Title = getTypographyComponent(var15.title, var16.Typography.TitleLarge, var16.Color.Content.Emphasis, var15.TextXAlignment, if var15.subtitle == nil then 2 else 1, 1, `{var17.testId}--header-title`),
-		Subtitle = if var15.subtitle ~= nil then nil else getTypographyComponent(var15.subtitle, var16.Typography.CaptionLarge, var16.Color.Content.Default, var15.TextXAlignment, 1, 2, `{var17.testId}--header-subtitle`)
+		Title = getTypographyComponent(var1.title, var2.Typography.TitleLarge, var2.Color.Content.Emphasis, var1.TextXAlignment, if var1.subtitle == nil then 2 else 1, 1, `{var3.testId}--header-title`),
+		Subtitle = if var1.subtitle ~= nil then nil else getTypographyComponent(var1.subtitle, var2.Typography.CaptionLarge, var2.Color.Content.Default, var1.TextXAlignment, 1, 2, `{var3.testId}--header-subtitle`)
 	})
 end

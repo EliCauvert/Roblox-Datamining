@@ -4,35 +4,35 @@ local formatModule = require(parent.format)
 local readonlyKey = errorModule.new("ReadonlyKey", "Attempted to write to readonly key {key:?} of frozen object {objectName:?}")
 local missingKey = errorModule.new("MissingKey", "Attempted to read missing key {key:?} of frozen object {objectName:?}")
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: missingKey (ref), readonlyKey (ref), formatModule (ref)
 	local t = {}
-	assert(type(p1) == "table", `Attempted to call Dash.freeze with argument #2 of type {type(p1)}, but it should be table `)
+	assert(type(p2) == "table", `Attempted to call Dash.freeze with argument #2 of type {type(p2)}, but it should be table `)
 	setmetatable(t, {
-		__index = function(_, p3)
-			-- upvalues: p1 (ref), p2 (ref), missingKey (copy), p0 (ref)
-			local var5 = p1[p3]
+		__index = function(_, p1)
+			-- upvalues: p2 (ref), p3 (ref), missingKey (copy), p1 (ref)
+			local var1 = p2[p1]
 			
-			if var5 == nil and p2 then
-				missingKey:throw({ key = p3, objectName = p0 })
+			if var1 == nil and p3 then
+				missingKey:throw({ key = p1, objectName = p1 })
 			end
-			return var5
+			return var1
 		end,
-		__newindex = function(_, p4)
-			-- upvalues: readonlyKey (copy), p0 (ref)
-			readonlyKey:throw({ key = p4, objectName = p0 })
+		__newindex = function(_, p1)
+			-- upvalues: readonlyKey (copy), p1 (ref)
+			readonlyKey:throw({ key = p1, objectName = p1 })
 		end,
 		__len = function()
-			-- upvalues: p1 (ref)
-			return #p1
+			-- upvalues: p2 (ref)
+			return #p2
 		end,
 		__tostring = function()
-			-- upvalues: formatModule (copy), p0 (ref)
-			return formatModule("Frozen({})", p0)
+			-- upvalues: formatModule (copy), p1 (ref)
+			return formatModule("Frozen({})", p1)
 		end,
 		__call = function(_, ...)
-			-- upvalues: p1 (ref)
-			return p1(...)
+			-- upvalues: p2 (ref)
+			return p2(...)
 		end
 	})
 	

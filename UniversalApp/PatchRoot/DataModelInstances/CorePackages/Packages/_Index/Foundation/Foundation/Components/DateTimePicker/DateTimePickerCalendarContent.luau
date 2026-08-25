@@ -6,19 +6,19 @@ local dateTimePickerVariantModule = require(foundation.Enums.DateTimePickerVaria
 local dividerModule = require(foundation.Components.Divider)
 local viewModule = require(foundation.Components.View)
 
-return function(p0)
+return function(p1)
 	-- upvalues: dateTimePickerVariantModule (ref), reactModule (ref), viewModule (ref), dividerModule (ref), singleMonthCalendarModule (ref)
-	local testId = `{p0.testId}--calendar`
+	local testId = `{p1.testId}--calendar`
 	
-	return if p0.variant == dateTimePickerVariantModule.DualWithPresets then reactModule.createElement(viewModule, { tag = "col size-full-0 auto-y" }, {
+	return if p1.variant == dateTimePickerVariantModule.DualWithPresets then reactModule.createElement(viewModule, { tag = "col size-full-0 auto-y" }, {
 		Calendar = reactModule.createElement(require(script.Parent.Calendar.TwoMonthCalendar), {
 			LayoutOrder = 1,
-			onDayActivated = p0.onDayActivated,
-			referenceDate = p0.referenceDate,
-			selectableDateRange = p0.selectableDateRange,
-			selectedDates = p0.selectedDates,
+			onDayActivated = p1.onDayActivated,
+			referenceDate = p1.referenceDate,
+			selectableDateRange = p1.selectableDateRange,
+			selectedDates = p1.selectedDates,
 			testId = testId,
-			viewAnchorDate = p0.viewAnchorDate
+			viewAnchorDate = p1.viewAnchorDate
 		}),
 		PresetsDivider = reactModule.createElement(dividerModule, { LayoutOrder = 2 }),
 		PresetsBar = reactModule.createElement(viewModule, {
@@ -27,22 +27,22 @@ return function(p0)
 		}, {
 			Presets = reactModule.createElement(require(script.Parent.Presets.DateRangePresets), {
 				LayoutOrder = 1,
-				onPresetSelected = p0.onPresetSelected,
-				referenceDate = p0.referenceDate,
-				selectableDateRange = p0.selectableDateRange,
-				selectedDates = p0.selectedDates,
+				onPresetSelected = p1.onPresetSelected,
+				referenceDate = p1.referenceDate,
+				selectableDateRange = p1.selectableDateRange,
+				selectedDates = p1.selectedDates,
 				testId = `{testId}--presets`
 			})
 		})
 	}) else reactModule.createElement(singleMonthCalendarModule, {
 		LayoutOrder = 1,
-		isDateRange = p0.variant == dateTimePickerVariantModule.Dual,
-		onSelectedDateChanged = p0.onSelectedDatesChanged,
-		referenceDate = p0.referenceDate,
-		selectableDateRange = p0.selectableDateRange,
-		selectedDates = p0.selectedDates,
-		showTimeList = p0.variant == dateTimePickerVariantModule.SingleWithTime,
+		isDateRange = p1.variant == dateTimePickerVariantModule.Dual,
+		onSelectedDateChanged = p1.onSelectedDatesChanged,
+		referenceDate = p1.referenceDate,
+		selectableDateRange = p1.selectableDateRange,
+		selectedDates = p1.selectedDates,
+		showTimeList = p1.variant == dateTimePickerVariantModule.SingleWithTime,
 		testId = testId,
-		viewAnchorDate = p0.viewAnchorDate
+		viewAnchorDate = p1.viewAnchorDate
 	})
 end

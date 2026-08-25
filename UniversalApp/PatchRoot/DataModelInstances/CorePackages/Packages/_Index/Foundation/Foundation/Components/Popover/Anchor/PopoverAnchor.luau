@@ -7,32 +7,32 @@ local viewModule = require(foundation.Components.View)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local reactModule = require(parent.React)
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: reactModule (ref), popoverContextModule (ref), studioUriModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var6 = reactModule.useContext(popoverContextModule)
-	local var7 = reactModule.useRef(nil)
-	reactModule.useImperativeHandle(p1, function()
-		-- upvalues: var7 (ref)
-		return var7.current
+	local var1 = reactModule.useContext(popoverContextModule)
+	local var2 = reactModule.useRef(nil)
+	reactModule.useImperativeHandle(p2, function()
+		-- upvalues: var2 (ref)
+		return var2.current
 	end, {})
 	reactModule.useLayoutEffect(function()
-		-- upvalues: studioUriModule (copy), p0 (ref), var6 (ref), var7 (ref)
-		if studioUriModule.isStudioUri(p0.anchorRef) then
-			var6.setAnchorUri(p0.anchorRef)
+		-- upvalues: studioUriModule (copy), p1 (ref), var1 (ref), var2 (ref)
+		if studioUriModule.isStudioUri(p1.anchorRef) then
+			var1.setAnchorUri(p1.anchorRef)
 			
 			return
-		elseif typeof(p0.anchorRef) == "table" and p0.anchorRef.current then
-			var6.setAnchor(p0.anchorRef.current)
+		elseif typeof(p1.anchorRef) == "table" and p1.anchorRef.current then
+			var1.setAnchor(p1.anchorRef.current)
 			
 			return
 		end
-		var6.setAnchor(var7.current)
+		var1.setAnchor(var2.current)
 	end)
 	
-	if p0.anchorRef then
+	if p1.anchorRef then
 		return nil
 	end
-	p0.testId = `{var6.testId}--anchor`
+	p1.testId = `{var1.testId}--anchor`
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p0, { tag = "auto-xy", ref = var7 }), p0.children)
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { tag = "auto-xy", ref = var2 }), p1.children)
 end)

@@ -30,14 +30,14 @@ for i_2, v_2 in validationEnumsModule do
 		end
 	end
 end
-local function tableOnlyHasExistingEnums(p0, p1, p2)
+local function tableOnlyHasExistingEnums(p1, p2, p3)
 	-- upvalues: t_2 (ref)
-	if typeof(p1) ~= "table" then
-		error(`Invalid config option {p2} inside of {p0} - expected to be table`)
+	if typeof(p2) ~= "table" then
+		error(`Invalid config option {p3} inside of {p1} - expected to be table`)
 	end
-	for i, v in p1 do
-		if not t_2[p2][v] then
-			error(`Invalid config option {v} in {p2} inside of {p0}`)
+	for i, v in p2 do
+		if not t_2[p3][v] then
+			error(`Invalid config option {v} in {p3} inside of {p1}`)
 		end
 	end
 end
@@ -53,17 +53,17 @@ end
 local t_3 = {}
 
 for i_3, v_3 in t_1 do
-	local var9 = v_3:FindFirstChild(i_3)
+	local var1 = v_3:FindFirstChild(i_3)
 	
-	if var9 == nil then
+	if var1 == nil then
 		error(`{i_3} validation folder is missing from {v_3.Name}`)
 	end
-	local var10 = var9:FindFirstChild(i_3)
+	local var2 = var1:FindFirstChild(i_3)
 	
-	if var10 == nil or not var10:IsA("ModuleScript") then
+	if var2 == nil or not var2:IsA("ModuleScript") then
 		error(`{i_3}.lua validation file is missing from {v_3.Name}/{i_3}`)
 	end
-	local unknownModule = require(var10)
+	local unknownModule = require(var2)
 	
 	for i_4, v_4 in unknownModule do
 		if typeof(i_4) ~= "string" then
@@ -93,9 +93,9 @@ for i_3, v_3 in t_1 do
 		error(`Missing module run function in {i_3}`)
 	end
 	setmetatable(unknownModule, {
-		__index = function(_, p3)
+		__index = function(_, p1)
 			-- upvalues: i_3 (ref)
-			error(`Invalid ValidationConfig {p3} used on the module {i_3}`)
+			error(`Invalid ValidationConfig {p1} used on the module {i_3}`)
 		end
 	})
 	
@@ -113,12 +113,12 @@ for i_3, v_3 in t_1 do
 end
 t.allModules = t_3
 
-function t.getValidationModule(p4)
+function t.getValidationModule(p1)
 	-- upvalues: t_3 (ref)
-	if t_3[p4] == nil then
-		error(`{p4} does not exist in the preload table.`)
+	if t_3[p1] == nil then
+		error(`{p1} does not exist in the preload table.`)
 	end
-	return t_3[p4]
+	return t_3[p1]
 end
 
 return t

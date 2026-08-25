@@ -16,44 +16,44 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local useSegmentedControlVariantsModule = require(script.Parent.useSegmentedControlVariants)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: flagsModule (ref), useTokensModule (ref), useSegmentedControlVariantsModule (ref), devAssertModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref)
-	local var10 = useSegmentedControlVariantsModule(useTokensModule(), p0.size, if flagsModule.FoundationSegmentedControlBeta then if flagsModule.FoundationSegmentedControlBeta then p0.variant else nil else nil, if flagsModule.FoundationSegmentedControlBeta then if flagsModule.FoundationSegmentedControlBeta then p0.fillBehavior else nil else nil, p0.isCircular, if flagsModule.FoundationSegmentedControlBeta then p0.isActive else nil)
-	devAssertModule(if p0.text ~= nil then p0.icon == nil else true, "Segment: `text` and `icon` are mutually exclusive. Only one can be provided.")
-	local var11 = p0.icon ~= nil
+	local var1 = useSegmentedControlVariantsModule(useTokensModule(), p1.size, if flagsModule.FoundationSegmentedControlBeta then if flagsModule.FoundationSegmentedControlBeta then p1.variant else nil else nil, if flagsModule.FoundationSegmentedControlBeta then if flagsModule.FoundationSegmentedControlBeta then p1.fillBehavior else nil else nil, p1.isCircular, if flagsModule.FoundationSegmentedControlBeta then p1.isActive else nil)
+	devAssertModule(if p1.text ~= nil then p1.icon == nil else true, "Segment: `text` and `icon` are mutually exclusive. Only one can be provided.")
+	local var2 = p1.icon ~= nil
 	local icon = nil
 	local variant = nil
 	local icon_1 = nil
 	
-	if var11 then
-		if typeof(p0.icon) == "table" then
-			local icon_2 = p0.icon
+	if var2 then
+		if typeof(p1.icon) == "table" then
+			local icon_2 = p1.icon
 			icon = icon_2.name
 			variant = icon_2.variant
 		else
-			icon = p0.icon
+			icon = p1.icon
 		end
-		icon_1 = var10.icon
+		icon_1 = var1.icon
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(p0, {
-		tag = var10.segment.tag,
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
+		tag = var1.segment.tag,
 		onActivated = function()
-			-- upvalues: p0 (ref)
-			p0.onActivated(p0.id)
+			-- upvalues: p1 (ref)
+			p1.onActivated(p1.id)
 		end,
-		ref = p1
+		ref = p2
 	}), {
-		Text = if var11 then reactModule.createElement(iconModule, {
+		Text = if var2 then reactModule.createElement(iconModule, {
 			name = icon,
 			variant = variant,
 			size = icon_1.size,
 			style = icon_1.style,
-			testId = if flagsModule.FoundationSegmentedControlBeta then `{p0.testId}--icon` else nil
+			testId = if flagsModule.FoundationSegmentedControlBeta then `{p1.testId}--icon` else nil
 		}) else reactModule.createElement(textModule, {
-			tag = var10.text.tag,
-			Text = p0.text,
-			textStyle = if flagsModule.FoundationSegmentedControlBeta then var10.text.style else nil,
-			testId = if flagsModule.FoundationSegmentedControlBeta then `{p0.testId}--text` else nil
+			tag = var1.text.tag,
+			Text = p1.text,
+			textStyle = if flagsModule.FoundationSegmentedControlBeta then var1.text.style else nil,
+			testId = if flagsModule.FoundationSegmentedControlBeta then `{p1.testId}--text` else nil
 		})
 	})
 end))

@@ -25,56 +25,56 @@ local function lerpNumberSequence(startValue, endValue, alpha)
 	local t = {}
 	
 	for i, v in keypoints do
-		local var14 = keypoints_1[i]
-		t[i] = NumberSequenceKeypoint.new(v.Time + (var14.Time - v.Time) * alpha, v.Value + (var14.Value - v.Value) * alpha)
+		local var1 = keypoints_1[i]
+		t[i] = NumberSequenceKeypoint.new(v.Time + (var1.Time - v.Time) * alpha, v.Value + (var1.Value - v.Value) * alpha)
 	end
 	return NumberSequence.new(t)
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokensModule (ref), useBackgroundStyle (ref), useScrimVariantsModule (ref), reactOtterModule (ref), reactModule (ref), t (ref), lerpNumberSequence (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), iconModule (ref)
-	local var15 = useBackgroundStyle()
-	local var16 = useScrimVariantsModule(useTokensModule(), p0.alignment, p0.preferredInput)
-	local var17 = p0.alignment == Enum.HorizontalAlignment.Right
-	local var18 = if p0.preferredInput ~= Enum.PreferredInput.Touch then p0.preferredInput == Enum.PreferredInput.Gamepad else true
-	local var19, var20 = reactOtterModule.useAnimatedBinding(if p0.isHovered then 1 else 0)
+	local var1 = useBackgroundStyle()
+	local var2 = useScrimVariantsModule(useTokensModule(), p1.alignment, p1.preferredInput)
+	local var3 = p1.alignment == Enum.HorizontalAlignment.Right
+	local var4 = if p1.preferredInput ~= Enum.PreferredInput.Touch then p1.preferredInput == Enum.PreferredInput.Gamepad else true
+	local var5, var6 = reactOtterModule.useAnimatedBinding(if p1.isHovered then 1 else 0)
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), reactOtterModule (copy), p0 (ref), t (copy)
-		var20(reactOtterModule.ease(if p0.isHovered then 1 else 0, t))
-	end, { p0.isHovered })
-	local var21 = var19:map(function(p1)
-		-- upvalues: var18 (ref), var17 (ref)
-		return if var18 then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if var17 then 1 else -1) * (1 - p1), 0.5)
+		-- upvalues: var6 (ref), reactOtterModule (copy), p1 (ref), t (copy)
+		var6(reactOtterModule.ease(if p1.isHovered then 1 else 0, t))
+	end, { p1.isHovered })
+	local var1 = var5:map(function(p1)
+		-- upvalues: var4 (ref), var3 (ref)
+		return if var4 then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if var3 then 1 else -1) * (1 - p1), 0.5)
 	end)
-	local var22 = p0.rowHeight:map(function(p2)
-		-- upvalues: var16 (ref)
-		return UDim2.new(0, p2 + var16.fade, 1, 0)
+	local var1 = p1.rowHeight:map(function(p1)
+		-- upvalues: var2 (ref)
+		return UDim2.new(0, p1 + var2.fade, 1, 0)
 	end)
-	local var23 = var19:map(function(p3)
-		-- upvalues: var18 (ref), var16 (ref), lerpNumberSequence (copy)
-		return if var18 then var16.hoverGradient else lerpNumberSequence(var16.gradient, var16.hoverGradient, p3)
+	local var2 = var5:map(function(p1)
+		-- upvalues: var4 (ref), var2 (ref), lerpNumberSequence (copy)
+		return if var4 then var2.hoverGradient else lerpNumberSequence(var2.gradient, var2.hoverGradient, p1)
 	end)
-	local var24, var25 = reactOtterModule.useAnimatedBinding(if p0.isVisible then 0 else 1)
+	local var1, var2 = reactOtterModule.useAnimatedBinding(if p1.isVisible then 0 else 1)
 	reactModule.useEffect(function()
-		-- upvalues: var25 (ref), reactOtterModule (copy), p0 (ref), t (copy)
-		var25(reactOtterModule.ease(if p0.isVisible then 0 else 1, t))
-	end, { p0.isVisible })
+		-- upvalues: var2 (ref), reactOtterModule (copy), p1 (ref), t (copy)
+		var2(reactOtterModule.ease(if p1.isVisible then 0 else 1, t))
+	end, { p1.isVisible })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p0, { Size = var22, GroupTransparency = var24 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { Size = var1, GroupTransparency = var1 }), {
 		Scrim = reactModule.createElement(viewModule, {
 			tag = "size-full",
-			backgroundStyle = var15,
-			onActivated = p0.onActivated,
+			backgroundStyle = var1,
+			onActivated = p1.onActivated,
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			onStateChanged = p0.onStateChanged,
-			isDisabled = not p0.isVisible,
+			onStateChanged = p1.onStateChanged,
+			isDisabled = not p1.isVisible,
 			selection = { Selectable = false },
-			testId = `{p0.testId}--button`
+			testId = `{p1.testId}--button`
 		}, {
-			Gradient = reactModule.createElement("UIGradient", { Transparency = var23 }),
+			Gradient = reactModule.createElement("UIGradient", { Transparency = var2 }),
 			DirectionIcon = reactModule.createElement(viewModule, {
 				ZIndex = 2,
-				tag = var16.iconAlignmentTag,
+				tag = var2.iconAlignmentTag,
 				Size = UDim2.fromScale(0, 1),
 				aspectRatio = {
 					AspectRatio = 1,
@@ -84,10 +84,10 @@ return function(p0)
 			}, {
 				Icon = reactModule.createElement(iconModule, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = var21,
-					size = p0.size,
-					name = var16.directionIcon,
-					testId = `{p0.testId}--direction-indicator`
+					Position = var1,
+					size = p1.size,
+					name = var2.directionIcon,
+					testId = `{p1.testId}--direction-indicator`
 				})
 			})
 		})

@@ -10,35 +10,35 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDialogVariants
 local t = { height = UDim.new(1, 0) }
 
-return function(p0)
+return function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useDialogModule (ref), useDialogVariants (ref), reactModule (ref), viewModule (ref), constantsModule (ref), imageModule (ref)
-	local var8 = withDefaultsModule(p0, t)
-	local var9 = useDialogModule()
-	local var10 = useDialogVariants()
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useDialogModule()
+	local var3 = useDialogVariants()
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref)
-		var9.setHasHeroMedia(true)
+		-- upvalues: var2 (ref)
+		var2.setHasHeroMedia(true)
 		
 		return function()
-			-- upvalues: var9 (copy)
-			var9.setHasHeroMedia(false)
+			-- upvalues: var2 (copy)
+			var2.setHasHeroMedia(false)
 		end
 	end, {})
-	local offsetX = var10.heroMedia.offsetX
+	local offsetX = var3.heroMedia.offsetX
 	
 	return reactModule.createElement(viewModule, {
-		tag = var10.heroMediaWrapper.tag,
+		tag = var3.heroMediaWrapper.tag,
 		LayoutOrder = constantsModule.MIN_LAYOUT_ORDER,
-		testId = `{var9.testId}--hero-media`
+		testId = `{var2.testId}--hero-media`
 	}, {
 		Image = reactModule.createElement(imageModule, {
-			Image = var8.media,
-			imageStyle = var8.mediaStyle,
-			backgroundStyle = var8.backgroundStyle,
-			tag = var10.heroMedia.tag,
-			aspectRatio = var8.aspectRatio,
+			Image = var1.media,
+			imageStyle = var1.mediaStyle,
+			backgroundStyle = var1.backgroundStyle,
+			tag = var3.heroMedia.tag,
+			aspectRatio = var1.aspectRatio,
 			Position = UDim2.fromOffset(-offsetX, 0),
-			Size = UDim2.new(1, offsetX * 2, var8.height.Scale, var8.height.Offset)
+			Size = UDim2.new(1, offsetX * 2, var1.height.Scale, var1.height.Offset)
 		})
 	})
 end

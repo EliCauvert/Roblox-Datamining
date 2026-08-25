@@ -11,22 +11,21 @@ local devAssertModule = require(foundation.Utility.devAssert)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = {
-	maxButtonCount = 3,
 	testId = "--foundation-button-group",
 	orientation = orientationModule.Horizontal,
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), devAssertModule (ref), orientationModule (ref), fillBehaviorModule (ref), reactModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var11 = withDefaultsModule(p0, t)
-	devAssertModule(#var11.buttons <= var11.maxButtonCount, `ButtonGroup: a maximum of {var11.maxButtonCount} buttons is supported, got {#var11.buttons}.`)
-	local var12 = var11.orientation == orientationModule.Vertical
-	local var12_1 = var12 or var11.fillBehavior == fillBehaviorModule.Fill
-	local var14 = if var12 or not var12_1 then nil else fillBehaviorModule.Fill
+	local var1 = withDefaultsModule(p1, t)
+	devAssertModule(#var1.buttons <= 3, `ButtonGroup: a maximum of 3 buttons is supported, got {#var1.buttons}.`)
+	local var2 = var1.orientation == orientationModule.Vertical
+	local var3 = var2 or var1.fillBehavior == fillBehaviorModule.Fill
+	local var4 = if var2 or not var3 then nil else fillBehaviorModule.Fill
 	local t_1 = {}
 	
-	for i, v in var11.buttons do
+	for i, v in var1.buttons do
 		t_1[`{i}-{v.text}`] = reactModule.createElement(buttonModule, {
 			text = v.text,
 			onActivated = v.onActivated,
@@ -36,21 +35,21 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 			icon = v.icon,
 			inputDelay = v.inputDelay,
 			ref = v.ref,
-			size = var11.size,
-			fillBehavior = var14,
+			size = var1.size,
+			fillBehavior = var4,
 			LayoutOrder = i,
-			testId = v.testId or `{var11.testId}--button-{i}`
+			testId = v.testId or `{var1.testId}--button-{i}`
 		})
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var11, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
 		tag = {
 			["gap-small"] = true,
-			["col flex-x-fill"] = var12,
-			row = not var12 and var12_1,
-			["row wrap"] = not var12 and not var12_1,
-			["size-full-0 auto-y"] = var12_1,
-			["auto-xy"] = not var12_1
+			["col flex-x-fill"] = var2,
+			row = not var2 and var3,
+			["row wrap"] = not var2 and not var3,
+			["size-full-0 auto-y"] = var3,
+			["auto-xy"] = not var3
 		},
-		ref = p1
+		ref = p2
 	}), t_1)
 end))

@@ -12,6 +12,5 @@ return {
 	prompts = require(script.prompts.v1beta1),
 	search = require(script.search.v1beta1),
 	shared = require(script.shared.v1beta1),
-	spotlightcollection = require(script.spotlightcollection.v1beta1),
-	templates = require(script.templates.v1beta1)
+	spotlightcollection = require(script.spotlightcollection.v1beta1)
 }

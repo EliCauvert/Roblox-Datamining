@@ -8,55 +8,55 @@ local panelsContextModule = require(script.Parent.PanelsContext)
 local popoverManagerModule = require(script.Parent.Managers.PopoverManager)
 local _ = require(script.Parent.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: usePluginModule (ref), flagsModule (ref), useWidgetsContextModule (ref), reactModule (ref), popoverManagerModule (ref), panelsContextModule (ref)
-	local var7 = usePluginModule()
+	local var1 = usePluginModule()
 	
-	if var7 == nil then
+	if var1 == nil then
 		error("PanelsProvider must be used within a plugin context")
 	end
-	local var8 = if flagsModule.FoundationPopoverPluginAnchorRefresh then useWidgetsContextModule() else nil
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: popoverManagerModule (copy), var7 (ref), p0 (ref)
-		return popoverManagerModule.new(var7, p0.uriScope)
-	end, { var7, p0.uriScope })
+	local var2 = if flagsModule.FoundationPopoverPluginAnchorRefresh then useWidgetsContextModule() else nil
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: popoverManagerModule (copy), var1 (ref), p1 (ref)
+		return popoverManagerModule.new(var1, p1.uriScope)
+	end, { var1, p1.uriScope })
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref)
+		-- upvalues: var3 (ref)
 		local thread = task.spawn(function()
-			-- upvalues: var9 (copy)
-			var9:prewarmPoolAsync(2)
+			-- upvalues: var3 (copy)
+			var3:prewarmPoolAsync(2)
 		end)
 		
 		return function()
-			-- upvalues: thread (ref), var9 (copy)
+			-- upvalues: thread (ref), var3 (copy)
 			if thread then
 				task.cancel(thread)
 			end
-			var9:destroy()
+			var3:destroy()
 		end
-	end, { var9 })
-	local var10 = reactModule.useCallback(function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: flagsModule (copy), var8 (ref), var9 (ref)
+	end, { var3 })
+	local var4 = reactModule.useCallback(function(p1, p2, p3, p4, p5)
+		-- upvalues: flagsModule (copy), var2 (ref), var3 (ref)
 		if flagsModule.FoundationPopoverPluginAnchorRefresh then
-			var8.refreshAsync(p1)
+			var2.refreshAsync(p1)
 		end
-		local var12 = var9:openAtAsync({
+		local var1 = var3:openAtAsync({
 			targetWidgetUri = p1,
 			targetAnchorPoint = p2.targetAnchorPoint,
 			subjectAnchorPoint = p2.subjectAnchorPoint,
 			offset = p2.offset
-		}, p3, p4, p5, if flagsModule.FoundationPopoverPluginFocusable then p6 else nil)
+		}, p3, p4, p5)
 		
-		return var12, function()
-			-- upvalues: var12 (ref)
-			var12.close()
+		return var1, function()
+			-- upvalues: var1 (ref)
+			var1.close()
 		end
-	end, { var9, var8 })
+	end, { var3, var2 })
 	
 	return reactModule.createElement(panelsContextModule.Provider, {
 		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
-			-- upvalues: var10 (ref)
-			return { registerPopoverAsync = var10 }
-		end, { var10 }) else { registerPopoverAsync = var10 }
-	}, p0.children)
+			-- upvalues: var4 (ref)
+			return { registerPopoverAsync = var4 }
+		end, { var4 }) else { registerPopoverAsync = var4 }
+	}, p1.children)
 end

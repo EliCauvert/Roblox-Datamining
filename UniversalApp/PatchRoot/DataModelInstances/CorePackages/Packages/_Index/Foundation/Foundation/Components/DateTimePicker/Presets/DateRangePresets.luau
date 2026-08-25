@@ -16,16 +16,16 @@ local list = {
 	dateTimePickerDateRangePresetModule.LastYear
 }
 
-local function buildPresetChip(value, p0, p1, p2, p3)
+local function buildPresetChip(value, p1, p2, p3, p4)
 	-- upvalues: dateTimePresetRangesUtilitiesModule (ref), dateTimeEqualityUtilitiesModule (ref), translatorModule (ref)
-	local var10 = dateTimePresetRangesUtilitiesModule.resolvePresetRange(value, p1)
+	local var1 = dateTimePresetRangesUtilitiesModule.resolvePresetRange(value, p2)
 	
-	return if p2 and not dateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(var10, p2) then nil else {
+	return if p3 and not dateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(var1, p3) then nil else {
 		text = translatorModule:FormatByKey(`CommonUI.Controls.Label.{value}`),
-		isChecked = dateTimeEqualityUtilitiesModule.areDatesSameDayAsRange(p0, var10),
+		isChecked = dateTimeEqualityUtilitiesModule.areDatesSameDayAsRange(p1, var1),
 		onActivated = function()
-			-- upvalues: p3 (ref), var10 (ref)
-			p3(var10)
+			-- upvalues: p4 (ref), var1 (ref)
+			p4(var1)
 		end
 	}
 end
@@ -38,10 +38,10 @@ return function(value)
 			local t = {}
 			
 			for i = 1, #list do
-				local var12 = buildPresetChip(list[i], value.selectedDates, value.referenceDate, value.selectableDateRange, value.onPresetSelected)
+				local var1 = buildPresetChip(list[i], value.selectedDates, value.referenceDate, value.selectableDateRange, value.onPresetSelected)
 				
-				if var12 then
-					table.insert(t, var12)
+				if var1 then
+					table.insert(t, var1)
 				end
 			end
 			return t

@@ -9,9 +9,7 @@ local meshSpaceUtilsModule = require(parent.util.MeshSpaceUtils)
 local prettyPrintVector3Module = require(parent.util.prettyPrintVector3)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFStringUGCValidationAttachmentErrorLinkModule = require(parent.flags.getFStringUGCValidationAttachmentErrorLink)
-local getFFlagUGCValidateAttachmentBoundsErrorMessageModule = require(parent.flags.getFFlagUGCValidateAttachmentBoundsErrorMessage)
 local t = {
 	categories = {
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
@@ -23,52 +21,39 @@ local t = {
 		validationEnumsModule.SharedDataMember.consumerConfig
 	},
 	conditionalData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
+	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {}
 }
 
-local function validateInMeshSpace(p0, p1, p2, p3, p4, p5)
-	-- upvalues: getAttachmentCFrameInPartSpaceModule (ref), boundsDataUtilsModule (ref), errorSourceStringsModule (ref), meshSpaceUtilsModule (ref), getFFlagUGCValidateAttachmentBoundsErrorMessageModule (ref), prettyPrintVector3Module (ref), getFStringUGCValidationAttachmentErrorLinkModule (ref)
-	local var15 = p3.cframe * getAttachmentCFrameInPartSpaceModule(p0)
-	local var16 = boundsDataUtilsModule.calculateBoundsCenters(p3.boundsData)
-	local var17 = boundsDataUtilsModule.calculateBoundsDimensions(p3.boundsData)
+local function validateInMeshSpace(p1, p2, p3, p4, p5)
+	-- upvalues: getAttachmentCFrameInPartSpaceModule (ref), boundsDataUtilsModule (ref), errorSourceStringsModule (ref), meshSpaceUtilsModule (ref), prettyPrintVector3Module (ref), getFStringUGCValidationAttachmentErrorLinkModule (ref)
+	local var1 = p4.cframe * getAttachmentCFrameInPartSpaceModule(p1)
+	local var2 = boundsDataUtilsModule.calculateBoundsCenters(p4.boundsData)
+	local var3 = boundsDataUtilsModule.calculateBoundsDimensions(p4.boundsData)
 	
-	if not var16 or not var17 then
-		p4:fail(errorSourceStringsModule.Keys.AttachmentBoundsCalculationFailed, { AttachmentName = p0.Name, PartName = p1.Name })
+	if not var2 or not var3 then
+		p5:fail(errorSourceStringsModule.Keys.AttachmentBoundsCalculationFailed, { AttachmentName = p1.Name, PartName = p2.Name })
 		
 		return
 	end
-	local var18 = (var15.Position - var16) / (var17 / 2)
-	local min = p2.min
-	local max = p2.max
+	local var4 = (var1.Position - var2) / (var3 / 2)
+	local min = p3.min
+	local max = p3.max
 	
 	for i, v in { "X", "Y", "Z" } do
-		if var18[v] < min[v] or max[v] < var18[v] then
-			local var19 = meshSpaceUtilsModule.clampAttachmentToBounds(p0, p3, p2, 0.001)
-			local var20, var21 = meshSpaceUtilsModule.calculateAcceptableBoundsLocalSpace(p2, p3, var17, var16)
-			local position = var20.Position
-			local var22, var23, var24 = var20.Rotation:ToOrientation()
-			local vector3 = Vector3.new(math.deg(var22), math.deg(var23), math.deg(var24))
-			
-			if getFFlagUGCValidateAttachmentBoundsErrorMessageModule() then
-				p4:fail(if p5 then errorSourceStringsModule.Keys.RigAttachmentOutOfBounds else errorSourceStringsModule.Keys.AccessoryAttachmentOutOfBounds, {
-					AttachmentName = p0.Name,
-					PartName = p1.Name,
-					CurrentPosition = prettyPrintVector3Module(p0.CFrame.Position, 3),
-					ClosestValidPosition = prettyPrintVector3Module(var19.Position, 3),
-					HelpLink = getFStringUGCValidationAttachmentErrorLinkModule()
-				})
-				
-				return
-			end
-			p4:fail(errorSourceStringsModule.Keys.AttachmentOutOfBounds, {
-				AttachmentName = p0.Name,
-				PartName = p1.Name,
-				CurrentPosition = prettyPrintVector3Module(p0.CFrame.Position, 3),
-				ClosestValidPosition = prettyPrintVector3Module(var19.Position, 3),
+		if var4[v] < min[v] or max[v] < var4[v] then
+			local var5 = meshSpaceUtilsModule.clampAttachmentToBounds(p1, p4, p3, 0.001)
+			local var6, var7 = meshSpaceUtilsModule.calculateAcceptableBoundsLocalSpace(p3, p4, var3, var2)
+			local position = var6.Position
+			local var8, var9, var10 = var6.Rotation:ToOrientation()
+			p5:fail(errorSourceStringsModule.Keys.AttachmentOutOfBounds, {
+				AttachmentName = p1.Name,
+				PartName = p2.Name,
+				CurrentPosition = prettyPrintVector3Module(p1.CFrame.Position, 3),
+				ClosestValidPosition = prettyPrintVector3Module(var5.Position, 3),
 				BoundsPosition = prettyPrintVector3Module(position, 3),
-				BoundsOrientation = prettyPrintVector3Module(vector3, 3),
-				BoundsSize = prettyPrintVector3Module(var21, 3),
+				BoundsOrientation = prettyPrintVector3Module(Vector3.new(math.deg(var8), math.deg(var9), math.deg(var10)), 3),
+				BoundsSize = prettyPrintVector3Module(var7, 3),
 				HelpLink = getFStringUGCValidationAttachmentErrorLinkModule()
 			})
 			
@@ -77,70 +62,70 @@ local function validateInMeshSpace(p0, p1, p2, p3, p4, p5)
 	end
 end
 
-local function checkAll(p6, p7, p8, p9)
+local function checkAll(p1, p2, p3, p4)
 	-- upvalues: r15plusUtilsModule (ref), validateInMeshSpace (ref)
-	local name = p6:FindFirstChild(p7.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local name = p1:FindFirstChild(p2.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	
 	if not name then return end
-	validateInMeshSpace(name, p6, p7.rigAttachmentToParent.bounds, p8, p9, true)
+	validateInMeshSpace(name, p1, p2.rigAttachmentToParent.bounds, p3, p4)
 	
-	for i, v in pairs(p7.otherAttachments) do
-		local var27 = p6:FindFirstChild(i, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	for i, v in pairs(p2.otherAttachments) do
+		local var1 = p1:FindFirstChild(i, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 		
-		if var27 then
-			validateInMeshSpace(var27, p6, v.bounds, p8, p9, string.find(i, "RigAttachment$") ~= nil)
+		if var1 then
+			validateInMeshSpace(var1, p1, v.bounds, p3, p4)
 		end
 	end
 end
 
-function t.run(p10, p11)
+function t.run(p1, p2)
 	-- upvalues: constantsModule (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref), checkAll (ref)
-	local rootInstance = p11.rootInstance
-	local assetType = p11.uploadEnum.assetType
-	local var28 = constantsModule.ASSET_TYPE_INFO[assetType]
+	local rootInstance = p2.rootInstance
+	local assetType = p2.uploadEnum.assetType
+	local var1 = constantsModule.ASSET_TYPE_INFO[assetType]
 	
-	if not var28 then return end
+	if not var1 then return end
 	local t = {}
 	
-	if p11.renderMeshesData then
+	if p2.renderMeshesData then
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
 		for i, v in descendants do
-			local name = p11.renderMeshesData[v.Name]
+			local name = p2.renderMeshesData[v.Name]
 			
 			if name and name.editable then
 				t[v] = { MeshId = { created = false, instance = name.editable } }
 			end
 		end
 	end
-	local var31, _, var32 = boundsCalculatorModule.calculateIndividualAssetPartsData(rootInstance, {
+	local var2, _, var3 = boundsCalculatorModule.calculateIndividualAssetPartsData(rootInstance, {
 		assetTypeEnum = assetType,
-		isServer = p11.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+		isServer = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
 		editableMeshes = t
 	})
 	
-	if not var31 then
-		p10:fail(errorSourceStringsModule.Keys.AttachmentBoundsAssetCalculationFailed, { InstancePath = rootInstance:GetFullName() })
+	if not var2 then
+		p1:fail(errorSourceStringsModule.Keys.AttachmentBoundsAssetCalculationFailed, { InstancePath = rootInstance:GetFullName() })
 		
 		return
 	elseif Enum.AssetType.DynamicHead == assetType then
-		local name = var32[rootInstance.Name]
+		local name = var3[rootInstance.Name]
 		
 		if name then
-			checkAll(rootInstance, var28.subParts.Head, name, p10)
+			checkAll(rootInstance, var1.subParts.Head, name, p1)
 			
 			return
 		end
 	else
-		for i, v in pairs(var28.subParts) do
-			local var33 = rootInstance:FindFirstChild(i)
+		for i, v in pairs(var1.subParts) do
+			local var4 = rootInstance:FindFirstChild(i)
 			
-			if var33 then
-				local var34 = var32[i]
+			if var4 then
+				local var5 = var3[i]
 				
-				if var34 then
-					checkAll(var33, v, var34, p10)
+				if var5 then
+					checkAll(var4, v, var5, p1)
 				end
 			end
 		end

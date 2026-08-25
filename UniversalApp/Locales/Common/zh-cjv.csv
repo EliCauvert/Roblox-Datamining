@@ -655,7 +655,6 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,素材质量：纹理�
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,素材质量：“{partName}”有 {intersecting_tri_face_percent}% 的相交三角形（得分：{score}）。
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,素材质量：“{partName}”有 {uv_outside_bound_vert_percent}% 的 UV 顶点超出边界（得分：{score}）。
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,素材质量：“{partName}”有 {similar_vertex_percent}% 的相似顶点（得分：{score}）。
-Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,“{PartName}”中的配件附件“{AttachmentName}”必须放置在网格表面附近。当前位置 [{CurrentPosition}] 在有效区域之外。请将其移动到更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,手柄已通过蒙皮绑定到{jointName}关节，该关节不属于允许的架构。目前只允许使用标准 R15 关节和蒙皮转移关节。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,{assetType}必须使用蒙皮转移功能，但你缺少必需的{requiredJointName}关节。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,手柄已通过蒙皮绑定到接头“{jointName}”，但此资源必须进行自动蒙皮。你只能通过蒙皮绑定到“{validJointNameList}”。
@@ -669,7 +668,6 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,在{ParentPath}中找不�
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,以下实例不属于已批准的架构，应予以移除：{UnexpectedDescendantPaths}。
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,上传的素材应为{ExpectedClass}，但实际为{RootClass}。
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,上传的素材应命名为{ExpectedClass}，但实际命名为{RootClass}。
-Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} 仍包含未保存的可编辑内容。请在发布前将其保存为素材，然后重试。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation 中的身体部位“{bodyPartName}”有一个位置（平移）轨道。动画身体部位只能旋转；不允许使用位置轨道。请从此身体部位中移除位置轨道。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation 中的身体部位“{bodyPartName}”从起始位置移动了 {distance} 格。允许的最大平移距离为 {maxDistance} 格。请减少身体部位的位置移动。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,CurveAnimation 包含 HRD/DRD 骨骼，且身体部位“{bodyPartName}”有一个位置（平移）轨道。当动画中存在骨骼时，不可平移任何身体部位，以防止接头分离。请从身体部位移除所有位置轨道。
@@ -711,7 +709,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 拥�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含关键帧过多的 Curve。每个 Curve 最多只能有 {maxAllowed} 个关键帧。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含超过 {maxAllowed} 个 MarkerCurve。请确保 MarkerCurve 的子对象数量不超过 {maxAllowed} 个。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation 包含带 {count} 个标记的 MarkerCurve。每个 MarkerCurve 最多只能有 {maxAllowed} 个标记。请修改该动画。
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,已发布的动画指定了部件的最大位移为 {taggedTranslation} 格，但根据动画数据计算出的位移为 {calculatedTranslation} 格。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation 包含不应存在的子级：{childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,商城中的动态头部必须正确置入笼架，以便笼架上的眼睛和嘴巴顶点与网格顶点对齐。请调整笼架位置，使其与网格对齐。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,无法检测到动态头部的微笑表情。请调整嘴巴的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示微笑表情。
@@ -770,9 +767,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,“{partName}“网格�
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,附件“{attName}”必须存在于“{partName}”的后代中，且只能存在一次。
 Common.UGCValidation.ErrorLabel.NoAttributes,“{RootInstanceName}”（或其后代）包含属性。你需要从以下实例中移除属性：{InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' 有无效属性： {ProblematicProperties}。超出了显示的字节限制（限制为 0 表示属性必须为空）；任何其他属性包含 NaN/Inf 值或超出其默认大小限制。
-Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,“{PartName}”中的骨架附件“{AttachmentName}”必须放置在该身体部位与相邻部位连接的关节边界附近。当前位置 [{CurrentPosition}] 离连接平面过远。请将其移动到更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,要将素材上传到 Roblox，你必须选择恰好 1 个实例及其关联的上传类型。
-Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,此素材过大，无法上传（{sizeBytes} 字节，超出 {maxSizeBytes} 字节的上限）。请缩小其大小，然后重试。
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,实例 {ProblematicDescendantPath} 不应有标签。
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,第二个测试错误字符串，用于验证端到端 Hub-first 翻译同步工作流程。
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,头部网格部件包含{jointName}的脸部动画，但这些动画无法在 FACS 中使用。请重命名此关节，然后重新导入头部。
@@ -1366,7 +1361,6 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,X 句柄无效。
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTube 网址无效。
 Feature.AddFriends.Action.FriendAdded,好友已添加
 Feature.AddFriends.Action.IgnoreAll,全部忽略
-Feature.AddFriends.Action.IgnoreAllAltCase,
 Feature.AddFriends.Action.IgnoreConnectionRequest,忽略联系人请求
 Feature.AddFriends.Action.IgnoreFriendRequest,忽略好友邀请
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,忽略可信好友请求
@@ -1535,7 +1529,6 @@ Feature.AppealsPortal.Label.Type.LookText,已分享的虚拟形象名称和描�
 Feature.AppealsPortal.Label.Type.Mesh,网格
 Feature.AppealsPortal.Label.Type.Model,模型
 Feature.AppealsPortal.Label.Type.Plugin,插件
-Feature.AppealsPortal.Label.Type.Post,发布
 Feature.AppealsPortal.Label.Type.Screenshot,屏幕截图
 Feature.AppealsPortal.Label.Type.UserProfile,用户个人资料
 Feature.AppealsPortal.Label.Type.Video,视频
@@ -1565,7 +1558,6 @@ Feature.AppealsPortal.Label.TypeLower.Mesh,
 Feature.AppealsPortal.Label.TypeLower.Model,
 Feature.AppealsPortal.Label.TypeLower.PlaceId,
 Feature.AppealsPortal.Label.TypeLower.Plugin,
-Feature.AppealsPortal.Label.TypeLower.Post,
 Feature.AppealsPortal.Label.TypeLower.Screenshot,
 Feature.AppealsPortal.Label.TypeLower.UserProfile,用户资料
 Feature.AppealsPortal.Label.TypeLower.Video,
@@ -1598,7 +1590,7 @@ Feature.Avatar.Action.AddNewMakeupLook,添加新造型
 Feature.Avatar.Action.Cancel,
 Feature.Avatar.Action.CancelSelection,取消选择
 Feature.Avatar.Action.Clear,清除
-Feature.Avatar.Action.ComposerPost,
+Feature.Avatar.Action.ComposerPost,发布
 Feature.Avatar.Action.ComposerPreviewAndPost,预览并发布
 Feature.Avatar.Action.CreateSet,创建
 Feature.Avatar.Action.CreateSetFirstRun,创建集合
@@ -1659,24 +1651,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
-Feature.Avatar.BackgroundGeneration.Action.Upload,上传
+Feature.Avatar.BackgroundGeneration.Action.Upload,
 Feature.Avatar.BackgroundGeneration.Action.View,
-Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,订阅 Plus，创建背景。
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,你的作品已可供使用。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景由 AI 生成。发布即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。在出现在你的道具栏中之前，需要先经过审核，且已发布的道具无法编辑。
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,此背景由 AI 生成。上传即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。此背景需要先经过审核，然后才会出现在你的道具库中。已发布的道具无法编辑。
-Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,订阅 Plus，解锁免费专属背景。
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社区准则
-Feature.Avatar.BackgroundGeneration.Error.LimitReached,
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,描述
-Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 专属
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,
 Feature.Avatar.BackgroundGeneration.Label.Name,名称
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
@@ -1685,7 +1673,7 @@ Feature.Avatar.BackgroundGeneration.Title,创建背景
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,发布到道具栏
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
-Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,上传到道具库
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,此身体样式无法进行调整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,默认使用原始身体肤色
@@ -2243,7 +2231,6 @@ Feature.Build.Label.BackToBuild,返回构建
 Feature.Build.Label.Building,正在构建…
 Feature.Build.Label.CaptureLibrary,截图库
 Feature.Build.Label.ContentRating,内容评级
-Feature.Build.Label.Created,创建时间
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
 Feature.Build.Label.Deleted,已删除
@@ -2257,13 +2244,11 @@ Feature.Build.Label.FriendsOnly,仅限好友
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
-Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Loading,正在加载…
-Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.NoLimit,无限额
 Feature.Build.Label.NotStarted,未开始
 Feature.Build.Label.Pending,待定
@@ -2273,19 +2258,15 @@ Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公开
 Feature.Build.Label.PubliclyUnavailable,不公开
 Feature.Build.Label.Published,已发布
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,准备就绪
 Feature.Build.Label.ResetsDaily,每日重置
 Feature.Build.Label.RestoredVersion,已恢复 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,搜索素材
 Feature.Build.Label.SearchGames,搜索游戏
 Feature.Build.Label.SearchTasks,搜索任务
 Feature.Build.Label.SelectOption,选择一个选项
 Feature.Build.Label.ShareAddedFriends,分享给已添加的好友
-Feature.Build.Label.Shared,已共享
-Feature.Build.Label.Sounds,声音
 Feature.Build.Label.Thinking,正在思考
 Feature.Build.Label.Title,标题
 Feature.Build.Label.TitleDescription,标题和描述
@@ -2353,7 +2334,6 @@ Feature.Build.Label.ToolThumbnailRunning,正在设置游戏缩略图
 Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
 Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 无限额
-Feature.Build.Label.Updated,更新时间
 Feature.Build.Label.Usage,使用额度
 Feature.Build.Label.UsageUsed,已使用 {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2367,8 +2347,6 @@ Feature.Build.Message.AccountRequirements,你的帐户不符合使用 Build 的�
 Feature.Build.Message.AccountTooNew,你的帐户刚刚创建，暂时无法发布。请在帐户创建 2 天后重试。
 Feature.Build.Message.AllFriendsAdded,你已将所有好友添加为测试玩家。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答 Build 的问题。
-Feature.Build.Message.AssetDetailsUnavailable,无法显示素材详情。
-Feature.Build.Message.AssetsLoadFailed,无法加载素材。
 Feature.Build.Message.AudienceIneligible,不具备面向此受众发布的资格
 Feature.Build.Message.BuildAccountBlocked,你的帐户目前无法使用 Build。
 Feature.Build.Message.BuildBusy,Build 忙碌中。请稍后重试。
@@ -2399,7 +2377,6 @@ Feature.Build.Message.InvitesLoadFailed,无法加载邀请
 Feature.Build.Message.LimitBelowSpend,限额不能低于今日已支出的 {ALREADY_SPENT} Robux。
 Feature.Build.Message.LinkCopied,链接已复制到剪贴板。
 Feature.Build.Message.LoadingVersions,正在加载版本历史记录…
-Feature.Build.Message.NoAssetsFound,未找到素材。
 Feature.Build.Message.NoDescriptionProvided,没有提供描述。
 Feature.Build.Message.NoFriendsToAdd,你还没有任何可添加的好友。请先在 Roblox 上找到要建立联系的人。
 Feature.Build.Message.NoResults,
@@ -2435,7 +2412,6 @@ Feature.Build.Message.WorkingOnTasks,正在处理你的任务
 Feature.Build.Title.AdCampaignActive,广告活动已启动
 Feature.Build.Title.AddFriendsToPlaytest,添加好友来帮助你进行游戏测试
 Feature.Build.Title.ArchiveThisGame,要将此游戏存档吗？
-Feature.Build.Title.AssetLibrary,库
 Feature.Build.Title.Audience,受众
 Feature.Build.Title.BuildQuestion,Build 提出了一个问题
 Feature.Build.Title.BuildQuestions,Build 提出了一些问题
@@ -2924,7 +2900,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,长按以回复
 Feature.Chat.Label.Members,成员
 Feature.Chat.Label.MessageNotAvailable,此信息不可用
 Feature.Chat.Label.MuteInGameChatToastNotifications,将游戏内聊天通知静音
-Feature.Chat.Label.MuteInGamePartyToastNotifications,将游戏 Party 通知静音
+Feature.Chat.Label.MuteInGamePartyToastNotifications,
 Feature.Chat.Label.New,全新
 Feature.Chat.Label.NoChatFound,未找到聊天记录
 Feature.Chat.Label.NoDescriptionYet,尚无描述。
@@ -3463,7 +3439,7 @@ Feature.GameDetails.Label.ChatFeatures,聊天功能
 Feature.GameDetails.Label.Community,
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,包含激烈言辞
 Feature.GameDetails.Label.ContentMaturity,
-Feature.GameDetails.Label.Created,
+Feature.GameDetails.Label.Created,创建时间
 Feature.GameDetails.Label.Developer,开发者
 Feature.GameDetails.Label.DontLikeGame,不喜欢这个游戏
 Feature.GameDetails.Label.DontLikeImage,不喜欢这张图像
@@ -3511,7 +3487,7 @@ Feature.GameDetails.Label.Supported,已支持
 Feature.GameDetails.Label.TellUsMorePlaceholder,请告诉我们详情
 Feature.GameDetails.Label.TooRepetitive,过于重复
 Feature.GameDetails.Label.Unavailable,
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,更新时间
 Feature.GameDetails.Label.Upvoted,赞
 Feature.GameDetails.Label.Visits,访问次数
 Feature.GameDetails.Label.VoiceChat,
@@ -3769,9 +3745,6 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩余 {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,确定要从你的道具栏中永久删除此道具吗？如果你改变主意，需要通过体验再次获得该道具。
 Feature.Item.Label.DeleteItemUndercase,删除道具
-Feature.Landing.Action.PlayNow,立即游玩
-Feature.Landing.Action.SignInWithRoblox,
-Feature.Landing.Description.ContinuedTermsDisclaimer,继续操作即表示你同意我们的{startTermsTag}条款{endTermsTag}（包括仲裁条款），并确认已知悉我们的{startPrivacyTag}隐私政策{endPrivacyTag}。若你未满 18 岁，则你的父母或监护人必须同意你创建帐户，并同意我们的条款。
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,不当语言
 Feature.Landing.Label.BrazilContentDescriptorViolence,暴力
 Feature.Landing.Label.BrazilContentRatingLogoTitle,建议评级：12 岁
@@ -3779,7 +3752,6 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,建议评级：16 岁
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,游戏内购买（包括随机道具）
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,用户互动
 Feature.Landing.Label.InvitedBy,由“{name}”邀请
-Feature.Landing.Label.PoweredBy,技术支持：
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,开启
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,允许拥有你手机号码的人在 Roblox 上将你添加为好友
@@ -3802,7 +3774,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,
-Feature.Moments.Action.GenerateText,生成文本
+Feature.Moments.Action.GenerateText,生成
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,没有帮助
 Feature.Moments.Action.GenerateTextFeedbackPolicy,不妥或违反准则
 Feature.Moments.Action.Hide,隐藏详情
@@ -3889,7 +3861,7 @@ Feature.Moments.Label.Tone.Hype,活力
 Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
-Feature.Moments.Title.GenerateTextOptions,
+Feature.Moments.Title.GenerateTextOptions,生成文本
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.ReportPost,举报帖子
@@ -4248,12 +4220,6 @@ Feature.NotApproved.Label.Sublabel.CommerceServices,服务
 Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,烟草与神经学
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,玩具和游戏
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,武器、火器和相关产品
-Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,成熟度与合规问卷提交内容不准确
-Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
-Feature.NotApproved.Label.Sublabel.ContentMaturityMissingSensitiveDescriptor,
-Feature.NotApproved.Label.Sublabel.ContentMaturityMissingUnplayableDescriptor,
-Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
-Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
 Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,发布垃圾信息
@@ -4580,8 +4546,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Plus 订阅已为你提供了�
 Feature.RobloxSubscription.Body.GenericError,我们目前无法完成此操作。请重试。
 Feature.RobloxSubscription.Body.UnsupportedPlatform,此订阅无法在此设备上购买。
 Feature.RobloxSubscription.Description.AgeCheckTrial,为表达我们的谢意，完成年龄验证即可免费使用 Roblox Plus 一周。无需提供付款方式即可享受此免费试用。
-Feature.RobloxSubscription.Description.Benefit.Customize,使用个人资料边框和 App 主题进行自定义
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与虚拟形象九折优惠，之后享八折优惠
+Feature.RobloxSubscription.Description.Benefit.Customize,
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器
@@ -4630,7 +4596,6 @@ Feature.Schools.Description.MoreVerifiedAlumniNeeded,需要更多通过验证的
 Feature.Schools.Description.NotAvailableInRegion,学校功能尚不可用。
 Feature.Schools.Description.RemoveSchoolBody,你必须重新验证学校电子邮件地址，才能再次加入学校。你收到的所有奖励道具都将被删除。
 Feature.Schools.Description.SchoolIsLiveBody,
-Feature.Schools.Description.SchoolUnavailableBody,
 Feature.Schools.Description.UpsellDisclaimer,你的学校信息只对同校的人可见。你可以随时更新或移除你的学校。
 Feature.Schools.Description.UpsellTagline,找到已通过验证的同校学生，与他们交流并一起游玩。
 Feature.Schools.Description.WaitlistAlumniBody,你已完成验证。你的学校校友群组上线后，我们会立即通知你。
@@ -4660,7 +4625,6 @@ Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} 名成员
 Feature.Schools.Heading.RemoveYourSchool,移除你的学校
 Feature.Schools.Heading.SchoolIsLive,添加学校功能现已上线
-Feature.Schools.Heading.SchoolUnavailable,学校不可用
 Feature.Schools.Heading.SelectGraduationYear,选择毕业年份
 Feature.Schools.Heading.ShareWithFriends,与好友分享
 Feature.Schools.Heading.ThanksForInterest,感谢你的关注
@@ -4676,7 +4640,6 @@ Feature.Schools.Label.ResendInSeconds,{time}后重新发送
 Feature.Schools.Label.SchoolLaunches,学校上线
 Feature.Schools.Label.SchoolVerified,你已通过验证
 Feature.Schools.Label.Search,
-Feature.Schools.Label.SuggestedEmail,
 Feature.Schools.Label.UnlockAlumniGroup,校友群组待上线
 Feature.Schools.Label.UpsellPerkFindFriends,寻找同校的好友
 Feature.Schools.Label.UpsellPerkPlayAndChat,查看在线好友，轻松一起游玩

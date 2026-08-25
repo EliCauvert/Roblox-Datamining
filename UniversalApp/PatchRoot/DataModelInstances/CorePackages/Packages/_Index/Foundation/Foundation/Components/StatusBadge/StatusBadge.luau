@@ -18,39 +18,39 @@ local t = {
 	size = statusBadgeSizeModule.Small
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useStatusBadgeVariantsModule (ref), useScaledValueModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref)
-	local var13 = withDefaultsModule(p0, t)
-	local var14 = useStatusBadgeVariantsModule(useTokensModule(), var13.variant, var13.shape, var13.size)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useStatusBadgeVariantsModule(useTokensModule(), var1.variant, var1.shape, var1.size)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var13, { tag = var14.container.tag, ref = p1 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = var2.container.tag, ref = p2 }), {
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
-			tag = var14.content.tag,
-			layout = if var14.content.gap then {
+			tag = var2.content.tag,
+			layout = if var2.content.gap then {
 				FillDirection = Enum.FillDirection.Horizontal,
-				Padding = UDim.new(0, var14.content.gap)
+				Padding = UDim.new(0, var2.content.gap)
 			} else nil,
-			testId = `{var13.testId}--content`
+			testId = `{var1.testId}--content`
 		}, {
 			StatusLight = reactModule.createElement(viewModule, {
 				LayoutOrder = 1,
-				tag = var14.statusLight.tag,
-				testId = `{var13.testId}--status-light`
+				tag = var2.statusLight.tag,
+				testId = `{var1.testId}--status-light`
 			}, {
 				Dot = reactModule.createElement(viewModule, {
 					LayoutOrder = 1,
-					tag = var14.dot.tag,
-					testId = `{var13.testId}--dot`
+					tag = var2.dot.tag,
+					testId = `{var1.testId}--dot`
 				})
 			}),
 			Text = reactModule.createElement(textModule, {
 				LayoutOrder = 2,
-				Text = var13.text,
-				tag = var14.text.tag,
-				textStyle = var14.text.style,
+				Text = var1.text,
+				tag = var2.text.tag,
+				textStyle = var2.text.style,
 				sizeConstraint = { MaxSize = Vector2.new(useScaledValueModule(200), 1e999) },
-				testId = `{var13.testId}--text`
+				testId = `{var1.testId}--text`
 			})
 		})
 	})

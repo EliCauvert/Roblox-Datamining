@@ -5,12 +5,12 @@ local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getFFlagUGCValidationEnforceHRDUploadModule = require(parent.flags.getFFlagUGCValidationEnforceHRDUpload)
 local t = { LeftHand = "LeftHand", RightHand = "RightHand" }
 
-return function(p0, p1, _)
+return function(p1, p2, _)
 	-- upvalues: constantsModule (ref), r15plusUtilsModule (ref), getFFlagUGCValidationEnforceHRDUploadModule (ref), t (ref)
-	local var4 = constantsModule.ASSET_TYPE_INFO[p0].subParts[p1]
+	local var1 = constantsModule.ASSET_TYPE_INFO[p1].subParts[p2]
 	local t_1 = {
 		ClassName = "MeshPart",
-		Name = { p1 },
+		Name = { p2 },
 		_children = {
 			{
 				ClassName = "StringValue",
@@ -18,7 +18,7 @@ return function(p0, p1, _)
 			},
 			{
 				ClassName = "WrapTarget",
-				Name = { p1, p1 .. "WrapTarget", "WrapTarget" }
+				Name = { p2, p2 .. "WrapTarget", "WrapTarget" }
 			},
 			{
 				ClassName = "SurfaceAppearance",
@@ -29,10 +29,10 @@ return function(p0, p1, _)
 	}
 	table.insert(t_1._children, {
 		ClassName = "Attachment",
-		Name = { var4.rigAttachmentToParent.name }
+		Name = { var1.rigAttachmentToParent.name }
 	})
 	
-	for i in pairs(var4.otherAttachments) do
+	for i in pairs(var1.otherAttachments) do
 		table.insert(t_1._children, { ClassName = "Attachment", Name = { i } })
 	end
 	if r15plusUtilsModule.checkFlagEnabledForAllowHrd() then
@@ -42,14 +42,14 @@ return function(p0, p1, _)
 			_optional = not getFFlagUGCValidationEnforceHRDUploadModule()
 		})
 		
-		if t[p1] ~= nil then
+		if t[p2] ~= nil then
 			table.insert(t_1._children, {
 				ClassName = "DigitsRigDescription",
 				_optional = true,
-				Name = { "DigitsRigDescription", `{t[p1]}Description` }
+				Name = { "DigitsRigDescription", `{t[p2]}Description` }
 			})
 		end
-		local avatarBoneSchema = r15plusUtilsModule.getAvatarBoneSchema(p1)
+		local avatarBoneSchema = r15plusUtilsModule.getAvatarBoneSchema(p2)
 		local attachment = r15plusUtilsModule.getNameWhitelistOfClassInSchema(avatarBoneSchema, "Attachment")
 		
 		for i_1, v in t_1._children do

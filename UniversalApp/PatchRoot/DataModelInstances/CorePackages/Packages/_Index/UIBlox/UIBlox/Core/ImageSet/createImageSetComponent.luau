@@ -10,58 +10,58 @@ local scaleSliceToResolutionModule = require(parent_1.App.ImageSet.scaleSliceToR
 local imagesInverseModule = require(parent_1.App.ImageSet.ImagesInverse)
 local getBuilderIconElementModule = require(parent.getBuilderIconElement)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: roactModule (ref), uiblox (ref), useTokens (ref), useTextSizeOffset (ref), imagesInverseModule (ref), getBuilderIconElementModule (ref), scaleSliceToResolutionModule (ref)
-	assert(p1 > 0, "resolutionScale for ImageSet must be greater than 0! got " .. tostring(p1))
+	assert(p2 > 0, "resolutionScale for ImageSet must be greater than 0! got " .. tostring(p2))
 	
-	return roactModule.forwardRef(function(p2, p3)
-		-- upvalues: roactModule (copy), uiblox (copy), useTokens (copy), useTextSizeOffset (copy), imagesInverseModule (copy), getBuilderIconElementModule (copy), p0 (ref), p1 (ref), scaleSliceToResolutionModule (copy)
+	return roactModule.forwardRef(function(p1, p2)
+		-- upvalues: roactModule (copy), uiblox (copy), useTokens (copy), useTextSizeOffset (copy), imagesInverseModule (copy), getBuilderIconElementModule (copy), p1 (ref), p2 (ref), scaleSliceToResolutionModule (copy)
 		local t = {
-			[roactModule.Ref] = p3,
-			[roactModule.Children] = p2[roactModule.Children]
+			[roactModule.Ref] = p2,
+			[roactModule.Children] = p1[roactModule.Children]
 		}
-		local var6 = nil
+		local var1 = nil
 		local image = nil
-		local var7 = false
-		local var8 = false
+		local var2 = false
+		local var3 = false
 		
-		for i, v in pairs(p2) do
+		for i, v in pairs(p1) do
 			if i ~= "Image" or typeof(v) ~= "table" then
 				t[i] = v
 			elseif uiblox[v.Image] then
-				var8 = true
+				var3 = true
 				image = v.Image
 			else
-				var7 = true
-				var6 = v
+				var2 = true
+				var1 = v
 			end
 		end
-		local var9 = useTokens()
-		local var10 = useTextSizeOffset()
+		local var4 = useTokens()
+		local var5 = useTextSizeOffset()
 		
-		if var7 or var8 then
-			local var11 = if var8 then image else imagesInverseModule[var6]
+		if var2 or var3 then
+			local var6 = if var3 then image else imagesInverseModule[var1]
 			
-			if var11 and uiblox[var11] then
-				if not var9.Stroke then
-					error(`No StyleProvider in tree for migrated icon ImageSetComponent.\n UIBlox Icon: {var11}, BuilderIcon: {uiblox[var11]}`)
+			if var6 and uiblox[var6] then
+				if not var4.Stroke then
+					error(`No StyleProvider in tree for migrated icon ImageSetComponent.\n UIBlox Icon: {var6}, BuilderIcon: {uiblox[var6]}`)
 				end
-				return getBuilderIconElementModule(t, p0, uiblox[var11], var11, var9, var10, var9.Stroke.Standard)
-			elseif var7 then
-				for i_1, v_1 in pairs(var6) do
+				return getBuilderIconElementModule(t, p1, uiblox[var6], var6, var4, var5, var4.Stroke.Standard)
+			elseif var2 then
+				for i_1, v_1 in pairs(var1) do
 					if not t[i_1] then
 						t[i_1] = v_1
 					elseif i_1 == "ImageRectOffset" then
-						t[i_1] = v_1 + t[i_1] * p1
+						t[i_1] = v_1 + t[i_1] * p2
 					elseif i_1 == "ImageRectSize" then
-						t[i_1] *= p1
+						t[i_1] *= p2
 					end
 				end
 			end
-			if var7 then
-				t = scaleSliceToResolutionModule(t, p1)
+			if var2 then
+				t = scaleSliceToResolutionModule(t, p2)
 			end
-			return roactModule.createElement(p0, t)
+			return roactModule.createElement(p1, t)
 		end
 	end)
 end

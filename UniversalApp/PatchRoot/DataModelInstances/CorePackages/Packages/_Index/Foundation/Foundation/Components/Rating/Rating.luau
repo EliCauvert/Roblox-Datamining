@@ -23,90 +23,90 @@ local t = {
 	value = ratingValueModule.None
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useRatingVariantsModule (ref), reactModule (ref), ratingValueModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconVariant (ref), textModule (ref), dividerModule (ref), orientationModule (ref)
-	local var15 = withDefaultsModule(p0, t)
-	local var16 = useTokensModule()
-	local var17 = useRatingVariantsModule(var16, var15.size)
-	local var18 = reactModule.useRef(nil)
-	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: var16 (ref)
-		local floored = math.floor(var16.Stroke.Thicker)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = useRatingVariantsModule(var2, var1.size)
+	local var4 = reactModule.useRef(nil)
+	local var5 = reactModule.useRef(nil)
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref)
+		local floored = math.floor(var2.Stroke.Thicker)
 		
 		return {
-			radius = UDim.new(0, var16.Radius.Circle),
+			radius = UDim.new(0, var2.Radius.Circle),
 			offset = floored * 2,
 			borderWidth = floored
 		}
-	end, { var16 })
+	end, { var2 })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var15, {
-		tag = var17.container.tag,
-		backgroundStyle = var17.container.backgroundStyle,
-		ref = p1
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		tag = var3.container.tag,
+		backgroundStyle = var3.container.backgroundStyle,
+		ref = p2
 	}), {
 		ThumbUp = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
-			tag = var17.thumbUpSegment.tag,
-			ref = var18,
-			onActivated = var15.onThumbUp,
-			cursor = var20,
+			tag = var3.thumbUpSegment.tag,
+			ref = var4,
+			onActivated = var1.onThumbUp,
+			cursor = var6,
 			selection = {
-				Selectable = var15.Selectable,
-				NextSelectionUp = var15.NextSelectionUp,
-				NextSelectionDown = var15.NextSelectionDown,
-				NextSelectionLeft = var15.NextSelectionLeft,
-				NextSelectionRight = var19
+				Selectable = var1.Selectable,
+				NextSelectionUp = var1.NextSelectionUp,
+				NextSelectionDown = var1.NextSelectionDown,
+				NextSelectionLeft = var1.NextSelectionLeft,
+				NextSelectionRight = var5
 			},
-			testId = `{var15.testId}--thumb-up`
+			testId = `{var1.testId}--thumb-up`
 		}, {
-			Icon = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var17.thumbUpIcon.tag }, {
+			Icon = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var3.thumbUpIcon.tag }, {
 				Icon = reactModule.createElement(iconModule, {
 					name = icon.ThumbUp,
-					variant = if var15.value == ratingValueModule.ThumbUp then iconVariant.Filled else iconVariant.Regular,
-					size = var17.iconSize,
-					style = var17.text.contentStyle,
-					testId = `{var15.testId}--thumb-up-icon`
+					variant = if var1.value == ratingValueModule.ThumbUp then iconVariant.Filled else iconVariant.Regular,
+					size = var3.iconSize,
+					style = var3.text.contentStyle,
+					testId = `{var1.testId}--thumb-up-icon`
 				})
 			}),
 			Text = reactModule.createElement(textModule, {
 				LayoutOrder = 2,
-				Text = var15.text,
-				textStyle = var17.text.contentStyle,
-				tag = var17.text.tag,
-				testId = `{var15.testId}--text`
+				Text = var1.text,
+				textStyle = var3.text.contentStyle,
+				tag = var3.text.tag,
+				testId = `{var1.testId}--text`
 			})
 		}),
 		Divider = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
-			tag = var17.dividerContainer.tag,
-			testId = `{var15.testId}--divider`
+			tag = var3.dividerContainer.tag,
+			testId = `{var1.testId}--divider`
 		}, {
 			Line = reactModule.createElement(dividerModule, { orientation = orientationModule.Vertical })
 		}),
 		ThumbDown = reactModule.createElement(viewModule, {
 			LayoutOrder = 3,
-			tag = var17.thumbDownSegment.tag,
-			ref = var19,
-			onActivated = var15.onThumbDown,
-			cursor = var20,
+			tag = var3.thumbDownSegment.tag,
+			ref = var5,
+			onActivated = var1.onThumbDown,
+			cursor = var6,
 			selection = {
-				Selectable = var15.Selectable,
-				NextSelectionUp = var15.NextSelectionUp,
-				NextSelectionDown = var15.NextSelectionDown,
-				NextSelectionLeft = var18,
-				NextSelectionRight = var15.NextSelectionRight
+				Selectable = var1.Selectable,
+				NextSelectionUp = var1.NextSelectionUp,
+				NextSelectionDown = var1.NextSelectionDown,
+				NextSelectionLeft = var4,
+				NextSelectionRight = var1.NextSelectionRight
 			},
-			testId = `{var15.testId}--thumb-down`
+			testId = `{var1.testId}--thumb-down`
 		}, {
-			Icon = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var17.thumbDownIcon.tag }, {
+			Icon = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var3.thumbDownIcon.tag }, {
 				Icon = reactModule.createElement(iconModule, {
 					name = icon.ThumbDown,
-					variant = if var15.value == ratingValueModule.ThumbDown then iconVariant.Filled else iconVariant.Regular,
-					size = var17.iconSize,
-					style = var17.text.contentStyle,
-					testId = `{var15.testId}--thumb-down-icon`
+					variant = if var1.value == ratingValueModule.ThumbDown then iconVariant.Filled else iconVariant.Regular,
+					size = var3.iconSize,
+					style = var3.text.contentStyle,
+					testId = `{var1.testId}--thumb-down-icon`
 				})
 			})
 		})

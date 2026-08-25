@@ -3,10 +3,10 @@ local analyticsModule = require(parent.Analytics)
 local _ = require(parent.util.Types)
 local UGCValidationBodyPartCollisionFidelity = game:DefineFastString("UGCValidationBodyPartCollisionFidelity", "Default")
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: UGCValidationBodyPartCollisionFidelity (ref), analyticsModule (ref)
-	local descendants = p0:GetDescendants()
-	table.insert(descendants, 1, p0)
+	local descendants = p1:GetDescendants()
+	table.insert(descendants, 1, p1)
 	local default = Enum.CollisionFidelity.Default
 	pcall(function()
 		-- upvalues: default (write), UGCValidationBodyPartCollisionFidelity (copy)
@@ -22,7 +22,7 @@ return function(p0, p1)
 	if #t == 0 then
 		return true
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCollisionFidelity, nil, p1)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCollisionFidelity, nil, p2)
 	
 	return false, t
 end

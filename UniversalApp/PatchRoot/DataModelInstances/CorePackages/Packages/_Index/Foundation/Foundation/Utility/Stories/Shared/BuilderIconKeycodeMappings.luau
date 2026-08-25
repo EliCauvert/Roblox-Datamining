@@ -4,16 +4,16 @@ local dashModule = require(parent.Dash)
 
 local function _(value)
 	-- upvalues: builderIconsModule (ref)
-	local var30 = builderIconsModule.Icon[value]
+	local var1 = builderIconsModule.Icon[value]
 	
-	return if typeof(var30) == "string" and var30 ~= "" then var30 else nil
+	return if typeof(var1) == "string" and var1 ~= "" then var1 else nil
 end
 
-local function forEachBuilderIcon(p0)
+local function forEachBuilderIcon(p1)
 	-- upvalues: builderIconsModule (ref)
 	for i, v in builderIconsModule.Icon do
 		if typeof(i) == "string" and typeof(v) == "string" then
-			p0(i, v)
+			p1(i, v)
 		end
 	end
 end
@@ -23,11 +23,11 @@ local function buildResolvedMappings(p1)
 	local t = {}
 	
 	for i, v in p1 do
-		local var32 = builderIconsModule.Icon[v]
-		local var33 = if typeof(var32) == "string" and var32 ~= "" then var32 else nil
+		local var1 = builderIconsModule.Icon[v]
+		local var2 = if typeof(var1) == "string" and var1 ~= "" then var1 else nil
 		
-		if var33 then
-			t[i] = var33
+		if var2 then
+			t[i] = var2
 		end
 	end
 	return t
@@ -177,35 +177,35 @@ local t_4 = {
 	MouseScrollwheel = { "MouseWheel" }
 }
 
-local function isKeycodeRelatedIconKey(p2)
-	return if p2:match("^Key") == nil then if p2:match("^Ps") == nil then if p2:match("^Xbox") == nil then if p2:match("^Mouse") == nil then if p2 ~= "GenericDpad" then if p2 ~= "Controller" then if p2 ~= "ControllerWithCog" then if p2 ~= "Keyboard" then if p2 ~= "Playstation" then p2 == "PlaystationCircle" else true else true else true else true else true else true else true else true else true
+local function isKeycodeRelatedIconKey(p1)
+	return if p1:match("^Key") == nil then if p1:match("^Ps") == nil then if p1:match("^Xbox") == nil then if p1:match("^Mouse") == nil then if p1 ~= "GenericDpad" then if p1 ~= "Controller" then if p1 ~= "ControllerWithCog" then if p1 ~= "Keyboard" then if p1 ~= "Playstation" then p1 == "PlaystationCircle" else true else true else true else true else true else true else true else true else true
 end
 
-local function getKeycodeNamesForIconKey(p3)
+local function getKeycodeNamesForIconKey(p1)
 	-- upvalues: t_4 (ref), t_3 (ref)
-	if t_4[p3] then
-		return t_4[p3]
+	if t_4[p1] then
+		return t_4[p1]
 	end
-	local var34 = p3:match("^Key(.+)$")
+	local var1 = p1:match("^Key(.+)$")
 	
-	if var34 then
-		local var35 = t_3[var34]
+	if var1 then
+		local var2 = t_3[var1]
 		
-		return if var35 then { var35 } else {}
+		return if var2 then { var2 } else {}
 	end
 end
 
-local function addIconToKeycode(p4, p5, p6)
-	if p6 == nil or p6 == "" then return end
-	if p4[p5] == nil then
-		p4[p5] = {}
+local function addIconToKeycode(p1, p2, p3)
+	if p3 == nil or p3 == "" then return end
+	if p1[p2] == nil then
+		p1[p2] = {}
 	end
-	if not table.find(p4[p5], p6) then
-		table.insert(p4[p5], p6)
+	if not table.find(p1[p2], p3) then
+		table.insert(p1[p2], p3)
 	end
 end
 
-local var14 = (function()
+local var3 = (function()
 	-- upvalues: list_1 (ref), t_2 (ref), addIconToKeycode (ref), forEachBuilderIcon (ref), isKeycodeRelatedIconKey (ref), getKeycodeNamesForIconKey (ref)
 	local t = {}
 	
@@ -214,11 +214,11 @@ local var14 = (function()
 			addIconToKeycode(t, i_2, v_1)
 		end
 	end
-	forEachBuilderIcon(function(p7, p8)
+	forEachBuilderIcon(function(p1, p2)
 		-- upvalues: isKeycodeRelatedIconKey (copy), getKeycodeNamesForIconKey (copy), addIconToKeycode (copy), t (ref)
-		if isKeycodeRelatedIconKey(p7) then
-			for i, v in getKeycodeNamesForIconKey(p7) do
-				addIconToKeycode(t, v, p8)
+		if isKeycodeRelatedIconKey(p1) then
+			for i, v in getKeycodeNamesForIconKey(p1) do
+				addIconToKeycode(t, v, p2)
 			end
 		end
 	end)
@@ -232,41 +232,41 @@ local t_5 = {}
 local t_6 = {}
 local t_7 = {}
 
-for i, v in var14 do
+for i, v in var3 do
 	for i_1, v_1 in v do
 		t_7[v_1] = true
 	end
 end
-forEachBuilderIcon(function(p9, p10)
+forEachBuilderIcon(function(p1, p2)
 	-- upvalues: isKeycodeRelatedIconKey (ref), t_6 (ref), t_5 (ref)
-	if isKeycodeRelatedIconKey(p9) and p10 ~= "" and not t_6[p10] then
-		t_6[p10] = true
-		table.insert(t_5, p10)
+	if isKeycodeRelatedIconKey(p1) and p2 ~= "" and not t_6[p2] then
+		t_6[p2] = true
+		table.insert(t_5, p2)
 	end
 end)
-table.sort(t_5, function(p11, p12)
-	return p11 < p12
+table.sort(t_5, function(p1, p2)
+	return p1 < p2
 end)
 local t_8 = {}
-forEachBuilderIcon(function(p13, p14)
+forEachBuilderIcon(function(p1, p2)
 	-- upvalues: isKeycodeRelatedIconKey (ref), t_7 (ref), t_8 (ref)
-	if isKeycodeRelatedIconKey(p13) and p14 ~= "" and (not t_7[p14] and not table.find(t_8, p14)) then
-		table.insert(t_8, p14)
+	if isKeycodeRelatedIconKey(p1) and p2 ~= "" and (not t_7[p2] and not table.find(t_8, p2)) then
+		table.insert(t_8, p2)
 	end
 end)
 table.sort(t_8)
 local t_9 = {}
-forEachBuilderIcon(function(p15, p16)
+forEachBuilderIcon(function(p1, p2)
 	-- upvalues: t_9 (ref)
-	if p16 ~= "" then
-		t_9[p16] = p15
+	if p2 ~= "" then
+		t_9[p2] = p1
 	end
 end)
 
-for i_1, v_1 in var14 do
-	table.sort(v_1, function(p17, p18)
+for i_1, v_1 in var3 do
+	table.sort(v_1, function(p1, p2)
 		-- upvalues: t_9 (ref)
-		return (t_9[p17] or p17) < (t_9[p18] or p18)
+		return (t_9[p1] or p1) < (t_9[p2] or p2)
 	end)
 end
 local t_10 = {}
@@ -275,56 +275,56 @@ local t_11 = {}
 for i_2, v_2 in list_1 do
 	for i_3, v_3 in t_1[v_2] do
 		t_11[i_3] = v_3
-		local var29 = builderIconsModule.Icon[v_3]
+		local var1 = builderIconsModule.Icon[v_3]
 		
-		if (if typeof(var29) == "string" and var29 ~= "" then var29 else nil) == nil then
+		if (if typeof(var1) == "string" and var1 ~= "" then var1 else nil) == nil then
 			t_10[i_3] = true
 		end
 	end
 end
-local _ = function(p19)
+local _ = function(p1)
 	-- upvalues: t_11 (ref)
-	return t_11[p19]
+	return t_11[p1]
 end
 
-local function isBrokenKeycodeMapping(p20)
+local function isBrokenKeycodeMapping(p1)
 	-- upvalues: t_10 (ref)
-	return t_10[p20] == true
+	return t_10[p1] == true
 end
 
-local function isBrokenKeycodeMappingForKeyCode(p21)
+local function isBrokenKeycodeMappingForKeyCode(p1)
 	-- upvalues: t_10 (ref)
-	return t_10[p21.Name] == true
+	return t_10[p1.Name] == true
 end
 
-local function getBrokenKeycodeMappingNote(p22)
+local function getBrokenKeycodeMappingNote(p1)
 	-- upvalues: t_10 (ref), t_11 (ref)
-	if t_10[p22] ~= true then
+	if t_10[p1] ~= true then
 		return nil
 	end
-	local var37 = t_11[p22]
+	local var1 = t_11[p1]
 	
-	return if var37 then `KeycodeMappings references {var37}, but the icon asset is missing from BuilderIcons.` else "KeycodeMappings declares this KeyCode, but the icon asset resolves to nil."
+	return if var1 then `KeycodeMappings references {var1}, but the icon asset is missing from BuilderIcons.` else "KeycodeMappings declares this KeyCode, but the icon asset resolves to nil."
 end
 
-local function getIconForKeyName(p23, p24)
+local function getIconForKeyName(p1, p2)
 	-- upvalues: t_2 (ref)
-	return t_2[p24][p23]
+	return t_2[p2][p1]
 end
 
-local function getIconForKeyCode(p25, p26)
+local function getIconForKeyCode(p1, p2)
 	-- upvalues: t_2 (ref)
-	return t_2[p26][p25.Name]
+	return t_2[p2][p1.Name]
 end
 
-local function getAllIconsForKeyCode(p27)
-	-- upvalues: var14 (ref)
-	return var14[p27.Name] or {}
+local function getAllIconsForKeyCode(p1)
+	-- upvalues: var3 (ref)
+	return var3[p1.Name] or {}
 end
 
-local function getAllIconsForKeyName(p28)
-	-- upvalues: var14 (ref)
-	return var14[p28] or {}
+local function getAllIconsForKeyName(p1)
+	-- upvalues: var3 (ref)
+	return var3[p1] or {}
 end
 
 local _ = function(value)
@@ -332,30 +332,30 @@ local _ = function(value)
 	return t_9[value] or value
 end
 
-local _ = function(p29)
+local _ = function(p1)
 	-- upvalues: getKeycodeNamesForIconKey (ref), t_10 (ref)
-	local var38 = getKeycodeNamesForIconKey(p29)
+	local var1 = getKeycodeNamesForIconKey(p1)
 	
-	return #var38 == 1 and t_10[var38[1]] == true
+	return #var1 == 1 and t_10[var1[1]] == true
 end
 
 return {
 	GAMEPAD_PLATFORM_ORDER = list,
 	INPUT_PLATFORM_ORDER = list_1,
-	getAllIconNamesForKeyCode = function(p30)
-		-- upvalues: var14 (ref), t_9 (ref)
+	getAllIconNamesForKeyCode = function(p1)
+		-- upvalues: var3 (ref), t_9 (ref)
 		local t = {}
 		
-		for i, v in var14[p30.Name] or {} do
+		for i, v in var3[p1.Name] or {} do
 			table.insert(t, t_9[v] or v)
 		end
 		return t
 	end,
-	getAllIconsWithNamesForKeyCode = function(p31)
-		-- upvalues: var14 (ref), t_9 (ref)
+	getAllIconsWithNamesForKeyCode = function(p1)
+		-- upvalues: var3 (ref), t_9 (ref)
 		local t = {}
 		
-		for i, v in var14[p31.Name] or {} do
+		for i, v in var3[p1.Name] or {} do
 			table.insert(t, { icon = v, name = t_9[v] or v })
 		end
 		return t
@@ -401,10 +401,10 @@ return {
 		local t = {}
 		
 		for i, v in t_8 do
-			local var45 = t_9[v] or v
-			local t_1 = { icon = v, name = var45 }
-			local var47 = getKeycodeNamesForIconKey(var45)
-			t_1.isBrokenLink = #var47 ~= 1 and t_10[var47[1]] == true
+			local var1 = t_9[v] or v
+			local t_1 = { icon = v, name = var1 }
+			local var2 = getKeycodeNamesForIconKey(var1)
+			t_1.isBrokenLink = #var2 ~= 1 and t_10[var2[1]] == true
 			table.insert(t, t_1)
 		end
 		return t

@@ -10,7 +10,7 @@ local inputSizeModule = require(foundation.Enums.InputSize)
 local textModule = require(foundation.Components.Text)
 local viewModule = require(foundation.Components.View)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), viewModule (ref), iconButtonModule (ref), icon (ref), inputSizeModule (ref), buttonVariantModule (ref), textModule (ref), dateTimeUtilitiesModule (ref)
 	return reactModule.createElement(viewModule, {
 		LayoutOrder = 1,
@@ -20,30 +20,30 @@ return function(p0)
 			isCircular = false,
 			LayoutOrder = 1,
 			icon = icon.ChevronSmallLeft,
-			onActivated = p0.onPreviousMonth,
+			onActivated = p1.onPreviousMonth,
 			size = inputSizeModule.Small,
-			testId = `{p0.testId}--previous-month-button`,
+			testId = `{p1.testId}--previous-month-button`,
 			variant = buttonVariantModule.Utility
 		}),
 		FirstMonthLabel = reactModule.createElement(textModule, {
 			LayoutOrder = 2,
 			tag = "grow auto-y text-title-small text-align-x-center",
-			testId = `{p0.testId}--first-month-label`,
-			Text = `{dateTimeUtilitiesModule.monthMap[p0.currViewDate.month]} {p0.currViewDate.year}`
+			testId = `{p1.testId}--first-month-label`,
+			Text = `{dateTimeUtilitiesModule.monthMap[p1.currViewDate.month]} {p1.currViewDate.year}`
 		}),
 		SecondMonthLabel = reactModule.createElement(textModule, {
 			LayoutOrder = 3,
 			tag = "grow auto-y text-title-small text-align-x-center",
-			testId = `{p0.testId}--second-month-label`,
-			Text = `{dateTimeUtilitiesModule.monthMap[p0.secondMonth]} {p0.secondYear}`
+			testId = `{p1.testId}--second-month-label`,
+			Text = `{dateTimeUtilitiesModule.monthMap[p1.secondMonth]} {p1.secondYear}`
 		}),
 		NextMonthButton = reactModule.createElement(iconButtonModule, {
 			isCircular = false,
 			LayoutOrder = 4,
 			icon = icon.ChevronSmallRight,
-			onActivated = p0.onNextMonth,
+			onActivated = p1.onNextMonth,
 			size = inputSizeModule.Small,
-			testId = `{p0.testId}--next-month-button`,
+			testId = `{p1.testId}--next-month-button`,
 			variant = buttonVariantModule.Utility
 		})
 	})

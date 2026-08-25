@@ -20,14 +20,10 @@ local visibilityModule = require(foundation.Enums.Visibility)
 local sliderVariantModule = require(foundation.Enums.SliderVariant)
 local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
 local controlStateModule = require(foundation.Enums.ControlState)
-local cursorTypeModule = require(foundation.Enums.CursorType)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local cursorComponentModule = require(foundation.Providers.Cursor.CursorComponent)
 local flagsModule = require(foundation.Utility.Flags)
 local knobModule = require(foundation.Components.Knob)
 local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
-local getKnobSizeModule = require(foundation.Components.Knob.getKnobSize)
-local usePresentationContext = presentationContextModule.usePresentationContext
 local useSliderMotionStatesModule = require(foundation.Components.Slider.useSliderMotionStates)
 local useSliderVariantsModule = require(foundation.Components.Slider.useSliderVariants)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
@@ -49,318 +45,270 @@ local t_2 = {
 	SelectionBehaviorDown = Enum.SelectionBehavior.Escape
 }
 
-return reactModule.forwardRef(function(p0, p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), controlStateModule (ref), useBindableModule (ref), flagsModule (ref), useLastInputModeModule (ref), usePointerPositionModule (ref), useSliderVariantsModule (ref), useSliderMotionStatesModule (ref), visibilityModule (ref), calculateSliderValueFromPositionModule (ref), calculateSliderStepValueModule (ref), useSliderDirectionalInputModule (ref), inputModeModule (ref), calculatePixelsPerStepModule (ref), calculateNextStepValueModule (ref), calculateSliderPositionDeltaModule (ref), usePresentationContext (ref), viewModule (ref), withCommonPropsModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), t_2 (ref), cursorTypeModule (ref), getKnobSizeModule (ref), cursorComponentModule (ref), presentationContextModule (ref), t_1 (ref), knobModule (ref)
-	local var53
-	local var34 = withDefaultsModule(p0, t)
-	local var35 = useTokensModule()
-	local var36, var37 = reactModule.useState(controlStateModule.Initialize)
-	local var38, var39 = reactModule.useState(false)
-	local var40, var41 = reactModule.useState(false)
-	local var42 = useBindableModule(var34.value):map(function(p2)
-		-- upvalues: var34 (ref)
-		return math.clamp(p2, var34.range.Min, var34.range.Max)
+return reactModule.forwardRef(function(p1, p2)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), controlStateModule (ref), useBindableModule (ref), flagsModule (ref), useLastInputModeModule (ref), usePointerPositionModule (ref), useSliderVariantsModule (ref), useSliderMotionStatesModule (ref), visibilityModule (ref), calculateSliderValueFromPositionModule (ref), calculateSliderStepValueModule (ref), useSliderDirectionalInputModule (ref), inputModeModule (ref), calculatePixelsPerStepModule (ref), calculateNextStepValueModule (ref), calculateSliderPositionDeltaModule (ref), viewModule (ref), withCommonPropsModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), t_2 (ref), presentationContextModule (ref), t_1 (ref), knobModule (ref)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3, var4 = reactModule.useState(controlStateModule.Initialize)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9 = useBindableModule(var1.value):map(function(p1)
+		-- upvalues: var1 (ref)
+		return math.clamp(p1, var1.range.Min, var1.range.Max)
 	end)
-	local var43 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useRef(nil)
-	local var44 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useRef(nil) else nil
-	local var45 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useRef(0) else nil
-	local var46 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useRef(0) else nil
-	local var47 = useLastInputModeModule()
-	local var48 = reactModule.useRef(nil)
-	reactModule.useImperativeHandle(p1, function()
-		-- upvalues: var48 (ref)
-		return var48.current
+	local var10 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useRef(nil)
+	local var11 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useRef(nil) else nil
+	local var12 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useRef(0) else nil
+	local var13 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useRef(0) else nil
+	local var14 = useLastInputModeModule()
+	local var15 = reactModule.useRef(nil)
+	reactModule.useImperativeHandle(p2, function()
+		-- upvalues: var15 (ref)
+		return var15.current
 	end, {})
-	local var49 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else usePointerPositionModule(var48.current)
-	local var50 = useSliderVariantsModule(var35, var34.size, var34.variant)
-	local var51 = useSliderMotionStatesModule(var50.knob.style, var50.knob.dragStyle)
-	local var52 = reactModule.useMemo(function()
-		-- upvalues: var40 (ref), var51 (ref), var38 (ref)
-		return if var40 then if var38 then var51.Dragging else var51.Idle else var51.Hidden
-	end, { var35, var40, var38, var51 })
-	
-	if flagsModule.FoundationSliderKnobSelection then
-		var53 = true
-		
-		if var36 ~= controlStateModule.Selected then
-			local _ = var36 == controlStateModule.SelectedPressed
-		end
-	else
-		var53 = nil
-	end
+	local var16 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else usePointerPositionModule(var15.current)
+	local var17 = useSliderVariantsModule(var2, var1.size, var1.variant)
+	local var18 = useSliderMotionStatesModule(var17.knob.style, var17.knob.dragStyle)
+	local var19 = reactModule.useMemo(function()
+		-- upvalues: var7 (ref), var18 (ref), var5 (ref)
+		return if var7 then if var5 then var18.Dragging else var18.Idle else var18.Hidden
+	end, { var2, var7, var5, var18 })
 	reactModule.useEffect(function()
-		-- upvalues: var34 (ref), visibilityModule (copy), var41 (ref), flagsModule (copy), var53 (write), var38 (ref), var36 (ref), controlStateModule (copy)
-		if var34.knobVisibility == visibilityModule.None then
-			var41(if flagsModule.FoundationSliderKnobSelection then var53 else false)
+		-- upvalues: var1 (ref), visibilityModule (copy), var8 (ref), var5 (ref), var3 (ref), controlStateModule (copy)
+		if var1.knobVisibility == visibilityModule.None then
+			var8(false)
 			
 			return
-		elseif var34.knobVisibility == visibilityModule.Always then
-			var41(true)
+		elseif var1.knobVisibility == visibilityModule.Always then
+			var8(true)
 			
 			return
 		end
-		var41(var38 or (if var36 ~= controlStateModule.Hover then if var36 ~= controlStateModule.Selected then var36 == controlStateModule.Pressed else true else true))
-	end, {
-		var34.knobVisibility,
-		var36,
-		var38,
-		if flagsModule.FoundationSliderKnobSelection then var53 else nil
-	})
-	local var54 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useCallback(function(p3)
-		-- upvalues: var48 (ref), calculateSliderValueFromPositionModule (copy), var34 (ref), calculateSliderStepValueModule (copy)
-		if not var48.current then
+		var8(var5 or (if var3 ~= controlStateModule.Hover then if var3 ~= controlStateModule.Selected then var3 == controlStateModule.Pressed else true else true))
+	end, { var1.knobVisibility, var3, var5 })
+	local var1 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useCallback(function(p1)
+		-- upvalues: var15 (ref), calculateSliderValueFromPositionModule (copy), var1 (ref), calculateSliderStepValueModule (copy)
+		if not var15.current then
 			return 0
 		end
-		local var68 = calculateSliderValueFromPositionModule(p3, var48.current, var34.range)
+		local var1 = calculateSliderValueFromPositionModule(p1, var15.current, var1.range)
 		
-		return if var34.step then calculateSliderStepValueModule(var68, var34.step, var34.range) else var68
-	end, { var48, var34.range, var34.step })
-	local var55 = reactModule.useCallback(function(p4)
-		-- upvalues: var42 (ref), var34 (ref)
-		if p4 ~= var42:getValue() and var34.onValueChanged then
-			var34.onValueChanged(p4)
+		return if var1.step then calculateSliderStepValueModule(var1, var1.step, var1.range) else var1
+	end, { var15, var1.range, var1.step })
+	local var2 = reactModule.useCallback(function(p1)
+		-- upvalues: var9 (ref), var1 (ref)
+		if p1 ~= var9:getValue() and var1.onValueChanged then
+			var1.onValueChanged(p1)
 		end
-	end, { var42, var34.onValueChanged })
-	local var56 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useCallback(function()
-		-- upvalues: var54 (ref), var49 (ref), var55 (ref)
-		var55(var54(var49:getValue()))
-	end, { var54, var49, var55 })
+	end, { var9, var1.onValueChanged })
+	local var3 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useCallback(function()
+		-- upvalues: var1 (ref), var16 (ref), var2 (ref)
+		var2(var1(var16:getValue()))
+	end, { var1, var16, var2 })
 	
 	if flagsModule.FoundationSliderAsSeenOnTV then
-		if not flagsModule.FoundationSliderKnobSelection then
-			var53 = if var36 ~= controlStateModule.Selected then var36 == controlStateModule.SelectedPressed else true
-		end
-		useSliderDirectionalInputModule(var53 and not var34.isDisabled, var34.step, var34.range, {
+		useSliderDirectionalInputModule((if var3 ~= controlStateModule.Selected then var3 == controlStateModule.SelectedPressed else true) and not var1.isDisabled, var1.step, var1.range, {
 			getValue = function()
-				-- upvalues: var42 (ref)
-				return var42:getValue()
+				-- upvalues: var9 (ref)
+				return var9:getValue()
 			end,
-			onStep = function(p5)
-				-- upvalues: var55 (ref), var34 (ref), calculateSliderStepValueModule (copy)
-				var55(if var34.step then calculateSliderStepValueModule(p5, var34.step, var34.range) else p5)
+			onStep = function(p1)
+				-- upvalues: var2 (ref), var1 (ref), calculateSliderStepValueModule (copy)
+				var2(if var1.step then calculateSliderStepValueModule(p1, var1.step, var1.range) else p1)
 			end
 		})
 	end
-	local var57 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useCallback(function(_, _)
-		-- upvalues: var44 (ref), var34 (ref), var47 (ref), inputModeModule (copy), var46 (ref), var45 (ref), var42 (ref), var55 (ref), calculateSliderStepValueModule (copy)
-		local current = var44.current
+	local var4 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useCallback(function(_, _)
+		-- upvalues: var11 (ref), var1 (ref), var14 (ref), inputModeModule (copy), var13 (ref), var12 (ref), var9 (ref), var2 (ref), calculateSliderStepValueModule (copy)
+		local current = var11.current
 		
 		if not current then return end
-		local var75 = var34.range.Max - var34.range.Min
+		local var1 = var1.range.Max - var1.range.Min
 		local scale = current.DragUDim2.X.Scale
 		
-		if var47 == inputModeModule.Directional and math.abs(scale - var46.current) > 0.01 then
-			var45.current = (var42:getValue() - var34.range.Min) / var75 - scale
-			var46.current = scale
+		if var14 == inputModeModule.Directional and math.abs(scale - var13.current) > 0.01 then
+			var12.current = (var9:getValue() - var1.range.Min) / var1 - scale
+			var13.current = scale
 			
 			return
 		end
-		var46.current = scale
-		local var76 = var34.range.Min + math.clamp(var45.current + scale, 0, 1) * var75
-		var55(if var34.step then calculateSliderStepValueModule(var76, var34.step, var34.range) else var76)
+		var13.current = scale
+		local var2 = var1.range.Min + math.clamp(var12.current + scale, 0, 1) * var1
+		var2(if var1.step then calculateSliderStepValueModule(var2, var1.step, var1.range) else var2)
 	end, {
-		var34.step,
-		var34.range,
-		var47,
-		var42,
-		var55
-	}) else reactModule.useCallback(function(_, p6)
-		-- upvalues: var48 (ref), var43 (ref), var34 (ref), var47 (ref), inputModeModule (copy), calculatePixelsPerStepModule (copy), var42 (ref), calculateNextStepValueModule (copy), var55 (ref), var54 (ref), calculateSliderPositionDeltaModule (copy)
-		if var48.current and var43.current then
-			if var34.step and var34.step > 0 then
-				if var47 ~= inputModeModule.Directional then
-					var55(var54(p6))
-					var43.current = p6
+		var1.step,
+		var1.range,
+		var14,
+		var9,
+		var2
+	}) else reactModule.useCallback(function(_, p1)
+		-- upvalues: var15 (ref), var10 (ref), var1 (ref), var14 (ref), inputModeModule (copy), calculatePixelsPerStepModule (copy), var9 (ref), calculateNextStepValueModule (copy), var2 (ref), var1 (ref), calculateSliderPositionDeltaModule (copy)
+		if var15.current and var10.current then
+			if var1.step and var1.step > 0 then
+				if var14 ~= inputModeModule.Directional then
+					var2(var1(p1))
+					var10.current = p1
 					
 					return
 				end
-				local var69 = p6 - var43.current
-				local absValue = math.abs(var69.X)
-				local var71 = calculatePixelsPerStepModule(var48.current.AbsoluteSize.X, var34.step, var34.range)
+				local var1 = p1 - var10.current
+				local absValue = math.abs(var1.X)
+				local var2 = calculatePixelsPerStepModule(var15.current.AbsoluteSize.X, var1.step, var1.range)
 				
-				if var71 * 2 < absValue then
-					var43.current = p6
+				if var2 * 2 < absValue then
+					var10.current = p1
 					
 					return
-				elseif absValue < var71 / 2 then return end
-				local value = var42:getValue()
-				local var73 = calculateNextStepValueModule(var69.X, value, var34.step, var34.range)
+				elseif absValue < var2 / 2 then return end
+				local value = var9:getValue()
+				local var3 = calculateNextStepValueModule(var1.X, value, var1.step, var1.range)
 				
-				if var73 == value then
+				if var3 == value then
 					return
 				else
-					var55(var73)
-					var43.current = p6
+					var2(var3)
+					var10.current = p1
 					
 					return
 				end
 			else
-				local var74 = calculateSliderPositionDeltaModule(p6, var43.current, var48.current.AbsoluteSize.Magnitude)
-				var43.current = p6
+				local var4 = calculateSliderPositionDeltaModule(p1, var10.current, var15.current.AbsoluteSize.Magnitude)
+				var10.current = p1
 				
-				if var47 == inputModeModule.Directional and math.abs(var74) > 0.01 then return end
-				var55(var54(p6))
+				if var14 == inputModeModule.Directional and math.abs(var4) > 0.01 then return end
+				var2(var1(p1))
 			end
 		end
 	end, {
-		var34.step, var34.range, var47, var42, var55, var54
+		var1.step, var1.range, var14, var9, var2, var1
 	})
-	local var58 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useCallback(function(_, p8)
-		-- upvalues: var39 (ref), var34 (ref), var46 (ref), var47 (ref), inputModeModule (copy), var45 (ref), var42 (ref), var48 (ref), calculateSliderValueFromPositionModule (copy), var55 (ref), calculateSliderStepValueModule (copy)
-		var39(true)
+	local var3 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useCallback(function(_, p1)
+		-- upvalues: var6 (ref), var1 (ref), var13 (ref), var14 (ref), inputModeModule (copy), var12 (ref), var9 (ref), var15 (ref), calculateSliderValueFromPositionModule (copy), var2 (ref), calculateSliderStepValueModule (copy)
+		var6(true)
 		
-		if var34.onDragStarted then
-			var34.onDragStarted()
+		if var1.onDragStarted then
+			var1.onDragStarted()
 		end
-		var46.current = 0
-		local var77 = var34.range.Max - var34.range.Min
+		var13.current = 0
+		local var1 = var1.range.Max - var1.range.Min
 		
-		if var47 == inputModeModule.Directional then
-			var45.current = (var42:getValue() - var34.range.Min) / var77
+		if var14 == inputModeModule.Directional then
+			var12.current = (var9:getValue() - var1.range.Min) / var1
 			
 			return
 		end
-		local var78 = if var48.current then calculateSliderValueFromPositionModule(p8, var48.current, var34.range) else var34.range.Min
-		var45.current = (var78 - var34.range.Min) / var77
-		var55(if var34.step then calculateSliderStepValueModule(var78, var34.step, var34.range) else var78)
+		local var2 = if var15.current then calculateSliderValueFromPositionModule(p1, var15.current, var1.range) else var1.range.Min
+		var12.current = (var2 - var1.range.Min) / var1
+		var2(if var1.step then calculateSliderStepValueModule(var2, var1.step, var1.range) else var2)
 	end, {
-		var34.onDragStarted, var34.step, var34.range, var47, var42, var55
-	}) else reactModule.useCallback(function(_, p7)
-		-- upvalues: var43 (ref), var39 (ref), var34 (ref)
-		var43.current = p7
-		var39(true)
+		var1.onDragStarted, var1.step, var1.range, var14, var9, var2
+	}) else reactModule.useCallback(function(_, p1)
+		-- upvalues: var10 (ref), var6 (ref), var1 (ref)
+		var10.current = p1
+		var6(true)
 		
-		if var34.onDragStarted then
-			var34.onDragStarted()
+		if var1.onDragStarted then
+			var1.onDragStarted()
 		end
-	end, { var34.onDragStarted })
-	local var59 = reactModule.useCallback(function(_, _)
-		-- upvalues: var39 (ref), flagsModule (copy), var43 (ref), var34 (ref)
-		var39(false)
+	end, { var1.onDragStarted })
+	local var3 = reactModule.useCallback(function(_, _)
+		-- upvalues: var6 (ref), flagsModule (copy), var10 (ref), var1 (ref)
+		var6(false)
 		
 		if not flagsModule.FoundationSliderOffloadDraggingMath then
-			var43.current = nil
+			var10.current = nil
 		end
-		if var34.onDragEnded then
-			var34.onDragEnded()
+		if var1.onDragEnded then
+			var1.onDragEnded()
 		end
-	end, { var34.onDragEnded })
-	local var60 = reactModule.useCallback(function(p9)
-		-- upvalues: var37 (ref), flagsModule (copy), controlStateModule (copy), var56 (ref)
-		var37(p9)
+	end, { var1.onDragEnded })
+	local var4 = reactModule.useCallback(function(p1)
+		-- upvalues: var4 (ref), flagsModule (copy), controlStateModule (copy), var3 (ref)
+		var4(p1)
 		
-		if not flagsModule.FoundationSliderOffloadDraggingMath and p9 == controlStateModule.Pressed then
-			var56()
+		if not flagsModule.FoundationSliderOffloadDraggingMath and p1 == controlStateModule.Pressed then
+			var3()
 		end
-	end, { var56 })
-	local var61 = if flagsModule.FoundationSliderKnobSelection then usePresentationContext() else nil
+	end, { var3 })
 	
 	if flagsModule.FoundationSliderOffloadDraggingMath then
 		reactModule.useEffect(function()
-			-- upvalues: var44 (ref), var45 (ref)
-			local current = var44.current
+			-- upvalues: var11 (ref), var12 (ref)
+			local current = var11.current
 			
 			if current then
-				local var79 = current:AddConstraintFunction(1, function(p10, p11)
-					-- upvalues: var45 (copy)
-					local current = var45.current
+				local var1 = current:AddConstraintFunction(1, function(p1, p2)
+					-- upvalues: var12 (copy)
+					local current = var12.current
 					
-					return UDim2.fromScale(math.clamp(p10.X.Scale, -current, 1 - current), 0), p11
+					return UDim2.fromScale(math.clamp(p1.X.Scale, -current, 1 - current), 0), p2
 				end)
 				
 				return function()
-					-- upvalues: var79 (ref)
-					var79:Disconnect()
+					-- upvalues: var1 (ref)
+					var1:Disconnect()
 				end
 			end
 		end, {})
 	end
 	local uDim2 = UDim2.fromScale(1, 0.5)
-	local var63 = if var34.isContained then var42:map(function(p12)
-		-- upvalues: var34 (ref)
-		return Vector2.new((p12 - var34.range.Min) / (var34.range.Max - var34.range.Min), 0.5)
+	local var5 = if var1.isContained then var9:map(function(p1)
+		-- upvalues: var1 (ref)
+		return Vector2.new((p1 - var1.range.Min) / (var1.range.Max - var1.range.Min), 0.5)
 	end) else Vector2.new(0.5, 0.5)
-	local var64 = nil
-	local var65 = nil
 	
-	if flagsModule.FoundationSliderKnobSelection then
-		local var66, var67 = reactModule.useBinding(Vector2.zero)
-		var64 = var66
-		var65 = var67
-	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var34, {
-		Size = UDim2.new(var34.width, UDim.new(0, var50.hitbox.height)),
-		GroupTransparency = if var34.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		Size = UDim2.new(var1.width, UDim.new(0, var17.hitbox.height)),
+		GroupTransparency = if var1.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
 		stateLayer = { affordance = stateLayerAffordanceModule.None },
 		selectionGroup = if flagsModule.FoundationSliderAsSeenOnTV then t_2 else nil,
-		cursor = if flagsModule.FoundationSliderKnobSelection then cursorTypeModule.Invisible else nil,
-		onStateChanged = var60,
-		isDisabled = var34.isDisabled,
-		ref = var48
+		onStateChanged = var4,
+		isDisabled = var1.isDisabled,
+		ref = var15
 	}), {
 		DragDetector = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.createElement("UIDragDetector", {
-			ref = var44,
+			ref = var11,
 			DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
 			DragAxis = Vector2.new(1, 0),
 			ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale,
 			DragRelativity = Enum.UIDragDetectorDragRelativity.Absolute,
-			[reactModule.Event.DragStart] = var58,
-			[reactModule.Event.DragContinue] = var57,
-			[reactModule.Event.DragEnd] = var59,
+			[reactModule.Event.DragStart] = var3,
+			[reactModule.Event.DragContinue] = var4,
+			[reactModule.Event.DragEnd] = var3,
 			SelectionModeDragSpeed = if flagsModule.FoundationSliderAsSeenOnTV then UDim2.new() else nil,
-			Enabled = not var34.isDisabled
+			Enabled = not var1.isDisabled
 		}) else reactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
-			[reactModule.Event.DragStart] = var58,
-			[reactModule.Event.DragContinue] = var57,
-			[reactModule.Event.DragEnd] = var59,
+			[reactModule.Event.DragStart] = var3,
+			[reactModule.Event.DragContinue] = var4,
+			[reactModule.Event.DragEnd] = var3,
 			SelectionModeDragSpeed = if flagsModule.FoundationSliderAsSeenOnTV then UDim2.new() else nil,
-			Enabled = not var34.isDisabled
+			Enabled = not var1.isDisabled
 		}),
-		Bar = reactModule.createElement(viewModule, { tag = var50.bar.tag, testId = `{var34.testId}--bar` }, {
+		Bar = reactModule.createElement(viewModule, { tag = var17.bar.tag, testId = `{var1.testId}--bar` }, {
 			Fill = reactModule.createElement(viewModule, {
-				tag = var50.fill.tag,
-				Size = var42:map(function(p13)
-					-- upvalues: var34 (ref)
-					return UDim2.fromScale((p13 - var34.range.Min) / (var34.range.Max - var34.range.Min), 1)
+				tag = var17.fill.tag,
+				Size = var9:map(function(p1)
+					-- upvalues: var1 (ref)
+					return UDim2.fromScale((p1 - var1.range.Min) / (var1.range.Max - var1.range.Min), 1)
 				end),
-				testId = `{var34.testId}--fill`
+				testId = `{var1.testId}--fill`
 			}, {
-				SelectionCursor = if flagsModule.FoundationSliderKnobSelection and var53 then reactModule.createElement(viewModule, {
-					Size = if var34.knob then var64:map(function(p14)
-						return UDim2.fromOffset(p14.X, p14.Y)
-					end) else getKnobSizeModule(var35, var34.size),
-					AnchorPoint = var63,
-					Position = uDim2,
-					testId = `{var34.testId}--selection-cursor`
-				}, {
-					Cursor = reactModule.createElement(cursorComponentModule, {
-						isVisible = true,
-						cornerRadius = UDim.new(0.5, 0),
-						offset = var35.Padding.XSmall,
-						borderWidth = var35.Stroke.Thicker,
-						colorNamespace = var61.colorNamespace
-					})
-				}) else nil,
-				Knob = if var34.knob then reactModule.createElement(viewModule, {
+				Knob = if var1.knob then reactModule.createElement(viewModule, {
 					tag = "size-0-0 auto-xy",
-					AnchorPoint = var63,
+					AnchorPoint = var5,
 					Position = uDim2,
-					Visible = var40,
-					onAbsoluteSizeChanged = if flagsModule.FoundationSliderKnobSelection then if flagsModule.FoundationSliderKnobSelection then reactModule.useCallback(function(p15)
-						-- upvalues: var65 (write)
-						var65(p15.AbsoluteSize)
-					end, {}) else nil else nil,
-					testId = `{var34.testId}--custom-knob`
-				}, var34.knob) else reactModule.createElement(presentationContextModule.Provider, { value = t_1 }, {
+					Visible = var7,
+					testId = `{var1.testId}--custom-knob`
+				}, var1.knob) else reactModule.createElement(presentationContextModule.Provider, { value = t_1 }, {
 					Knob = reactModule.createElement(knobModule, {
-						AnchorPoint = var63,
+						AnchorPoint = var5,
 						Position = uDim2,
-						size = var34.size,
-						style = var52.knobStyle,
-						stroke = var50.knob.stroke,
-						hasShadow = var50.knob.hasShadow,
-						testId = `{var34.testId}--knob`
+						size = var1.size,
+						style = var19.knobStyle,
+						stroke = var17.knob.stroke,
+						hasShadow = var17.knob.hasShadow,
+						testId = `{var1.testId}--knob`
 					})
 				})
 			})

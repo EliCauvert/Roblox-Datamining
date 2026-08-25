@@ -17,14 +17,14 @@ local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDia
 local useDialogModule = require(script.Parent.Parent.useDialog)
 local t = { orientation = orientationModule.Horizontal }
 
-return function(p0)
+return function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useDialogVariants (ref), useDialogModule (ref), reactModule (ref), dashModule (ref), buttonModule (ref), fillBehaviorModule (ref), dialogSizeModule (ref), orientationModule (ref), viewModule (ref), flagsModule (ref), buttonGroupModule (ref), textModule (ref)
-	local var14 = withDefaultsModule(p0, t)
-	local var15 = useDialogVariants()
-	local var16 = useDialogModule()
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var14 (ref), reactModule (copy), dashModule (copy), buttonModule (copy), fillBehaviorModule (copy)
-		return if var14.actions then reactModule.createElement(reactModule.Fragment, nil, dashModule.map(var14.actions, function(p1, p2)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useDialogVariants()
+	local var3 = useDialogModule()
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), reactModule (copy), dashModule (copy), buttonModule (copy), fillBehaviorModule (copy)
+		return if var1.actions then reactModule.createElement(reactModule.Fragment, nil, dashModule.map(var1.actions, function(p1, p2)
 			-- upvalues: reactModule (copy), buttonModule (copy), dashModule (copy), fillBehaviorModule (copy)
 			return reactModule.createElement(buttonModule, dashModule.join(p1, {
 				key = `{p2}-{p1.text}`,
@@ -33,35 +33,35 @@ return function(p0)
 				fillBehavior = fillBehaviorModule.Fill
 			}))
 		end)) else nil
-	end, { var14.actions })
-	local var18 = var16.responsiveSize == dialogSizeModule.Small
-	local var19 = var14.orientation == orientationModule.Vertical and var18
+	end, { var1.actions })
+	local var1 = var3.responsiveSize == dialogSizeModule.Small
+	local var2 = var1.orientation == orientationModule.Vertical and var1
 	
 	return reactModule.createElement(viewModule, {
 		tag = "col size-full-0 auto-y",
-		LayoutOrder = var14.LayoutOrder,
-		testId = `{var16.testId}--actions`
+		LayoutOrder = var1.LayoutOrder,
+		testId = `{var3.testId}--actions`
 	}, {
 		ActionsContainer = if flagsModule.FoundationDialogBetaUpdate then reactModule.createElement(buttonGroupModule, {
 			LayoutOrder = 1,
-			buttons = var14.actions or {},
-			orientation = if var19 then orientationModule.Vertical else orientationModule.Horizontal,
+			buttons = var1.actions or {},
+			orientation = if var2 then orientationModule.Vertical else orientationModule.Horizontal,
 			fillBehavior = fillBehaviorModule.Fill,
-			testId = `{var16.testId}--actions-container`
+			testId = `{var3.testId}--actions-container`
 		}) else reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
 			tag = {
 				["gap-small size-full-0 auto-y"] = true,
-				["row wrap"] = if var14.orientation ~= orientationModule.Horizontal then not var18 else true,
-				["col flex-x-fill"] = var19
+				["row wrap"] = if var1.orientation ~= orientationModule.Horizontal then not var1 else true,
+				["col flex-x-fill"] = var2
 			},
-			testId = `{var16.testId}--actions-container`
-		}, { Actions = var17 }),
-		ActionsLabel = if var14.label then reactModule.createElement(textModule, {
+			testId = `{var3.testId}--actions-container`
+		}, { Actions = var4 }),
+		ActionsLabel = if var1.label then reactModule.createElement(textModule, {
 			LayoutOrder = 2,
-			Text = var14.label,
-			tag = var15.actionsLabel.tag,
-			testId = `{var16.testId}--actions-label`
+			Text = var1.label,
+			tag = var2.actionsLabel.tag,
+			testId = `{var3.testId}--actions-label`
 		}) else nil
 	})
 end

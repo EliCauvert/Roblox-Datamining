@@ -37,115 +37,115 @@ local t = {
 local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-local function Dialog(p0)
+local function Dialog(p1)
 	-- upvalues: dashModule (ref), useDialogVariants (ref), useScaledValueModule (ref), reactModule (ref), useOverlayModule (ref), useElevationModule (ref), elevationLayerModule (ref), useDialogModule (ref), useDialogResponsiveSizeModule (ref), useTokensModule (ref), usePreferencesModule (ref), useAnimatedBinding (ref), otterModule (ref), viewModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), typesModule (ref), closeAffordanceModule (ref), elevationOwnerScope (ref), flagsModule (ref), onCloseCallbackReasonModule (ref), reactRobloxModule (ref)
 	local createElement_2
-	local var27 = dashModule.assign({}, p0, { LayoutOrder = 1 })
-	local var28 = useDialogVariants()
-	local var29 = useScaledValueModule(var28.inner.maxWidth)
-	local var30, var31 = reactModule.useBinding(Vector2.new(0, 0))
-	local var32 = useOverlayModule()
-	local var33 = useElevationModule(elevationLayerModule.Dialog, { stackAboveOwner = false })
-	local var34 = useDialogModule()
-	useDialogResponsiveSizeModule(var27.size)
-	local var35 = useTokensModule()
+	local var1 = dashModule.assign({}, p1, { LayoutOrder = 1 })
+	local var2 = useDialogVariants()
+	local var3 = useScaledValueModule(var2.inner.maxWidth)
+	local var4, var5 = reactModule.useBinding(Vector2.new(0, 0))
+	local var6 = useOverlayModule()
+	local var7 = useElevationModule(elevationLayerModule.Dialog, { stackAboveOwner = false })
+	local var8 = useDialogModule()
+	useDialogResponsiveSizeModule(var1.size)
+	local var9 = useTokensModule()
 	local reducedMotion = usePreferencesModule().reducedMotion
-	local size800 = var35.Size.Size_800
-	local var36, var37 = reactModule.useState(true)
-	local var38 = reactModule.useRef(false)
-	local var39 = reactModule.useRef(nil)
-	local var40, var41 = useAnimatedBinding(1)
-	local var42, var43 = useAnimatedBinding(size800, function()
-		-- upvalues: var38 (ref), var27 (ref), var39 (ref), var37 (ref)
-		if var38.current then
-			if var27.onClose then
-				var27.onClose(var39.current)
+	local size800 = var9.Size.Size_800
+	local var10, var11 = reactModule.useState(true)
+	local var12 = reactModule.useRef(false)
+	local var13 = reactModule.useRef(nil)
+	local var14, var15 = useAnimatedBinding(1)
+	local var16, var17 = useAnimatedBinding(size800, function()
+		-- upvalues: var12 (ref), var1 (ref), var13 (ref), var11 (ref)
+		if var12.current then
+			if var1.onClose then
+				var1.onClose(var13.current)
 				
 				return
 			end
 		else
-			var37(false)
+			var11(false)
 		end
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: reducedMotion (ref), var43 (ref), otterModule (copy), var41 (ref), var35 (ref)
+		-- upvalues: reducedMotion (ref), var17 (ref), otterModule (copy), var15 (ref), var9 (ref)
 		if reducedMotion then
-			var43(otterModule.instant(0))
-			var41(otterModule.instant(0))
+			var17(otterModule.instant(0))
+			var15(otterModule.instant(0))
 			
 			return
 		end
-		var43(otterModule.ease(0, {
-			easingStyle = var35.Ease.StandardOut,
-			duration = var35.Time.Time_300
+		var17(otterModule.ease(0, {
+			easingStyle = var9.Ease.StandardOut,
+			duration = var9.Time.Time_300
 		}))
-		var41(otterModule.ease(0, { duration = var35.Time.Time_100 }))
+		var15(otterModule.ease(0, { duration = var9.Time.Time_100 }))
 	end, {})
-	local var44 = reactModule.useCallback(function(p1)
-		-- upvalues: var38 (ref), var39 (ref), reducedMotion (ref), var43 (ref), otterModule (copy), size800 (ref), var41 (ref), var35 (ref), var37 (ref)
-		if var38.current then return end
-		var39.current = p1
+	local var18 = reactModule.useCallback(function(p1)
+		-- upvalues: var12 (ref), var13 (ref), reducedMotion (ref), var17 (ref), otterModule (copy), size800 (ref), var15 (ref), var9 (ref), var11 (ref)
+		if var12.current then return end
+		var13.current = p1
 		
 		if reducedMotion then
-			var38.current = true
-			var43(otterModule.instant(size800))
-			var41(otterModule.instant(1))
+			var12.current = true
+			var17(otterModule.instant(size800))
+			var15(otterModule.instant(1))
 			
 			return
 		end
-		var43(otterModule.ease(size800, {
-			easingStyle = var35.Ease.StandardIn,
-			duration = var35.Time.Time_200
+		var17(otterModule.ease(size800, {
+			easingStyle = var9.Ease.StandardIn,
+			duration = var9.Time.Time_200
 		}))
-		var41(otterModule.ease(1, { duration = var35.Time.Time_100 }))
-		var37(true)
-		var38.current = true
+		var15(otterModule.ease(1, { duration = var9.Time.Time_100 }))
+		var11(true)
+		var12.current = true
 	end, { size800, reducedMotion })
-	local var45 = reactModule.useMemo(function()
+	local var19 = reactModule.useMemo(function()
 		return Instance.new("Folder")
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var45 (ref)
+		-- upvalues: var19 (ref)
 		return function()
-			-- upvalues: var45 (copy)
-			var45:Destroy()
+			-- upvalues: var19 (copy)
+			var19:Destroy()
 		end
-	end, { var45 })
-	local var46, var47 = reactModule.useState(false)
-	local var48 = reactModule.useCallback(function(p2)
-		-- upvalues: var45 (ref), var47 (ref)
-		if p2 then
-			var45.Parent = p2
-			var47(true)
+	end, { var19 })
+	local var20, var21 = reactModule.useState(false)
+	local var22 = reactModule.useCallback(function(p1)
+		-- upvalues: var19 (ref), var21 (ref)
+		if p1 then
+			var19.Parent = p1
+			var21(true)
 			
 			return
 		end
-		var45.Parent = nil
-		var47(false)
-	end, { var45 })
-	local var49 = reactModule.createElement(viewModule, { ZIndex = 2, tag = var28.container.tag }, {
+		var19.Parent = nil
+		var21(false)
+	end, { var19 })
+	local var23 = reactModule.createElement(viewModule, { ZIndex = 2, tag = var2.container.tag }, {
 		Shadow = reactModule.createElement(imageModule, {
 			Image = SHADOW_IMAGE,
-			Size = var30:map(function(p3)
+			Size = var4:map(function(p1)
 				-- upvalues: SHADOW_SIZE (copy)
-				return UDim2.fromOffset(p3.X + SHADOW_SIZE * 2, p3.Y + SHADOW_SIZE * 2)
+				return UDim2.fromOffset(p1.X + SHADOW_SIZE * 2, p1.Y + SHADOW_SIZE * 2)
 			end),
 			slice = {
 				scale = 2,
 				center = Rect.new(SHADOW_SIZE, SHADOW_SIZE, SHADOW_SIZE, SHADOW_SIZE)
 			},
-			imageStyle = var28.shadow.imageStyle,
-			testId = `{var27.testId}--shadow`
+			imageStyle = var2.shadow.imageStyle,
+			testId = `{var1.testId}--shadow`
 		})
 	})
 	local createElement = reactModule.createElement
-	local t = { ZIndex = 3, tag = var28.container.tag }
+	local t = { ZIndex = 3, tag = var2.container.tag }
 	local t_1 = {}
 	local createElement_1 = reactModule.createElement
-	local var52 = withCommonPropsModule(var27, {
-		tag = var28.inner.tag,
-		ref = var27.forwardRef,
-		sizeConstraint = { MaxSize = Vector2.new(var29, 1e999) },
+	local var24 = withCommonPropsModule(var1, {
+		tag = var2.inner.tag,
+		ref = var1.forwardRef,
+		sizeConstraint = { MaxSize = Vector2.new(var3, 1e999) },
 		stateLayer = { affordance = stateLayerAffordanceModule.None },
 		selection = typesModule.nonSelectable,
 		selectionGroup = typesModule.isolatedSelectionGroup,
@@ -153,109 +153,109 @@ local function Dialog(p0)
 	})
 	local t_2 = {}
 	
-	if var27.onClose then
+	if var1.onClose then
 		createElement_2 = reactModule.createElement
 		createElement_2 = createElement_2(closeAffordanceModule, {
 			ZIndex = 2,
-			onActivated = if var44 and not reducedMotion then var44 else var27.onClose,
-			ref = var34.closeAffordanceRef,
-			NextSelectionDown = var34.contentStartRef,
-			Position = UDim2.new(1, -var28.closeAffordance.offset, 0, var28.closeAffordance.offset),
+			onActivated = if var18 and not reducedMotion then var18 else var1.onClose,
+			ref = var8.closeAffordanceRef,
+			NextSelectionDown = var8.contentStartRef,
+			Position = UDim2.new(1, -var2.closeAffordance.offset, 0, var2.closeAffordance.offset),
 			AnchorPoint = Vector2.new(1, 0),
-			testId = `{var27.testId}--close-affordance`
+			testId = `{var1.testId}--close-affordance`
 		})
 	else
 		createElement_2 = nil
 	end
-	local var57
+	local var25
 	t_2.CloseAffordance = createElement_2
 	t_2.DialogBody = reactModule.createElement(viewModule, {
-		tag = var28.body.tag,
+		tag = var2.body.tag,
 		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var31 (ref)
+			-- upvalues: var5 (ref)
 			local absoluteSize = value.AbsoluteSize
 			
 			if absoluteSize.X > 0 and absoluteSize.Y > 0 then
-				var31(absoluteSize)
+				var5(absoluteSize)
 			end
 		end,
-		testId = `{var27.testId}--body`
-	}, reactModule.createElement(elevationOwnerScope, { owner = var33 }, var27.children))
-	t_1.DialogInner = createElement_1(viewModule, var52, t_2)
+		testId = `{var1.testId}--body`
+	}, reactModule.createElement(elevationOwnerScope, { owner = var7 }, var1.children))
+	t_1.DialogInner = createElement_1(viewModule, var24, t_2)
 	createElement = createElement(viewModule, t, t_1)
 	local createElement_3 = reactModule.createElement
-	local var54 = viewModule
+	local var26 = viewModule
 	local t_3 = {
-		ZIndex = var33.zIndex,
+		ZIndex = var7.zIndex,
 		tag = if flagsModule.FoundationDialogBetaUpdate then "size-full padding-y-xlarge" else "size-full",
-		testId = `{var27.testId}--container`
+		testId = `{var1.testId}--container`
 	}
 	local t_4 = {}
 	
-	if var27.hasBackdrop then
-		var57 = reactModule.createElement
-		var57 = var57(viewModule, {
+	if var1.hasBackdrop then
+		var25 = reactModule.createElement
+		var25 = var25(viewModule, {
 			tag = "position-center-center anchor-center-center",
 			ZIndex = 2,
 			Size = UDim2.fromScale(2, 2),
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
 			onActivated = function()
-				-- upvalues: var27 (ref), var44 (ref), reducedMotion (ref), onCloseCallbackReasonModule (copy)
-				if var27.onClose then
-					if var44 and not reducedMotion then
-						var44(onCloseCallbackReasonModule.BackdropClick)
+				-- upvalues: var1 (ref), var18 (ref), reducedMotion (ref), onCloseCallbackReasonModule (copy)
+				if var1.onClose then
+					if var18 and not reducedMotion then
+						var18(onCloseCallbackReasonModule.BackdropClick)
 						
 						return
 					end
-					var27.onClose(onCloseCallbackReasonModule.BackdropClick)
+					var1.onClose(onCloseCallbackReasonModule.BackdropClick)
 				end
 			end,
-			backgroundStyle = if reducedMotion or not var40 then var28.backdrop.backgroundStyle else var40:map(function(p4)
-				-- upvalues: var28 (ref)
+			backgroundStyle = if reducedMotion or not var14 then var2.backdrop.backgroundStyle else var14:map(function(p1)
+				-- upvalues: var2 (ref)
 				return {
-					Color3 = var28.backdrop.backgroundStyle.Color3,
-					Transparency = math.lerp(var28.backdrop.backgroundStyle.Transparency, 1, p4)
+					Color3 = var2.backdrop.backgroundStyle.Color3,
+					Transparency = math.lerp(var2.backdrop.backgroundStyle.Transparency, 1, p1)
 				}
 			end),
-			testId = `{var27.testId}--backdrop`
+			testId = `{var1.testId}--backdrop`
 		})
 	else
-		var57 = nil
+		var25 = nil
 	end
-	t_4.Backdrop = var57
+	t_4.Backdrop = var25
 	t_4.DialogContentWrapper = reactModule.createElement(viewModule, {
 		ZIndex = 2,
-		ref = if not reducedMotion then var48 else nil,
-		Position = if reducedMotion or not var42 then nil else var42:map(function(p5)
-			return UDim2.new(0.5, 0, 0.5, p5)
+		ref = if not reducedMotion then var22 else nil,
+		Position = if reducedMotion or not var16 then nil else var16:map(function(p1)
+			return UDim2.new(0.5, 0, 0.5, p1)
 		end),
-		sizeConstraint = if not reducedMotion then { MaxSize = Vector2.new(var29 + SHADOW_SIZE * 2, 1e999) } else nil,
+		sizeConstraint = if not reducedMotion then { MaxSize = Vector2.new(var3 + SHADOW_SIZE * 2, 1e999) } else nil,
 		tag = {
 			["anchor-center-center size-full"] = not reducedMotion,
 			["size-full"] = reducedMotion
 		},
-		GroupTransparency = if reducedMotion or not var36 or not var42 then nil else var42:map(function(p6)
+		GroupTransparency = if reducedMotion or not var10 or not var16 then nil else var16:map(function(p1)
 			-- upvalues: size800 (ref)
-			return p6 / size800
+			return p1 / size800
 		end)
-	}, if reducedMotion then { DialogShadowWrapper = var49, Dialog = createElement } else nil)
-	createElement_3 = createElement_3(var54, t_3, t_4)
+	}, if reducedMotion then { DialogShadowWrapper = var23, Dialog = createElement } else nil)
+	createElement_3 = createElement_3(var26, t_3, t_4)
 	
-	return if reducedMotion then if var27.disablePortal or var32 == nil then createElement_3 else reactRobloxModule.createPortal(createElement_3, var32) else reactModule.createElement(reactModule.Fragment, nil, {
-		Main = if var27.disablePortal or var32 == nil then createElement_3 else reactRobloxModule.createPortal(createElement_3, var32),
-		StableContent = if var46 then reactRobloxModule.createPortal(reactModule.createElement(reactModule.Fragment, nil, { DialogShadowWrapper = var49, Dialog = createElement }), var45) else nil
+	return if reducedMotion then if var1.disablePortal or var6 == nil then createElement_3 else reactRobloxModule.createPortal(createElement_3, var6) else reactModule.createElement(reactModule.Fragment, nil, {
+		Main = if var1.disablePortal or var6 == nil then createElement_3 else reactRobloxModule.createPortal(createElement_3, var6),
+		StableContent = if var20 then reactRobloxModule.createPortal(reactModule.createElement(reactModule.Fragment, nil, { DialogShadowWrapper = var23, Dialog = createElement }), var19) else nil
 	})
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p7, p8)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), dialogProviderModule (ref), Dialog (ref), dashModule (ref)
-	local var58 = withDefaultsModule(p7, t)
+	local var1 = withDefaultsModule(p1, t)
 	
 	return reactModule.createElement(dialogProviderModule, {
-		size = var58.size,
-		responsiveSize = var58.size,
-		testId = var58.testId
+		size = var1.size,
+		responsiveSize = var1.size,
+		testId = var1.testId
 	}, {
-		Dialog = reactModule.createElement(Dialog, dashModule.assign({}, var58, { forwardRef = p8 }))
+		Dialog = reactModule.createElement(Dialog, dashModule.assign({}, var1, { forwardRef = p2 }))
 	})
 end))

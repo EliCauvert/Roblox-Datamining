@@ -30,20 +30,20 @@ local t = {
 	}
 }
 
-local function onProgressChange(p0)
+local function onProgressChange(p1)
 	-- upvalues: constantsModule (ref)
 	return NumberSequence.new({
 		NumberSequenceKeypoint.new(0, 0),
-		NumberSequenceKeypoint.new(math.max(0, p0 - 0.0001), 0),
-		NumberSequenceKeypoint.new(math.min(1, p0 + 0.0001), constantsModule.DISABLED_TRANSPARENCY),
+		NumberSequenceKeypoint.new(math.max(0, p1 - 0.0001), 0),
+		NumberSequenceKeypoint.new(math.min(1, p1 + 0.0001), constantsModule.DISABLED_TRANSPARENCY),
 		NumberSequenceKeypoint.new(1, constantsModule.DISABLED_TRANSPARENCY)
 	})
 end
 
 local function _(p1, p2)
-	return p2:map(function(p3)
+	return p2:map(function(p1)
 		-- upvalues: p1 (ref)
-		return if p1 == nil then p3 else p1 + (1 - p1) * p3
+		return if p1 == nil then p1 else p1 + (1 - p1) * p1
 	end)
 end
 
@@ -57,169 +57,169 @@ local t_1 = {
 	width = UDim.new(0, 0)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p4, p5)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), reactModule (ref), controlStateModule (ref), reactOtterModule (ref), endAlignedIconsModule (ref), useTokensModule (ref), usePresentationContext (ref), useButtonVariantsModule (ref), useButtonMotionStatesModule (ref), constantsModule (ref), useMotion (ref), t (ref), viewModule (ref), withCommonPropsModule (ref), fillBehaviorModule (ref), animatePresence (ref), spinnerModule (ref), flagsModule (ref), buttonIconModule (ref), textModule (ref), onProgressChange (ref)
-	local var43
-	local var23 = withDefaultsModule(p4, t_1)
-	local inputDelay = var23.inputDelay
-	local var24, var25 = reactModule.useBinding(controlStateModule.Initialize)
-	local var26, var27 = reactModule.useState(inputDelay > 0)
-	local var28, var29 = reactOtterModule.useAnimatedBinding(0, function()
-		-- upvalues: var27 (ref)
-		var27(false)
+	local var1
+	local var2 = withDefaultsModule(p1, t_1)
+	local inputDelay = var2.inputDelay
+	local var3, var4 = reactModule.useBinding(controlStateModule.Initialize)
+	local var5, var6 = reactModule.useState(inputDelay > 0)
+	local var7, var8 = reactOtterModule.useAnimatedBinding(0, function()
+		-- upvalues: var6 (ref)
+		var6(false)
 	end)
-	local icon = var23.icon and endAlignedIconsModule[var23.icon]
+	local icon = var2.icon and endAlignedIconsModule[var2.icon]
 	reactModule.useEffect(function()
-		-- upvalues: var26 (ref), var29 (ref), reactOtterModule (copy)
-		if var26 == false then
-			var29(reactOtterModule.instant(0))
+		-- upvalues: var5 (ref), var8 (ref), reactOtterModule (copy)
+		if var5 == false then
+			var8(reactOtterModule.instant(0))
 		end
-	end, { var26 })
+	end, { var5 })
 	reactModule.useEffect(function()
-		-- upvalues: var26 (ref), var27 (ref), inputDelay (ref), var29 (ref), reactOtterModule (copy)
-		if var26 then
-			var27(false)
+		-- upvalues: var5 (ref), var6 (ref), inputDelay (ref), var8 (ref), reactOtterModule (copy)
+		if var5 then
+			var6(false)
 		end
 		if inputDelay > 0 then
-			var27(true)
-			var29(reactOtterModule.ease(1, {
+			var6(true)
+			var8(reactOtterModule.ease(1, {
 				duration = inputDelay,
 				easingStyle = Enum.EasingStyle.Quad
 			}))
 		end
 	end, { inputDelay })
-	local var31 = useTokensModule()
-	local var32 = usePresentationContext()
-	local var33 = useButtonVariantsModule(var31, var23.size, var23.variant, if var32 then var32.colorNamespace else nil)
-	local var34 = useButtonMotionStatesModule(var33.content.style.Transparency, constantsModule.DISABLED_TRANSPARENCY)
-	local var35, var36 = useMotion(var34.Default)
-	local var37, var38 = useMotion(var34.Default)
+	local var9 = useTokensModule()
+	local var10 = usePresentationContext()
+	local var11 = useButtonVariantsModule(var9, var2.size, var2.variant, if var10 then var10.colorNamespace else nil)
+	local var12 = useButtonMotionStatesModule(var11.content.style.Transparency, constantsModule.DISABLED_TRANSPARENCY)
+	local var13, var14 = useMotion(var12.Default)
+	local var15, var16 = useMotion(var12.Default)
 	reactModule.useEffect(function()
-		-- upvalues: var23 (ref), var38 (ref), var34 (ref)
-		if var23.isLoading then
-			var38(var34.Loading)
+		-- upvalues: var2 (ref), var16 (ref), var12 (ref)
+		if var2.isLoading then
+			var16(var12.Loading)
 			
 			return
 		end
-		var38(var34.Default)
-	end, { var23.isLoading })
+		var16(var12.Default)
+	end, { var2.isLoading })
 	reactModule.useEffect(function()
-		-- upvalues: var23 (ref), var36 (ref), var34 (ref)
-		if var23.isDisabled then
-			var36(var34.Disabled)
+		-- upvalues: var2 (ref), var14 (ref), var12 (ref)
+		if var2.isDisabled then
+			var14(var12.Disabled)
 			
 			return
 		end
-		var36(var34.Default)
-	end, { var23.isDisabled })
-	local var39 = reactModule.useMemo(function()
-		-- upvalues: var33 (ref), var31 (ref)
+		var14(var12.Default)
+	end, { var2.isDisabled })
+	local var17 = reactModule.useMemo(function()
+		-- upvalues: var11 (ref), var9 (ref)
 		return {
-			radius = UDim.new(0, var33.container.radius),
-			offset = var31.Size.Size_200,
-			borderWidth = var31.Stroke.Thicker
+			radius = UDim.new(0, var11.container.radius),
+			offset = var9.Size.Size_200,
+			borderWidth = var9.Stroke.Thicker
 		}
-	end, { var31, var33.container.radius })
-	local var40 = var23.text and var23.text ~= ""
-	local var41 = reactModule.useCallback(function(p6)
-		-- upvalues: t (copy), var23 (ref), var40 (ref)
-		local variant = t[var23.variant]
+	end, { var9, var11.container.radius })
+	local var18 = var2.text and var2.text ~= ""
+	local var19 = reactModule.useCallback(function(p1)
+		-- upvalues: t (copy), var2 (ref), var18 (ref)
+		local variant = t[var2.variant]
 		
-		return if var40 and variant and table.find(variant.controlState, p6) then variant.format:format(var23.text) else var23.text
-	end, { var23.text, var23.variant, var40 })
+		return if var18 and variant and table.find(variant.controlState, p1) then variant.format:format(var2.text) else var2.text
+	end, { var2.text, var2.variant, var18 })
 	local createElement = reactModule.createElement
 	local t_2 = {
-		AutomaticSize = if var23.width.Scale == 0 and var23.width.Offset == 0 then Enum.AutomaticSize.X else nil,
-		cornerRadius = UDim.new(0, var33.container.radius)
+		AutomaticSize = if var2.width.Scale == 0 and var2.width.Offset == 0 then Enum.AutomaticSize.X else nil,
+		cornerRadius = UDim.new(0, var11.container.radius)
 	}
 	
-	if var33.container.style then
-		local transparency = var33.container.style.Transparency
-		var43 = var35.transparency:map(function(p8)
+	if var11.container.style then
+		local transparency = var11.container.style.Transparency
+		var1 = var13.transparency:map(function(p1)
 			-- upvalues: transparency (ref)
-			return if transparency == nil then p8 else transparency + (1 - transparency) * p8
-		end):map(function(p7)
-			-- upvalues: var33 (ref)
-			return { Color3 = var33.container.style.Color3, Transparency = p7 }
+			return if transparency == nil then p1 else transparency + (1 - transparency) * p1
+		end):map(function(p1)
+			-- upvalues: var11 (ref)
+			return { Color3 = var11.container.style.Color3, Transparency = p1 }
 		end)
 	else
-		var43 = nil
+		var1 = nil
 	end
 	local t_3
-	t_2.backgroundStyle = var43
-	t_2.flexItem = if var23.fillBehavior then {
-		FlexMode = if var23.fillBehavior == fillBehaviorModule.Fill then Enum.UIFlexMode.Fill else Enum.UIFlexMode.Shrink
+	t_2.backgroundStyle = var1
+	t_2.flexItem = if var2.fillBehavior then {
+		FlexMode = if var2.fillBehavior == fillBehaviorModule.Fill then Enum.UIFlexMode.Fill else Enum.UIFlexMode.Shrink
 	} else nil
 	
-	if var33.container.stroke then
-		t_3 = { Color = var33.container.stroke.Color }
-		local transparency = var33.container.stroke.Transparency
-		t_3.Transparency = var35.transparency:map(function(p9)
+	if var11.container.stroke then
+		t_3 = { Color = var11.container.stroke.Color }
+		local transparency = var11.container.stroke.Transparency
+		t_3.Transparency = var13.transparency:map(function(p1)
 			-- upvalues: transparency (ref)
-			return if transparency == nil then p9 else transparency + (1 - transparency) * p9
+			return if transparency == nil then p1 else transparency + (1 - transparency) * p1
 		end)
 	else
 		t_3 = nil
 	end
 	t_2.stroke = t_3
-	t_2.Size = UDim2.new(if var23.fillBehavior == fillBehaviorModule.Fill then 1 else var23.width.Scale, if var23.fillBehavior == fillBehaviorModule.Fill then 0 else var23.width.Offset, 0, var33.container.height)
+	t_2.Size = UDim2.new(if var2.fillBehavior == fillBehaviorModule.Fill then 1 else var2.width.Scale, if var2.fillBehavior == fillBehaviorModule.Fill then 0 else var2.width.Offset, 0, var11.container.height)
 	t_2.selection = {
-		Selectable = if var23.isDisabled then false else var23.Selectable,
-		NextSelectionUp = var23.NextSelectionUp,
-		NextSelectionDown = var23.NextSelectionDown,
-		NextSelectionLeft = var23.NextSelectionLeft,
-		NextSelectionRight = var23.NextSelectionRight
+		Selectable = if var2.isDisabled then false else var2.Selectable,
+		NextSelectionUp = var2.NextSelectionUp,
+		NextSelectionDown = var2.NextSelectionDown,
+		NextSelectionLeft = var2.NextSelectionLeft,
+		NextSelectionRight = var2.NextSelectionRight
 	}
-	t_2.cursor = var39
-	t_2.onActivated = var23.onActivated
-	t_2.onStateChanged = var25
-	t_2.isDisabled = var23.isDisabled or (var23.isLoading or var26)
-	t_2.stateLayer = var33.container.stateLayer
-	t_2.tag = var33.container.tag
-	t_2.ref = p5
+	t_2.cursor = var17
+	t_2.onActivated = var2.onActivated
+	t_2.onStateChanged = var4
+	t_2.isDisabled = var2.isDisabled or (var2.isLoading or var5)
+	t_2.stateLayer = var11.container.stateLayer
+	t_2.tag = var11.container.tag
+	t_2.ref = p2
 	
-	return createElement(viewModule, withCommonPropsModule(var23, t_2), {
-		Loading = if var23.isLoading then reactModule.createElement("Folder", {}, {
+	return createElement(viewModule, withCommonPropsModule(var2, t_2), {
+		Loading = if var2.isLoading then reactModule.createElement("Folder", {}, {
 			PresenceWrapper = reactModule.createElement(animatePresence, {}, {
 				Spinner = reactModule.createElement(spinnerModule, {
-					Size = var33.icon.size - (if flagsModule.FoundationUsePath2DSpinner then UDim2.fromOffset(var31.Padding.XSmall, var31.Padding.XSmall) else UDim2.fromOffset(0, 0)),
-					style = var35.transparency:map(function(p10)
-						-- upvalues: var33 (ref)
-						return { Color3 = var33.content.style.Color3, Transparency = p10 }
+					Size = var11.icon.size - (if flagsModule.FoundationUsePath2DSpinner then UDim2.fromOffset(var9.Padding.XSmall, var9.Padding.XSmall) else UDim2.fromOffset(0, 0)),
+					style = var13.transparency:map(function(p1)
+						-- upvalues: var11 (ref)
+						return { Color3 = var11.content.style.Color3, Transparency = p1 }
 					end),
-					testId = `{var23.testId}--spinner`
+					testId = `{var2.testId}--spinner`
 				})
 			})
 		}) else nil,
-		IconWrapper = if var23.icon then reactModule.createElement(viewModule, {
-			Size = if var23.icon then var33.icon.size else nil,
-			LayoutOrder = if var23.icon then if icon then 3 else 1 else nil,
-			testId = if var23.icon then `{var23.testId}--icon-wrapper` else nil
+		IconWrapper = if var2.icon then reactModule.createElement(viewModule, {
+			Size = if var2.icon then var11.icon.size else nil,
+			LayoutOrder = if var2.icon then if icon then 3 else 1 else nil,
+			testId = if var2.icon then `{var2.testId}--icon-wrapper` else nil
 		}, {
 			Icon = reactModule.createElement(buttonIconModule, {
-				icon = var23.icon,
-				isLoading = var23.isLoading,
-				variant = var23.variant,
-				size = var23.size,
-				disabledTransparencyBinding = var35.transparency,
-				textTransparencyBinding = var37.textTransparency,
-				testId = var23.testId
+				icon = var2.icon,
+				isLoading = var2.isLoading,
+				variant = var2.variant,
+				size = var2.size,
+				disabledTransparencyBinding = var13.transparency,
+				textTransparencyBinding = var15.textTransparency,
+				testId = var2.testId
 			})
 		}) else nil,
-		Text = if var40 then reactModule.createElement(textModule, {
+		Text = if var18 then reactModule.createElement(textModule, {
 			LayoutOrder = 2,
-			Text = var24:map(var41),
-			RichText = t[var23.variant] == nil,
-			tag = var33.text.tag,
-			textStyle = reactModule.joinBindings({ var35.transparency, var37.textTransparency }):map(function(p11)
-				-- upvalues: var33 (ref)
+			Text = var3:map(var19),
+			RichText = t[var2.variant] == nil,
+			tag = var11.text.tag,
+			textStyle = reactModule.joinBindings({ var13.transparency, var15.textTransparency }):map(function(p1)
+				-- upvalues: var11 (ref)
 				return {
-					Color3 = var33.content.style.Color3,
-					Transparency = p11[2] + p11[1]
+					Color3 = var11.content.style.Color3,
+					Transparency = p1[2] + p1[1]
 				}
 			end),
-			testId = `{var23.testId}--text`
+			testId = `{var2.testId}--text`
 		}) else nil,
-		Gradient = if var26 then reactModule.createElement("UIGradient", { Transparency = var28:map(onProgressChange) }) else nil
+		Gradient = if var5 then reactModule.createElement("UIGradient", { Transparency = var7:map(onProgressChange) }) else nil
 	})
 end))

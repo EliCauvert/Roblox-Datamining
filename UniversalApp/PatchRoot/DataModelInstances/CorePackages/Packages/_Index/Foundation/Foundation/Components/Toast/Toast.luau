@@ -18,17 +18,17 @@ local fillBehaviorModule = require(foundation.Enums.FillBehavior)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local t = { testId = "--foundation-toast" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useCursorModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), useScaledValueModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), textModule (ref)
-	local var16 = withDefaultsModule(p0, t)
-	local var17 = useTokensModule()
-	local var18 = useCursorModule({
-		radius = UDim.new(0, var17.Radius.Medium),
-		offset = var17.Size.Size_200,
-		borderWidth = var17.Stroke.Thicker
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = useCursorModule({
+		radius = UDim.new(0, var2.Radius.Medium),
+		offset = var2.Size.Size_200,
+		borderWidth = var2.Stroke.Thicker
 	})
-	local actions = var16.actions
-	local var19 = reactModule.useMemo(function()
+	local actions = var1.actions
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: actions (ref), loggerModule (copy), inputSizeModule (copy), fillBehaviorModule (copy), dashModule (copy), reactModule (copy), buttonModule (copy)
 		local t = {}
 		
@@ -49,51 +49,51 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 		end
 		return t
 	end, { actions })
-	local var20 = var16.icon and var16.icon ~= ""
-	local var21 = var16.title and var16.title ~= ""
-	local var22 = var16.text and var16.text ~= ""
+	local var1 = var1.icon and var1.icon ~= ""
+	local var2 = var1.title and var1.title ~= ""
+	local var3 = var1.text and var1.text ~= ""
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var16, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
 		tag = "row gap-small auto-y padding-medium radius-medium bg-over-media-0",
-		Size = UDim2.new(var16.width or UDim.new(0, useScaledValueModule(400)), UDim.new()),
+		Size = UDim2.new(var1.width or UDim.new(0, useScaledValueModule(400)), UDim.new()),
 		Position = UDim2.fromScale(0.5, 0.1),
-		selection = { Selectable = false, SelectionImageObject = var18 },
-		ref = p1
+		selection = { Selectable = false, SelectionImageObject = var3 },
+		ref = p2
 	}), {
-		Media = if var20 then reactModule.createElement(imageModule, {
+		Media = if var1 then reactModule.createElement(imageModule, {
 			LayoutOrder = 1,
 			tag = "size-1200-1200",
-			Image = var16.icon,
-			testId = `{var16.testId}--media`
+			Image = var1.icon,
+			testId = `{var1.testId}--media`
 		}) else nil,
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
 			tag = {
 				["fill self-center auto-y"] = true,
-				["col gap-xxsmall"] = var21 or var22
+				["col gap-xxsmall"] = var2 or var3
 			},
-			testId = `{var16.testId}--content`
+			testId = `{var1.testId}--content`
 		}, {
-			Header = if var21 then reactModule.createElement(textModule, {
+			Header = if var2 then reactModule.createElement(textModule, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-small text-align-x-left text-truncate-end content-emphasis",
-				Text = var16.title,
-				testId = `{var16.testId}--header`
+				Text = var1.title,
+				testId = `{var1.testId}--header`
 			}) else nil,
-			Body = if var22 then reactModule.createElement(textModule, {
+			Body = if var3 then reactModule.createElement(textModule, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default",
-				Text = var16.text,
-				testId = `{var16.testId}--body`
+				Text = var1.text,
+				testId = `{var1.testId}--body`
 			}) else nil,
 			Actions = if actions and #actions > 0 then reactModule.createElement(viewModule, {
 				LayoutOrder = 3,
 				tag = {
 					["row gap-small size-full-0 auto-y"] = true,
-					["padding-top-small"] = var21 or var22
+					["padding-top-small"] = var2 or var3
 				},
-				testId = `{var16.testId}--actions`
-			}, var19) else nil
+				testId = `{var1.testId}--actions`
+			}, var4) else nil
 		})
 	})
 end))

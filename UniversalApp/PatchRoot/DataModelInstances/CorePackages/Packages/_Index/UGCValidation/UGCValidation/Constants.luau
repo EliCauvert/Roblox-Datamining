@@ -10,12 +10,11 @@ local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.get
 local UGCValidateMakeupDecalUVProperties = game:DefineFastFlag("UGCValidateMakeupDecalUVProperties", false)
 local getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule = require(parent.flags.getFFlagUGCValidationAllowEngineDefaultPartSurfaces)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
-local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 
-local function _(p0)
+local function _(p1)
 	local t = {}
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		t[v] = true
 	end
 	return t
@@ -210,8 +209,8 @@ t.INCLUSION_METHODS = {
 	EXCLUSION_LIST = "EXCLUSION_LIST"
 }
 setmetatable(t.INCLUSION_METHODS, {
-	__index = function(_, p2)
-		return error("Invalid INCLUSION_METHOD " .. tostring(p2))
+	__index = function(_, p1)
+		return error("Invalid INCLUSION_METHOD " .. tostring(p1))
 	end
 })
 t.PROPERTIES = {
@@ -367,25 +366,6 @@ t.CONTENT_ID_EDITABLE_PROPERTY = {
 		RoughnessMap = "RoughnessMapContent"
 	}
 }
-t.CONTENT_TYPED_PROPERTIES_BY_CLASS = {
-	MeshPart = { "MeshContent", "TextureContent" },
-	WrapTarget = { "CageMeshContent" },
-	WrapLayer = { "CageMeshContent", "ReferenceMeshContent" },
-	SurfaceAppearance = {
-		"ColorMapContent",
-		"MetalnessMapContent",
-		"NormalMapContent",
-		"RoughnessMapContent",
-		"EmissiveMaskContent"
-	},
-	Decal = {
-		"ColorMapContent",
-		"MetalnessMapContent",
-		"NormalMapContent",
-		"RoughnessMapContent"
-	},
-	WrapTextureTransfer = { "ReferenceCageMeshContent" }
-}
 t.MESH_CONTENT_ID_FIELDS = {
 	SpecialMesh = { "MeshId" },
 	MeshPart = { "MeshId" },
@@ -507,10 +487,6 @@ for i_5, v_5 in t.AllAssetUploadCategories do
 	table.insert(t.AllAssetUploadCategoriesIncludingMakeup, v_5)
 end
 table.insert(t.AllAssetUploadCategoriesIncludingMakeup, validationEnumsModule.UploadCategory.MAKEUP)
-
-if getFFlagUGCValidateMakeupCategoryParityModule() then
-	table.insert(t.AllAssetUploadCategories, validationEnumsModule.UploadCategory.MAKEUP)
-end
 t.AllBundleUploadCategories = {
 	validationEnumsModule.UploadCategory.FULL_BODY,
 	validationEnumsModule.UploadCategory.BOTH_SHOES

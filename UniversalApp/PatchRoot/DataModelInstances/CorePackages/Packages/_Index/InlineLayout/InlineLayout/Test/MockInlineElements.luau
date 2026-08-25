@@ -5,11 +5,11 @@ local t = {}
 t.__index = t
 t.__type = inlineElementTypeModule
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
-	tbl.width = p0
-	tbl.canForceSplit = p1
+	tbl.width = p1
+	tbl.canForceSplit = p2
 	
 	return tbl
 end
@@ -23,13 +23,13 @@ function t:split(_, _)
 	return t.new(self.width, self.canForceSplit)
 end
 
-function t:render(p2, p3)
+function t:render(p1, p2)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("TextLabel", {
-		key = tostring(p3),
-		LayoutOrder = p3,
+		key = tostring(p2),
+		LayoutOrder = p2,
 		Size = UDim2.new(0, self.width, 0, 20),
-		Text = `{p2}`
+		Text = `{p1}`
 	})
 end
 
@@ -37,11 +37,11 @@ local t_1 = {}
 t_1.__index = t_1
 t_1.__type = inlineElementTypeModule
 
-function t_1.new(p4, p5)
+function t_1.new(p1, p2)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
-	tbl.width = p4
-	tbl.canForceSplit = p5
+	tbl.width = p1
+	tbl.canForceSplit = p2
 	
 	return tbl
 end
@@ -50,26 +50,26 @@ function t_1:getWidth()
 	return self.width
 end
 
-function t_1:split(p6, p7)
+function t_1:split(p1, p2)
 	-- upvalues: t_1 (ref)
 	local floored = math.floor(self.width / 2)
-	local var8 = floored
-	local var9 = self.width - floored
+	local var1 = floored
+	local var2 = self.width - floored
 	
-	if p7 and p6 < floored then
-		var8 = p6
-		var9 = self.width - p6
+	if p2 and p1 < floored then
+		var1 = p1
+		var2 = self.width - p1
 	end
-	return t_1.new(var8, self.canForceSplit), t_1.new(var9, self.canForceSplit)
+	return t_1.new(var1, self.canForceSplit), t_1.new(var2, self.canForceSplit)
 end
 
-function t_1:render(p8, p9)
+function t_1:render(p1, p2)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("TextLabel", {
-		key = tostring(p9),
-		LayoutOrder = p9,
+		key = tostring(p2),
+		LayoutOrder = p2,
 		Size = UDim2.new(0, self.width, 0, 20),
-		Text = `{p8}`
+		Text = `{p1}`
 	})
 end
 

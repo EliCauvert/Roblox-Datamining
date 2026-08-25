@@ -15,17 +15,17 @@ local useScrollToSelectedRefModule = require(script.Parent.useScrollToSelectedRe
 local useTextSizeModule = require(foundation.Utility.useTextSize)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokensModule (ref), dateTimeUtilitiesModule (ref), useTextSizeModule (ref), useScaledValueModule (ref), reactModule (ref), useScrollToSelectedRefModule (ref), viewModule (ref), iconButtonModule (ref), icon (ref), inputSizeModule (ref), buttonVariantModule (ref), dropdownModule (ref), inputVariantModule (ref)
-	local viewDate = p0.viewDate
-	local var13 = useTokensModule()
-	local var14 = useTextSizeModule(dateTimeUtilitiesModule.monthMap[viewDate.month], var13.Typography.BodySmall)
-	local var15 = useTextSizeModule(tostring(viewDate.year), var13.Typography.BodySmall)
-	local var16 = useScaledValueModule(44)
-	local var17 = useScaledValueModule(200)
-	local var18 = if var14 then math.ceil(var14.X) + var16 else 110
-	local var19 = if var15 then math.ceil(var15.X) + var16 else 70
-	local var20 = reactModule.useMemo(function()
+	local viewDate = p1.viewDate
+	local var1 = useTokensModule()
+	local var2 = useTextSizeModule(dateTimeUtilitiesModule.monthMap[viewDate.month], var1.Typography.BodySmall)
+	local var3 = useTextSizeModule(tostring(viewDate.year), var1.Typography.BodySmall)
+	local var4 = useScaledValueModule(44)
+	local var5 = useScaledValueModule(200)
+	local var6 = if var2 then math.ceil(var2.X) + var4 else 110
+	local var7 = if var3 then math.ceil(var3.X) + var4 else 70
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: dateTimeUtilitiesModule (copy)
 		local t = {}
 		
@@ -34,15 +34,15 @@ return function(p0)
 		end
 		return t
 	end, {})
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), dateTimeUtilitiesModule (copy), viewDate (ref)
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), dateTimeUtilitiesModule (copy), viewDate (ref)
 		local year, year_1
 		local _ = nil
 		local _ = nil
 		
-		if p0.selectableDateRange then
-			year = dateTimeUtilitiesModule.toLocalTime(p0.selectableDateRange.startDate).Year
-			year_1 = dateTimeUtilitiesModule.toLocalTime(p0.selectableDateRange.endDate).Year
+		if p1.selectableDateRange then
+			year = dateTimeUtilitiesModule.toLocalTime(p1.selectableDateRange.startDate).Year
+			year_1 = dateTimeUtilitiesModule.toLocalTime(p1.selectableDateRange.endDate).Year
 		else
 			year = viewDate.year - 50
 			year_1 = viewDate.year + 50
@@ -53,18 +53,18 @@ return function(p0)
 			table.insert(t, { id = i, text = tostring(i) })
 		end
 		return t
-	end, { p0.selectableDateRange, viewDate.year })
+	end, { p1.selectableDateRange, viewDate.year })
 	
 	return reactModule.createElement(viewModule, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-y-small",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		PreviousMonthButton = reactModule.createElement(iconButtonModule, {
 			LayoutOrder = 1,
 			icon = icon.ChevronSmallLeft,
-			onActivated = p0.onPreviousMonth,
+			onActivated = p1.onPreviousMonth,
 			size = inputSizeModule.Small,
-			testId = `{p0.testId}--previous-month-button`,
+			testId = `{p1.testId}--previous-month-button`,
 			variant = buttonVariantModule.Utility
 		}),
 		MonthYearDropdowns = reactModule.createElement(viewModule, {
@@ -74,50 +74,50 @@ return function(p0)
 			MonthDropdown = reactModule.createElement(dropdownModule.Root, {
 				label = "",
 				LayoutOrder = 1,
-				items = var20,
-				maxHeight = var17,
+				items = var8,
+				maxHeight = var5,
 				onItemChanged = reactModule.useCallback(function(p1)
-					-- upvalues: p0 (ref), viewDate (ref)
-					local var24 = tonumber(p1)
+					-- upvalues: p1 (ref), viewDate (ref)
+					local var1 = tonumber(p1)
 					
-					if var24 then
-						p0.onViewDateChanged({ month = var24, year = viewDate.year })
+					if var1 then
+						p1.onViewDateChanged({ month = var1, year = viewDate.year })
 					end
-				end, { p0.onViewDateChanged, viewDate.year }),
-				scrollingFrameRef = useScrollToSelectedRefModule(var20, viewDate.month),
+				end, { p1.onViewDateChanged, viewDate.year }),
+				scrollingFrameRef = useScrollToSelectedRefModule(var8, viewDate.month),
 				size = inputSizeModule.XSmall,
-				testId = `{p0.testId}--month-dropdown`,
+				testId = `{p1.testId}--month-dropdown`,
 				value = viewDate.month,
 				variant = inputVariantModule.Utility,
-				width = UDim.new(0, var18)
+				width = UDim.new(0, var6)
 			}),
 			YearDropdown = reactModule.createElement(dropdownModule.Root, {
 				label = "",
 				LayoutOrder = 2,
-				items = var21,
-				maxHeight = var17,
-				onItemChanged = reactModule.useCallback(function(p2)
-					-- upvalues: p0 (ref), viewDate (ref)
-					local var25 = tonumber(p2)
+				items = var1,
+				maxHeight = var5,
+				onItemChanged = reactModule.useCallback(function(p1)
+					-- upvalues: p1 (ref), viewDate (ref)
+					local var1 = tonumber(p1)
 					
-					if var25 then
-						p0.onViewDateChanged({ month = viewDate.month, year = var25 })
+					if var1 then
+						p1.onViewDateChanged({ month = viewDate.month, year = var1 })
 					end
-				end, { p0.onViewDateChanged, viewDate.month }),
-				scrollingFrameRef = useScrollToSelectedRefModule(var21, viewDate.year),
+				end, { p1.onViewDateChanged, viewDate.month }),
+				scrollingFrameRef = useScrollToSelectedRefModule(var1, viewDate.year),
 				size = inputSizeModule.XSmall,
-				testId = `{p0.testId}--year-dropdown`,
+				testId = `{p1.testId}--year-dropdown`,
 				value = viewDate.year,
 				variant = inputVariantModule.Utility,
-				width = UDim.new(0, var19)
+				width = UDim.new(0, var7)
 			})
 		}),
 		NextMonthButton = reactModule.createElement(iconButtonModule, {
 			LayoutOrder = 3,
 			icon = icon.ChevronSmallRight,
-			onActivated = p0.onNextMonth,
+			onActivated = p1.onNextMonth,
 			size = inputSizeModule.Small,
-			testId = `{p0.testId}--next-month-button`,
+			testId = `{p1.testId}--next-month-button`,
 			variant = buttonVariantModule.Utility
 		})
 	})

@@ -21,71 +21,71 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = { testId = "--foundation-snackbar" }
 local t_1 = { colorNamespace = colorNamespaceModule.Inverse }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), iconVariant (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), t_1 (ref), iconModule (ref), dashModule (ref), textModule (ref), stateLayerModeModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
-	local var19 = withDefaultsModule(p0, t)
-	local var20 = useTokensModule()
-	local var21 = var19.icon and var19.icon ~= ""
-	local var22 = var19.action ~= nil and var19.action.text ~= ""
-	local var22_1 = var22 or var19.onClose ~= nil
-	local var21_1 = var21 or var22_1
-	local action = var19.action
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = var1.icon and var1.icon ~= ""
+	local var4 = var1.action ~= nil and var1.action.text ~= ""
+	local var5 = var4 or var1.onClose ~= nil
+	local var6 = var3 or var5
+	local action = var1.action
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var19, {
-		Size = if var22_1 then UDim2.fromOffset(useScaledValueModule(371), 0) else UDim2.fromOffset(0, 0),
-		sizeConstraint = if var22_1 then nil else {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		Size = if var5 then UDim2.fromOffset(useScaledValueModule(371), 0) else UDim2.fromOffset(0, 0),
+		sizeConstraint = if var5 then nil else {
 			MinSize = Vector2.new(0, 0),
-			MaxSize = Vector2.new(useScaledValueModule(if var21 then 304 else 272), 1e999)
+			MaxSize = Vector2.new(useScaledValueModule(if var3 then 304 else 272), 1e999)
 		},
 		tag = {
 			["row align-y-center gap-large padding-y-xsmall radius-medium bg-system-contrast"] = true,
-			["padding-left-large"] = not var21_1,
-			["padding-left-medium"] = var21_1,
-			["auto-xy padding-right-large"] = not var22_1,
-			["auto-y padding-right-small"] = var22_1
+			["padding-left-large"] = not var6,
+			["padding-left-medium"] = var6,
+			["auto-xy padding-right-large"] = not var5,
+			["auto-y padding-right-small"] = var5
 		},
-		ref = p1
+		ref = p2
 	}), reactModule.createElement(presentationContextModule.Provider, { value = t_1 }, {
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
 			tag = "row align-y-center fill gap-small auto-xy padding-y-small",
-			testId = `{var19.testId}--content`
+			testId = `{var1.testId}--content`
 		}, {
-			Icon = if var21 then reactModule.createElement(iconModule, dashModule.join(if typeof(var19.icon) == "string" then { name = var19.icon, variant = iconVariant.Regular } else var19.icon, {
+			Icon = if var3 then reactModule.createElement(iconModule, dashModule.join(if typeof(var1.icon) == "string" then { name = var1.icon, variant = iconVariant.Regular } else var1.icon, {
 				LayoutOrder = 1,
-				style = var20.Inverse.Content.Emphasis,
-				testId = `{var19.testId}--icon`
+				style = var2.Inverse.Content.Emphasis,
+				testId = `{var1.testId}--icon`
 			})) else nil,
 			Title = reactModule.createElement(textModule, {
 				LayoutOrder = 2,
 				tag = "fill auto-xy text-caption-large text-wrap text-align-x-left text-truncate-split content-inverse-emphasis",
-				Text = var19.title,
+				Text = var1.title,
 				sizeConstraint = {
 					MinSize = Vector2.new(0, 0),
-					MaxSize = Vector2.new(1e999, var20.Typography.CaptionLarge.FontSize * var20.Typography.CaptionLarge.LineHeight * 2)
+					MaxSize = Vector2.new(1e999, var2.Typography.CaptionLarge.FontSize * var2.Typography.CaptionLarge.LineHeight * 2)
 				},
-				testId = `{var19.testId}--title`
+				testId = `{var1.testId}--title`
 			})
 		}),
-		Buttons = if var22_1 then reactModule.createElement(viewModule, {
+		Buttons = if var5 then reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
 			tag = "row align-y-center gap-xsmall auto-xy",
-			testId = `{var19.testId}--buttons`
+			testId = `{var1.testId}--buttons`
 		}, {
-			Action = if var22 then reactModule.createElement(textModule, {
+			Action = if var4 then reactModule.createElement(textModule, {
 				LayoutOrder = 1,
 				tag = "auto-xy padding-small text-label-medium radius-medium content-inverse-link",
 				onActivated = action.onActivated,
 				stateLayer = { mode = stateLayerModeModule.Inverse },
 				Text = action.text,
-				testId = `{var19.testId}--action`
+				testId = `{var1.testId}--action`
 			}) else nil,
-			CloseAffordance = if var19.onClose ~= nil then nil else reactModule.createElement(closeAffordanceModule, {
+			CloseAffordance = if var1.onClose ~= nil then nil else reactModule.createElement(closeAffordanceModule, {
 				LayoutOrder = 2,
-				onActivated = var19.onClose,
+				onActivated = var1.onClose,
 				size = inputSizeModule.Small,
 				variant = closeAffordanceVariantModule.Utility,
-				testId = `{var19.testId}--close-affordance`
+				testId = `{var1.testId}--close-affordance`
 			})
 		}) else nil
 	}))

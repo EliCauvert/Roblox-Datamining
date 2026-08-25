@@ -1,3 +1,3 @@
-﻿return function(p0)
-	error(`Unknown value in exhaustive match: {p0}`)
+﻿return function(p1)
+	error(`Unknown value in exhaustive match: {p1}`)
 end

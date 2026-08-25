@@ -18,49 +18,49 @@ local t = {
 }
 local t_1 = { LayoutOrder = 1, shape = mediaShapeModule.Square }
 
-return function(p0)
+return function(p1)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), useTileModule (ref), reactModule (ref), getRbxThumbModule (ref), imageModule (ref), viewModule (ref), t (ref), mediaShapeModule (ref)
-	local var10 = withDefaultsModule(p0, t_1)
-	local var11 = useTileModule()
-	local var12 = if var10.background then var10.background.style else nil
-	local var13 = if var10.background then var10.background.image else nil
+	local var1 = withDefaultsModule(p1, t_1)
+	local var2 = useTileModule()
+	local var3 = if var1.background then var1.background.style else nil
+	local var4 = if var1.background then var1.background.image else nil
 	
-	return reactModule.createElement(if var13 then imageModule else viewModule, {
+	return reactModule.createElement(if var4 then imageModule else viewModule, {
 		ZIndex = 0,
-		Image = var13,
-		imageStyle = if var13 then var12 else nil,
-		backgroundStyle = if var13 then nil else var12,
-		Size = if var11.fillDirection == Enum.FillDirection.Vertical then UDim2.fromScale(1, 0) else UDim2.fromScale(0, 1),
-		LayoutOrder = var10.LayoutOrder,
+		Image = var4,
+		imageStyle = if var4 then var3 else nil,
+		backgroundStyle = if var4 then nil else var3,
+		Size = if var2.fillDirection == Enum.FillDirection.Vertical then UDim2.fromScale(1, 0) else UDim2.fromScale(0, 1),
+		LayoutOrder = var1.LayoutOrder,
 		aspectRatio = {
-			AspectRatio = t[var10.shape],
+			AspectRatio = t[var1.shape],
 			AspectType = Enum.AspectType.ScaleWithParentSize,
-			DominantAxis = if var11.fillDirection == Enum.FillDirection.Vertical then Enum.DominantAxis.Width else Enum.DominantAxis.Height
+			DominantAxis = if var2.fillDirection == Enum.FillDirection.Vertical then Enum.DominantAxis.Width else Enum.DominantAxis.Height
 		},
 		tag = {
-			["radius-top-medium"] = var11.fillDirection == Enum.FillDirection.Vertical and var11.isContained,
-			["radius-left-medium"] = var11.fillDirection == Enum.FillDirection.Horizontal and var11.isContained,
-			["radius-medium"] = var10.shape ~= mediaShapeModule.Circle and not var11.isContained,
-			["radius-circle"] = var10.shape == mediaShapeModule.Circle and not var11.isContained
+			["radius-top-medium"] = var2.fillDirection == Enum.FillDirection.Vertical and var2.isContained,
+			["radius-left-medium"] = var2.fillDirection == Enum.FillDirection.Horizontal and var2.isContained,
+			["radius-medium"] = var1.shape ~= mediaShapeModule.Circle and not var2.isContained,
+			["radius-circle"] = var1.shape == mediaShapeModule.Circle and not var2.isContained
 		},
-		onStateChanged = var10.onStateChanged,
-		testId = `{var11.testId}--media`
+		onStateChanged = var1.onStateChanged,
+		testId = `{var2.testId}--media`
 	}, {
 		Image = reactModule.createElement(imageModule, {
 			Image = reactModule.useMemo(function()
-				-- upvalues: var10 (ref), getRbxThumbModule (copy)
-				return if var10.id == nil or var10.type == nil then nil else getRbxThumbModule(var10.type, var10.id)
-			end, { var10.type, var10.id }),
-			imageStyle = var10.style,
+				-- upvalues: var1 (ref), getRbxThumbModule (copy)
+				return if var1.id == nil or var1.type == nil then nil else getRbxThumbModule(var1.type, var1.id)
+			end, { var1.type, var1.id }),
+			imageStyle = var1.style,
 			tag = {
 				["size-full"] = true,
-				["padding-medium"] = var10.children ~= nil,
-				["radius-top-medium"] = var11.fillDirection == Enum.FillDirection.Vertical and var11.isContained,
-				["radius-left-medium"] = var11.fillDirection == Enum.FillDirection.Horizontal and var11.isContained,
-				["radius-medium"] = var10.shape ~= mediaShapeModule.Circle and not var11.isContained,
-				["radius-circle"] = var10.shape == mediaShapeModule.Circle
+				["padding-medium"] = var1.children ~= nil,
+				["radius-top-medium"] = var2.fillDirection == Enum.FillDirection.Vertical and var2.isContained,
+				["radius-left-medium"] = var2.fillDirection == Enum.FillDirection.Horizontal and var2.isContained,
+				["radius-medium"] = var1.shape ~= mediaShapeModule.Circle and not var2.isContained,
+				["radius-circle"] = var1.shape == mediaShapeModule.Circle
 			},
-			testId = `{var11.testId}--media-image`
-		}, var10.children)
+			testId = `{var2.testId}--media-image`
+		}, var1.children)
 	})
 end

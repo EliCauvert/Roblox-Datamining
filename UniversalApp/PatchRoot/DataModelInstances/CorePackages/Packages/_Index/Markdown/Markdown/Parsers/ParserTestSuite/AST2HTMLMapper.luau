@@ -2,330 +2,330 @@
 local t = {}
 local t_1 = {}
 
-local function sanitize(p0)
-	return p0:gsub("&amp;", "&"):gsub("&lt;", "<"):gsub("&gt;", ">"):gsub("&quot;", "\""):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("\"", "&quot;"):gsub(" *\n *", "\n")
+local function sanitize(p1)
+	return p1:gsub("&amp;", "&"):gsub("&lt;", "<"):gsub("&gt;", ">"):gsub("&quot;", "\""):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("\"", "&quot;"):gsub(" *\n *", "\n")
 end
 
 local function _(p1)
-	return string.gsub(p1, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p2)
-		return string.format("%%%02X", string.byte(p2))
+	return string.gsub(p1, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p1)
+		return string.format("%%%02X", string.byte(p1))
 	end)
 end
 
-local function map(p3)
+local function map(p1)
 	-- upvalues: t_1 (write)
-	local name = t_1[p3.name]
+	local name = t_1[p1.name]
 	
 	if name then
-		return name(p3)
+		return name(p1)
 	end
-	error(`No handler found for node {p3.name}`)
+	error(`No handler found for node {p1.name}`)
 end
 
-local _ = function(p4)
+local _ = function(p1)
 	-- upvalues: t_1 (write)
-	if not p4 then
+	if not p1 then
 		return ""
 	end
-	local var5 = ""
+	local var1 = ""
 	
-	for i, v in p4 do
-		local var7
-		local var6 = var5
+	for i, v in p1 do
+		local var2
+		local var3 = var1
 		local name = t_1[v.name]
 		
 		if name then
-			var7 = name(v)
+			var2 = name(v)
 		else
 			error(`No handler found for node {v.name}`)
-			var7 = nil
+			var2 = nil
 		end
-		var5 = var6 .. var7
+		var1 = var3 .. var7
 	end
-	return var5
+	return var1
 end
 
-local function emptyHandler(p5)
+local function emptyHandler(p1)
 	-- upvalues: t_1 (write)
-	local children = p5.children
+	local children = p1.children
 	
 	if not children then
 		return ""
 	end
-	local var8 = ""
+	local var1 = ""
 	
 	for i, v in children do
-		local var10
-		local var9 = var8
+		local var2
+		local var3 = var1
 		local name = t_1[v.name]
 		
 		if name then
-			var10 = name(v)
+			var2 = name(v)
 		else
 			error(`No handler found for node {v.name}`)
-			var10 = nil
+			var2 = nil
 		end
-		var8 = var9 .. var10
+		var1 = var3 .. var10
 	end
-	return var8
+	return var1
 end
 
 t_1 = {
-	ROOT = function(p6)
+	ROOT = function(p1)
 		-- upvalues: t_1 (write)
-		local children = p6.children
+		local children = p1.children
 		
 		if not children then
 			return ""
 		end
-		local var11 = ""
+		local var1 = ""
 		
 		for i, v in children do
-			local var13
-			local var12 = var11
+			local var2
+			local var3 = var1
 			local name = t_1[v.name]
 			
 			if name then
-				var13 = name(v)
+				var2 = name(v)
 			else
 				error(`No handler found for node {v.name}`)
-				var13 = nil
+				var2 = nil
 			end
-			var11 = var12 .. var13
+			var1 = var3 .. var13
 		end
-		return var11
+		return var1
 	end,
-	HEADING = function(p7)
+	HEADING = function(p1)
 		-- upvalues: t_1 (write)
-		local var16
-		local var14 = if p7.attributes then p7.attributes.depth else 1
-		local var15 = "<h%*>%*</h%*>\n"
-		local children = p7.children
+		local var1
+		local var2 = if p1.attributes then p1.attributes.depth else 1
+		local var3 = "<h%*>%*</h%*>\n"
+		local children = p1.children
 		
 		if children then
-			local var17 = ""
+			local var4 = ""
 			
 			for i, v in children do
-				local var19
-				local var18 = var17
+				local var5
+				local var6 = var4
 				local name = t_1[v.name]
 				
 				if name then
-					var19 = name(v)
+					var5 = name(v)
 				else
 					error(`No handler found for node {v.name}`)
-					var19 = nil
+					var5 = nil
 				end
-				var17 = var18 .. var19
+				var4 = var6 .. var19
 			end
-			var16 = var17
+			var1 = var4
 		else
-			var16 = ""
+			var1 = ""
 		end
-		return var15:format(var14, var16, var14)
+		return var3:format(var2, var1, var2)
 	end,
-	PARAGRAPH = function(p8)
+	PARAGRAPH = function(p1)
 		-- upvalues: t_1 (write)
-		local var21
-		local var20 = "<p>%*</p>\n"
-		local children = p8.children
+		local var1
+		local var2 = "<p>%*</p>\n"
+		local children = p1.children
 		
 		if children then
-			local var22 = ""
+			local var3 = ""
 			
 			for i, v in children do
-				local var24
-				local var23 = var22
+				local var4
+				local var5 = var3
 				local name = t_1[v.name]
 				
 				if name then
-					var24 = name(v)
+					var4 = name(v)
 				else
 					error(`No handler found for node {v.name}`)
-					var24 = nil
+					var4 = nil
 				end
-				var22 = var23 .. var24
+				var3 = var5 .. var24
 			end
-			var21 = var22
+			var1 = var3
 		else
-			var21 = ""
+			var1 = ""
 		end
-		return var20:format(var21:gsub("^ +", ""):gsub(" +$", ""))
+		return var2:format(var1:gsub("^ +", ""):gsub(" +$", ""))
 	end,
-	TEXT = function(p9)
+	TEXT = function(p1)
 		-- upvalues: sanitize (ref)
-		return sanitize(p9.text or "")
+		return sanitize(p1.text or "")
 	end,
-	STYLED_TEXT = function(p10)
+	STYLED_TEXT = function(p1)
 		-- upvalues: t_1 (write)
-		local var25 = if p10.attributes then p10.attributes.style else nil
+		local var1 = if p1.attributes then p1.attributes.style else nil
 		
-		if var25 == "BOLD" or var25 == "ITALIC" then
-			local var27
-			local var26 = "<em>%*</em>"
-			local children = p10.children
+		if var1 == "BOLD" or var1 == "ITALIC" then
+			local var2
+			local var3 = "<em>%*</em>"
+			local children = p1.children
 			
 			if children then
-				local var28 = ""
+				local var4 = ""
 				
 				for i, v in children do
-					local var30
-					local var29 = var28
+					local var5
+					local var6 = var4
 					local name = t_1[v.name]
 					
 					if name then
-						var30 = name(v)
+						var5 = name(v)
 					else
 						error(`No handler found for node {v.name}`)
-						var30 = nil
+						var5 = nil
 					end
-					var28 = var29 .. var30
+					var4 = var6 .. var30
 				end
-				var27 = var28
+				var2 = var4
 			else
-				var27 = ""
+				var2 = ""
 			end
-			return var26:format(var27)
-		elseif var25 == "BOLD_2" or var25 == "ITALIC_2" then
-			local var32
-			local var31 = "<strong>%*</strong>"
-			local children = p10.children
+			return var3:format(var2)
+		elseif var1 == "BOLD_2" or var1 == "ITALIC_2" then
+			local var7
+			local var8 = "<strong>%*</strong>"
+			local children = p1.children
 			
 			if children then
-				local var33 = ""
+				local var9 = ""
 				
 				for i, v in children do
-					local var35
-					local var34 = var33
+					local var10
+					local var11 = var9
 					local name = t_1[v.name]
 					
 					if name then
-						var35 = name(v)
+						var10 = name(v)
 					else
 						error(`No handler found for node {v.name}`)
-						var35 = nil
+						var10 = nil
 					end
-					var33 = var34 .. var35
+					var9 = var11 .. var35
 				end
-				var32 = var33
+				var7 = var9
 			else
-				var32 = ""
+				var7 = ""
 			end
-			return var31:format(var32)
-		elseif var25 == "STRIKE" then
-			local var37
-			local var36 = "<u>%*</u>"
-			local children = p10.children
+			return var8:format(var7)
+		elseif var1 == "STRIKE" then
+			local var12
+			local var13 = "<u>%*</u>"
+			local children = p1.children
 			
 			if children then
-				local var38 = ""
+				local var14 = ""
 				
 				for i, v in children do
-					local var40
-					local var39 = var38
+					local var15
+					local var16 = var14
 					local name = t_1[v.name]
 					
 					if name then
-						var40 = name(v)
+						var15 = name(v)
 					else
 						error(`No handler found for node {v.name}`)
-						var40 = nil
+						var15 = nil
 					end
-					var38 = var39 .. var40
+					var14 = var16 .. var40
 				end
-				var37 = var38
+				var12 = var14
 			else
-				var37 = ""
+				var12 = ""
 			end
-			return var36:format(var37)
-		elseif var25 == "INLINE_CODE" then
-			local var42
-			local var41 = "<code>%*</code>"
-			local children = p10.children
+			return var13:format(var12)
+		elseif var1 == "INLINE_CODE" then
+			local var17
+			local var18 = "<code>%*</code>"
+			local children = p1.children
 			
 			if children then
-				local var43 = ""
+				local var19 = ""
 				
 				for i, v in children do
-					local var45
-					local var44 = var43
+					local var20
+					local var21 = var19
 					local name = t_1[v.name]
 					
 					if name then
-						var45 = name(v)
+						var20 = name(v)
 					else
 						error(`No handler found for node {v.name}`)
-						var45 = nil
+						var20 = nil
 					end
-					var43 = var44 .. var45
+					var19 = var21 .. var45
 				end
-				var42 = var43
+				var17 = var19
 			else
-				var42 = ""
+				var17 = ""
 			end
-			return var41:format(var42)
-		elseif var25 ~= nil then
-			error(`Unknown text style {var25}`)
+			return var18:format(var17)
+		elseif var1 ~= nil then
+			error(`Unknown text style {var1}`)
 			
 			return
 		end
-		local children = p10.children
+		local children = p1.children
 		
 		if not children then
 			return ""
 		end
-		local var46 = ""
+		local var22 = ""
 		
 		for i, v in children do
-			local var48
-			local var47 = var46
+			local var23
+			local var24 = var22
 			local name = t_1[v.name]
 			
 			if name then
-				var48 = name(v)
+				var23 = name(v)
 			else
 				error(`No handler found for node {v.name}`)
-				var48 = nil
+				var23 = nil
 			end
-			var46 = var47 .. var48
+			var22 = var24 .. var48
 		end
-		return var46
+		return var22
 	end,
 	DIVIDER = function()
 		return "<hr />\n"
 	end,
-	QUOTE = function(p11)
+	QUOTE = function(p1)
 		-- upvalues: t_1 (write)
-		local var50
-		local var49 = "<blockquote>\n%*</blockquote>\n"
-		local children = p11.children
+		local var1
+		local var2 = "<blockquote>\n%*</blockquote>\n"
+		local children = p1.children
 		
 		if children then
-			local var51 = ""
+			local var3 = ""
 			
 			for i, v in children do
-				local var53
-				local var52 = var51
+				local var4
+				local var5 = var3
 				local name = t_1[v.name]
 				
 				if name then
-					var53 = name(v)
+					var4 = name(v)
 				else
 					error(`No handler found for node {v.name}`)
-					var53 = nil
+					var4 = nil
 				end
-				var51 = var52 .. var53
+				var3 = var5 .. var53
 			end
-			var50 = var51
+			var1 = var3
 		else
-			var50 = ""
+			var1 = ""
 		end
-		return var49:format(var50)
+		return var2:format(var1)
 	end,
-	CODE_BLOCK = function(p12)
+	CODE_BLOCK = function(p1)
 		local t = {}
 		
-		if p12.attributes and p12.attributes.language and p12.attributes.language ~= "" then
+		if p1.attributes and p1.attributes.language and p1.attributes.language ~= "" then
 			table.insert(t, "language-" .. p12.attributes.language)
 		end
 		local t_1 = {}
@@ -333,143 +333,143 @@ t_1 = {
 		if #t > 0 then
 			table.insert(t_1, `class="{table.concat(t, " ")}"`)
 		end
-		return `<pre><code{if #t_1 > 0 then ` {table.concat(t_1, " ")}` else ""}>{p12.text}</code></pre>\n`
+		return `<pre><code{if #t_1 > 0 then ` {table.concat(t_1, " ")}` else ""}>{p1.text}</code></pre>\n`
 	end,
-	LIST = function(p13)
+	LIST = function(p1)
 		-- upvalues: t_1 (write)
-		local var58
-		local var56 = if p13.attributes then if p13.attributes.ordered then "ol" else "ul" else "ul"
-		local var57 = "<%*>\n%*</%*>\n"
-		local children = p13.children
+		local var1
+		local var2 = if p1.attributes then if p1.attributes.ordered then "ol" else "ul" else "ul"
+		local var3 = "<%*>\n%*</%*>\n"
+		local children = p1.children
 		
 		if children then
-			local var59 = ""
+			local var4 = ""
 			
 			for i, v in children do
-				local var61
-				local var60 = var59
+				local var5
+				local var6 = var4
 				local name = t_1[v.name]
 				
 				if name then
-					var61 = name(v)
+					var5 = name(v)
 				else
 					error(`No handler found for node {v.name}`)
-					var61 = nil
+					var5 = nil
 				end
-				var59 = var60 .. var61
+				var4 = var6 .. var61
 			end
-			var58 = var59
+			var1 = var4
 		else
-			var58 = ""
+			var1 = ""
 		end
-		return var57:format(var56, var58, var56)
+		return var3:format(var2, var1, var2)
 	end,
-	LIST_ITEM = function(p14)
+	LIST_ITEM = function(p1)
 		-- upvalues: t_1 (write)
-		local var63
-		local var62 = "<li>%*</li>\n"
-		local children = p14.children
+		local var1
+		local var2 = "<li>%*</li>\n"
+		local children = p1.children
 		
 		if children then
-			local var64 = ""
+			local var3 = ""
 			
 			for i, v in children do
-				local var66
-				local var65 = var64
+				local var4
+				local var5 = var3
 				local name = t_1[v.name]
 				
 				if name then
-					var66 = name(v)
+					var4 = name(v)
 				else
 					error(`No handler found for node {v.name}`)
-					var66 = nil
+					var4 = nil
 				end
-				var64 = var65 .. var66
+				var3 = var5 .. var66
 			end
-			var63 = var64
+			var1 = var3
 		else
-			var63 = ""
+			var1 = ""
 		end
-		return var62:format(var63)
+		return var2:format(var1)
 	end,
-	LINK = function(p15)
+	LINK = function(p1)
 		-- upvalues: t_1 (write), sanitize (ref)
-		local var69
-		local var67 = if p15.attributes then p15.attributes.url else p15.url or ""
-		local var68 = if p15.attributes then p15.attributes.title else nil
-		local children = p15.children
+		local var1
+		local var2 = if p1.attributes then p1.attributes.url else p1.url or ""
+		local var3 = if p1.attributes then p1.attributes.title else nil
+		local children = p1.children
 		
 		if children then
-			local var70 = ""
+			local var4 = ""
 			
 			for i, v in children do
-				local var72
-				local var71 = var70
+				local var5
+				local var6 = var4
 				local name = t_1[v.name]
 				
 				if name then
-					var72 = name(v)
+					var5 = name(v)
 				else
 					error(`No handler found for node {v.name}`)
-					var72 = nil
+					var5 = nil
 				end
-				var70 = var71 .. var72
+				var4 = var6 .. var72
 			end
-			var69 = var70
+			var1 = var4
 		else
-			var69 = ""
+			var1 = ""
 		end
-		if var69 == "" and p15.text then
-			var69 = sanitize(p15.text)
+		if var1 == "" and p1.text then
+			var1 = sanitize(p1.text)
 		end
 		return `<a href="{string.gsub(var67, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p16)
 			return string.format("%%%02X", string.byte(p16))
-		end)}"{if var68 then ` title="{sanitize(var68)}"` else ""}>{var69}</a>`
+		end)}"{if var68 then ` title="{sanitize(var3)}"` else ""}>{var69}</a>`
 	end,
-	TAG = function(p17)
+	TAG = function(p1)
 		-- upvalues: t_1 (write)
-		local text = p17.text
+		local text = p1.text
 		
 		if not text or text == "" then
 			error("TAG node must have a text value")
 		end
-		local var73 = ""
+		local var1 = ""
 		
-		if p17.attributes then
-			for i, v in p17.attributes do
-				var73 = `{var73} {i}="{v}"`
+		if p1.attributes then
+			for i, v in p1.attributes do
+				var1 = `{var1} {i}="{v}"`
 			end
 		end
-		if not p17.children or #p17.children <= 0 then
-			return `<{text}{var73} />`
+		if not p1.children or #p1.children <= 0 then
+			return `<{text}{var1} />`
 		end
-		local var77
-		local var74 = "<%*%*>%*</%*>"
-		local var75 = text
-		local var76 = var73
-		local children = p17.children
+		local var2
+		local var3 = "<%*%*>%*</%*>"
+		local var4 = text
+		local var5 = var1
+		local children = p1.children
 		
 		if children then
-			local var78 = ""
+			local var6 = ""
 			
 			for i, v in children do
-				local var80
-				local var79 = var78
+				local var7
+				local var8 = var6
 				local name = t_1[v.name]
 				
 				if name then
-					var80 = name(v)
+					var7 = name(v)
 				else
 					error(`No handler found for node {v.name}`)
-					var80 = nil
+					var7 = nil
 				end
-				var78 = var79 .. var80
+				var6 = var8 .. var80
 			end
-			var77 = var78
+			var2 = var6
 		else
-			var77 = ""
+			var2 = ""
 		end
-		return var74:format(var75, var76, var77, text)
+		return var3:format(var4, var5, var2, text)
 	end,
 	LINE_BREAK = function()
 		return "<br />"
@@ -477,7 +477,7 @@ t_1 = {
 	BREAK = function()
 		return "<br />\n"
 	end,
-	IMAGE = function(p18)
+	IMAGE = function(p1)
 		-- upvalues: sanitize (ref)
 		return `<img src="{string.gsub(if p18.attributes then p18.attributes.url else p18.url or "", "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p19)
 			return string.format("%%%02X", string.byte(p19))
@@ -488,9 +488,9 @@ t_1 = {
 	ACTION = emptyHandler
 }
 
-function t.map(p20)
+function t.map(p1)
 	-- upvalues: map (ref)
-	return map(p20)
+	return map(p1)
 end
 
 return t

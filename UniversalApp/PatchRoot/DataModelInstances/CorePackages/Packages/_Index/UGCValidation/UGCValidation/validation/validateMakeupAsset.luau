@@ -15,67 +15,62 @@ local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumu
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagUGCValidateMigrateWrapAndMakeupModule = require(parent.flags.getFFlagUGCValidateMigrateWrapAndMakeup)
-local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 
 return function(value)
-	-- upvalues: getFFlagUGCValidateMakeupCategoryParityModule (ref), validateSingleInstanceModule (ref), createMakeupSchemaModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), validatePropertyRequirementsModule (ref), validateTagsModule (ref), validateAttributesModule (ref), validateModerationModule (ref), getFFlagUGCValidateMigrateWrapAndMakeupModule (ref), validateMakeupDecalModule (ref), validateWrapTextureTransferModule (ref)
+	-- upvalues: validateSingleInstanceModule (ref), createMakeupSchemaModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), validatePropertyRequirementsModule (ref), validateTagsModule (ref), validateAttributesModule (ref), validateModerationModule (ref), getFFlagUGCValidateMigrateWrapAndMakeupModule (ref), validateMakeupDecalModule (ref), validateWrapTextureTransferModule (ref)
 	local instances = value.instances
 	local _ = nil
 	local _ = nil
+	local var1, var2 = validateSingleInstanceModule(instances, value)
+	local var3 = var2
 	
-	if not getFFlagUGCValidateMakeupCategoryParityModule() then
-		local var16, var17 = validateSingleInstanceModule(instances, value)
-		local var18 = var17
-		
-		if not var16 then
-			return false, var18
-		end
+	if not var1 then
+		return false, var3
 	end
-	local var19 = instances[1]
-	local var20 = createMakeupSchemaModule()
+	local var4 = instances[1]
+	local var5 = createMakeupSchemaModule()
 	
 	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-		local var21, var22 = validateInstanceTreeModule(var20, var19, value)
-		local var23 = var22
+		local var6, var7 = validateInstanceTreeModule(var5, var4, value)
+		local var8 = var7
 		
-		if not var21 then
-			return false, var23
+		if not var6 then
+			return false, var8
 		elseif not getFFlagUGCValidateMigrateSchemaPropertiesModule() and getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-			local var24, var25 = validatePropertiesSensibleModule.validate(var19, value)
-			local var26 = var25
+			local var9, var10 = validatePropertiesSensibleModule.validate(var4, value)
+			local var11 = var10
 			
-			if not var24 then
-				return false, var26
+			if not var9 then
+				return false, var11
 			end
 		end
-		local var27, var28 = validateDependenciesModule(var19, value, {
+		local var12, var13 = validateDependenciesModule(var4, value, {
 			skipExistenceCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule(),
 			skipOwnershipCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule()
 		})
 		
-		if not var27 then
-			return false, var28
+		if not var12 then
+			return false, var13
 		end
-		local var29 = failureReasonsAccumulatorModule.new()
+		local var14 = failureReasonsAccumulatorModule.new()
 		
 		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-			var29:updateReasons(validatePropertyRequirementsModule(var19, nil, value))
+			var14:updateReasons(validatePropertyRequirementsModule(var4, nil, value))
 		end
-		if not getFFlagUGCValidateMakeupCategoryParityModule() then
-			var29:updateReasons(validateTagsModule(var19, value))
+		var14:updateReasons(validateTagsModule(var4, value))
+		
+		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
+			var14:updateReasons(validateAttributesModule(var4, value))
 		end
 		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-			var29:updateReasons(validateAttributesModule(var19, value))
-		end
-		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-			var29:updateReasons(validateModerationModule(var19, {}, value))
+			var14:updateReasons(validateModerationModule(var4, {}, value))
 		end
 		if not getFFlagUGCValidateMigrateWrapAndMakeupModule() then
-			var29:updateReasons(validateMakeupDecalModule(var19, value))
+			var14:updateReasons(validateMakeupDecalModule(var4, value))
 		end
 		if not getFFlagUGCValidateMigrateWrapAndMakeupModule() then
-			var29:updateReasons(validateWrapTextureTransferModule(var19, value))
+			var14:updateReasons(validateWrapTextureTransferModule(var4, value))
 		end
-		return var29:getFinalResults()
+		return var14:getFinalResults()
 	end
 end

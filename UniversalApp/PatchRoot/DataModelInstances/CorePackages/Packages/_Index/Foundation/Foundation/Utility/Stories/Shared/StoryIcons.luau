@@ -6,11 +6,11 @@ local matrixGridModule = require(foundation.Utility.Stories.Shared.MatrixGrid)
 local icon = builderIconsModule.Icon
 local uiblox = builderIconsModule.Migration.uiblox
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: uiblox (ref)
-	local var6 = uiblox[p0]
+	local var1 = uiblox[p1]
 	
-	return `{p0} \226\134\146 {var6.name} ({var6.variant})`
+	return `{p1} \226\134\146 {var1.name} ({var1.variant})`
 end
 
 local t = {}
@@ -36,28 +36,28 @@ return {
 		for i, v in t do
 			table.insert(list, v.name)
 		end
-		local var8 = if p1 then p1.additional else nil
+		local var1 = if p1 then p1.additional else nil
 		
-		if var8 then
-			for i_1, v_1 in var8 do
+		if var1 then
+			for i_1, v_1 in var1 do
 				table.insert(list, v_1)
 			end
 		end
 		return list
 	end,
-	buildIconTypeMatrixRows = function(p2)
+	buildIconTypeMatrixRows = function(p1)
 		-- upvalues: t (ref), matrixGridModule (ref)
 		local t_1 = {}
 		
 		for i, v in t do
 			table.insert(t_1, {
 				label = matrixGridModule.matrixInfoLabel(v.title, v.subtitle),
-				cells = p2(v)
+				cells = p1(v)
 			})
 		end
 		return t_1
 	end,
-	parseIconControl = function(p3)
-		return if p3 == "" then nil else p3
+	parseIconControl = function(p1)
+		return if p1 == "" then nil else p1
 	end
 }

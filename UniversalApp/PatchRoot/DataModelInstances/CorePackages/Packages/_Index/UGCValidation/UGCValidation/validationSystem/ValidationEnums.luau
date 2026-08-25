@@ -1,10 +1,10 @@
 ﻿local t = {}
 
-local function createEnumMetatable(p0)
+local function createEnumMetatable(p1)
 	return {
 		__metatable = "This metatable is protected",
 		__index = function(_, p1)
-			-- upvalues: p0 (ref)
+			-- upvalues: p1 (ref)
 			error("Invalid ValidationEnums." .. p0 .. " enum value: " .. tostring(p1))
 		end,
 		__newindex = function(_, _, _)
@@ -13,30 +13,28 @@ local function createEnumMetatable(p0)
 	}
 end
 
-local function finalizeEnumTable(p2)
+local function finalizeEnumTable(p1)
 	-- upvalues: t (ref), createEnumMetatable (ref)
-	if t[p2] == nil then
-		error(p2 .. " enum table is not found")
+	if t[p1] == nil then
+		error(p1 .. " enum table is not found")
 	end
-	for i, v in t[p2] do
+	for i, v in t[p1] do
 		if typeof(i) ~= "string" then
-			error(p2 .. " enum table has non string key " .. tostring(i))
+			error(p1 .. " enum table has non string key " .. tostring(i))
 		elseif i ~= v then
-			error(p2 .. " enum table has non-matching key and value for key " .. tostring(i))
+			error(p1 .. " enum table has non-matching key and value for key " .. tostring(i))
 		end
 	end
-	setmetatable(t[p2], createEnumMetatable(p2))
+	setmetatable(t[p1], createEnumMetatable(p1))
 end
 
 t.ValidationModule = {
 	ExpectedRootSchema = "ExpectedRootSchema",
 	SingleInstanceSelected = "SingleInstanceSelected",
-	SerializedAssetSizeBounded = "SerializedAssetSizeBounded",
 	NoExtraTags = "NoExtraTags",
 	AttributesAllowed = "AttributesAllowed",
 	MaterialsAllowed = "MaterialsAllowed",
 	PropertyRequirementsValid = "PropertyRequirementsValid",
-	ArchivableRequired = "ArchivableRequired",
 	PropertiesSensible = "PropertiesSensible",
 	InstanceTreeMatchesSchema = "InstanceTreeMatchesSchema",
 	DescendantIdsAllowed = "DescendantIdsAllowed",
@@ -48,7 +46,6 @@ t.ValidationModule = {
 	HSRMeshIdsMatch = "HSRMeshIdsMatch",
 	ThumbnailConfigValid = "ThumbnailConfigValid",
 	DescendantIdsNotMissing = "DescendantIdsNotMissing",
-	ContentNotEditable = "ContentNotEditable",
 	NoFACSOverrideData = "NoFACSOverrideData",
 	FacsHeadConsistency = "FacsHeadConsistency",
 	DynamicHeadFacsPresent = "DynamicHeadFacsPresent",
@@ -107,7 +104,6 @@ t.ValidationModule = {
 	CurveAnimAllowedTypes = "CurveAnimAllowedTypes",
 	CurveAnimNumericalDataValid = "CurveAnimNumericalDataValid",
 	CurveAnimTagsValid = "CurveAnimTagsValid",
-	CurveAnimTranslationTagAccurate = "CurveAnimTranslationTagAccurate",
 	CurveAnimJointsManipulated = "CurveAnimJointsManipulated",
 	CurveAnimFrameDataSensible = "CurveAnimFrameDataSensible",
 	CurveAnimJointsAnimated = "CurveAnimJointsAnimated",
@@ -135,7 +131,6 @@ t.SharedDataMember = {
 	uploadEnum = "uploadEnum",
 	consumerConfig = "consumerConfig",
 	aqsFetchMetrics = "aqsFetchMetrics",
-	r15LegacyDuplicateRoot = "r15LegacyDuplicateRoot",
 	aqsSummaryData = "aqsSummaryData",
 	renderMeshesData = "renderMeshesData",
 	innerCagesData = "innerCagesData",

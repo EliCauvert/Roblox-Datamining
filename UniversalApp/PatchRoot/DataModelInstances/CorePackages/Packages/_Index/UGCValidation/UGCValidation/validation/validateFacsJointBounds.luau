@@ -7,34 +7,34 @@ local getFIntFacsJointMaximumDistRatioDirectModule = require(parent.flags.getFIn
 local getFIntFacsJointMaximumDistRatioAccumulatedModule = require(parent.flags.getFIntFacsJointMaximumDistRatioAccumulated)
 local _ = require(parent.util.Types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: pcallDeferredModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), analyticsModule (ref), getFIntFacsJointMaximumDistRatioDirectModule (ref), getFIntFacsJointMaximumDistRatioAccumulatedModule (ref)
-	local var6, var7 = pcallDeferredModule(function()
-		-- upvalues: getEditableMeshFromContextModule (copy), p0 (ref), p1 (ref), UGCValidationService (copy)
-		local var12, var13 = getEditableMeshFromContextModule(p0, "MeshId", p1)
+	local var1, var2 = pcallDeferredModule(function()
+		-- upvalues: getEditableMeshFromContextModule (copy), p1 (ref), p2 (ref), UGCValidationService (copy)
+		local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 		
-		if not var12 then
+		if not var1 then
 			error("Failed to retrieve MeshContent")
 		end
-		return UGCValidationService:GetMaximalJointDistancesWithinFacs(var13)
-	end, p1)
+		return UGCValidationService:GetMaximalJointDistancesWithinFacs(var2)
+	end, p2)
 	
-	if not var6 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateFACSJointTransformsWithinBounds_Error, nil, p1)
+	if not var1 then
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateFACSJointTransformsWithinBounds_Error, nil, p2)
 		
 		return false, {
 			"Failed to validate facial animation joint bounds, please try again later"
 		}
 	end
-	local var8, var9, var10, var11 = unpack(var7)
+	local var3, var4, var5, var6 = unpack(var2)
 	
-	if getFIntFacsJointMaximumDistRatioDirectModule() / 100 < var8 then
+	if getFIntFacsJointMaximumDistRatioDirectModule() / 100 < var3 then
 		return false, {
-			`Head facial animation {var9} results in joints being moved substantially outside of the head. Please edit your facial animations and try again.`
+			`Head facial animation {var4} results in joints being moved substantially outside of the head. Please edit your facial animations and try again.`
 		}
-	elseif getFIntFacsJointMaximumDistRatioAccumulatedModule() / 100 < var10 then
+	elseif getFIntFacsJointMaximumDistRatioAccumulatedModule() / 100 < var5 then
 		return false, {
-			`Head facial animations can be combined to extend the joint {var11} far outside the head. Please edit your facial animations and try again.`
+			`Head facial animations can be combined to extend the joint {var6} far outside the head. Please edit your facial animations and try again.`
 		}
 	end
 	return true

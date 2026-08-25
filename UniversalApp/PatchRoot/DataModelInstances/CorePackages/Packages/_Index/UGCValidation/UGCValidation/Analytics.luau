@@ -2,7 +2,7 @@
 local _ = require(parent.util.Types)
 local runService = game:GetService("RunService")
 local UGCValidationService = game:GetService("UGCValidationService")
-local var2 = if runService:IsStudio() then game:GetService("StudioService") else nil
+local var1 = if runService:IsStudio() then game:GetService("StudioService") else nil
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local getEngineFeatureEngineUGCValidationReportScriptTimeModule = require(parent.flags.getEngineFeatureEngineUGCValidationReportScriptTime)
 local getEngineFeatureEngineUGCValidationIECTelemetryModule = require(parent.flags.getEngineFeatureEngineUGCValidationIECTelemetry)
@@ -220,8 +220,8 @@ if getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then
 	t.ErrorType.validateFACSJointTransformsWithinBounds_OOB = "validateFACSJointTransformsWithinBounds_OOB"
 end
 setmetatable(t.ErrorType, {
-	__index = function(_, p0)
-		return `UNREGISTERED_{p0}`
+	__index = function(_, p1)
+		return `UNREGISTERED_{p1}`
 	end
 })
 t.metadata = {}
@@ -241,67 +241,67 @@ function t.shouldReportIECTelemetry(p1)
 	return if getEngineFeatureEngineUGCValidationIECTelemetryModule() then if p1 then runService:IsStudio() or not p1.allowEditableInstances or not p1.isServer else false else false
 end
 
-function t.reportCounter(p2, p3, p4)
+function t.reportCounter(p1, p2, p3)
 	-- upvalues: t (ref), UGCValidationService (ref)
-	if t.shouldReportIECTelemetry(p4) then
-		UGCValidationService:ReportUGCValidationCounter(p2, p3)
+	if t.shouldReportIECTelemetry(p3) then
+		UGCValidationService:ReportUGCValidationCounter(p1, p2)
 	end
 end
 
-function t.reportFailure(p5, p6, p7)
-	-- upvalues: runService (ref), joinTables (ref), t (ref), rbxAnalyticsService (ref), var2 (ref), UGCValidationService (ref)
-	rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "rcc", "ugcValidation", "failure", joinTables(t.metadata, p6 or {}, {
-		errorType = p5,
+function t.reportFailure(p1, p2, p3)
+	-- upvalues: runService (ref), joinTables (ref), t (ref), rbxAnalyticsService (ref), var1 (ref), UGCValidationService (ref)
+	rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "rcc", "ugcValidation", "failure", joinTables(t.metadata, p2 or {}, {
+		errorType = p1,
 		studioSid = rbxAnalyticsService:GetSessionId(),
 		clientId = rbxAnalyticsService:GetClientId(),
 		placeId = game.PlaceId,
-		userId = if var2 then var2:GetUserId() else 0
+		userId = if var1 then var1:GetUserId() else 0
 	}))
 	
-	if t.shouldReportIECTelemetry(p7) then
-		UGCValidationService:ReportUGCValidationFailureTelemetry(p5)
+	if t.shouldReportIECTelemetry(p3) then
+		UGCValidationService:ReportUGCValidationFailureTelemetry(p1)
 	end
 end
 
-function t.reportThumbnailing(p8, p9)
-	-- upvalues: runService (ref), joinTables (ref), t (ref), rbxAnalyticsService (ref), var2 (ref)
-	rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "rcc", "ugcValidation", "thumbnailing", joinTables(t.metadata, p9 or {}, {
-		time = p8,
+function t.reportThumbnailing(p1, p2)
+	-- upvalues: runService (ref), joinTables (ref), t (ref), rbxAnalyticsService (ref), var1 (ref)
+	rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "rcc", "ugcValidation", "thumbnailing", joinTables(t.metadata, p2 or {}, {
+		time = p1,
 		studioSid = rbxAnalyticsService:GetSessionId(),
 		clientId = rbxAnalyticsService:GetClientId(),
 		placeId = game.PlaceId,
-		userId = if var2 then var2:GetUserId() else 0
+		userId = if var1 then var1:GetUserId() else 0
 	}))
 end
 
-function t.recordScriptTime(p10, p11, p12)
+function t.recordScriptTime(p1, p2, p3)
 	-- upvalues: getEngineFeatureEngineUGCValidationReportScriptTimeModule (ref)
 	if not getEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
-	if not p12.scriptTimes then
-		p12.scriptTimes = {}
+	if not p3.scriptTimes then
+		p3.scriptTimes = {}
 	end
-	local scriptTimes = p12.scriptTimes
+	local scriptTimes = p3.scriptTimes
 	
-	if not scriptTimes[p10] then
-		scriptTimes[p10] = 0
+	if not scriptTimes[p1] then
+		scriptTimes[p1] = 0
 	end
-	scriptTimes[p10] += tick() - p11
+	scriptTimes[p1] += tick() - p2
 end
 
-function t.reportScriptTimes(p13)
+function t.reportScriptTimes(p1)
 	-- upvalues: getEngineFeatureEngineUGCValidationReportScriptTimeModule (ref), runService (ref), t (ref), UGCValidationService (ref)
 	if not getEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
-	if p13.isServer and not runService:IsStudio() and p13.scriptTimes then
+	if p1.isServer and not runService:IsStudio() and p1.scriptTimes then
 		assert(t.metadata, "Metadata is never nil")
 		local entrypoint = t.metadata.entrypoint
-		local var17 = "FullBody"
+		local var1 = "FullBody"
 		
-		if p13.assetTypeEnum then
-			var17 = p13.assetTypeEnum.Name
+		if p1.assetTypeEnum then
+			var1 = p1.assetTypeEnum.Name
 		elseif entrypoint and type(entrypoint) == "string" and #entrypoint > 0 then
-			var17 = entrypoint
+			var1 = entrypoint
 		end
-		UGCValidationService:ReportUGCValidationTelemetry(var17, p13.scriptTimes)
+		UGCValidationService:ReportUGCValidationTelemetry(var1, p1.scriptTimes)
 	end
 end
 

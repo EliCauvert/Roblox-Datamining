@@ -22,97 +22,97 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), usePreferredInputModule (ref), useClippingRectModule (ref), reactOtterModule (ref), otterModule (ref), controlStateModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), stateLayerAffordanceModule (ref), visibilityModule (ref), scrimModule (ref)
-	local var17 = withDefaultsModule(p0, t)
-	local var18 = useTokensModule()
-	local var19, var20 = reactModule.useState(false)
-	local var21, var22 = reactModule.useState(false)
-	local var23, var24 = reactModule.useState(false)
-	local var25, var26 = reactModule.useState(false)
-	local var27, var28 = reactModule.useState(false)
-	local forceHovered = var17.forceHovered or (var23 or (var25 or var27))
-	local forcePreferredInput = var17.forcePreferredInput or usePreferredInputModule()
-	local var31 = reactModule.useRef(nil)
-	local var32 = useClippingRectModule(var31)
-	local var33, var34 = reactModule.useBinding(0)
-	local var35 = reactOtterModule.useMotor(0, function(p2)
-		-- upvalues: var31 (ref)
-		local current = var31.current
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3, var4 = reactModule.useState(false)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9, var10 = reactModule.useState(false)
+	local var11, var12 = reactModule.useState(false)
+	local forceHovered = var1.forceHovered or (var7 or (var9 or var11))
+	local forcePreferredInput = var1.forcePreferredInput or usePreferredInputModule()
+	local var13 = reactModule.useRef(nil)
+	local var14 = useClippingRectModule(var13)
+	local var15, var16 = reactModule.useBinding(0)
+	local var17 = reactOtterModule.useMotor(0, function(p1)
+		-- upvalues: var13 (ref)
+		local current = var13.current
 		
 		if current then
-			current.CanvasPosition = Vector2.new(p2, 0)
+			current.CanvasPosition = Vector2.new(p1, 0)
 			
 			return
 		end
 	end)
-	local var36 = reactModule.useCallback(function(p3)
-		-- upvalues: var34 (ref), var22 (ref), var20 (ref)
-		var34(p3.AbsoluteWindowSize.Y)
+	local var18 = reactModule.useCallback(function(p1)
+		-- upvalues: var16 (ref), var6 (ref), var4 (ref)
+		var16(p1.AbsoluteWindowSize.Y)
 		
-		if p3.AbsoluteWindowSize.X == 0 then
+		if p1.AbsoluteWindowSize.X == 0 then
 			return
 		end
-		var22(p3.CanvasPosition.X > 0)
-		var20(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
+		var6(p1.CanvasPosition.X > 0)
+		var4(p1.AbsoluteWindowSize.X + p1.CanvasPosition.X < p1.AbsoluteCanvasSize.X - 1)
 	end, {})
-	local var37 = reactModule.useCallback(function(p4)
-		-- upvalues: var31 (ref), var35 (ref), otterModule (copy), var18 (ref)
-		local current = var31.current
+	local var19 = reactModule.useCallback(function(p1)
+		-- upvalues: var13 (ref), var17 (ref), otterModule (copy), var2 (ref)
+		local current = var13.current
 		
 		if not current then return end
 		local maxValue = math.max(current.AbsoluteCanvasSize.X - current.AbsoluteWindowSize.X, 0)
-		local var44 = current.AbsoluteWindowSize.X * 0.2
-		local var45 = current.CanvasPosition.X + p4 * (current.AbsoluteWindowSize.X * 0.8)
+		local var1 = current.AbsoluteWindowSize.X * 0.2
+		local var2 = current.CanvasPosition.X + p1 * (current.AbsoluteWindowSize.X * 0.8)
 		
-		if p4 > 0 and maxValue - var45 <= var44 then
-			var45 = maxValue
-		elseif p4 < 0 and var45 <= var44 then
-			var45 = 0
+		if p1 > 0 and maxValue - var2 <= var1 then
+			var2 = maxValue
+		elseif p1 < 0 and var2 <= var1 then
+			var2 = 0
 		end
-		var35(otterModule.ease(math.clamp(var45, 0, maxValue), {
-			duration = var18.Time.Time_200,
+		var17(otterModule.ease(math.clamp(var2, 0, maxValue), {
+			duration = var2.Time.Time_200,
 			easingStyle = Enum.EasingStyle.Quad,
 			startingValue = current.CanvasPosition.X
 		}))
-	end, { var18 })
-	local var38 = reactModule.useCallback(function()
-		-- upvalues: var37 (ref)
-		var37(-1)
-	end, { var37 })
-	local var39 = reactModule.useCallback(function()
-		-- upvalues: var37 (ref)
-		var37(1)
-	end, { var37 })
-	local var40 = reactModule.useCallback(function(p5)
-		-- upvalues: var24 (ref), controlStateModule (copy)
-		var24(if p5 ~= controlStateModule.Hover then p5 == controlStateModule.Pressed else true)
+	end, { var2 })
+	local var20 = reactModule.useCallback(function()
+		-- upvalues: var19 (ref)
+		var19(-1)
+	end, { var19 })
+	local var21 = reactModule.useCallback(function()
+		-- upvalues: var19 (ref)
+		var19(1)
+	end, { var19 })
+	local var22 = reactModule.useCallback(function(p1)
+		-- upvalues: var8 (ref), controlStateModule (copy)
+		var8(if p1 ~= controlStateModule.Hover then p1 == controlStateModule.Pressed else true)
 	end, {})
-	local var41 = reactModule.useCallback(function(p6)
-		-- upvalues: var26 (ref), controlStateModule (copy)
-		var26(if p6 ~= controlStateModule.Hover then p6 == controlStateModule.Pressed else true)
+	local var1 = reactModule.useCallback(function(p1)
+		-- upvalues: var10 (ref), controlStateModule (copy)
+		var10(if p1 ~= controlStateModule.Hover then p1 == controlStateModule.Pressed else true)
 	end, {})
-	local var42 = reactModule.useCallback(function(p7)
-		-- upvalues: var28 (ref), controlStateModule (copy)
-		var28(if p7 ~= controlStateModule.Hover then p7 == controlStateModule.Pressed else true)
+	local var1 = reactModule.useCallback(function(p1)
+		-- upvalues: var12 (ref), controlStateModule (copy)
+		var12(if p1 ~= controlStateModule.Hover then p1 == controlStateModule.Pressed else true)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var31 (ref), var36 (ref)
-		if var31.current then
-			var36(var31.current)
+		-- upvalues: var13 (ref), var18 (ref)
+		if var13.current then
+			var18(var13.current)
 		end
 	end, {})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var17, { tag = "size-full-0 auto-y", ref = p1 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "size-full-0 auto-y", ref = p2 }), {
 		Scroll = reactModule.createElement(scrollViewModule, {
 			tag = "size-full-0 auto-y",
 			ClipsDescendants = false,
-			onStateChanged = var40,
+			onStateChanged = var22,
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			onCanvasPositionChanged = var36,
-			onAbsoluteCanvasSizeChanged = var36,
-			onAbsoluteWindowSizeChanged = var36,
-			scrollingFrameRef = var31,
+			onCanvasPositionChanged = var18,
+			onAbsoluteCanvasSizeChanged = var18,
+			onAbsoluteWindowSizeChanged = var18,
+			scrollingFrameRef = var13,
 			selection = { Selectable = false },
 			layout = { FillDirection = Enum.FillDirection.Horizontal },
 			scroll = {
@@ -122,43 +122,43 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 				ScrollingDirection = Enum.ScrollingDirection.X,
 				scrollBarVisibility = visibilityModule.None
 			},
-			testId = `{var17.testId}--scroll`
-		}, var17.children),
+			testId = `{var1.testId}--scroll`
+		}, var1.children),
 		ScrimLayer = reactModule.createElement(viewModule, {
 			tag = "row flex-between",
 			ZIndex = 2,
-			Position = var32:map(function(p8)
-				return UDim2.fromOffset(p8.Min.X, 0)
+			Position = var14:map(function(p1)
+				return UDim2.fromOffset(p1.Min.X, 0)
 			end),
-			Size = var32:map(function(p9)
-				-- upvalues: var17 (ref)
-				return UDim2.new(0, p9.Max.X - p9.Min.X, 1, -var17.scrimBottomInset)
+			Size = var14:map(function(p1)
+				-- upvalues: var1 (ref)
+				return UDim2.new(0, p1.Max.X - p1.Min.X, 1, -var1.scrimBottomInset)
 			end),
-			testId = `{var17.testId}--scrim-layer`
+			testId = `{var1.testId}--scrim-layer`
 		}, {
 			ScrimStart = reactModule.createElement(scrimModule, {
 				LayoutOrder = 1,
-				size = var17.size,
-				rowHeight = var33,
+				size = var1.size,
+				rowHeight = var15,
 				alignment = Enum.HorizontalAlignment.Left,
 				isHovered = forceHovered,
 				preferredInput = forcePreferredInput,
-				isVisible = var17.forceScrimsVisible or var21,
-				onActivated = var38,
-				onStateChanged = var41,
-				testId = `{var17.testId}--scrim-start`
+				isVisible = var1.forceScrimsVisible or var5,
+				onActivated = var20,
+				onStateChanged = var1,
+				testId = `{var1.testId}--scrim-start`
 			}),
 			ScrimEnd = reactModule.createElement(scrimModule, {
 				LayoutOrder = 2,
-				size = var17.size,
-				rowHeight = var33,
+				size = var1.size,
+				rowHeight = var15,
 				alignment = Enum.HorizontalAlignment.Right,
 				isHovered = forceHovered,
 				preferredInput = forcePreferredInput,
-				isVisible = var17.forceScrimsVisible or var19,
-				onActivated = var39,
-				onStateChanged = var42,
-				testId = `{var17.testId}--scrim-end`
+				isVisible = var1.forceScrimsVisible or var3,
+				onActivated = var21,
+				onStateChanged = var1,
+				testId = `{var1.testId}--scrim-end`
 			})
 		})
 	})

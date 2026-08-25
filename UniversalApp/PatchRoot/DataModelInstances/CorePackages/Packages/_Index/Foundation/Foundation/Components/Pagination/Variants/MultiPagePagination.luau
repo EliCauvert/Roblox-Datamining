@@ -20,104 +20,104 @@ local t = {
 	size = paginationSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), paginationSlotsUtilsModule (ref), usePaginationNavModule (ref), usePaginationAnimatedHighlightModule (ref), paginationSizeModule (ref), chipSizeModule (ref), useChipVariantsModule (ref), chipVariantModule (ref), ellipsisModule (ref), pageNumberSlotModule (ref), viewModule (ref), paginationUtilsModule (ref)
-	local var16 = withDefaultsModule(p0, t)
-	local size = var16.size
-	local var17 = useTokensModule()
-	local var18 = var16.page <= 1
-	local var19 = var16.count <= var16.page
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: paginationSlotsUtilsModule (copy), var16 (ref)
-		return paginationSlotsUtilsModule.getVisiblePageSlots(var16.page, var16.count)
-	end, { var16.page, var16.count })
-	local var21, var22 = reactModule.useState(nil)
-	local var23 = usePaginationNavModule(var16, {
-		hasFirstLastButtons = var16.hasFirstLastButtons,
-		currentPage = var16.page,
-		pageSlots = var20,
+	local var1 = withDefaultsModule(p1, t)
+	local size = var1.size
+	local var2 = useTokensModule()
+	local var3 = var1.page <= 1
+	local var4 = var1.count <= var1.page
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: paginationSlotsUtilsModule (copy), var1 (ref)
+		return paginationSlotsUtilsModule.getVisiblePageSlots(var1.page, var1.count)
+	end, { var1.page, var1.count })
+	local var6, var7 = reactModule.useState(nil)
+	local var8 = usePaginationNavModule(var1, {
+		hasFirstLastButtons = var1.hasFirstLastButtons,
+		currentPage = var1.page,
+		pageSlots = var5,
 		disabledState = {
-			isBackDisabled = var18,
-			isFirstDisabled = var18,
-			isForwardDisabled = var19,
-			isLastDisabled = var19
+			isBackDisabled = var3,
+			isFirstDisabled = var3,
+			isForwardDisabled = var4,
+			isLastDisabled = var4
 		}
-	}, var22)
-	reactModule.useImperativeHandle(p1, function()
-		-- upvalues: var21 (ref)
-		return var21
-	end, { var21 })
-	local var24 = reactModule.useRef(nil)
-	local var25 = reactModule.useMemo(function()
-		-- upvalues: var20 (ref), paginationSlotsUtilsModule (copy), var23 (ref)
+	}, var7)
+	reactModule.useImperativeHandle(p2, function()
+		-- upvalues: var6 (ref)
+		return var6
+	end, { var6 })
+	local var9 = reactModule.useRef(nil)
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), paginationSlotsUtilsModule (copy), var8 (ref)
 		local t = {}
 		
-		for i, v in var20 do
+		for i, v in var5 do
 			if v ~= "ellipsis" then
 				local pageSlotId = paginationSlotsUtilsModule.getPageSlotId(v)
-				t[pageSlotId] = var23.selection.getSlotBindings(pageSlotId).ref
+				t[pageSlotId] = var8.selection.getSlotBindings(pageSlotId).ref
 			end
 		end
 		return t
-	end, { var20, var23.selection })
-	local pageSlotId = paginationSlotsUtilsModule.getPageSlotId(var16.page)
-	local var27 = usePaginationAnimatedHighlightModule(pageSlotId, var24, var25, size, var20)
+	end, { var5, var8.selection })
+	local pageSlotId = paginationSlotsUtilsModule.getPageSlotId(var1.page)
+	local var1 = usePaginationAnimatedHighlightModule(pageSlotId, var9, var10, size, var5)
 	
-	return var23.createLayout(reactModule.createElement(viewModule, {
+	return var8.createLayout(reactModule.createElement(viewModule, {
 		LayoutOrder = 2,
 		tag = "auto-xy",
-		testId = `{var16.testId}--pages`,
-		ref = var24
+		testId = `{var1.testId}--pages`,
+		ref = var9
 	}, {
-		ActivePageHighlight = if not paginationUtilsModule.needsWidePageSlot(var16.page) then reactModule.createElement(viewModule, {
+		ActivePageHighlight = if not paginationUtilsModule.needsWidePageSlot(var1.page) then reactModule.createElement(viewModule, {
 			Active = false,
 			tag = "radius-circle clip",
 			ZIndex = 1,
-			backgroundStyle = useChipVariantsModule(var17, if size == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium, chipVariantModule.Utility, true, false, false).chip.backgroundStyle,
-			Size = reactModule.joinBindings({ var27.highlightWidth, var27.activeItemHeight }):map(function(p2)
-				return UDim2.fromOffset(p2[1], p2[2])
+			backgroundStyle = useChipVariantsModule(var2, if size == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium, chipVariantModule.Utility, true, false, false).chip.backgroundStyle,
+			Size = reactModule.joinBindings({ var1.highlightWidth, var1.activeItemHeight }):map(function(p1)
+				return UDim2.fromOffset(p1[1], p1[2])
 			end),
-			Position = var27.highlightPosition:map(function(p3)
-				return UDim2.fromOffset(p3, 0)
+			Position = var1.highlightPosition:map(function(p1)
+				return UDim2.fromOffset(p1, 0)
 			end),
-			Visible = var27.isVisible,
+			Visible = var1.isVisible,
 			selection = { Selectable = false },
-			testId = `{var16.testId}--active-page-highlight`
+			testId = `{var1.testId}--active-page-highlight`
 		}) else nil,
 		PagesRow = reactModule.createElement(viewModule, {
 			tag = "row gap-xsmall auto-xy",
 			LayoutOrder = 1,
 			ZIndex = 2,
 			onAbsoluteSizeChanged = reactModule.useCallback(function()
-				-- upvalues: var25 (ref), pageSlotId (ref), var24 (ref), var27 (ref)
-				local var30 = var25[pageSlotId]
+				-- upvalues: var10 (ref), pageSlotId (ref), var9 (ref), var1 (ref)
+				local var1 = var10[pageSlotId]
 				
-				if var30 and var30.current and var24.current then
-					var27.updateHighlight(var30, true)
+				if var1 and var1.current and var9.current then
+					var1.updateHighlight(var1, true)
 				end
-			end, { pageSlotId, var25, var27.updateHighlight })
+			end, { pageSlotId, var10, var1.updateHighlight })
 		}, reactModule.useMemo(function()
-			-- upvalues: var20 (ref), reactModule (copy), ellipsisModule (copy), size (ref), var16 (ref), paginationSlotsUtilsModule (copy), var23 (ref), pageNumberSlotModule (copy)
+			-- upvalues: var5 (ref), reactModule (copy), ellipsisModule (copy), size (ref), var1 (ref), paginationSlotsUtilsModule (copy), var8 (ref), pageNumberSlotModule (copy)
 			local t = {}
 			
-			for i, v in var20 do
+			for i, v in var5 do
 				if v == "ellipsis" then
 					t[if i == 2 then "ellipsis-leading" else "ellipsis-trailing"] = reactModule.createElement(ellipsisModule, {
 						slotSize = size,
 						LayoutOrder = i,
-						testId = `{var16.testId}--ellipsis-{i}`
+						testId = `{var1.testId}--ellipsis-{i}`
 					})
 				else
 					local pageSlotId = paginationSlotsUtilsModule.getPageSlotId(v)
-					local slotBindings = var23.selection.getSlotBindings(pageSlotId)
+					local slotBindings = var8.selection.getSlotBindings(pageSlotId)
 					t[`Page-{v}`] = reactModule.createElement(pageNumberSlotModule, {
 						slotSize = size,
-						isChecked = v == var16.page,
+						isChecked = v == var1.page,
 						LayoutOrder = i,
-						onPageActivated = var16.onActivated,
+						onPageActivated = var1.onActivated,
 						page = v,
-						testId = `{var16.testId}--page-{v}`,
-						ref = var23.selection.getSlotRef(pageSlotId),
+						testId = `{var1.testId}--page-{v}`,
+						ref = var8.selection.getSlotRef(pageSlotId),
 						Selectable = slotBindings.Selectable,
 						NextSelectionLeft = slotBindings.NextSelectionLeft,
 						NextSelectionRight = slotBindings.NextSelectionRight,
@@ -128,7 +128,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 			end
 			return t
 		end, {
-			var20, var16.page, size, var16.testId, var16.onActivated, var23.selection
+			var5, var1.page, size, var1.testId, var1.onActivated, var8.selection
 		}))
 	}), nil)
 end))

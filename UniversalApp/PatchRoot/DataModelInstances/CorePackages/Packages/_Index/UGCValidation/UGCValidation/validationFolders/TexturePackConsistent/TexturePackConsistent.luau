@@ -25,24 +25,24 @@ return {
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: getFFlagUGCValidateTexturePackModule (ref), t_1 (ref), t (ref), validationEnumsModule (ref), getFFlagUGCValidateTexturePackOnRCCOnlyModule (ref), texturePackUtilsModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref)
 		if not getFFlagUGCValidateTexturePackModule() then return end
-		local rootInstance = p1.rootInstance
-		local source = p1.consumerConfig.source
+		local rootInstance = p2.rootInstance
+		local source = p2.consumerConfig.source
 		
 		if t_1[source] == true then return end
-		local var9 = t[source] == true
-		local uploadCategory = p1.uploadCategory
-		local var10 = if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true
+		local var1 = t[source] == true
+		local uploadCategory = p2.uploadCategory
+		local var2 = if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true
 		
 		if not getFFlagUGCValidateTexturePackOnRCCOnlyModule() then
-			for i, v in texturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(rootInstance, var10) do
-				p0:fail(errorSourceStringsModule.Keys.TexturePackInvalidURL, { SurfaceAppearanceName = v:GetFullName() }, v)
+			for i, v in texturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(rootInstance, var2) do
+				p1:fail(errorSourceStringsModule.Keys.TexturePackInvalidURL, { SurfaceAppearanceName = v:GetFullName() }, v)
 			end
-		elseif var9 then
-			for i, v in texturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(rootInstance, var10) do
-				p0:fail(errorSourceStringsModule.Keys.TexturePackInvalidURL, { SurfaceAppearanceName = v:GetFullName() }, v)
+		elseif var1 then
+			for i, v in texturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(rootInstance, var2) do
+				p1:fail(errorSourceStringsModule.Keys.TexturePackInvalidURL, { SurfaceAppearanceName = v:GetFullName() }, v)
 			end
 		end
 		for i, v in texturePackUtilsModule.findSurfaceAppearancesWithTexturePacks(rootInstance) do
@@ -52,12 +52,12 @@ return {
 			end)
 			
 			if not ok then
-				if var9 then
-					p0:forceError(`Failed to download TexturePack for SurfaceAppearance '{v:GetFullName()}'.`)
+				if var1 then
+					p1:forceError(`Failed to download TexturePack for SurfaceAppearance '{v:GetFullName()}'.`)
 				end
-				p0:fail(errorSourceStringsModule.Keys.TexturePack_DownloadFailed, { SurfaceAppearanceName = v:GetFullName() }, v)
+				p1:fail(errorSourceStringsModule.Keys.TexturePack_DownloadFailed, { SurfaceAppearanceName = v:GetFullName() }, v)
 			elseif not status then
-				p0:fail(errorSourceStringsModule.Keys.TexturePack_Mismatch, { SurfaceAppearanceName = v:GetFullName() }, v)
+				p1:fail(errorSourceStringsModule.Keys.TexturePack_Mismatch, { SurfaceAppearanceName = v:GetFullName() }, v)
 			end
 		end
 	end

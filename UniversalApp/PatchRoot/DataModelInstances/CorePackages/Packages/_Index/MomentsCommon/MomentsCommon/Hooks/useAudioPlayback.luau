@@ -22,61 +22,61 @@ local t = {
 	playbackRegion = NumberRange.new(0, 1e999)
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useToggleStateModule (ref), useState (ref), useCallback (ref), useMemo (ref), useEffect (ref), localPlayer (ref)
-	local var6 = cryoModule.Dictionary.union(t, p2 or {})
-	local var7 = useRef(nil)
-	local var8 = useToggleStateModule(var6.autoplay)
-	local var9 = useToggleStateModule(false)
-	local var10, var11 = useState(0)
-	local var12, var13 = useState(0)
-	local var14, var15 = useState(0)
-	local var16, var17 = useState(0)
-	local var18 = useCallback(function(p3)
-		-- upvalues: var7 (ref), var6 (ref), var10 (ref)
-		local current = var7.current
+	local var1 = cryoModule.Dictionary.union(t, p3 or {})
+	local var2 = useRef(nil)
+	local var3 = useToggleStateModule(var1.autoplay)
+	local var4 = useToggleStateModule(false)
+	local var5, var6 = useState(0)
+	local var7, var8 = useState(0)
+	local var9, var10 = useState(0)
+	local var11, var12 = useState(0)
+	local var13 = useCallback(function(p1)
+		-- upvalues: var2 (ref), var1 (ref), var5 (ref)
+		local current = var2.current
 		
 		if current then
-			current.TimePosition = math.clamp(p3 + var6.playbackRegion.Min, 0, var10)
+			current.TimePosition = math.clamp(p1 + var1.playbackRegion.Min, 0, var5)
 		end
-	end, { var10, var6.playbackRegion })
-	local var19 = useCallback(function()
-		-- upvalues: p0 (ref), var7 (ref), var17 (ref), var6 (ref), var13 (ref)
-		if not p0 then return end
-		local current = var7.current
+	end, { var5, var1.playbackRegion })
+	local var14 = useCallback(function()
+		-- upvalues: p1 (ref), var2 (ref), var12 (ref), var1 (ref), var8 (ref)
+		if not p1 then return end
+		local current = var2.current
 		
 		if current then
-			var17(current.TimePosition - var6.playbackRegion.Min)
-			var13(current.TimePosition)
+			var12(current.TimePosition - var1.playbackRegion.Min)
+			var8(current.TimePosition)
 		end
-	end, { p0, p1, var6.playbackRegion })
-	p1 = useMemo(function()
-		-- upvalues: p1 (write)
-		return if p1 then `rbxassetid://{p1}` else nil
-	end, { p1 })
+	end, { p1, p2, var1.playbackRegion })
+	p2 = useMemo(function()
+		-- upvalues: p2 (write)
+		return if p2 then `rbxassetid://{p2}` else nil
+	end, { p2 })
 	useEffect(function()
-		-- upvalues: p1 (write), var6 (ref), var11 (ref), var7 (ref), localPlayer (copy)
-		if p1 then
+		-- upvalues: p2 (write), var1 (ref), var6 (ref), var2 (ref), localPlayer (copy)
+		if p2 then
 			local folder = Instance.new("Folder")
-			folder.Name = `AudioPlayback_{p1}`
+			folder.Name = `AudioPlayback_{p2}`
 			local audioPlayer = Instance.new("AudioPlayer")
-			audioPlayer.Asset = p1
-			audioPlayer.PlaybackRegion = var6.playbackRegion
-			audioPlayer.Looping = var6.looping or false
+			audioPlayer.Asset = p2
+			audioPlayer.PlaybackRegion = var1.playbackRegion
+			audioPlayer.Looping = var1.looping or false
 			audioPlayer.Parent = folder
 			audioPlayer.Volume = 0.2
 			audioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function()
-				-- upvalues: var11 (copy), audioPlayer (ref)
-				var11(audioPlayer.TimeLength)
+				-- upvalues: var6 (copy), audioPlayer (ref)
+				var6(audioPlayer.TimeLength)
 			end)
-			var11(audioPlayer.TimeLength)
+			var6(audioPlayer.TimeLength)
 			local audioDeviceOutput = Instance.new("AudioDeviceOutput")
 			audioDeviceOutput.Parent = folder
 			local wire = Instance.new("Wire")
 			wire.SourceInstance = audioPlayer
 			wire.TargetInstance = audioDeviceOutput
 			wire.Parent = folder
-			var7.current = audioPlayer
+			var2.current = audioPlayer
 			task.spawn(function()
 				-- upvalues: folder (ref), localPlayer (copy)
 				folder.Parent = localPlayer:WaitForChild("PlayerGui")
@@ -87,26 +87,26 @@ return function(p0, p1, p2)
 				folder:Destroy()
 			end
 		end
-	end, { p1 })
+	end, { p2 })
 	useEffect(function()
-		-- upvalues: var7 (ref), var6 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var1 (ref)
+		local current = var2.current
 		
 		if current then
-			current.PlaybackRegion = var6.playbackRegion
+			current.PlaybackRegion = var1.playbackRegion
 			current.TimePosition = 0
 		end
-	end, { var6.playbackRegion })
+	end, { var1.playbackRegion })
 	useEffect(function()
-		-- upvalues: var6 (ref), var15 (ref), var10 (ref)
-		var15(math.min(var6.playbackRegion.Max - var6.playbackRegion.Min, var10))
-	end, { var10, var6.playbackRegion })
+		-- upvalues: var1 (ref), var10 (ref), var5 (ref)
+		var10(math.min(var1.playbackRegion.Max - var1.playbackRegion.Min, var5))
+	end, { var5, var1.playbackRegion })
 	useEffect(function()
-		-- upvalues: var7 (ref), var8 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var3 (ref)
+		local current = var2.current
 		
 		if current then
-			if var8.enabled then
+			if var3.enabled then
 				current.PlaybackSpeed = 1
 				
 				if current.IsPlaying then
@@ -124,31 +124,31 @@ return function(p0, p1, p2)
 				end
 			end
 		end
-	end, { p1, var8.enabled })
+	end, { p2, var3.enabled })
 	useEffect(function()
-		-- upvalues: var7 (ref), var9 (ref), var8 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var4 (ref), var3 (ref)
+		local current = var2.current
 		
 		if current then
-			if var9.enabled or not var8.enabled then
+			if var4.enabled or not var3.enabled then
 				current.Volume = 0
 				
 				return
 			end
 			current.Volume = 0.2
 		end
-	end, { var9.enabled, var8.enabled })
-	local var20 = useCallback(function()
-		-- upvalues: var8 (ref)
-		var8.disable()
+	end, { var4.enabled, var3.enabled })
+	local var1 = useCallback(function()
+		-- upvalues: var3 (ref)
+		var3.disable()
 	end, {})
 	useEffect(function()
-		-- upvalues: var7 (ref), var19 (ref), var20 (ref)
+		-- upvalues: var2 (ref), var14 (ref), var1 (ref)
 		local t = {}
 		
-		if var7.current then
-			table.insert(t, game:GetService("RunService").RenderStepped:Connect(var19))
-			table.insert(t, var7.current.Ended:Connect(var20))
+		if var2.current then
+			table.insert(t, game:GetService("RunService").RenderStepped:Connect(var14))
+			table.insert(t, var2.current.Ended:Connect(var1))
 		end
 		return function()
 			-- upvalues: t (ref)
@@ -156,28 +156,28 @@ return function(p0, p1, p2)
 				v:Disconnect()
 			end
 		end
-	end, { var19, var20 })
+	end, { var14, var1 })
 	
 	return {
 		timeline = {
-			duration = var14,
-			elapsed = var16,
-			seek = var18,
-			timeLength = var10,
-			timePosition = var12
+			duration = var9,
+			elapsed = var11,
+			seek = var13,
+			timeLength = var5,
+			timePosition = var7
 		},
 		playback = {
-			isPlaying = var8.enabled,
-			pause = var8.disable,
-			play = var8.enable,
-			toggle = var8.toggle
+			isPlaying = var3.enabled,
+			pause = var3.disable,
+			play = var3.enable,
+			toggle = var3.toggle
 		},
 		volume = {
-			isMuted = var9.enabled,
-			mute = var9.enable,
-			unmute = var9.disable,
-			toggle = var9.toggle
+			isMuted = var4.enabled,
+			mute = var4.enable,
+			unmute = var4.disable,
+			toggle = var4.toggle
 		},
-		ref = var7
+		ref = var2
 	}
 end

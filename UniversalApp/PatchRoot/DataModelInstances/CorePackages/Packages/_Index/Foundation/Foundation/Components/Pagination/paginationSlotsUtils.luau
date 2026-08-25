@@ -8,8 +8,8 @@ local t = {
 
 return {
 	NAV_SLOT_IDS = t,
-	getPageSlotId = function(p0)
-		return `page-{p0}`
+	getPageSlotId = function(p1)
+		return `page-{p1}`
 	end,
 	getPaginationSelectableSlotOrder = function(p1)
 		-- upvalues: t (ref), paginationDirectionModule (ref)
@@ -36,32 +36,32 @@ return {
 		end
 		return t_1
 	end,
-	getVisiblePageSlots = function(p2, p3)
-		if p3 <= 7 then
+	getVisiblePageSlots = function(p1, p2)
+		if p2 <= 7 then
 			local t = {}
 			
-			for i = 1, p3 do
+			for i = 1, p2 do
 				table.insert(t, i)
 			end
 			return t
 		else
 			local t = {}
 			
-			if p2 <= 4 then
+			if p1 <= 4 then
 				table.insert(t, 1)
 				table.insert(t, 2)
 				table.insert(t, 3)
 				table.insert(t, 4)
 				table.insert(t, 5)
 				table.insert(t, "ellipsis")
-				table.insert(t, p3)
+				table.insert(t, p2)
 				
 				return t
-			elseif p3 - 4 + 1 <= p2 then
+			elseif p2 - 4 + 1 <= p1 then
 				table.insert(t, 1)
 				table.insert(t, "ellipsis")
 				
-				for i_1 = p3 - 4, p3 do
+				for i_1 = p2 - 4, p2 do
 					table.insert(t, i_1)
 				end
 				return t
@@ -69,11 +69,11 @@ return {
 				table.insert(t, 1)
 				table.insert(t, "ellipsis")
 				
-				for i_2 = p2 - 1, p2 + 1 do
+				for i_2 = p1 - 1, p1 + 1 do
 					table.insert(t, i_2)
 				end
 				table.insert(t, "ellipsis")
-				table.insert(t, p3)
+				table.insert(t, p2)
 				
 				return t
 			end

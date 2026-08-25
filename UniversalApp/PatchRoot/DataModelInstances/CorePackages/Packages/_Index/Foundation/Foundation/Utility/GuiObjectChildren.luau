@@ -6,58 +6,58 @@ local paddingModule = require(foundation.Components.Padding)
 local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
 local _ = require(foundation.Components.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), aspectRatioModule (ref), cornerRadiusModule (ref), getTestIdTagModule (ref), paddingModule (ref)
-	local testId = p0.testId
+	local testId = p1.testId
 	
 	return {
-		Children = reactModule.createElement(reactModule.Fragment, {}, p0.children),
-		AspectRatio = if p0.aspectRatio ~= nil then nil else reactModule.createElement(aspectRatioModule, {
-			value = p0.aspectRatio,
+		Children = reactModule.createElement(reactModule.Fragment, {}, p1.children),
+		AspectRatio = if p1.aspectRatio ~= nil then nil else reactModule.createElement(aspectRatioModule, {
+			value = p1.aspectRatio,
 			testId = if testId then `{testId}--aspect-ratio` else nil
 		}),
-		CornerRadius = if p0.cornerRadius ~= nil then nil else reactModule.createElement(cornerRadiusModule, {
-			value = p0.cornerRadius,
+		CornerRadius = if p1.cornerRadius ~= nil then nil else reactModule.createElement(cornerRadiusModule, {
+			value = p1.cornerRadius,
 			testId = if testId then `{testId}--corner-radius` else nil
 		}),
-		FlexItem = if p0.flexItem ~= nil then nil else reactModule.createElement("UIFlexItem", {
-			FlexMode = p0.flexItem.FlexMode,
-			GrowRatio = p0.flexItem.GrowRatio,
-			ShrinkRatio = p0.flexItem.ShrinkRatio,
-			ItemLineAlignment = p0.flexItem.ItemLineAlignment,
+		FlexItem = if p1.flexItem ~= nil then nil else reactModule.createElement("UIFlexItem", {
+			FlexMode = p1.flexItem.FlexMode,
+			GrowRatio = p1.flexItem.GrowRatio,
+			ShrinkRatio = p1.flexItem.ShrinkRatio,
+			ItemLineAlignment = p1.flexItem.ItemLineAlignment,
 			[reactModule.Tag] = getTestIdTagModule(testId, "flex-item")
 		}),
-		ListLayout = if p0.layout == nil or p0.layout.FillDirection == nil then nil else reactModule.createElement("UIListLayout", {
-			FillDirection = p0.layout.FillDirection,
-			ItemLineAlignment = p0.layout.ItemLineAlignment,
-			HorizontalAlignment = p0.layout.HorizontalAlignment,
-			HorizontalFlex = p0.layout.HorizontalFlex,
-			VerticalAlignment = p0.layout.VerticalAlignment,
-			VerticalFlex = p0.layout.VerticalFlex,
-			Padding = p0.layout.Padding,
-			SortOrder = p0.layout.SortOrder,
-			Wraps = p0.layout.Wraps,
+		ListLayout = if p1.layout == nil or p1.layout.FillDirection == nil then nil else reactModule.createElement("UIListLayout", {
+			FillDirection = p1.layout.FillDirection,
+			ItemLineAlignment = p1.layout.ItemLineAlignment,
+			HorizontalAlignment = p1.layout.HorizontalAlignment,
+			HorizontalFlex = p1.layout.HorizontalFlex,
+			VerticalAlignment = p1.layout.VerticalAlignment,
+			VerticalFlex = p1.layout.VerticalFlex,
+			Padding = p1.layout.Padding,
+			SortOrder = p1.layout.SortOrder,
+			Wraps = p1.layout.Wraps,
 			[reactModule.Tag] = getTestIdTagModule(testId, "list-layout")
 		}),
-		SizeConstraint = if p0.sizeConstraint ~= nil then nil else reactModule.createElement("UISizeConstraint", {
-			MaxSize = p0.sizeConstraint.MaxSize,
-			MinSize = p0.sizeConstraint.MinSize,
+		SizeConstraint = if p1.sizeConstraint ~= nil then nil else reactModule.createElement("UISizeConstraint", {
+			MaxSize = p1.sizeConstraint.MaxSize,
+			MinSize = p1.sizeConstraint.MinSize,
 			[reactModule.Tag] = getTestIdTagModule(testId, "size-constraint")
 		}),
-		Padding = if p0.padding ~= nil then nil else reactModule.createElement(paddingModule, {
-			value = p0.padding,
+		Padding = if p1.padding ~= nil then nil else reactModule.createElement(paddingModule, {
+			value = p1.padding,
 			testId = if testId then `{testId}--padding` else nil
 		}),
-		Scale = if p0.scale ~= nil then nil else reactModule.createElement("UIScale", {
-			Scale = p0.scale,
+		Scale = if p1.scale ~= nil then nil else reactModule.createElement("UIScale", {
+			Scale = p1.scale,
 			[reactModule.Tag] = getTestIdTagModule(testId, "scale")
 		}),
-		Stroke = if p0.stroke ~= nil then nil else reactModule.createElement("UIStroke", {
-			Color = p0.stroke.Color,
-			Thickness = p0.stroke.Thickness,
-			Transparency = p0.stroke.Transparency,
-			LineJoinMode = p0.stroke.LineJoinMode,
-			BorderStrokePosition = p0.stroke.BorderStrokePosition,
+		Stroke = if p1.stroke ~= nil then nil else reactModule.createElement("UIStroke", {
+			Color = p1.stroke.Color,
+			Thickness = p1.stroke.Thickness,
+			Transparency = p1.stroke.Transparency,
+			LineJoinMode = p1.stroke.LineJoinMode,
+			BorderStrokePosition = p1.stroke.BorderStrokePosition,
 			[reactModule.Tag] = getTestIdTagModule(testId, "stroke")
 		})
 	}

@@ -88,22 +88,22 @@ local t = {
 	[110] = "MissingCicRoleset"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: APIUtilModule (ref), httpService (ref), t (ref)
-	local var3, var4 = APIUtilModule.requestAndRetryGet(`https://itemconfiguration.{APIUtilModule.getBaseDomain()}/v1/collectibles/check-item-upload-access?targetType=1&groupId={p0 or ""}`)
+	local var1, var2 = APIUtilModule.requestAndRetryGet(`https://itemconfiguration.{APIUtilModule.getBaseDomain()}/v1/collectibles/check-item-upload-access?targetType=1&groupId={p1 or ""}`)
 	
-	if not var3 then
-		return { type = "error", message = var4 }
+	if not var1 then
+		return { type = "error", message = var2 }
 	end
-	local var5 = httpService:JSONDecode(var4)
+	local var3 = httpService:JSONDecode(var2)
 	
-	if var5.isAllowed then
+	if var3.isAllowed then
 		return { type = "allowed" }
 	end
-	assert(var5.isAllowed == false, "Luau")
+	assert(var3.isAllowed == false, "Luau")
 	
 	return {
 		type = "notAllowed",
-		denyReason = t[var5.deniedReason] or var5.deniedReason
+		denyReason = t[var3.deniedReason] or var3.deniedReason
 	}
 end
