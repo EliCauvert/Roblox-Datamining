@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "eb8bdf73-1ac6-7c78-c0ee-3e8582bb4d68")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "178e0e5f-51ff-1d93-7228-c5066f1e93d8")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -616,6 +616,7 @@
             getPaymentsUrl: () => "/dashboard/payments",
             getServerManagementUrl: e => "/dashboard/creations/experiences/".concat(e, "/server-management"),
             getClientSessionsUrl: e => "/dashboard/creations/experiences/".concat(e, "/client-sessions"),
+            getClientSessionDetailsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/client-sessions/").concat(a),
             getPlayerSupportUrl: e => "/dashboard/creations/experiences/".concat(e, "/player-support")
         };
     e.s(["creatorStore", 0, {
@@ -733,5 +734,5 @@
     e.s(["creatorHub", 0, a])
 }]);
 
-//# debugId=eb8bdf73-1ac6-7c78-c0ee-3e8582bb4d68
-//# sourceMappingURL=3hebvljbjfqcp.js.map
+//# debugId=178e0e5f-51ff-1d93-7228-c5066f1e93d8
+//# sourceMappingURL=0yn5gp2ofb02r.js.map
