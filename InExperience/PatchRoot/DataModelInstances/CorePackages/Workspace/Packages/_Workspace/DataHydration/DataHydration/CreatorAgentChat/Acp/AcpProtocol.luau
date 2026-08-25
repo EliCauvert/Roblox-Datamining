@@ -38,11 +38,11 @@ return {
 		OutOfCredits = -32006
 	},
 	AskTool = { Name = "ask_tool" },
-	extractSessionNewProject = function(p0)
-		if typeof(p0) ~= "table" then
+	extractSessionNewProject = function(p1)
+		if typeof(p1) ~= "table" then
 			return nil
 		end
-		local roblox = p0._meta and p0._meta._roblox
+		local roblox = p1._meta and p1._meta._roblox
 		
 		return if typeof(roblox) == "table" and typeof(roblox.universeId) == "number" and typeof(roblox.placeId) == "number" then roblox else nil
 	end,
@@ -54,6 +54,9 @@ return {
 		
 		if p1.experiment ~= nil then
 			t.experiment = p1.experiment
+		end
+		if p1.application ~= nil then
+			t.application = p1.application
 		end
 		return {
 			cwd = p1.cwd,

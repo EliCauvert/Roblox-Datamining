@@ -1296,6 +1296,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景由
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,此背景由 AI 生成。上传即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。此背景需要先经过审核，然后才会出现在你的道具库中。已发布的道具无法编辑。
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,订阅 Plus，解锁免费专属背景。
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社区准则
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,你已达到使用额度上限。请稍后重试，以继续自定义。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,你已达到使用额度上限。请于明天重试，以继续自定义。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,你已达到使用额度上限。请在 1 小时后重试，以继续自定义。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,你已达到使用额度上限。请在 1 分钟后重试，以继续自定义。
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
@@ -3242,7 +3246,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,
 Feature.Moments.Action.GenerateText,生成文本
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,没有帮助
-Feature.Moments.Action.GenerateTextFeedbackPolicy,不妥或违反准则
+Feature.Moments.Action.GenerateTextFeedbackPolicy,不适当或违规
 Feature.Moments.Action.Hide,隐藏详情
 Feature.Moments.Action.HowToCapture,如何截取
 Feature.Moments.Action.Join,

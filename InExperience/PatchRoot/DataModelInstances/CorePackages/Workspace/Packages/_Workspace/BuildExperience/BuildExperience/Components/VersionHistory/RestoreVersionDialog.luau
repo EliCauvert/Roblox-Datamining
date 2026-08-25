@@ -11,10 +11,10 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagEnableTeamTestLua (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
 	local VERSION_HISTORY_CANCEL, CHAT_REVERT_CONFIRMATION_ACTION, VERSION_HISTORY_RESTORE
-	local var5 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		cancel = localizationStringsModule.VERSION_HISTORY_CANCEL,
 		revert = localizationStringsModule.CHAT_REVERT_CONFIRMATION_ACTION,
 		restore = localizationStringsModule.VERSION_HISTORY_RESTORE
@@ -24,55 +24,61 @@ return function(p0)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		VERSION_HISTORY_CANCEL = var5.cancel
-		CHAT_REVERT_CONFIRMATION_ACTION = var5.revert
-		VERSION_HISTORY_RESTORE = var5.restore
+		VERSION_HISTORY_CANCEL = var1.cancel
+		CHAT_REVERT_CONFIRMATION_ACTION = var1.revert
+		VERSION_HISTORY_RESTORE = var1.restore
 	else
 		VERSION_HISTORY_CANCEL = localizationStringsModule.VERSION_HISTORY_CANCEL
 		CHAT_REVERT_CONFIRMATION_ACTION = localizationStringsModule.CHAT_REVERT_CONFIRMATION_ACTION
 		VERSION_HISTORY_RESTORE = localizationStringsModule.VERSION_HISTORY_RESTORE
 	end
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.onRestore()
-	end, { p0.onRestore })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.onCancel()
-	end, { p0.onCancel })
+	local var2 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		if p1.isLoading then
+			return
+		end
+		p1.onRestore()
+	end, { p1.isLoading, p1.onRestore })
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		if p1.isLoading then
+			return
+		end
+		p1.onCancel()
+	end, { p1.isLoading, p1.onCancel })
 	
-	return if p0.isOpen == false then nil else reactModule.createElement(dialog.Root, {
+	return if p1.isOpen == false then nil else reactModule.createElement(dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
 		testId = "restore-version-dialog",
 		size = dialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = p0.title }),
+		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = p1.title }),
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Description = reactModule.createElement(dialog.Text, { Text = p0.description })
+			Description = reactModule.createElement(dialog.Text, { Text = p1.description })
 		}),
 		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function()
-			-- upvalues: fFlagEnableTeamTestLua (copy), CHAT_REVERT_CONFIRMATION_ACTION (write), VERSION_HISTORY_RESTORE (write), buttonVariant (copy), var6 (ref), VERSION_HISTORY_CANCEL (write), var7 (ref)
+			-- upvalues: fFlagEnableTeamTestLua (copy), CHAT_REVERT_CONFIRMATION_ACTION (write), VERSION_HISTORY_RESTORE (write), buttonVariant (copy), p1 (ref), var2 (ref), VERSION_HISTORY_CANCEL (write), var3 (ref)
 			return {
 				LayoutOrder = 3,
 				actions = {
 					{
 						text = if fFlagEnableTeamTestLua then CHAT_REVERT_CONFIRMATION_ACTION else VERSION_HISTORY_RESTORE,
 						variant = buttonVariant.Emphasis,
-						onActivated = var6
+						isDisabled = p1.isLoading,
+						isLoading = p1.isLoading,
+						onActivated = var2
 					},
 					{
 						text = VERSION_HISTORY_CANCEL,
 						variant = buttonVariant.Standard,
-						onActivated = var7
+						isDisabled = p1.isLoading,
+						onActivated = var3
 					}
 				}
 			}
 		end, {
-			VERSION_HISTORY_CANCEL,
-			var6,
-			var7,
-			VERSION_HISTORY_RESTORE,
+			VERSION_HISTORY_CANCEL, var2, var3, p1.isLoading, VERSION_HISTORY_RESTORE,
 			CHAT_REVERT_CONFIRMATION_ACTION
 		}))
 	})

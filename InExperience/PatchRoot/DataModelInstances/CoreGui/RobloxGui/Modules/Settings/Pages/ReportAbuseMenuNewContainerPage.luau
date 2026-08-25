@@ -10,20 +10,19 @@ local iconVariant = foundationModule.Enums.IconVariant
 local abuseReportMenu = require(robloxGui.Modules.AbuseReportMenu).AbuseReportMenu
 local abuseReportMenuV2 = require(robloxGui.Modules.AbuseReportMenu).AbuseReportMenuV2
 local reportAbuseAnalytics = require(robloxGui.Modules.AbuseReportMenu).ReportAbuseAnalytics
-local var6 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
-local var7 = if var6 then require(robloxGui.Modules.Chrome.Service) else nil
+local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var2 = if var1 then require(robloxGui.Modules.Chrome.Service) else nil
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagInExperienceReportClosingBugfix = sharedFlagsModule.FFlagInExperienceReportClosingBugfix
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 local fFlagHideShortcutsOnReportDropdownModule = require(robloxGui.Modules.AbuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
 local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
-local fFlagIEMSettingsPageDisplaying = sharedFlagsModule.FFlagIEMSettingsPageDisplaying
 local fFlagReportFocusNavIEMButtonsModule = require(robloxGui.Modules.AbuseReportMenu.Flags.FFlagReportFocusNavIEMButtons)
 local fFlagStandardizeSafetyIcon = sharedFlagsModule.FFlagStandardizeSafetyIcon
 local fFlagAbuseReportMenuV2_1 = game:DefineFastFlag("SwitchOverToAbuseReportMenuV2", false) and fFlagAbuseReportMenuV2
 local _ = nil
-local var12 = (function()
-	-- upvalues: robloxGui (ref), utilityModule (ref), uiblox (ref), fFlagStandardizeSafetyIcon (ref), iconName (ref), iconVariant (ref), builderIconsModule (ref), fFlagEnableSideSheet (ref), fFlagAbuseReportMenuV2 (ref), fFlagAbuseReportMenuV2_1 (ref), roactModule (ref), abuseReportMenuV2 (ref), abuseReportMenu (ref), fFlagInExperienceReportClosingBugfix (ref), var6 (ref), var7 (ref), fFlagHideShortcutsOnReportDropdownModule (ref), fFlagReportFocusNavIEMButtonsModule (ref)
+local var3 = (function()
+	-- upvalues: robloxGui (ref), utilityModule (ref), uiblox (ref), fFlagStandardizeSafetyIcon (ref), iconName (ref), iconVariant (ref), builderIconsModule (ref), fFlagEnableSideSheet (ref), fFlagAbuseReportMenuV2 (ref), fFlagAbuseReportMenuV2_1 (ref), roactModule (ref), abuseReportMenuV2 (ref), abuseReportMenu (ref), fFlagInExperienceReportClosingBugfix (ref), var1 (ref), var2 (ref), fFlagHideShortcutsOnReportDropdownModule (ref), fFlagReportFocusNavIEMButtonsModule (ref)
 	local reportAbuseMenuNewContainerPage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
 	function reportAbuseMenuNewContainerPage._onHiddenCallback() end
@@ -38,9 +37,9 @@ local var12 = (function()
 	
 	function reportAbuseMenuNewContainerPage._onMenuWidthChange() end
 	
-	function reportAbuseMenuNewContainerPage.SetHub(_, p0)
+	function reportAbuseMenuNewContainerPage.SetHub(_, p1)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
-		reportAbuseMenuNewContainerPage.HubRef = p0
+		reportAbuseMenuNewContainerPage.HubRef = p1
 		reportAbuseMenuNewContainerPage.HubRef.SettingsShowSignal:connect(function(p1)
 			-- upvalues: reportAbuseMenuNewContainerPage (copy)
 			if not p1 then
@@ -51,14 +50,14 @@ local var12 = (function()
 		return reportAbuseMenuNewContainerPage
 	end
 	
-	function reportAbuseMenuNewContainerPage.showAlert(_, p2, p3, p4)
+	function reportAbuseMenuNewContainerPage.showAlert(_, p1, p2, p3)
 		-- upvalues: utilityModule (copy), reportAbuseMenuNewContainerPage (ref)
-		utilityModule:ShowAlert(p2, p3, reportAbuseMenuNewContainerPage.HubRef, p4)
+		utilityModule:ShowAlert(p1, p2, reportAbuseMenuNewContainerPage.HubRef, p3)
 	end
 	
-	function reportAbuseMenuNewContainerPage.showReportSentPage(_, p5)
+	function reportAbuseMenuNewContainerPage.showReportSentPage(_, p1)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
-		reportAbuseMenuNewContainerPage.HubRef.ReportSentPageV2:ShowReportedPlayer(p5, true)
+		reportAbuseMenuNewContainerPage.HubRef.ReportSentPageV2:ShowReportedPlayer(p1, true)
 	end
 	
 	function reportAbuseMenuNewContainerPage.HideMenu(_)
@@ -91,15 +90,15 @@ local var12 = (function()
 		reportAbuseMenuNewContainerPage._onDisplayingCallback()
 	end
 	
-	function reportAbuseMenuNewContainerPage.setNextPlayerToReport(_, p6)
+	function reportAbuseMenuNewContainerPage.setNextPlayerToReport(_, p1)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
-		reportAbuseMenuNewContainerPage._setNextPlayerToReportCallback(p6)
+		reportAbuseMenuNewContainerPage._setNextPlayerToReportCallback(p1)
 	end
 	
 	reportAbuseMenuNewContainerPage.TabHeader.Name = "ReportAbuseTab"
-	local var14 = if fFlagStandardizeSafetyIcon then { name = iconName.Flag, variant = iconVariant.Regular } else uiblox["icons/actions/feedback"]
-	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.Text = var14.name
-	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[var14.variant]
+	local var1 = if fFlagStandardizeSafetyIcon then { name = iconName.Flag, variant = iconVariant.Regular } else uiblox["icons/actions/feedback"]
+	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.Text = var1.name
+	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[var1.variant]
 	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Title.Text = "Report"
 	reportAbuseMenuNewContainerPage.Page.Name = "ReportAbuseMenuNewContainerPage"
 	reportAbuseMenuNewContainerPage.ShouldShowBottomBar = not fFlagEnableSideSheet
@@ -114,21 +113,21 @@ local var12 = (function()
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage:ShowMenu()
 		end,
-		registerOnReportTabHidden = function(p7)
+		registerOnReportTabHidden = function(p1)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
-			reportAbuseMenuNewContainerPage._onHiddenCallback = p7
+			reportAbuseMenuNewContainerPage._onHiddenCallback = p1
 		end,
-		registerOnReportTabDisplayed = function(p8)
+		registerOnReportTabDisplayed = function(p1)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
-			reportAbuseMenuNewContainerPage._onDisplayedCallback = p8
+			reportAbuseMenuNewContainerPage._onDisplayedCallback = p1
 		end,
-		registerOnReportTabDisplaying = function(p9)
+		registerOnReportTabDisplaying = function(p1)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
-			reportAbuseMenuNewContainerPage._onDisplayingCallback = p9
+			reportAbuseMenuNewContainerPage._onDisplayingCallback = p1
 		end,
-		registerOnMenuWidthChange = function(p10)
+		registerOnMenuWidthChange = function(p1)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
-			reportAbuseMenuNewContainerPage._onMenuWidthChange = p10
+			reportAbuseMenuNewContainerPage._onMenuWidthChange = p1
 		end,
 		registerSetNextPlayerToReport = function(value)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
@@ -138,23 +137,23 @@ local var12 = (function()
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage._onSettingsHiddenCallback = value
 		end,
-		showReportSentPage = function(p11)
+		showReportSentPage = function(p1)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
-			reportAbuseMenuNewContainerPage:showReportSentPage(p11)
+			reportAbuseMenuNewContainerPage:showReportSentPage(p1)
 		end,
-		onReportComplete = function(p12)
-			-- upvalues: fFlagInExperienceReportClosingBugfix (copy), var6 (copy), var7 (copy), reportAbuseMenuNewContainerPage (ref)
-			if fFlagInExperienceReportClosingBugfix and var6 then
-				var7:setShortcutBar(nil)
+		onReportComplete = function(p1)
+			-- upvalues: fFlagInExperienceReportClosingBugfix (copy), var1 (copy), var2 (copy), reportAbuseMenuNewContainerPage (ref)
+			if fFlagInExperienceReportClosingBugfix and var1 then
+				var2:setShortcutBar(nil)
 			end
-			reportAbuseMenuNewContainerPage:showAlert(p12, "Ok", function()
+			reportAbuseMenuNewContainerPage:showAlert(p1, "Ok", function()
 				-- upvalues: reportAbuseMenuNewContainerPage (copy)
 				reportAbuseMenuNewContainerPage:HideMenu()
 			end)
 		end,
-		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule and var6 then function(p13)
-			-- upvalues: var7 (copy)
-			var7:setHideShortcutBar("InExperienceReportDropdown", p13)
+		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule and var1 then function(p1)
+			-- upvalues: var2 (copy)
+			var2:setHideShortcutBar("InExperienceReportDropdown", p1)
 		end else nil,
 		getSettingsHubRef = if fFlagReportFocusNavIEMButtonsModule then function()
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
@@ -170,37 +169,34 @@ local var12 = (function()
 	
 	return reportAbuseMenuNewContainerPage
 end)()
-var12.Displayed.Event:connect(function()
-	-- upvalues: var12 (write)
-	var12:onDisplayed()
+var3.Displayed.Event:connect(function()
+	-- upvalues: var3 (write)
+	var3:onDisplayed()
+end)
+var3.Displaying.Event:connect(function()
+	-- upvalues: var3 (write)
+	var3:onDisplaying()
+end)
+var3.Hidden.Event:connect(function()
+	-- upvalues: var3 (write)
+	var3:onHidden()
 end)
 
-if fFlagIEMSettingsPageDisplaying then
-	var12.Displaying.Event:connect(function()
-		-- upvalues: var12 (write)
-		var12:onDisplaying()
-	end)
-end
-var12.Hidden.Event:connect(function()
-	-- upvalues: var12 (write)
-	var12:onHidden()
-end)
-
-function var12.ReportPlayer(_, p14, p15)
-	-- upvalues: reportAbuseAnalytics (ref), var12 (write)
-	if p14 then
-		reportAbuseAnalytics:startAbuseReportSession(p15)
-		var12:setNextPlayerToReport(p14)
+function var12.ReportPlayer(_, p1, p2)
+	-- upvalues: reportAbuseAnalytics (ref), var3 (write)
+	if p1 then
+		reportAbuseAnalytics:startAbuseReportSession(p2)
+		var3:setNextPlayerToReport(p1)
 		
-		if not var12.HubRef:GetVisibility() then
-			var12.HubRef:SetVisibility(true, false, var12)
+		if not var3.HubRef:GetVisibility() then
+			var3.HubRef:SetVisibility(true, false, var3)
 			
 			return
 		end
-		var12.HubRef:SwitchToPage(var12, false, nil, nil, nil, {
+		var3.HubRef:SwitchToPage(var3, false, nil, nil, nil, {
 			entrypoint = reportAbuseAnalytics:getAbuseReportSessionEntryPoint()
 		})
 	end
 end
 
-return var12
+return var3

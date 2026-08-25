@@ -50,12 +50,13 @@ local fFlagSduiTileHoldAction = require(parent.SharedFlags).FFlagSduiTileHoldAct
 local fFlagLuaAppSduiPlaceholderSupport = require(parent.SharedFlags).FFlagLuaAppSduiPlaceholderSupport
 local fFlagSduiOptionSelectorCollection = require(parent.SharedFlags).FFlagSduiOptionSelectorCollection
 local fFlagSduiCollectionCarouselPlaceholderItem = require(parent.SharedFlags).FFlagSduiCollectionCarouselPlaceholderItem
+local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
 local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
 function t_1.new()
-	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagLuaAppSduiPlaceholderSupport (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileBottomButton (ref), fFlagSduiTileHoldAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiEnableAssociatedItemsRow (ref), fFlagSduiExperienceDetailsSocialProof (ref), fFlagSduiChartsSupport (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
+	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagLuaAppSduiPlaceholderSupport (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), fFlagSduiCollectionGridRevealRows (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileBottomButton (ref), fFlagSduiTileHoldAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiEnableAssociatedItemsRow (ref), fFlagSduiExperienceDetailsSocialProof (ref), fFlagSduiChartsSupport (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
 	local t = {
 		anchorPoint = parseVector2Prop,
 		automaticSize = getEngineEnumParser(Enum.AutomaticSize),
@@ -197,6 +198,9 @@ function t_1.new()
 				},
 				propInterface = { itemHeightFromWidth = tModule.UDim }
 			},
+			[sduiComponentType.RevealRowsButtonWithDivider] = if fFlagSduiCollectionGridRevealRows then {
+				component = require(serverDrivenUi.Content.Collections.SduiRevealRowsButtonWithDivider)
+			} else nil,
 			[sduiComponentType.Dialog] = {
 				component = require(serverDrivenUi.Content.SduiDialog),
 				propParsers = {
@@ -869,42 +873,42 @@ function t_1.new()
 	return t_3
 end
 
-function t_1:getComponentDefinition(p0)
+function t_1:getComponentDefinition(p1)
 	-- upvalues: fFlagSduiGlobalRegistryFallback (ref), getSduiComponentRegistry (ref)
-	local var14 = self._registeredComponents[p0]
+	local var1 = self._registeredComponents[p1]
 	
-	if not var14 then
+	if not var1 then
 		if fFlagSduiGlobalRegistryFallback then
-			return getSduiComponentRegistry().getComponentDefinition(p0)
+			return getSduiComponentRegistry().getComponentDefinition(p1)
 		end
-		var14 = nil
+		var1 = nil
 	end
-	return var14
+	return var1
 end
 
 function t_1:doesComponentManageChildren(p1)
-	local var15 = self:getComponentDefinition(p1)
+	local var1 = self:getComponentDefinition(p1)
 	
-	return if var15 then var15.doesManageChildren else false
+	return if var1 then var1.doesManageChildren else false
 end
 
-function t_1:getComponent(p2)
-	local var16 = self:getComponentDefinition(p2)
+function t_1:getComponent(p1)
+	local var1 = self:getComponentDefinition(p1)
 	
-	return var16 and var16.component
+	return var1 and var1.component
 end
 
-function t_1:getPropParsers(p3)
+function t_1:getPropParsers(p1)
 	-- upvalues: t (ref)
-	local var17 = self:getComponentDefinition(p3)
+	local var1 = self:getComponentDefinition(p1)
 	
-	return if var17 then var17.propParsers else t
+	return if var1 then var1.propParsers else t
 end
 
-function t_1:getPropInterface(p4)
-	local var18 = self:getComponentDefinition(p4)
+function t_1:getPropInterface(p1)
+	local var1 = self:getComponentDefinition(p1)
 	
-	return if var18 then var18.propInterface else nil
+	return if var1 then var1.propInterface else nil
 end
 
 local t_2 = {
@@ -913,13 +917,13 @@ local t_2 = {
 	[parseFocusNavActionsProp] = true
 }
 
-function t_1.doesParserRequireRenderContext(_, p5)
+function t_1.doesParserRequireRenderContext(_, p1)
 	-- upvalues: t_2 (ref)
-	return if p5 and t_2[p5] then true else typeof(p5) == "table"
+	return if p1 and t_2[p1] then true else typeof(p1) == "table"
 end
 
-function t_1:registerComponent(p6, p7)
-	self._registeredComponents[p6] = p7
+function t_1:registerComponent(p1, p2)
+	self._registeredComponents[p1] = p2
 end
 
 return t_1

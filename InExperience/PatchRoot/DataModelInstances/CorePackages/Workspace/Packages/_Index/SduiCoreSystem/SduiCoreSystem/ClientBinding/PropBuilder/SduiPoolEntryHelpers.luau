@@ -1,106 +1,108 @@
 ﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(sduiCoreSystem.Parent.Signals)
+local parent = sduiCoreSystem.Parent
+local _ = require(parent.Signals)
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local sduiPoolStoreModule = require(sduiCoreSystem.ClientBinding.SduiPoolStore)
 local _ = require(sduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
 local _ = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormalizer)
 local sduiListEntryRendererModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryRenderer)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
+local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
 
-local function resolvePoolDataGetter(p0, p1, p2, p3)
+local function resolvePoolDataGetter(p1, p2, p3, p4)
 	-- upvalues: sduiPropUtilsModule (ref)
-	if p0 == nil or p0 == "" then
+	if p1 == nil or p1 == "" then
 		return nil
 	end
-	local var12 = sduiPropUtilsModule.generateDynamicBindingPropValue(p0, p1, p2, p3)
+	local var1 = sduiPropUtilsModule.generateDynamicBindingPropValue(p1, p2, p3, p4)
 	
-	return function(p4)
-		-- upvalues: var12 (ref)
-		return var12(p4).data
+	return function(p1)
+		-- upvalues: var1 (ref)
+		return var1(p1).data
 	end
 end
 
-local function buildPoolEntryConfigs(p5)
-	if typeof(p5) ~= "table" then
+local function buildPoolEntryConfigs(p1)
+	if typeof(p1) ~= "table" then
 		return nil
 	end
-	local entries = p5.entries
+	local entries = p1.entries
 	
 	if typeof(entries) ~= "table" then
 		return nil
 	end
 	local t = {}
-	local var14 = false
+	local var1 = false
 	
 	for i, v in entries do
 		if typeof(i) == "string" and typeof(v) == "table" then
 			local collectionItemSize = v.collection_item_size
-			local var15 = if typeof(collectionItemSize) == "string" and collectionItemSize ~= "" then collectionItemSize else nil
+			local var2 = if typeof(collectionItemSize) == "string" and collectionItemSize ~= "" then collectionItemSize else nil
 			
-			if var15 ~= nil then
-				t[i] = { collectionItemSize = var15 }
-				var14 = true
+			if var2 ~= nil then
+				t[i] = { collectionItemSize = var2 }
+				var1 = true
 			end
 		end
 	end
-	return if var14 then t else nil
+	return if var1 then t else nil
 end
 
-local function normalizePoolData(p6)
-	if p6 == nil or next(p6) == nil then
+local function normalizePoolData(p1)
+	if p1 == nil or next(p1) == nil then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p6 do
+	for i, v in p1 do
 		local t_1 = {}
 		local t_2 = {}
-		local var19 = false
+		local var1 = false
 		
 		if typeof(v.items) == "table" then
 			for i_1, v_1 in v.items do
 				if typeof(v_1) == "table" then
 					local kind = v_1.kind
-					local var20 = if typeof(kind) == "table" then kind.value else nil
+					local var2 = if typeof(kind) == "table" then kind.value else nil
 					
-					if typeof(var20) == "table" then
-						t_1[i_1] = var20
+					if typeof(var2) == "table" then
+						t_1[i_1] = var2
 					end
 					local layout = v_1.layout
 					
 					if typeof(layout) == "table" then
-						local var25
+						local var3
 						local colSpan = layout.colSpan or layout.col_span
 						local rowSpan = layout.rowSpan or layout.row_span
 						local alignmentType = layout.alignmentType or layout.alignment_type
-						local var24 = tonumber(layout.minRowPadding or layout.min_row_padding)
+						local var4 = tonumber(layout.minRowPadding or layout.min_row_padding)
 						
 						if colSpan ~= nil then
-							var25 = true
+							var3 = true
 							
 							if colSpan == 1 then
 								if rowSpan ~= nil then
-									var25 = true
+									var3 = true
 									
 									if rowSpan == 1 then
 										if alignmentType ~= nil then
-											var25 = true
+											var3 = true
 											
 											if alignmentType == "" then
-												var25 = var24 ~= nil and var24 > 0
+												var3 = var4 ~= nil and var4 > 0
 											end
 										end
 									end
 								end
 							end
-							if var25 then
+							if var3 then
 								t_2[i_1] = {
 									colSpan = colSpan,
 									rowSpan = rowSpan,
 									alignmentType = alignmentType,
-									minRowPadding = var24
+									minRowPadding = var4
 								}
-								var19 = true
+								var1 = true
 							end
 						end
 					end
@@ -110,32 +112,32 @@ local function normalizePoolData(p6)
 		local collectionItemSize = v.collection_item_size
 		t[i] = {
 			items = t_1,
-			layouts = if var19 then t_2 else nil,
+			layouts = if var1 then t_2 else nil,
 			collectionItemSize = if typeof(collectionItemSize) == "string" and collectionItemSize ~= "" then collectionItemSize else nil
 		}
 	end
 	return t
 end
 
-local function poolSectionFromEntry(p7)
-	local identifier = p7.identifier
+local function poolSectionFromEntry(p1)
+	local identifier = p1.identifier
 	
 	if typeof(identifier) ~= "string" then
 		return nil
 	end
 	local poolId = nil
 	local maxVisibleRows = nil
-	local item = p7.item
+	local item = p1.item
 	
 	if typeof(item) == "table" then
-		local var26 = item
-		local inputData = var26.input_data
+		local var1 = item
+		local inputData = var1.input_data
 		
 		if inputData and inputData.kind and inputData.kind.value then
-			var26 = inputData.kind.value
+			var1 = inputData.kind.value
 		end
-		poolId = var26.pool_id
-		maxVisibleRows = var26.max_visible_rows
+		poolId = var1.pool_id
+		maxVisibleRows = var1.max_visible_rows
 	end
 	return {
 		sectionId = identifier,
@@ -144,22 +146,22 @@ local function poolSectionFromEntry(p7)
 	}
 end
 
-local function computePoolSections(p8)
+local function computePoolSections(p1)
 	-- upvalues: poolSectionFromEntry (ref)
 	local t = {}
 	
-	for i, v in p8 do
-		local var28 = poolSectionFromEntry(v)
+	for i, v in p1 do
+		local var1 = poolSectionFromEntry(v)
 		
-		if var28 ~= nil then
-			table.insert(t, var28)
+		if var1 ~= nil then
+			table.insert(t, var1)
 		end
 	end
 	return t
 end
 
-local function sectionsHaveMultiRow(p9)
-	for i, v in p9 do
+local function sectionsHaveMultiRow(p1)
+	for i, v in p1 do
 		if v.numberOfRows ~= 1 then
 			return true
 		end
@@ -167,31 +169,31 @@ local function sectionsHaveMultiRow(p9)
 	return false
 end
 
-local function applyPoolEntryConfigs(p10, p11)
-	if p11 == nil then return end
-	for i, v in p11 do
-		local var29 = p10[i]
+local function applyPoolEntryConfigs(p1, p2)
+	if p2 == nil then return end
+	for i, v in p2 do
+		local var1 = p1[i]
 		
-		if var29 ~= nil and var29.collectionItemSize == nil and v.collectionItemSize ~= nil then
-			var29.collectionItemSize = v.collectionItemSize
+		if var1 ~= nil and var1.collectionItemSize == nil and v.collectionItemSize ~= nil then
+			var1.collectionItemSize = v.collectionItemSize
 		end
 	end
 end
 
-local function ingestPoolSections(p12, p13, p14, p15)
+local function ingestPoolSections(p1, p2, p3, p4)
 	-- upvalues: sduiPoolStoreModule (ref), normalizePoolData (ref), applyPoolEntryConfigs (ref)
-	local configKey = p14.configKey
+	local configKey = p3.configKey
 	
-	if configKey == nil or #p12 == 0 then
+	if configKey == nil or #p1 == 0 then
 		return nil
 	end
 	local sduiPoolStore = sduiPoolStoreModule.getSduiPoolStore(configKey)
-	sduiPoolStore.setSections(p12)
-	local var31 = if p13 ~= nil then nil else normalizePoolData(p13)
+	sduiPoolStore.setSections(p1)
+	local var1 = if p2 ~= nil then nil else normalizePoolData(p2)
 	
-	if var31 ~= nil then
-		applyPoolEntryConfigs(var31, p15)
-		sduiPoolStore.setPools(var31)
+	if var1 ~= nil then
+		applyPoolEntryConfigs(var1, p4)
+		sduiPoolStore.setPools(var1)
 	end
 	return sduiPoolStore
 end
@@ -205,40 +207,44 @@ return {
 	computePoolSections = computePoolSections,
 	sectionsHaveMultiRow = sectionsHaveMultiRow,
 	ingestPoolSections = ingestPoolSections,
-	createPoolEntryFns = function(p16, p17, p18, p19, p20, p21, p22)
-		-- upvalues: ingestPoolSections (ref), sduiListEntryRendererModule (ref)
-		local var32 = ingestPoolSections(p16, p21, p19, p22)
-		local var33 = nil
-		local var34 = nil
+	createPoolEntryFns = function(p1, p2, p3, p4, p5, p6, p7)
+		-- upvalues: ingestPoolSections (ref), fFlagSduiCollectionGridRevealRows (ref), sduiListEntryRendererModule (ref)
+		local var1 = ingestPoolSections(p1, p6, p4, p7)
+		local var2 = nil
+		local var3 = nil
 		
-		if var32 ~= nil then
+		if var1 ~= nil then
 			local t = {}
 			
-			for i, v in p16 do
+			for i, v in p1 do
 				if v.poolId ~= nil then
 					t[v.sectionId] = true
 				end
 			end
-			var33 = function(p23)
-				-- upvalues: t (ref), var32 (ref)
-				local identifier = p23.identifier
+			var2 = function(p1)
+				-- upvalues: t (ref), var1 (ref)
+				local identifier = p1.identifier
 				
-				return if typeof(identifier) == "string" and t[identifier] then { _section = { cells = var32.getSectionCells(identifier) } } else nil
+				return if typeof(identifier) == "string" and t[identifier] then { _section = { cells = var1.getSectionCells(identifier) } } else nil
 			end
 			
-			var34 = function(p24, _)
-				-- upvalues: var32 (ref)
-				local identifier = p24.identifier
+			var3 = function(p1, _)
+				-- upvalues: var1 (ref), fFlagSduiCollectionGridRevealRows (copy)
+				local identifier = p1.identifier
 				
 				return if typeof(identifier) == "string" then {
 					_requiresDataBinding = true,
-					startRowGetter = var32.getSectionStartRow(identifier)
+					startRowGetter = var1.getSectionStartRow(identifier),
+					setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then function(p1)
+						-- upvalues: var1 (copy), identifier (ref)
+						var1.setSectionDisplayedRowCount(identifier, p1)
+					end else nil
 				} else nil
 			end
 		end
 		return {
-			inputSlicer = sduiListEntryRendererModule.createInputSlicer(p17, p18, p19, p20, var33),
-			entryConfigExtrasFn = var34
+			inputSlicer = sduiListEntryRendererModule.createInputSlicer(p2, p3, p4, p5, var2),
+			entryConfigExtrasFn = var3
 		}
 	end
 }

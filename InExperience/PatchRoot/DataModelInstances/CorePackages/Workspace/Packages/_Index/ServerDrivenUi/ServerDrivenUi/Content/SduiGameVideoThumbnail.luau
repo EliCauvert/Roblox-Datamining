@@ -11,32 +11,33 @@ local sduiVideoThumbnailModule = require(script.Parent.SduiVideoThumbnail)
 local fIntLuaAppGameTileVideoDwellTimeInSec = require(parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
 local fIntLuaAppGameTileVideoVisiblePercent = require(parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
 
-return function(p0)
+return function(p1)
 	-- upvalues: dataHydrationModule (ref), signalsReactModule (ref), reactModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), sduiVideoThumbnailModule (ref), isVideoEligibleForPlayability (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
 	local playabilityStore = dataHydrationModule.Game.getPlayabilityStore(false)
-	local playability = playabilityStore.getPlayability(p0.universeId)
-	local var7 = signalsReactModule.useSignalState(playability.data)
-	local var8 = signalsReactModule.useSignalState(playability.status) == dataHydrationModule.DataStatus.Ready
-	local var9, var10 = reactModule.useState(false)
-	local var11 = useCanDevicePlayVideoPreview(tileVideoBlockingConfig, p0.universeId, p0.sduiContext.appPage)
+	local playability = playabilityStore.getPlayability(p1.universeId)
+	local var1 = signalsReactModule.useSignalState(playability.data)
+	local var2 = signalsReactModule.useSignalState(playability.status) == dataHydrationModule.DataStatus.Ready
+	local var3, var4 = reactModule.useState(false)
+	local var5 = useCanDevicePlayVideoPreview(tileVideoBlockingConfig, p1.universeId, p1.sduiContext.appPage)
 	
 	return reactModule.createElement(sduiVideoThumbnailModule, {
-		videoPlayer = p0.videoPlayer,
-		imageComponent = p0.imageComponent,
-		videoPlaybackContext = p0.sduiContext.videoPlaybackContext,
-		isVideoEligible = isVideoEligibleForPlayability(var8, var7, nil) and var9,
+		sduiContext = p1.sduiContext,
+		videoPlayer = p1.videoPlayer,
+		imageComponent = p1.imageComponent,
+		videoPlaybackContext = p1.sduiContext.videoPlaybackContext,
+		isVideoEligible = isVideoEligibleForPlayability(var2, var1, nil) and var3,
 		onPlaybackCandidate = reactModule.useCallback(function()
-			-- upvalues: var8 (ref), playabilityStore (ref), p0 (ref), var10 (ref), var11 (ref)
-			if not var8 then
-				playabilityStore.fetchPlayability(p0.universeId)
+			-- upvalues: var2 (ref), playabilityStore (ref), p1 (ref), var4 (ref), var5 (ref)
+			if not var2 then
+				playabilityStore.fetchPlayability(p1.universeId)
 			end
-			var10(var11())
-		end, { p0.universeId, var8, playabilityStore, var11 }),
+			var4(var5())
+		end, { p1.universeId, var2, playabilityStore, var5 }),
 		videoDwellTimeInSec = fIntLuaAppGameTileVideoDwellTimeInSec,
 		videoVisiblePercent = fIntLuaAppGameTileVideoVisiblePercent,
-		isHovered = p0.isHovered,
-		isSelected = p0.isSelected,
-		cornerRadius = p0.cornerRadius,
-		playbackCandidateRef = p0.playbackCandidateRef
+		isHovered = p1.isHovered,
+		isSelected = p1.isSelected,
+		cornerRadius = p1.cornerRadius,
+		playbackCandidateRef = p1.playbackCandidateRef
 	})
 end

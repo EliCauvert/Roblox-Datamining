@@ -206,6 +206,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation hat 
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation enthält Kurven mit zu vielen Schlüsseln. Es sind maximal {maxAllowed} pro Kurve erlaubt. Bitte korrigiere die Animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation enthält mehr als {maxAllowed} MarkerCurve(s). Bitte stelle sicher, dass es nicht mehr als {maxAllowed} MarkerCurve-Unterelemente gibt."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation enthält eine MarkerCurve mit {count} Markern. {maxAllowed} ist die maximale Anzahl pro MarkerCurve. Bitte korrigiere die Animation.
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"Die veröffentlichte Animation gibt eine maximale Verschiebung eines Parts von {taggedTranslation} Noppen an, aber ihre Animationsdaten ergeben {calculatedTranslation} Noppen. Bitte veröffentliche die Animation erneut."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation enthält ein unerwartetes untergeordnetes Element: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische Köpfe auf dem Marktplatz müssen ordnungsgemäß gecaged sein, damit die Augen- und Mundscheitelpunkte auf dem Cage mit den Mesh-Scheitelpunkten übereinstimmen. Bitte verbessere deine Cages und deren Ausrichtung mit dem Netz."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,"Der Ausdruck ""Lächeln"" für den dynamischen Kopf kann nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für den Mund so an, dass sie mit der Position des Mundes auf dem Kopf übereinstimmen, und stelle sicher, dass er den Ausdruck ""Lächeln"" zeigen kann."
@@ -1248,15 +1249,24 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Veröffentlichen
+Feature.Avatar.BackgroundGeneration.Action.Upload,Hochladen
 Feature.Avatar.BackgroundGeneration.Action.View,Anzeigen
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Erstelle Hintergründe mit Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Deine Kreation kann jetzt genutzt werden.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Dieser Hintergrund wurde mit KI generiert. Durch die Veröffentlichung bestätigst du, dass er den Community-Regeln von Roblox entspricht und keine Inhalte verwendet, an denen du keine Rechte hast. Er wird überprüft, bevor er in deinem Inventar erscheint. Veröffentlichte Artikel können nicht bearbeitet werden."
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Dieser Hintergrund wurde mit KI generiert. Durch das Hochladen bestätigst du, dass er den Community-Regeln von Roblox entspricht und keine Inhalte verwendet, an denen du keine Rechte hast. Er wird überprüft, bevor er in deinem Inventar erscheint. Hochgeladene Artikel können nicht bearbeitet werden."
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Schalte kostenlose exklusive Hintergründe mit Plus frei.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Der Artikel entsprach nicht den Community-Regeln
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,"Du hast dein Nutzungslimit erreicht. Komm später zurück, um weiter anzupassen."
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,"Du hast dein Nutzungslimit erreicht. Komm morgen zurück, um weiter anzupassen."
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,"Du hast dein Nutzungslimit erreicht. Komm in einer Stunde zurück, um weiter anzupassen."
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,"Du hast dein Nutzungslimit erreicht. Komm in einer Minute zurück, um weiter anzupassen."
 Feature.Avatar.BackgroundGeneration.Error.Moderation,"Dieser Prompt entspricht nicht unseren Richtlinien. Versuche, etwas anderes zu beschreiben."
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Dieser Hintergrund entspricht nicht den Community-Regeln von Roblox, daher wurde er deinem Inventar nicht hinzugefügt. Versuche, einen neuen Hintergrund zu generieren."
 Feature.Avatar.BackgroundGeneration.Error.System,Beim Generieren deines Hintergrunds ist etwas schiefgelaufen. Bitte versuche es erneut.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exklusiv mit Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschreibe deinen Hintergrund …
 Feature.Avatar.BackgroundGeneration.Status.Generating,Dein Hintergrund wird generiert …
@@ -1264,6 +1274,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Dein Hintergrund wird vorbe
 Feature.Avatar.BackgroundGeneration.Title,Hintergrund erstellen
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Im Inventar veröffentlichen
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,In das Inventar hochladen
 Feature.Avatar.Backgrounds.Title,Hintergründe
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Für diesen Körperstil ist keine Anpassung verfügbar.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Zur Standard-Körperfarbe zurückkehren
@@ -2562,6 +2574,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,Zum Antworten lange drücken
 Feature.Chat.Label.Members,Mitglieder
 Feature.Chat.Label.MessageNotAvailable,Diese Nachricht ist nicht verfügbar
 Feature.Chat.Label.MuteInGameChatToastNotifications,Chat-Benachrichtigungen im Spiel stummschalten
+Feature.Chat.Label.MuteInGamePartyToastNotifications,Party-Benachrichtigungen im Spiel stummschalten
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,Keine Chats gefunden
 Feature.Chat.Label.NoDescriptionYet,Noch keine Beschreibung.
@@ -3195,9 +3208,9 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Erweitern
-Feature.Moments.Action.GenerateText,
+Feature.Moments.Action.GenerateText,Text generieren
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Nicht hilfreich
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Unangemessen oder verstößt gegen die Richtlinien
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Unangemessen oder verletzend
 Feature.Moments.Action.Hide,Details ausblenden
 Feature.Moments.Action.HowToCapture,So erstellst du Aufnahmen
 Feature.Moments.Action.Join,Mitmachen
@@ -3284,7 +3297,7 @@ Feature.Moments.Label.Tone.Hype,Hype
 Feature.Moments.Label.Tone.Neutral,Neutral
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
-Feature.Moments.Title.GenerateTextOptions,Text generieren
+Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
 Feature.Moments.Title.MomentRemoved,Moment entfernt
 Feature.Moments.Title.ReportPost,Post melden
@@ -3642,6 +3655,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Dein Plus-Abonnement bietet di
 Feature.RobloxSubscription.Body.GenericError,Diese Aktion konnte nicht abgeschlossen werden. Bitte versuche es erneut.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Du kannst dieses Abonnement auf diesem Gerät nicht erwerben.
 Feature.RobloxSubscription.Description.AgeCheckTrial,"Verifiziere dein Alter mit einer Altersprüfung und erhalte als Dankeschön Roblox Plus eine Woche lang kostenlos. Du brauchst keine Zahlungsmethode, um diese kostenlose Testversion zu nutzen."
+Feature.RobloxSubscription.Description.Benefit.Customize,Mit Profilrahmen und App-Designs anpassen
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10 % Rabatt in den ersten 60 Tagen, dann 20 % Rabatt auf Artikel und Avatare"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Mehr Spaß für weniger Robux. Abonniere Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Indem du auf \u{201C}{ctaText}\u{201D} klickst, stimmst du den <a href=""{termsUrl}"">Abonnementbedingungen von Roblox</a> zu. Dir wird jeden Monat automatisch eine Gebühr berechnet, bis du das Abo kündigst."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Kostenlose private Server

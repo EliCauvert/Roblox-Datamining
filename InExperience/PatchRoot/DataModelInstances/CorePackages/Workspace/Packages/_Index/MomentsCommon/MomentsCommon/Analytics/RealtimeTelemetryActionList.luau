@@ -9,17 +9,17 @@ local t = {
 	flyout_menu = "flyout_menu"
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref)
-	return t[p0] or "unknown"
+	return t[p1] or "unknown"
 end
 
 local function normalizeRequestFailureReason(p1)
 	return if p1 == nil or p1 == "" then "unknown" elseif p1 == "requestFailed" or p1 == "malformedResponse" then p1 else "unknown"
 end
 
-local function normalizeMediaFailureReason(p2)
-	return if p2 == nil or p2 == "" then "unknown" elseif string.find(p2, "video load errored:", 1, true) == 1 then "videoLoadErrored" elseif string.find(p2, "video load failed:", 1, true) == 1 then "videoLoadFailed" elseif string.find(p2, "screenshot load failed:", 1, true) == 1 then "screenshotLoadFailed" else "unknown"
+local function normalizeMediaFailureReason(p1)
+	return if p1 == nil or p1 == "" then "unknown" elseif string.find(p1, "video load errored:", 1, true) == 1 then "videoLoadErrored" elseif string.find(p1, "video load failed:", 1, true) == 1 then "videoLoadFailed" elseif string.find(p1, "screenshot load failed:", 1, true) == 1 then "screenshotLoadFailed" else "unknown"
 end
 
 local t_1 = {
@@ -30,9 +30,9 @@ local t_1 = {
 	report = "report"
 }
 
-local _ = function(p3)
+local _ = function(p1)
 	-- upvalues: t_1 (ref)
-	return t_1[p3] or "unknown"
+	return t_1[p1] or "unknown"
 end
 
 local t_2 = {
@@ -42,28 +42,44 @@ local t_2 = {
 	upload = "upload"
 }
 
-local _ = function(p4)
+local _ = function(p1)
 	-- upvalues: t_2 (ref)
-	return t_2[p4] or "unknown"
+	return t_2[p1] or "unknown"
 end
 
-local _ = function(p5)
-	return if p5 == "success" or p5 == "failed" then p5 else "unknown"
+local _ = function(p1)
+	return if p1 == "success" or p1 == "failed" then p1 else "unknown"
 end
 
 local t_3 = {
+	Moderated = "moderated",
+	CaptureModerated = "moderated",
+	UploadQuotaReached = "quota",
+	Timeout = "timeout",
+	StartUploadFailed = "startFailed",
+	RegistrationFailed = "registrationFailed",
+	PollError = "pollError",
+	GenericFailure = "generic"
+}
+
+local _ = function(p1)
+	-- upvalues: t_3 (ref)
+	return t_3[p1] or "unknown"
+end
+
+local t_4 = {
 	malformed = "malformed",
 	duplicate = "duplicate",
 	moderated = "moderated",
 	deleted = "deleted"
 }
 
-local _ = function(p6)
-	-- upvalues: t_3 (ref)
-	return t_3[p6] or "unknown"
+local _ = function(p1)
+	-- upvalues: t_4 (ref)
+	return t_4[p1] or "unknown"
 end
 
-local t_4 = {
+local t_5 = {
 	music = "music",
 	trim = "trim",
 	text_overlay = "text_overlay",
@@ -71,12 +87,12 @@ local t_4 = {
 	description = "description"
 }
 
-local _ = function(p7)
-	-- upvalues: t_4 (ref)
-	return t_4[p7] or "unknown"
+local _ = function(p1)
+	-- upvalues: t_5 (ref)
+	return t_5[p1] or "unknown"
 end
 
-local t_5 = {
+local t_6 = {
 	music = "music",
 	trim = "trim",
 	text = "text",
@@ -84,24 +100,24 @@ local t_5 = {
 	generateText = "generateText"
 }
 
-local _ = function(p8)
-	-- upvalues: t_5 (ref)
-	return t_5[p8] or "unknown"
+local _ = function(p1)
+	-- upvalues: t_6 (ref)
+	return t_6[p1] or "unknown"
 end
 
-local _ = function(p9)
-	return if p9 == "screenshot" or p9 == "video" then p9 else "unknown"
+local _ = function(p1)
+	return if p1 == "screenshot" or p1 == "video" then p1 else "unknown"
 end
 
-local _ = function(p10)
-	return if p10 == "succeeded" or p10 == "failed" or p10 == "filtered" then p10 else "unknown"
+local _ = function(p1)
+	return if p1 == "succeeded" or p1 == "failed" or p1 == "filtered" then p1 else "unknown"
 end
 
-local _ = function(p11, p12)
-	local t = { status = p11.status, feedType = p11.feedType }
+local _ = function(p1, p2)
+	local t = { status = p1.status, feedType = p1.feedType }
 	
-	if p11.status == "failed" then
-		t.failureReason = p12(p11.failureReason)
+	if p1.status == "failed" then
+		t.failureReason = p2(p1.failureReason)
 	end
 	return t
 end
@@ -116,8 +132,8 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p13)
-					return { feedType = p13.feedType }
+				format = function(p1)
+					return { feedType = p1.feedType }
 				end
 			}
 		}
@@ -131,11 +147,11 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p14)
-					local t = { status = p14.status, feedType = p14.feedType }
+				format = function(p1)
+					local t = { status = p1.status, feedType = p1.feedType }
 					
-					if p14.status == "failed" then
-						local failureReason = p14.failureReason
+					if p1.status == "failed" then
+						local failureReason = p1.failureReason
 						t.failureReason = if failureReason == nil or failureReason == "" then "unknown" elseif failureReason == "requestFailed" or failureReason == "malformedResponse" then failureReason else "unknown"
 					end
 					return t
@@ -152,12 +168,12 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p15)
+				format = function(p1)
 					-- upvalues: normalizeRequestFailureReason (ref)
-					local t = { status = p15.status, feedType = p15.feedType }
+					local t = { status = p1.status, feedType = p1.feedType }
 					
-					if p15.status == "failed" then
-						local failureReason = p15.failureReason
+					if p1.status == "failed" then
+						local failureReason = p1.failureReason
 						t.failureReason = if failureReason == nil or failureReason == "" then "unknown" elseif failureReason == "requestFailed" or failureReason == "malformedResponse" then failureReason else "unknown"
 					end
 					return t
@@ -174,12 +190,12 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p16)
+				format = function(p1)
 					-- upvalues: normalizeMediaFailureReason (ref)
-					local t = { status = p16.status, feedType = p16.feedType }
+					local t = { status = p1.status, feedType = p1.feedType }
 					
-					if p16.status == "failed" then
-						t.failureReason = normalizeMediaFailureReason(p16.failureReason)
+					if p1.status == "failed" then
+						t.failureReason = normalizeMediaFailureReason(p1.failureReason)
 					end
 					return t
 				end
@@ -195,8 +211,8 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p17)
-					return { reason = p17.reason }
+				format = function(p1)
+					return { reason = p1.reason }
 				end
 			}
 		}
@@ -210,9 +226,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p18)
+				format = function(p1)
 					-- upvalues: t (ref)
-					return { source = t[p18.source] or "unknown" }
+					return { source = t[p1.source] or "unknown" }
 				end
 			}
 		}
@@ -226,9 +242,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p19)
+				format = function(p1)
 					-- upvalues: t (ref)
-					return { source = t[p19.source] or "unknown" }
+					return { source = t[p1.source] or "unknown" }
 				end
 			}
 		}
@@ -242,9 +258,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p20)
+				format = function(p1)
 					-- upvalues: t (ref)
-					return { source = t[p20.source] or "unknown" }
+					return { source = t[p1.source] or "unknown" }
 				end
 			}
 		}
@@ -258,9 +274,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p21)
+				format = function(p1)
 					-- upvalues: t (ref)
-					return { source = t[p21.source] or "unknown" }
+					return { source = t[p1.source] or "unknown" }
 				end
 			}
 		}
@@ -274,9 +290,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p22)
+				format = function(p1)
 					-- upvalues: t_1 (ref)
-					return { action = t_1[p22.action] or "unknown" }
+					return { action = t_1[p1.action] or "unknown" }
 				end
 			}
 		}
@@ -290,13 +306,16 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p23)
-					-- upvalues: t_2 (ref)
-					local t = { step = t_2[p23.step] or "unknown" }
+				format = function(p1)
+					-- upvalues: t_2 (ref), t_3 (ref)
+					local t = { step = t_2[p1.step] or "unknown" }
 					
-					if p23.status ~= nil then
-						local status = p23.status
+					if p1.status ~= nil then
+						local status = p1.status
 						t.status = if status == "success" or status == "failed" then status else "unknown"
+					end
+					if p1.reason ~= nil then
+						t.reason = t_3[p1.reason] or "unknown"
 					end
 					return t
 				end
@@ -312,8 +331,8 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p24)
-					return { feedType = p24.feedType }
+				format = function(p1)
+					return { feedType = p1.feedType }
 				end
 			}
 		}
@@ -327,11 +346,11 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p25)
-					-- upvalues: t_3 (ref)
+				format = function(p1)
+					-- upvalues: t_4 (ref)
 					return {
-						reason = t_3[p25.reason] or "unknown",
-						feedType = p25.feedType
+						reason = t_4[p1.reason] or "unknown",
+						feedType = p1.feedType
 					}
 				end
 			}
@@ -346,9 +365,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p26)
-					-- upvalues: t_4 (ref)
-					return { editType = t_4[p26.editType] or "unknown" }
+				format = function(p1)
+					-- upvalues: t_5 (ref)
+					return { editType = t_5[p1.editType] or "unknown" }
 				end
 			}
 		}
@@ -362,8 +381,8 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p27)
-					return { bucket = p27.bucket }
+				format = function(p1)
+					return { bucket = p1.bucket }
 				end
 			}
 		}
@@ -377,9 +396,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p28)
+				format = function(p1)
 					local t = {}
-					local captureType = p28.captureType
+					local captureType = p1.captureType
 					t.captureType = if captureType == "screenshot" or captureType == "video" then captureType else "unknown"
 					
 					return t
@@ -396,9 +415,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p29)
-					-- upvalues: t_5 (ref)
-					return { tool = t_5[p29.tool] or "unknown" }
+				format = function(p1)
+					-- upvalues: t_6 (ref)
+					return { tool = t_6[p1.tool] or "unknown" }
 				end
 			}
 		}
@@ -412,9 +431,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p30)
-					-- upvalues: t_5 (ref)
-					return { tool = t_5[p30.tool] or "unknown" }
+				format = function(p1)
+					-- upvalues: t_6 (ref)
+					return { tool = t_6[p1.tool] or "unknown" }
 				end
 			}
 		}
@@ -428,9 +447,9 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p31)
+				format = function(p1)
 					local t = {}
-					local status = p31.status
+					local status = p1.status
 					t.status = if status == "succeeded" or status == "failed" or status == "filtered" then status else "unknown"
 					
 					return t

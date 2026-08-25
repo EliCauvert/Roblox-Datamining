@@ -1315,6 +1315,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Cet arrièr
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Cet arrière-plan a été généré avec l'IA. En l'important, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire. Une fois importés, les items ne peuvent plus être modifiés."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Débloque des arrière-plans exclusifs gratuits avec Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,L'item n'est pas conforme aux Normes de la communauté
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,Tu as atteint ta limite d'utilisation. Réessaie plus tard pour continuer à personnaliser.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Tu as atteint ta limite d'utilisation. Réessaie demain pour continuer à personnaliser.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,Tu as atteint ta limite d'utilisation. Réessaie dans 1 heure pour continuer à personnaliser.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Tu as atteint ta limite d'utilisation. Réessaie dans 1 minute pour continuer à personnaliser.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Cette invite ne respecte pas nos directives. Rédiges-en une autre.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Cet arrière-plan n'est pas conforme aux Normes de la communauté Roblox et n'a donc pas été ajouté à ton inventaire. Essaie d'en générer un nouveau.
 Feature.Avatar.BackgroundGeneration.Error.System,Une erreur s'est produite lors de la génération de ton arrière-plan. Réessaie.
@@ -3264,7 +3268,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Développer
 Feature.Moments.Action.GenerateText,Générer du texte
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Peu utile
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Inapproprié ou contraire aux directives
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Inapproprié ou non conforme aux règles
 Feature.Moments.Action.Hide,Masquer les détails
 Feature.Moments.Action.HowToCapture,Comment faire une capture d'écran
 Feature.Moments.Action.Join,

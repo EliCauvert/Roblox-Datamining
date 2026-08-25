@@ -66,6 +66,7 @@
 	PlayButton = "PlayButton",
 	PlayWithReward = "PlayWithReward",
 	PlayButtonContextualMessage = "PlayButtonContextualMessage",
+	RevealRowsButtonWithDivider = "RevealRowsButtonWithDivider",
 	RevealText = "RevealText",
 	SectionHeader = "SectionHeader",
 	SeeAllTile = "SeeAllTile",

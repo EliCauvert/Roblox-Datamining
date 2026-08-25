@@ -1298,6 +1298,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,พื้น
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,พื้นหลังนี้สร้างขึ้นด้วย AI เมื่อมีการอัปโหลด จะถือว่าคุณยืนยันว่าพื้นหลังนี้เป็นไปตามมาตรฐานชุมชนของ Roblox และไม่ได้ใช้เนื้อหาที่คุณไม่มีสิทธิ์ การดำเนินการดังกล่าวจะต้องผ่านการตรวจสอบก่อนที่พื้นหลังนี้จะปรากฏในคลังไอเท็มของคุณ ไอเท็มที่อัปโหลดแล้วจะไม่สามารถแก้ไขได้
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,ปลดล็อคพื้นหลังสุดพิเศษฟรีเมื่อสมัคร Plus
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,ไอเท็มไม่เป็นไปตามมาตรฐานชุมชน
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,คุณใช้งานครบตามจำนวนสูงสุดที่กำหนดไว้แล้ว โปรดลองอีกครั้งในภายหลังเพื่อปรับแต่งต่อ
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,คุณใช้งานครบตามจำนวนสูงสุดที่กำหนดไว้แล้ว โปรดลองอีกครั้งในวันพรุ่งนี้เพื่อปรับแต่งต่อ
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,คุณใช้งานครบตามจำนวนสูงสุดที่กำหนดไว้แล้ว โปรดลองอีกครั้งในอีก 1 ชั่วโมงเพื่อปรับแต่งต่อ
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,คุณใช้งานครบตามจำนวนสูงสุดที่กำหนดไว้แล้ว โปรดลองอีกครั้งในอีก 1 นาทีเพื่อปรับแต่งต่อ
 Feature.Avatar.BackgroundGeneration.Error.Moderation,พรอมต์นั้นไม่เป็นไปตามแนวทางของเรา ลองอธิบายอย่างอื่น
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,พื้นหลังนี้ไม่เป็นไปตามมาตรฐานชุมชนของ Roblox จึงไม่ได้เพิ่มไปยังคลังไอเท็มของคุณ ลองสร้างใหม่
 Feature.Avatar.BackgroundGeneration.Error.System,มีบางอย่างผิดปกติขณะสร้างพื้นหลัง โปรดลองอีกครั้ง
@@ -3247,7 +3251,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,ขยาย
 Feature.Moments.Action.GenerateText,สร้างข้อความ
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,ไม่มีประโยชน์
-Feature.Moments.Action.GenerateTextFeedbackPolicy,ไม่เหมาะสมหรือละเมิดแนวทางปฏิบัติ
+Feature.Moments.Action.GenerateTextFeedbackPolicy,ไม่เหมาะสมหรือละเมิดกฎเกณฑ์
 Feature.Moments.Action.Hide,ซ่อนรายละเอียด
 Feature.Moments.Action.HowToCapture,วิธีจับภาพ
 Feature.Moments.Action.Join,

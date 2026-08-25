@@ -1,28 +1,25 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
+﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
 local httpService = game:GetService("HttpService")
 local localPlayer = game:GetService("Players").LocalPlayer
 local dashModule = require(parent.Dash)
 local _ = require(script.Parent.AbuseSheetFlowTypes)
 local fFlagAbuseReportMenuV2 = require(parent.SharedFlags).FFlagAbuseReportMenuV2
-local fFlagAbuseReportInlineAlertStateOutsideReducerModule = require(genericAbuseReporting.Flags.FFlagAbuseReportInlineAlertStateOutsideReducer)
 
-local function getInitialState(p0, p1, p2)
+local function getInitialState(p1, p2, p3)
 	-- upvalues: localPlayer (ref), fFlagAbuseReportMenuV2 (ref)
 	return {
 		navigationState = "idle",
 		submissionState = "idle",
-		pendingInlineAlert = nil,
-		runId = p0,
+		runId = p1,
 		userId = if localPlayer then localPlayer.UserId else 0,
 		stack = {
 			{
-				nodeId = if fFlagAbuseReportMenuV2 then p2 else "root",
+				nodeId = if fFlagAbuseReportMenuV2 then p3 else "root",
 				store = {},
-				enterTime = p1
+				enterTime = p2
 			}
 		},
-		openTime = p1
+		openTime = p2
 	}
 end
 
@@ -32,10 +29,10 @@ return {
 		-- upvalues: httpService (ref)
 		return httpService:GenerateGUID(false)
 	end,
-	selectStore = function(p3)
+	selectStore = function(p1)
 		local t = {}
 		
-		for i, v in p3.stack do
+		for i, v in p1.stack do
 			if v.store then
 				for i_1, v_1 in v.store do
 					t[i_1] = v_1
@@ -44,135 +41,110 @@ return {
 		end
 		return t
 	end,
-	reducer = function(p4, p5)
-		-- upvalues: dashModule (ref), fFlagAbuseReportMenuV2 (ref), fFlagAbuseReportInlineAlertStateOutsideReducerModule (ref), getInitialState (ref)
-		local cloned = nil
+	reducer = function(p1, p2)
+		-- upvalues: dashModule (ref), fFlagAbuseReportMenuV2 (ref), getInitialState (ref)
+		local var1 = nil
 		
-		if p5.type == "gotoNode" then
-			if not p5.payload or not p5.payload.nodeId then
-				error(`gotoNode action requires payload.nodeId, got: {dashModule.pretty(p5, { depth = 5 })}`)
+		if p2.type == "gotoNode" then
+			if not p2.payload or not p2.payload.nodeId then
+				error(`gotoNode action requires payload.nodeId, got: {dashModule.pretty(p2, { depth = 5 })}`)
 			end
-			local cloned_1 = table.clone(p4.stack)
-			table.insert(cloned_1, {
-				nodeId = p5.payload.nodeId,
+			local cloned = table.clone(p1.stack)
+			table.insert(cloned, {
+				nodeId = p2.payload.nodeId,
 				store = {},
-				enterTime = p5.payload.enterTime
+				enterTime = p2.payload.enterTime
 			})
-			cloned = dashModule.join(p4, {
+			var1 = dashModule.join(p1, {
 				navigationState = "idle",
 				lastNavigationDirection = "forward",
-				stack = cloned_1
+				stack = cloned
 			})
 			
-			if fFlagAbuseReportMenuV2 and not fFlagAbuseReportInlineAlertStateOutsideReducerModule then
-				cloned.pendingInlineAlert = p5.payload.inlineAlert
-				
-				return cloned
-			end
-		elseif p5.type == "replaceAndGotoNode" then
-			local var8 = dashModule.last(p4.stack)
+			return var1
+		elseif p2.type == "replaceAndGotoNode" then
+			local var2 = dashModule.last(p1.stack)
 			
-			if not var8 then
+			if not var2 then
 				error("Stack is empty, cannot replace and go to node")
 			end
-			local var9 = dashModule.slice(p4.stack, 1, #p4.stack - 1)
-			table.insert(var9, {
-				nodeId = p5.payload.nodeId,
-				store = var8.store,
-				enterTime = p5.payload.enterTime
+			local var3 = dashModule.slice(p1.stack, 1, #p1.stack - 1)
+			table.insert(var3, {
+				nodeId = p2.payload.nodeId,
+				store = var2.store,
+				enterTime = p2.payload.enterTime
 			})
-			cloned = dashModule.join(p4, {
+			var1 = dashModule.join(p1, {
 				navigationState = "idle",
 				lastNavigationDirection = "forward",
-				stack = var9
+				stack = var3
 			})
 			
-			if fFlagAbuseReportMenuV2 and not fFlagAbuseReportInlineAlertStateOutsideReducerModule then
-				cloned.pendingInlineAlert = p5.payload.inlineAlert
-				
-				return cloned
-			end
-		elseif p5.type == "goBack" then
-			if #p4.stack <= 1 then
+			return var1
+		elseif p2.type == "goBack" then
+			if #p1.stack <= 1 then
 				warn("Cannot go back from stack with only one or zero items")
 				
-				return p4
+				return p1
 			end
-			cloned = dashModule.join(p4, {
+			var1 = dashModule.join(p1, {
 				lastNavigationDirection = "back",
-				stack = dashModule.slice(p4.stack, 1, #p4.stack - 1)
+				stack = dashModule.slice(p1.stack, 1, #p1.stack - 1)
 			})
 			
-			if fFlagAbuseReportMenuV2 and not fFlagAbuseReportInlineAlertStateOutsideReducerModule then
-				cloned.pendingInlineAlert = nil
-				
-				return cloned
-			end
-		elseif p5.type == "updateDataAndNavigateNext" then
-			local var10 = dashModule.last(p4.stack)
+			return var1
+		elseif p2.type == "updateDataAndNavigateNext" then
+			local var4 = dashModule.last(p1.stack)
 			
-			if not var10 then
+			if not var4 then
 				error("Stack is empty, cannot update data")
 			end
 			if fFlagAbuseReportMenuV2 then
-				if p5.payload.expectedFromNodeId and p5.payload.expectedFromNodeId ~= var10.nodeId then
-					return p4
-				elseif p4.navigationState == "idle" then
-					local var11 = dashModule.slice(p4.stack, 1, #p4.stack - 1)
-					table.insert(var11, dashModule.join(var10, { store = dashModule.join(var10.store, p5.payload.store) }))
-					cloned = dashModule.join(p4, { navigationState = "gotoNext", stack = var11 })
+				if p2.payload.expectedFromNodeId and p2.payload.expectedFromNodeId ~= var4.nodeId then
+					return p1
+				elseif p1.navigationState == "idle" then
+					local var5 = dashModule.slice(p1.stack, 1, #p1.stack - 1)
+					table.insert(var5, dashModule.join(var4, { store = dashModule.join(var4.store, p2.payload.store) }))
+					var1 = dashModule.join(p1, { navigationState = "gotoNext", stack = var5 })
 					
-					return cloned
+					return var1
 				else
-					return p4
+					return p1
 				end
 			end
-		elseif p5.type == "navigateFailure" then
-			local var12 = dashModule.last(p4.stack)
+		elseif p2.type == "navigateFailure" then
+			local var6 = dashModule.last(p1.stack)
 			
-			if not var12 then
+			if not var6 then
 				error("Stack is empty, cannot navigate after failure")
 			end
-			if p5.payload.expectedFromNodeId ~= var12.nodeId then
-				return p4
-			elseif p4.navigationState == "idle" then
-				cloned = dashModule.join(p4, { navigationState = "gotoFailure" })
+			if p2.payload.expectedFromNodeId ~= var6.nodeId then
+				return p1
+			elseif p1.navigationState == "idle" then
+				var1 = dashModule.join(p1, { navigationState = "gotoFailure" })
 				
-				return cloned
+				return var1
 			end
-			return p4
-		elseif p5.type == "startedSubmission" then
-			cloned = dashModule.join(p4, { submissionState = "submitting" })
+			return p1
+		elseif p2.type == "startedSubmission" then
+			var1 = dashModule.join(p1, { submissionState = "submitting" })
 			
-			return cloned
-		elseif p5.type == "completedSubmission" then
-			cloned = dashModule.join(p4, { submissionState = "completed" })
+			return var1
+		elseif p2.type == "completedSubmission" then
+			var1 = dashModule.join(p1, { submissionState = "completed" })
 			
-			return cloned
-		elseif p5.type == "submissionFailed" then
-			cloned = dashModule.join(p4, { submissionState = "failed" })
+			return var1
+		elseif p2.type == "submissionFailed" then
+			var1 = dashModule.join(p1, { submissionState = "failed" })
 			
-			return cloned
-		elseif p5.type == "reset" then
-			cloned = getInitialState(p5.payload.runId, p5.payload.initialEnterTime, p5.payload.startNodeId)
+			return var1
+		elseif p2.type == "reset" then
+			var1 = getInitialState(p2.payload.runId, p2.payload.initialEnterTime, p2.payload.startNodeId)
 			
-			if fFlagAbuseReportMenuV2 and not fFlagAbuseReportInlineAlertStateOutsideReducerModule then
-				cloned.pendingInlineAlert = p5.payload.inlineAlert
-				
-				return cloned
-			end
-		elseif fFlagAbuseReportMenuV2 and p5.type == "clearInlineAlert" then
-			cloned = table.clone(p4)
-			
-			if fFlagAbuseReportInlineAlertStateOutsideReducerModule then
-				return cloned
-			else
-				cloned.pendingInlineAlert = nil
-				
-				return cloned
-			end
-		else
-			error("Unknown action type: " .. tostring(p5.type))
+			return var1
 		end
+		error("Unknown action type: " .. tostring(p2.type))
+		
+		return var1
 	end
 }

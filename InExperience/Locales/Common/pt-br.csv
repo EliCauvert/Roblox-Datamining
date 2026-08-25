@@ -1315,6 +1315,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Este plano 
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Este plano de fundo foi gerado com IA. Ao enviar, você confirma que ele segue as Regras da Comunidade Roblox e não usa conteúdo sobre o qual você não tem direitos. Ele será analisado antes de aparecer no seu inventário. Os itens enviados não podem ser editados."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Desbloqueie planos de fundo exclusivos gratuitos com o Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,O item não atendeu às Regras da Comunidade
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,Você atingiu seu limite de uso. Tente novamente mais tarde para continuar personalizando.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Você atingiu seu limite de uso. Tente novamente amanhã para continuar personalizando.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,Você atingiu seu limite de uso. Tente novamente em 1 hora para continuar personalizando.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Você atingiu seu limite de uso. Tente novamente em 1 minuto para continuar personalizando.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Esse prompt não segue nossas diretrizes. Tente descrever outra coisa.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Este plano de fundo não segue as Regras da Comunidade Roblox, por isso não foi adicionado ao seu inventário. Tente gerar um novo."
 Feature.Avatar.BackgroundGeneration.Error.System,Algo deu errado ao gerar seu plano de fundo. Tente novamente.
@@ -3264,7 +3268,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expandir
 Feature.Moments.Action.GenerateText,Gerar texto
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Não é útil
-Feature.Moments.Action.GenerateTextFeedbackPolicy,É inapropriado ou viola as diretrizes
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Inapropriado ou ou viola as regras
 Feature.Moments.Action.Hide,
 Feature.Moments.Action.HowToCapture,Como capturar
 Feature.Moments.Action.Join,

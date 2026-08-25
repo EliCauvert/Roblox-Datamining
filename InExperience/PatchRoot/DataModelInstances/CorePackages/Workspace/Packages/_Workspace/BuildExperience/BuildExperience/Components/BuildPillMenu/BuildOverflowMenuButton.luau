@@ -2,8 +2,10 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagBuildLocalization = require(parent.SharedFlags).FFlagBuildLocalization
+local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local versionHistoryContainerModule = require(buildExperience.Components.VersionHistory.VersionHistoryContainer)
 local privateShareTooltipModule = require(buildExperience.Components.ShareAudience.PrivateShareTooltip)
 local friendsOnlyShareDialogModule = require(buildExperience.Components.ShareAudience.FriendsOnlyShareDialog)
@@ -27,215 +29,220 @@ local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOv
 local releaseAnyFocusModule = require(buildExperience.utils.releaseAnyFocus)
 local buildOverflowMenuWidth = game:DefineFastInt("BuildOverflowMenuWidth", 172)
 
-local function _(p0, p1)
-	return if p0.getText == nil then p0.text else p0.getText(p1)
+local function _(p1, p2)
+	return if p1.getText == nil then p1.text else p1.getText(p2)
 end
 
-return function(p2)
-	-- upvalues: useScaledValue (ref), buildOverflowMenuWidth (ref), reactModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), useSharePublishedExperience (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), useCreatorCreditMenuItem (ref), releaseAnyFocusModule (ref), leaveExperienceModule (ref), versionHistoryContainerModule (ref), menu (ref), popoverSide (ref), fFlagBuildDesktopReadinessModule (ref), inputSize (ref), popoverAlign (ref), iconButton (ref), buttonVariant (ref), experienceShareOverlaysModule (ref), friendsOnlyShareDialogModule (ref), privateShareTooltipModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
-	local var15 = useScaledValue(buildOverflowMenuWidth)
-	local var16, var17 = reactModule.useState(false)
-	local var18, var19 = reactModule.useState(false)
-	local var20, var21 = reactModule.useState(false)
-	local var22 = reactModule.useRef(nil)
-	local var23 = if fFlagBuildExperiencePrivateInvitesModule then useExperienceShareFlowModule(p2.target.universeId, p2.target.placeId) else nil
-	local var24 = if var23 ~= nil then nil else var23.onShare
-	local var25 = useSharePublishedExperience(p2.target.universeId)
-	local var26, var27 = reactModule.useState(nil)
-	local var28 = p2.onOpenCreatorCreditPage ~= nil
-	local var29 = if p2.isDisabled ~= true then p2.target.universeId == nil and not (fFlagEnableBuildOverflowMenuForNewGamesModule and (p2.target.universeId == nil and var28)) else true
-	local var30 = p2.hasPublishedTurn == true
-	local var31 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref), var30 (ref)
-		return if p2.target.universeId == nil then nil else {
-			universeId = p2.target.universeId,
-			placeId = p2.target.placeId,
-			sessionId = p2.target.sessionId,
-			isNewGameTarget = p2.target.isNewGameTarget,
-			hasPublishedTurn = var30,
-			hasPublishedVersion = p2.hasPublishedVersion == true
+return function(p1)
+	-- upvalues: useScaledValue (ref), buildOverflowMenuWidth (ref), reactModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), useSharePublishedExperience (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), useCreatorCreditMenuItem (ref), releaseAnyFocusModule (ref), leaveExperienceModule (ref), versionHistoryContainerModule (ref), fFlagBuildAgentRollbackModule (ref), menu (ref), popoverSide (ref), fFlagBuildDesktopReadinessModule (ref), inputSize (ref), popoverAlign (ref), iconButton (ref), buttonVariant (ref), experienceShareOverlaysModule (ref), friendsOnlyShareDialogModule (ref), privateShareTooltipModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
+	local var1 = useScaledValue(buildOverflowMenuWidth)
+	local var2, var3 = reactModule.useState(false)
+	local var4, var5 = reactModule.useState(false)
+	local var6, var7 = reactModule.useState(false)
+	local var8 = reactModule.useRef(nil)
+	local var9 = if fFlagBuildExperiencePrivateInvitesModule then useExperienceShareFlowModule(p1.target.universeId, p1.target.placeId) else nil
+	local var10 = if var9 ~= nil then nil else var9.onShare
+	local var11 = useSharePublishedExperience(p1.target.universeId)
+	local var12, var13 = reactModule.useState(nil)
+	local var14 = p1.onOpenCreatorCreditPage ~= nil
+	local var15 = if p1.isDisabled ~= true then p1.target.universeId == nil and not (fFlagEnableBuildOverflowMenuForNewGamesModule and (p1.target.universeId == nil and var14)) else true
+	local var16 = p1.hasPublishedTurn == true
+	local var17 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var16 (ref)
+		return if p1.target.universeId == nil then nil else {
+			universeId = p1.target.universeId,
+			placeId = p1.target.placeId,
+			sessionId = p1.target.sessionId,
+			isNewGameTarget = p1.target.isNewGameTarget,
+			hasPublishedTurn = var16,
+			hasPublishedVersion = p1.hasPublishedVersion == true
 		}
 	end, {
-		p2.target.universeId, p2.target.placeId, p2.target.sessionId,
-		p2.target.isNewGameTarget, var30, p2.hasPublishedVersion
+		p1.target.universeId, p1.target.placeId, p1.target.sessionId,
+		p1.target.isNewGameTarget, var16, p1.hasPublishedVersion
 	})
-	local var32 = p2.store.useItems(var31)
-	local var33 = if fFlagBuildLocalization then {} else nil
+	local var1 = p1.store.useItems(var17)
+	local var2 = if fFlagBuildLocalization then {} else nil
 	
-	if fFlagBuildLocalization and var31 ~= nil then
-		for i, v in var32 do
+	if fFlagBuildLocalization and var17 ~= nil then
+		for i, v in var1 do
 			for i_1, v_1 in v.items do
-				var33[v_1.id] = if v_1.getText ~= nil then v_1.text else v_1.getText(var31)
+				var2[v_1.id] = if v_1.getText ~= nil then v_1.text else v_1.getText(var17)
 			end
 		end
 	end
-	local var34 = if fFlagBuildLocalization then useLocalization(var33) else nil
-	local var35 = useCreatorCreditMenuItem({ onOpenCreatorCreditPage = p2.onOpenCreatorCreditPage })
+	local var3 = if fFlagBuildLocalization then useLocalization(var2) else nil
+	local var4 = useCreatorCreditMenuItem({ onOpenCreatorCreditPage = p1.onOpenCreatorCreditPage })
 	
-	local function _(p3)
-		-- upvalues: fFlagBuildLocalization (copy), var34 (ref), var31 (ref)
-		return if fFlagBuildLocalization then var34[p3.id] elseif p3.getText == nil then p3.text else p3.getText(var31)
+	local function _(p1)
+		-- upvalues: fFlagBuildLocalization (copy), var3 (ref), var17 (ref)
+		return if fFlagBuildLocalization then var3[p1.id] elseif p1.getText == nil then p1.text else p1.getText(var17)
 	end
 	
 	local function buildMenuItems()
-		-- upvalues: var29 (ref), var31 (ref), var32 (ref), fFlagBuildLocalization (copy), var34 (ref), var22 (ref), var28 (ref), var35 (ref)
+		-- upvalues: var15 (ref), var17 (ref), var1 (ref), fFlagBuildLocalization (copy), var3 (ref), var8 (ref), var14 (ref), var4 (ref)
 		local t = {}
 		
-		if not var29 then
-			if var31 ~= nil then
-				for i, v in var32 do
+		if not var15 then
+			if var17 ~= nil then
+				for i, v in var1 do
 					local t_1 = { items = {} }
 					
 					for i_1, v_1 in v.items do
 						table.insert(t_1.items, {
 							id = v_1.id,
-							text = if fFlagBuildLocalization then var34[v_1.id] elseif v_1.getText ~= nil then v_1.text else v_1.getText(var31),
+							text = if fFlagBuildLocalization then var3[v_1.id] elseif v_1.getText ~= nil then v_1.text else v_1.getText(var17),
 							icon = v_1.icon,
-							isDisabled = if v_1.isDisabled ~= nil then nil else v_1.isDisabled(var31),
-							ref = if v_1.id == "share" then var22 else nil
+							isDisabled = if v_1.isDisabled ~= nil then nil else v_1.isDisabled(var17),
+							ref = if v_1.id == "share" then var8 else nil
 						})
 					end
 					table.insert(t, t_1)
 				end
 			end
-			if var28 then
-				table.insert(t, { items = { var35.item } })
+			if var14 then
+				table.insert(t, { items = { var4.item } })
 			end
 		end
 		return t
 	end
 	
-	local var37 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), var21 (ref)
-		var17(false)
-		var21(false)
+	local var1 = if fFlagBuildLocalization then buildMenuItems() else reactModule.useMemo(buildMenuItems, {
+		var15,
+		var1,
+		var17,
+		var14,
+		var4
+	})
+	local var2 = reactModule.useCallback(function()
+		-- upvalues: var15 (ref), var7 (ref), var3 (ref), p1 (ref)
+		if var15 then return end
+		var7(false)
+		var3(function(p1)
+			return not p1
+		end)
+		
+		if p1.onActivated then
+			p1.onActivated()
+		end
+	end, { var15, p1.onActivated })
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var7 (ref)
+		var3(false)
+		var7(false)
+	end, {})
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref)
+		var5(false)
 	end, {})
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Menu = reactModule.createElement(menu, {
-			isOpen = var16 and not var29,
-			items = if fFlagBuildLocalization then buildMenuItems() else reactModule.useMemo(buildMenuItems, {
-				var29,
-				var32,
-				var31,
-				var28,
-				var35
-			}),
+			isOpen = var2 and not var15,
+			items = var1,
 			side = popoverSide.Bottom,
 			size = if fFlagBuildDesktopReadinessModule then inputSize.Large else nil,
 			align = popoverAlign.End,
-			onPressedOutside = var37,
-			onActivated = reactModule.useCallback(function(p4)
-				-- upvalues: var28 (ref), var35 (ref), var17 (ref), var31 (ref), var32 (ref), p2 (ref), releaseAnyFocusModule (copy), var19 (ref), fFlagBuildExperiencePrivateInvitesModule (copy), var24 (ref), var25 (ref), var27 (ref), var21 (ref), leaveExperienceModule (copy)
-				if var28 and var35 ~= nil and p4 == var35.item.id then
-					var35.activate()
-					var17(false)
+			onPressedOutside = var3,
+			onActivated = reactModule.useCallback(function(p1)
+				-- upvalues: var14 (ref), var4 (ref), var3 (ref), var17 (ref), var1 (ref), p1 (ref), releaseAnyFocusModule (copy), var5 (ref), fFlagBuildExperiencePrivateInvitesModule (copy), var10 (ref), var11 (ref), var13 (ref), var7 (ref), leaveExperienceModule (copy)
+				if var14 and var4 ~= nil and p1 == var4.item.id then
+					var4.activate()
+					var3(false)
 					
 					return
-				elseif var31 == nil then return end
-				for i, v in var32 do
+				elseif var17 == nil then return end
+				for i, v in var1 do
 					for i_1, v_1 in v.items do
-						if v_1.id == p4 then
-							local var40 = if v_1.onActivated then v_1.onActivated(var31) else nil
+						if v_1.id == p1 then
+							local var1 = if v_1.onActivated then v_1.onActivated(var17) else nil
 							
-							if var40 ~= nil then
-								if var40.type == "openPage" then
-									if p2.onAction then
-										p2.onAction(var40)
+							if var1 ~= nil then
+								if var1.type == "openPage" then
+									if p1.onAction then
+										p1.onAction(var1)
 									end
-								elseif var40.type == "openInvitePicker" then
-									if p2.onAction then
-										p2.onAction(var40)
+								elseif var1.type == "openInvitePicker" then
+									if p1.onAction then
+										p1.onAction(var1)
 									end
-								elseif var40.type == "openVersionHistory" then
+								elseif var1.type == "openVersionHistory" then
 									releaseAnyFocusModule()
-									var19(true)
-								elseif var40.type == "share" then
-									if fFlagBuildExperiencePrivateInvitesModule and var24 ~= nil then
-										var24()
-									elseif var40.placeId ~= nil then
-										var25(var40.placeId)
+									var5(true)
+								elseif var1.type == "share" then
+									if fFlagBuildExperiencePrivateInvitesModule and var10 ~= nil then
+										var10()
+									elseif var1.placeId ~= nil then
+										var11(var1.placeId)
 									end
-								elseif var40.type == "confirmFriendsShare" then
-									var27(var40.placeId)
-								elseif var40.type == "showPrivateShareTooltip" then
-									var21(function(p5)
-										return not p5
+								elseif var1.type == "confirmFriendsShare" then
+									var13(var1.placeId)
+								elseif var1.type == "showPrivateShareTooltip" then
+									var7(function(p1)
+										return not p1
 									end)
 									
 									return
-								elseif var40.type == "leaveExperience" then
-									var17(false)
+								elseif var1.type == "leaveExperience" then
+									var3(false)
 									leaveExperienceModule()
 									
 									return
 								end
 							end
-							var17(false)
+							var3(false)
 							
 							return
 						end
 					end
 				end
 			end, {
-				var32, var31, p2.onAction, var24, var25, var28, var35
+				var1, var17, p1.onAction, var10, var11, var14, var4
 			}),
-			LayoutOrder = p2.layoutOrder,
-			width = UDim.new(0, var15)
+			LayoutOrder = p1.layoutOrder,
+			width = UDim.new(0, var1)
 		}, reactModule.createElement(iconButton, {
 			isCircular = true,
 			testId = "build-header-overflow-button",
-			icon = p2.icon,
+			icon = p1.icon,
 			variant = buttonVariant.Utility,
 			size = inputSize.Medium,
-			isDisabled = var29,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var29 (ref), var21 (ref), var17 (ref), p2 (ref)
-				if var29 then return end
-				var21(false)
-				var17(function(p6)
-					return not p6
-				end)
-				
-				if p2.onActivated then
-					p2.onActivated()
-				end
-			end, { var29, p2.onActivated })
+			isDisabled = var15,
+			onActivated = var2
 		})),
-		ShareOverlays = if fFlagBuildExperiencePrivateInvitesModule and var23 ~= nil then reactModule.createElement(experienceShareOverlaysModule, {
-			activeDialog = var23.activeDialog,
-			hasShareError = var23.hasShareError,
-			onCancel = var23.onCancelDialog,
-			onConfirmFriends = var23.onConfirmFriends,
-			onConfirmPlaytesters = var23.onConfirmPlaytesters
+		ShareOverlays = if fFlagBuildExperiencePrivateInvitesModule and var9 ~= nil then reactModule.createElement(experienceShareOverlaysModule, {
+			activeDialog = var9.activeDialog,
+			hasShareError = var9.hasShareError,
+			onCancel = var9.onCancelDialog,
+			onConfirmFriends = var9.onConfirmFriends,
+			onConfirmPlaytesters = var9.onConfirmPlaytesters
 		}) else nil,
-		FriendsOnlyShareDialog = if fFlagBuildExperiencePrivateInvitesModule or var26 == nil then nil else reactModule.createElement(friendsOnlyShareDialogModule, {
+		FriendsOnlyShareDialog = if fFlagBuildExperiencePrivateInvitesModule or var12 == nil then nil else reactModule.createElement(friendsOnlyShareDialogModule, {
 			onCancel = reactModule.useCallback(function()
-				-- upvalues: var27 (ref)
-				var27(nil)
+				-- upvalues: var13 (ref)
+				var13(nil)
 			end, {}),
 			onShare = reactModule.useCallback(function()
-				-- upvalues: var26 (ref), var27 (ref), var25 (ref)
-				var27(nil)
+				-- upvalues: var12 (ref), var13 (ref), var11 (ref)
+				var13(nil)
 				
-				if var26 ~= nil then
-					var25(var26)
+				if var12 ~= nil then
+					var11(var12)
 				end
-			end, { var26, var25 })
+			end, { var12, var11 })
 		}),
 		PrivateShareTooltip = reactModule.createElement(privateShareTooltipModule, {
-			anchorRef = var22,
-			isOpen = var16 and var20,
-			onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then var37 else nil
+			anchorRef = var8,
+			isOpen = var2 and var6,
+			onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then var3 else nil
 		}),
-		VersionHistory = if var18 and p2.target.placeId ~= nil then reactModule.createElement(versionHistoryContainerModule, {
+		VersionHistory = if var4 and p1.target.placeId ~= nil then reactModule.createElement(versionHistoryContainerModule, {
 			isOpen = true,
 			testId = "build-version-history",
-			placeId = p2.target.placeId,
-			onClose = reactModule.useCallback(function()
-				-- upvalues: var19 (ref)
-				var19(false)
-			end, {})
+			universeId = p1.target.universeId,
+			placeId = p1.target.placeId,
+			onClose = var4,
+			onAgentRollbackStarted = if fFlagBuildAgentRollbackModule then var4 else nil
 		}) else nil
 	})
 end

@@ -4,17 +4,19 @@ local validateFontModule = require(parent.Validator.validateFont)
 local fontLoaderModule = require(script.Parent.FontLoader)
 local _ = require(parent.StyleTypes)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fontLoaderModule (ref), constantsModule (ref), validateFontModule (ref)
+	local var1 = fontLoaderModule.new(p2)
 	local t = {
-		[constantsModule.FontName.Gotham:lower()] = fontLoaderModule.new(p1):loadFont()
+		[constantsModule.FontName.Gotham:lower()] = var1:loadFont(),
+		[constantsModule.FontName.Classic:lower()] = var1:loadFont(Enum.Font.Cartoon)
 	}
-	local var4 = if not (p0 == nil or #p0 <= 0) then t[p0:lower()] else nil
+	local var2 = if not (p1 == nil or #p1 <= 0) then t[p1:lower()] else nil
 	
-	if var4 == nil then
-		var4 = t[constantsModule.DefaultFontName:lower()]
+	if var2 == nil then
+		var2 = t[constantsModule.DefaultFontName:lower()]
 	end
-	assert(validateFontModule(var4))
+	assert(validateFontModule(var2))
 	
-	return var4
+	return var2
 end

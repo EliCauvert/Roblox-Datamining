@@ -1315,6 +1315,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Latar belak
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Latar belakang ini dibuat dengan AI. Dengan meng-upload, kamu mengonfirmasi bahwa latar belakang ini mematuhi Standar Komunitas Roblox dan tidak menggunakan konten yang haknya tidak kamu miliki. Latar belakang ini akan di-review sebelum muncul di inventarismu. Item yang di-upload tidak dapat diedit."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Buka latar belakang eksklusif gratis dengan Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item tidak memenuhi Standar Komunitas
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,Kamu telah mencapai batas penggunaan. Coba lagi nanti untuk melanjutkan penyesuaian.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Kamu telah mencapai batas penggunaan. Coba lagi besok untuk melanjutkan penyesuaian.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,Kamu telah mencapai batas penggunaan. Coba lagi dalam 1 jam untuk melanjutkan penyesuaian.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Kamu telah mencapai batas penggunaan. Coba lagi dalam 1 menit untuk melanjutkan penyesuaian.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Prompt itu tidak mengikuti pedoman kami. Coba deskripsikan sesuatu yang lain.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Latar belakang ini tidak mengikuti Standar Komunitas Roblox, jadi tidak ditambahkan ke inventarismu. Coba buat yang baru."
 Feature.Avatar.BackgroundGeneration.Error.System,Terjadi kesalahan saat membuat latar belakangmu. Coba lagi.
@@ -3262,7 +3266,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Perluas
 Feature.Moments.Action.GenerateText,Buat Teks
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Tidak membantu
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Tidak pantas atau melanggar pedoman
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Tidak Pantas atau Melanggar Aturan
 Feature.Moments.Action.Hide,Sembunyikan detail
 Feature.Moments.Action.HowToCapture,Cara mengambil Media
 Feature.Moments.Action.Join,Gabung
@@ -3711,7 +3715,7 @@ Feature.RobloxSubscription.Body.GenericError,Kami tidak dapat menyelesaikannya s
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Subscription ini tidak tersedia untuk dibeli di perangkat ini.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verifikasi usiamu dengan pemeriksaan usia dan dapatkan Roblox Plus gratis selama 1 minggu sebagai ucapan terima kasih kami. Tidak diperlukan metode pembayaran untuk menikmati uji coba gratis ini.
 Feature.RobloxSubscription.Description.Benefit.Customize,Kustomisasi dengan bingkai profil dan tema aplikasi
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Diskon 10% untuk 60 hari pertama, kemudian diskon 20% untuk item dan avatar"
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Diskon 10% selama 60 hari pertama, kemudian diskon 20% untuk item dan avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Lebih seru, lebih hemat Robux. Subscribe Roblox Plus."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privat gratis

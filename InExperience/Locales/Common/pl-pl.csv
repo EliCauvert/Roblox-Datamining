@@ -1315,6 +1315,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"To tło zos
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"To tło zostało wygenerowane przez sztuczną inteligencję. Przesyłając, potwierdzasz, że jest ono zgodne ze Standardami społeczności Robloxa i nie wykorzystuje treści, do których nie masz praw. Zanim pojawi się w Twoim wyposażeniu, zostanie zweryfikowane. Przesłanych przedmiotów nie można edytować."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Odblokuj bezpłatne ekskluzywne tła dzięki subskrypcji Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Przedmiot nie spełniał Standardów społeczności
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,"Osiągnięto limit wykorzystania. Spróbuj ponownie później, aby kontynuować dostosowywanie."
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,"Osiągnięto limit wykorzystania. Spróbuj ponownie jutro, aby kontynuować dostosowywanie."
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,"Osiągnięto limit wykorzystania. Spróbuj ponownie za godzinę, aby kontynuować dostosowywanie."
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,"Osiągnięto limit wykorzystania. Spróbuj ponownie za minutę, aby kontynuować dostosowywanie."
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Ten prompt nie jest zgodny z naszymi wytycznymi. Spróbuj opisać coś innego.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"To tło nie jest zgodne ze Standardami społeczności Robloxa, dlatego nie dodano go do Twojego wyposażenia. Spróbuj wygenerować nowe."
 Feature.Avatar.BackgroundGeneration.Error.System,Podczas generowania Twojego tła coś poszło nie tak. Spróbuj ponownie.
@@ -3264,7 +3268,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Rozwiń
 Feature.Moments.Action.GenerateText,Generowanie tekstu
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Nieprzydatny
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Niewłaściwy lub niezgodny z zaleceniami
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Niewłaściwy lub naruszający zasady
 Feature.Moments.Action.Hide,Ukryj szczegóły
 Feature.Moments.Action.HowToCapture,Jak przechwytywać
 Feature.Moments.Action.Join,
@@ -3713,7 +3717,7 @@ Feature.RobloxSubscription.Body.GenericError,Nie udało się teraz tego zrealizo
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Tej subskrypcji nie można kupić na tym urządzeniu.
 Feature.RobloxSubscription.Description.AgeCheckTrial,"Przeprowadź weryfikację wieku i odbierz bezpłatny tydzień subskrypcji Roblox Plus w ramach podziękowania. Nie musisz podawać formy płatności, aby skorzystać z bezpłatnego okresu próbnego."
 Feature.RobloxSubscription.Description.Benefit.Customize,Dostosuj za pomocą ramek profilu i motywów aplikacji
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% zniżki przez pierwsze 60 dni, a następnie 20% zniżki na przedmioty i awatary"
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% zniżki przez pierwsze 60 dni, a następnie 20% zniżki na przedmioty i awatary"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Więcej zabawy za mniej Robuxów. Wykup subskrypcję Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Klikając przycisk \u{201C}{ctaText}\u{201D}, akceptujesz <a href=""{termsUrl}"">Warunki subskrypcji Robloxa</a>. Opłata będzie pobierana automatycznie co miesiąc do momentu anulowania subskrypcji."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Darmowe serwery prywatne

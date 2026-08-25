@@ -2,8 +2,8 @@
 
 return {
 	Analytics = require(script.Analytics),
-	canRenderNativeMoments = function(p0)
-		return p0.isTabEnabled or p0.isFlyoutEntryEnabled and p0.platformIntegrationEnabled
+	canRenderNativeMoments = function(p1)
+		return p1.isTabEnabled or p1.isFlyoutEntryEnabled and p1.platformIntegrationEnabled
 	end,
 	Flags = {
 		ArgusExperiment = require(script.Flags.ArgusExperiment),
@@ -18,6 +18,7 @@ return {
 		FFlagMomentsRealtimeObservability = require(script.Flags.FFlagMomentsRealtimeObservability),
 		FFlagMomentsRealtimeSessionTelemetry = require(script.Flags.FFlagMomentsRealtimeSessionTelemetry),
 		FFlagMomentsSessionHeartbeat = require(script.Flags.FFlagMomentsSessionHeartbeat),
+		FFlagMomentsUploadOutcomeTelemetry = require(script.Flags.FFlagMomentsUploadOutcomeTelemetry),
 		FFlagMomentsContentStatsTelemetry = require(script.Flags.FFlagMomentsContentStatsTelemetry),
 		FFlagMomentTextGenerationFilteredSignal = require(script.Flags.FFlagMomentTextGenerationFilteredSignal),
 		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync)

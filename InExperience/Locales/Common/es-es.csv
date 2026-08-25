@@ -1316,6 +1316,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Este fondo 
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Este fondo se generó con IA. Al subirlo, confirmas que cumple con las Normas de la comunidad de Roblox y que no utiliza contenido sobre el que no tengas derechos. Se revisará antes de que aparezca en tu inventario. No se pueden editar los objetos una vez que los hayas subido."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Desbloquea fondos exclusivos gratuitos con Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,El objeto no cumplía con las Normas de la comunidad
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,Alcanzaste tu límite de uso. Inténtalo de nuevo más tarde para seguir personalizando.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Alcanzaste tu límite de uso. Inténtalo de nuevo mañana para seguir personalizando.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,Alcanzaste tu límite de uso. Inténtalo de nuevo en 1 hora para seguir personalizando.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Alcanzaste tu límite de uso. Inténtalo de nuevo en 1 minuto para seguir personalizando.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Esa indicación no cumple con nuestras pautas. Intenta describir otra cosa.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Este fondo no cumple con las Normas de la comunidad de Roblox, por lo que no se añadió a tu inventario. Intenta generar uno nuevo."
 Feature.Avatar.BackgroundGeneration.Error.System,Algo salió mal al generar tu fondo. Inténtalo de nuevo.
@@ -3265,7 +3269,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Ampliar
 Feature.Moments.Action.GenerateText,Generar texto
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,No es útil
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Inadecuado o infringe las directrices
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Inadecuado o infractor
 Feature.Moments.Action.Hide,Ocultar detalles
 Feature.Moments.Action.HowToCapture,Cómo capturar
 Feature.Moments.Action.Join,
@@ -3714,7 +3718,7 @@ Feature.RobloxSubscription.Body.GenericError,No pudimos completar esto en este m
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Esta suscripción no está disponible para su compra en este dispositivo.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Completa la verificación de edad y obtén 1 semana gratis de Roblox Plus como agradecimiento. No se necesita ninguna forma de pago para disfrutar de esta prueba gratuita.
 Feature.RobloxSubscription.Description.Benefit.Customize,Personalizar con marcos de perfil y temas de la app
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,10% los primeros 60 días y luego 20% de descuento en objetos y avatares
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,10% de descuento los primeros 60 días y luego 20% de descuento en objetos y avatares
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Más diversión por menos Robux. Suscríbete a Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Al hacer clic en \u{201C}{ctaText}\u{201D}, aceptas los <a href=""{termsUrl}"">Términos de suscripción de Roblox</a>. Se te te hará el cargo automáticamente cada mes hasta que canceles la suscripción."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Servidores privados gratis

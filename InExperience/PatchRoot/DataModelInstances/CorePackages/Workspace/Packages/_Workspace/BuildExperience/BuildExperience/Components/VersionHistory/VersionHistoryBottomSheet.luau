@@ -6,32 +6,34 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
+local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local restoreVersionDialogModule = require(script.Parent.RestoreVersionDialog)
 local versionHistoryCardModule = require(script.Parent.VersionHistoryCard)
 local versionHistoryUtilsModule = require(script.Parent.VersionHistoryUtils)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(buildExperience.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
-local var9 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
+local var1 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
 local checkbox = foundationModule.Checkbox
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
 
-local function VersionHistoryContent(p0)
-	-- upvalues: fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var9 (ref), reactModule (ref), sheet (ref)
+local function VersionHistoryContent(p1)
+	-- upvalues: fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var1 (ref), reactModule (ref), sheet (ref)
 	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
-		var9("LuaApp_Build_VersionHistory_Scroll", p0.scrollingFrameRef)
+		var1("LuaApp_Build_VersionHistory_Scroll", p1.scrollingFrameRef)
 	end
-	return reactModule.createElement(sheet.Content, { scrollingFrameRef = p0.scrollingFrameRef }, p0.children)
+	return reactModule.createElement(sheet.Content, { scrollingFrameRef = p1.scrollingFrameRef }, p1.children)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), versionHistoryUtilsModule (ref), versionHistoryCardModule (ref), sheet (ref), text (ref), VersionHistoryContent (ref), view (ref), checkbox (ref), restoreVersionDialogModule (ref)
+	-- upvalues: reactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAgentRollbackModule (ref), versionHistoryUtilsModule (ref), versionHistoryCardModule (ref), sheet (ref), text (ref), VersionHistoryContent (ref), view (ref), checkbox (ref), restoreVersionDialogModule (ref)
 	local VERSION_HISTORY_HIDE_AUTOSAVED, VERSION_HISTORY_TITLE
 	local testId = p1.testId or "version-history-bottom-sheet"
 	local scrollingFrameRef = p1.scrollingFrameRef or reactModule.useRef(nil)
-	local var13, var14 = reactModule.useState(nil)
-	local var15, var16 = reactModule.useState(true)
-	local var17 = if fFlagBuildLocalization then useLocalization({
+	local var1, var2 = reactModule.useState(nil)
+	local var3, var4 = reactModule.useState(false)
+	local var5, var6 = reactModule.useState(true)
+	local var7 = if fFlagBuildLocalization then useLocalization({
 		hideAutosaved = localizationStringsModule.VERSION_HISTORY_HIDE_AUTOSAVED,
 		title = localizationStringsModule.VERSION_HISTORY_TITLE
 	}) else nil
@@ -39,15 +41,15 @@ return function(p1)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		VERSION_HISTORY_HIDE_AUTOSAVED = var17.hideAutosaved
-		VERSION_HISTORY_TITLE = var17.title
+		VERSION_HISTORY_HIDE_AUTOSAVED = var7.hideAutosaved
+		VERSION_HISTORY_TITLE = var7.title
 	else
 		VERSION_HISTORY_HIDE_AUTOSAVED = localizationStringsModule.VERSION_HISTORY_HIDE_AUTOSAVED
 		VERSION_HISTORY_TITLE = localizationStringsModule.VERSION_HISTORY_TITLE
 	end
-	local var18 = reactModule.useCallback(function(p2)
-		-- upvalues: var14 (ref)
-		var14(p2)
+	local var8 = reactModule.useCallback(function(p1)
+		-- upvalues: var2 (ref)
+		var2(p1)
 	end, {})
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
@@ -56,8 +58,8 @@ return function(p1)
 			isOpen = p1.isOpen == nil or p1.isOpen,
 			snapPoints = { 0.5, 1 },
 			onClose = reactModule.useCallback(function()
-				-- upvalues: var14 (ref), p1 (ref)
-				var14(nil)
+				-- upvalues: var2 (ref), p1 (ref)
+				var2(nil)
 				p1.onClose()
 			end, { p1.onClose }),
 			testId = testId
@@ -73,8 +75,8 @@ return function(p1)
 				AutosaveFilter = reactModule.createElement(view, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
 					Checkbox = reactModule.createElement(checkbox, {
 						label = VERSION_HISTORY_HIDE_AUTOSAVED,
-						isChecked = var15,
-						onActivated = var16,
+						isChecked = var5,
+						onActivated = var6,
 						testId = `{testId}-autosave-filter`
 					})
 				}),
@@ -87,13 +89,13 @@ return function(p1)
 					LayoutOrder = 3,
 					tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
 				}, reactModule.useMemo(function()
-					-- upvalues: p1 (ref), fFlagBuildLocalization (copy), var15 (ref), versionHistoryUtilsModule (copy), testId (ref), reactModule (copy), versionHistoryCardModule (copy), var18 (ref)
+					-- upvalues: p1 (ref), fFlagBuildLocalization (copy), var5 (ref), versionHistoryUtilsModule (copy), testId (ref), reactModule (copy), versionHistoryCardModule (copy), var8 (ref)
 					local t = {}
 					
 					for i, v in p1.entries do
 						local _ = nil
 						
-						if if fFlagBuildLocalization then if var15 then not v.isAutosaved else not var15 else versionHistoryUtilsModule.shouldShowEntry(v.badgeText, var15) then
+						if if fFlagBuildLocalization then if var5 then not v.isAutosaved else not var5 else versionHistoryUtilsModule.shouldShowEntry(v.badgeText, var5) then
 							t[v.id] = reactModule.createElement(versionHistoryCardModule, {
 								layoutOrder = i,
 								versionLabel = v.versionLabel,
@@ -102,8 +104,8 @@ return function(p1)
 								badgeText = v.badgeText,
 								isRestoreDisabled = p1.isRestoreDisabled,
 								onRestore = function()
-									-- upvalues: var18 (copy), v (ref)
-									var18(v)
+									-- upvalues: var8 (copy), v (ref)
+									var8(v)
 								end,
 								testId = `{testId}-card-{v.id}`
 							})
@@ -113,27 +115,66 @@ return function(p1)
 				end, {
 					p1.entries,
 					p1.isRestoreDisabled,
-					var15,
-					var18,
+					var5,
+					var8,
 					testId
 				}))
 			})
 		}),
-		RestoreDialog = if var13 then reactModule.createElement(restoreVersionDialogModule, {
+		RestoreDialog = if var1 then reactModule.createElement(restoreVersionDialogModule, {
 			isOpen = true,
-			title = var13.versionLabel,
-			description = var13.description,
+			title = var1.versionLabel,
+			description = var1.description,
+			isLoading = if fFlagBuildAgentRollbackModule then var3 else nil,
 			onRestore = reactModule.useCallback(function()
-				-- upvalues: var13 (ref), p1 (ref), var14 (ref)
-				if var13 and not p1.isRestoreDisabled then
-					p1.onRestore(var13)
+				-- upvalues: var1 (ref), fFlagBuildAgentRollbackModule (copy), var2 (ref), p1 (ref), var3 (ref), var4 (ref)
+				if var1 == nil then return end
+				if fFlagBuildAgentRollbackModule then
+					if p1.isRestoreDisabled or var3 then return end
+					var4(true)
+					local var1 = p1.onRestore(var1)
+					
+					if var1 == nil then
+						var4(false)
+						
+						return
+					end
+					var1:andThen(function()
+						-- upvalues: var4 (copy), var2 (copy), p1 (copy)
+						var4(false)
+						var2(nil)
+						
+						if p1.onRestoreStarted ~= nil then
+							p1.onRestoreStarted()
+						end
+					end):catch(function()
+						-- upvalues: var4 (copy)
+						var4(false)
+					end)
+					
+					return
+				else
+					var2(nil)
+					
+					if p1.isRestoreDisabled then
+						return
+					end
+					p1.onRestore(var1)
 				end
-				var14(nil)
-			end, { var13, p1.isRestoreDisabled, p1.onRestore }),
+			end, {
+				var1,
+				p1.isRestoreDisabled,
+				p1.onRestore,
+				p1.onRestoreStarted,
+				var3
+			}),
 			onCancel = reactModule.useCallback(function()
-				-- upvalues: var14 (ref)
-				var14(nil)
-			end, {})
+				-- upvalues: var3 (ref), var2 (ref)
+				if var3 then
+					return
+				end
+				var2(nil)
+			end, { var3 })
 		}) else nil
 	})
 end

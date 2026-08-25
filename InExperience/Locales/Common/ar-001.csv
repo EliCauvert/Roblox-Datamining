@@ -1295,6 +1295,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,تم إنش�
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,تم إنشاء هذه الخلفية باستخدام الذكاء الاصطناعي. ومن خلال الرفع، فإنك تؤكد أنها تتبع معايير مجتمع منصّة Roblox ولا تستخدم محتوى لا تملك الحق في استخدامه. ستتم مراجعتها قبل ظهورها في مقتنياتك، ولا يمكن تحرير العناصر المرفوعة.
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,افتح خلفيات حصرية مجانية مع اشتراك Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,لم يستوفِ العنصر معايير المجتمع
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,لقد وصلت إلى الحد الأقصى للاستخدام. حاول مرة أخرى لاحقًا لمواصلة التخصيص.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,لقد وصلت إلى الحد الأقصى للاستخدام. حاول مرة أخرى غدًا لمواصلة التخصيص.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,لقد وصلت إلى الحد الأقصى للاستخدام. حاول مرة أخرى خلال ساعة واحدة لمواصلة التخصيص.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,لقد وصلت إلى الحد الأقصى للاستخدام. حاول مرة أخرى خلال دقيقة واحدة لمواصلة التخصيص.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,هذه المطالبة لا تتبع قواعدنا الإرشادية. حاوِل وصف شيء آخر.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,هذه الخلفية لا تتوافق مع معايير مجتمع Roblox، لذا لم تتم إضافتها إلى مقتنياتك. حاول إنشاء خلفية جديدة.
 Feature.Avatar.BackgroundGeneration.Error.System,حدث خطأ ما أثناء إنشاء الخلفية. يُرجى المحاولة مرة أخرى.
@@ -3244,7 +3248,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,توسيع
 Feature.Moments.Action.GenerateText,إنشاء نص
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,غير مفيد
-Feature.Moments.Action.GenerateTextFeedbackPolicy,غير لائق أو ينتهك القواعد الإرشادية
+Feature.Moments.Action.GenerateTextFeedbackPolicy,غير لائق أو مخالف
 Feature.Moments.Action.Hide,إخفاء التفاصيل
 Feature.Moments.Action.HowToCapture,كيفية الالتقاط
 Feature.Moments.Action.Join,انضمام

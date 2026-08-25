@@ -24,7 +24,6 @@ local isInWHAM1707ExperimentModule = require(script.Parent.isInWHAM1707Experimen
 local safetyServiceSignalsModule = require(script.Parent.safetyServiceSignals)
 local inExpChatMessagesLoaderModule = require(script.Parent.inExpChatMessagesLoader)
 local inExpVoiceUsersLoaderModule = require(script.Parent.inExpVoiceUsersLoader)
-local fFlagIEMSettingsPageDisplaying = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagIEMSettingsPageDisplaying
 local setTimeout = require(corePackagesService.Packages.LuauPolyfill).setTimeout
 
 local function _()
@@ -32,7 +31,7 @@ local function _()
 	return isAbuseReportMenuOpenCloseSignalEnabledModule() and isInWHAM1707ExperimentModule()
 end
 
-local function AbuseReportMenuContentInner(p0)
+local function AbuseReportMenuContentInner(p1)
 	-- upvalues: useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), focusRoot (ref), dynamicReportInExpContainerModule (ref), inExpChatMessagesLoaderModule (ref), inExpVoiceUsersLoaderModule (ref), default (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -47,105 +46,98 @@ local function AbuseReportMenuContentInner(p0)
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.RouterView
 		}, {
 			DynamicReportInExpContainer = reactModule.createElement(dynamicReportInExpContainerModule, {
-				onClose = p0.onClose,
-				isReportTabVisible = p0.isReportTabVisible,
-				reportAnythingSnapshotRef = p0.reportAnythingSnapshotRef,
+				onClose = p1.onClose,
+				isReportTabVisible = p1.isReportTabVisible,
+				reportAnythingSnapshotRef = p1.reportAnythingSnapshotRef,
 				inExpChatMessagesLoader = inExpChatMessagesLoaderModule,
 				inExpVoiceUsersLoader = inExpVoiceUsersLoaderModule,
 				voiceChatServiceManager = default,
-				preselectedPlayer = p0.preselectedPlayer,
-				onReportFinish = p0.onReportFinish
+				preselectedPlayer = p1.preselectedPlayer,
+				onReportFinish = p1.onReportFinish
 			})
 		})
 	})
 end
 
 local function AbuseReportMenuContent(p1)
-	-- upvalues: reactModule (ref), useCaptureScreenshotV2Module (ref), fFlagIEMSettingsPageDisplaying (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), isInWHAM1707ExperimentModule (ref), safetyServiceSignalsModule (ref), setTimeout (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), AbuseReportMenuContentInner (ref)
-	local var17, var18 = reactModule.useState(false)
-	local var19, var20 = reactModule.useState(nil)
-	local var21 = useCaptureScreenshotV2Module()
-	local var22 = reactModule.useRef(p1.hideReportTab)
-	var22.current = p1.hideReportTab
-	local var23 = reactModule.useRef(p1.showReportTab)
-	var23.current = p1.showReportTab
-	local var24 = reactModule.useRef(false)
-	local var25 = reactModule.useRef(false)
+	-- upvalues: reactModule (ref), useCaptureScreenshotV2Module (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), isInWHAM1707ExperimentModule (ref), safetyServiceSignalsModule (ref), setTimeout (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), AbuseReportMenuContentInner (ref)
+	local var1, var2 = reactModule.useState(false)
+	local var3, var4 = reactModule.useState(nil)
+	local var5 = useCaptureScreenshotV2Module()
+	local var6 = reactModule.useRef(p1.hideReportTab)
+	var6.current = p1.hideReportTab
+	local var7 = reactModule.useRef(p1.showReportTab)
+	var7.current = p1.showReportTab
+	local var8 = reactModule.useRef(false)
+	local var9 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), var18 (ref), var21 (ref), var22 (ref), var23 (ref), fFlagIEMSettingsPageDisplaying (copy), p1 (ref), var25 (ref), var20 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707ExperimentModule (copy), safetyServiceSignalsModule (copy), setTimeout (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
-		local function onOpen()
-			-- upvalues: var24 (copy), var18 (copy), var21 (copy), var22 (copy), var23 (copy)
-			if var24.current then
+		-- upvalues: var8 (ref), var2 (ref), var5 (ref), var6 (ref), var7 (ref), p1 (ref), var9 (ref), var4 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707ExperimentModule (copy), safetyServiceSignalsModule (copy), setTimeout (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
+		p1.registerOnReportTabDisplaying(function()
+			-- upvalues: var8 (copy), var2 (copy), var5 (copy), var6 (copy), var7 (copy)
+			if var8.current then
 				return
 			end
-			var24.current = true
-			var18(true)
-			var21.captureIfApplicable({ hide = var22.current, show = var23.current })
-		end
-		
-		if fFlagIEMSettingsPageDisplaying then
-			p1.registerOnReportTabDisplaying(onOpen)
-		else
-			p1.registerOnReportTabDisplayed(onOpen)
-		end
+			var8.current = true
+			var2(true)
+			var5.captureIfApplicable({ hide = var6.current, show = var7.current })
+		end)
 		p1.registerOnReportTabHidden(function()
-			-- upvalues: var21 (copy), var24 (copy), var25 (copy), var18 (copy), var20 (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707ExperimentModule (copy), safetyServiceSignalsModule (copy)
-			if var21.getIsCapturing() then return end
-			var24.current = false
-			var25.current = false
-			var18(false)
-			var20(nil)
+			-- upvalues: var5 (copy), var8 (copy), var9 (copy), var2 (copy), var4 (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707ExperimentModule (copy), safetyServiceSignalsModule (copy)
+			if var5.getIsCapturing() then return end
+			var8.current = false
+			var9.current = false
+			var2(false)
+			var4(nil)
 			
 			if isAbuseReportMenuOpenCloseSignalEnabledModule() and isInWHAM1707ExperimentModule() then
 				safetyServiceSignalsModule.reportMenuTabClose()
 			end
 		end)
-		p1.registerSetNextPlayerToReport(function(p2)
-			-- upvalues: var20 (copy)
-			var20(p2)
+		p1.registerSetNextPlayerToReport(function(p1)
+			-- upvalues: var4 (copy)
+			var4(p1)
 		end)
 		p1.registerOnSettingsHidden(function()
-			-- upvalues: setTimeout (copy), var24 (copy), var21 (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
+			-- upvalues: setTimeout (copy), var8 (copy), var5 (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
 			setTimeout(function()
-				-- upvalues: var24 (copy), var21 (copy)
-				if not var24.current then
-					var21.reset()
+				-- upvalues: var8 (copy), var5 (copy)
+				if not var8.current then
+					var5.reset()
 				end
 			end, fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule)
 		end)
 	end, {
 		p1.registerOnReportTabHidden, p1.registerSetNextPlayerToReport,
-		p1.registerOnSettingsHidden,
-		if fFlagIEMSettingsPageDisplaying then p1.registerOnReportTabDisplaying else p1.registerOnReportTabDisplayed,
-		var21.captureIfApplicable, var21.getIsCapturing, var21.reset
+		p1.registerOnSettingsHidden, p1.registerOnReportTabDisplaying,
+		var5.captureIfApplicable, var5.getIsCapturing, var5.reset
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var25 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707ExperimentModule (copy), var21 (ref), safetyServiceSignalsModule (copy)
-		if not var17 or var25.current then return end
+		-- upvalues: var1 (ref), var9 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707ExperimentModule (copy), var5 (ref), safetyServiceSignalsModule (copy)
+		if not var1 or var9.current then return end
 		if not isAbuseReportMenuOpenCloseSignalEnabledModule() or not isInWHAM1707ExperimentModule() then return end
-		if not var21.isCaptureApplicable or var21.isScreenshotTaken then
-			var25.current = true
+		if not var5.isCaptureApplicable or var5.isScreenshotTaken then
+			var9.current = true
 			safetyServiceSignalsModule.reportMenuTabOpen()
 		end
 	end, {
-		var17,
-		var21.isScreenshotTaken,
-		var21.isCaptureApplicable
+		var1,
+		var5.isScreenshotTaken,
+		var5.isCaptureApplicable
 	})
 	
 	return reactModule.createElement(AbuseReportMenuContentInner, {
-		isReportTabVisible = var17,
-		preselectedPlayer = var19,
-		reportAnythingSnapshotRef = var21.snapshotRef,
+		isReportTabVisible = var1,
+		preselectedPlayer = var3,
+		reportAnythingSnapshotRef = var5.snapshotRef,
 		onClose = p1.hideReportTab,
 		onReportFinish = function()
-			-- upvalues: var20 (ref)
-			var20(nil)
+			-- upvalues: var4 (ref)
+			var4(nil)
 		end
 	})
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), AbuseReportMenuContent (ref)
 	return reactModule.createElement(coreScriptsRootProvider, nil, reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
@@ -153,7 +145,7 @@ return function(p3)
 		ServicesProvider = reactModule.createElement(roactServices.ServiceProvider, {
 			services = { [roactNetworking] = requestInternalWrapper(httpService) }
 		}, {
-			AbuseReportMenuContent = reactModule.createElement(AbuseReportMenuContent, p3)
+			AbuseReportMenuContent = reactModule.createElement(AbuseReportMenuContent, p1)
 		})
 	}))
 end

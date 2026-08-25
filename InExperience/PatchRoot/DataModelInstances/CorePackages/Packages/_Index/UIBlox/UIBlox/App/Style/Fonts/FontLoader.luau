@@ -7,15 +7,15 @@ local _ = { BASE_SIZE = 16, FACTOR = 1.26 }
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	local t_1 = { _tokens = p0 }
+	local t_1 = { _tokens = p1 }
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t:loadFont()
+function t:loadFont(p1)
 	-- upvalues: UIBloxConfigModule (ref), cryoModule (ref)
 	local tokens = self._tokens
 	local t = {
@@ -57,6 +57,13 @@ function t:loadFont()
 		}
 	}
 	
+	if p1 ~= nil then
+		for i, v in t do
+			if type(v) == "table" and v.Font ~= nil then
+				v.Font = p1
+			end
+		end
+	end
 	return cryoModule.Dictionary.join(self:mapLegacyFont(t, 16), t)
 end
 
