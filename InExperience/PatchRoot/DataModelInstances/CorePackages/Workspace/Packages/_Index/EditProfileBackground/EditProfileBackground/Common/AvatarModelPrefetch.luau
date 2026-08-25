@@ -11,7 +11,7 @@ local t_1 = {
 			-- upvalues: playersService (copy), p0 (ref)
 			local ok, status = pcall(function()
 				-- upvalues: playersService (copy), p0 (copy)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromUserIdAsync(p0) else game.Players:CreateHumanoidModelFromUserId(p0)
+				return playersService:CreateHumanoidModelFromUserIdAsync(p0)
 			end)
 			
 			if ok and status then

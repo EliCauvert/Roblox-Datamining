@@ -54,12 +54,7 @@ function t.LoadAssetsAsync(value)
 		end
 		local ok, status = pcall(function()
 			-- upvalues: value (copy), marketplaceService (copy)
-			if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-				value.GameAssetInfo = marketplaceService:GetProductInfoAsync(game.PlaceId)
-				
-				return
-			end
-			value.GameAssetInfo = marketplaceService:GetProductInfo(game.PlaceId)
+			value.GameAssetInfo = marketplaceService:GetProductInfoAsync(game.PlaceId)
 		end)
 		
 		if not loadingRemoveRemoteCallErrorPrint and not ok then

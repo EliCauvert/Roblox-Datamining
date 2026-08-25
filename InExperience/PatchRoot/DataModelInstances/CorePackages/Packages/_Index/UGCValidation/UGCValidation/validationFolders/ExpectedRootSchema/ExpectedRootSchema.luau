@@ -8,13 +8,16 @@ local getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule = require(paren
 local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackFolderStructure)
 local getFFlagUGCValidationAnimationPackDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackDisableModelStructure)
+local getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
+local shouldValidateR15LegacyDuplicateModule = require(parent.util.shouldValidateR15LegacyDuplicate)
 local t = {
 	categories = constantsModule.AllUploadCategories,
 	requiredData = {
 		validationEnumsModule.SharedDataMember.entrypointInput,
 		validationEnumsModule.SharedDataMember.rootInstance,
 		validationEnumsModule.SharedDataMember.uploadCategory,
-		validationEnumsModule.SharedDataMember.uploadEnum
+		validationEnumsModule.SharedDataMember.uploadEnum,
+		validationEnumsModule.SharedDataMember.consumerConfig
 	}
 }
 
@@ -38,32 +41,32 @@ local function validateInstancesFromSchema(p3, p4, p5, p6)
 		end
 		return
 	else
-		local var11
+		local var14
 		for i, v in p4._children or {} do
-			var11 = false
+			var14 = false
 			
 			for i_1, v_1 in p3:GetChildren() do
 				if p5[v_1] == nil and v_1.ClassName == v.ClassName then
 					if v.Name ~= nil then
-						local var12
+						local var15
 						local name = v.Name
 						local name_1 = v_1.Name
 						
 						if type(name) == "table" then
-							var12 = table.find(name, name_1) ~= nil
-							var12 = nil
+							var15 = table.find(name, name_1) ~= nil
+							var15 = nil
 						else
-							var12 = name == name_1
+							var15 = name == name_1
 						end
-						if var12 then
+						if var15 then
 							validateInstancesFromSchema(v_1, v, p5, p6)
-							var11 = true
+							var14 = true
 							break
 						end
 					end
 				end
 			end
-			if not var11 and not v._optional then
+			if not var14 and not v._optional then
 				local assetSchemaMissingItem = errorSourceStringsModule.Keys.AssetSchemaMissingItem
 				i_1 = {
 					ParentPath = p3:GetFullName(),
@@ -91,47 +94,60 @@ local function validateNoInstancesOutsideSchema(p7, p8, p9)
 	end
 end
 
-function t.run(p10, p11)
-	-- upvalues: errorSourceStringsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), createExpectedSchemaModule (ref), validateInstancesFromSchema (ref), validateNoInstancesOutsideSchema (ref)
-	local rootInstance = p11.rootInstance
-	local uploadCategory = p11.uploadCategory
-	local uploadEnum = p11.uploadEnum
+local function validateRootAgainstSchema(p10, p11, p12)
+	-- upvalues: errorSourceStringsModule (ref), validateInstancesFromSchema (ref), validateNoInstancesOutsideSchema (ref)
+	local t = {}
+	
+	if p11.ClassName ~= p10.ClassName then
+		p12:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootClass, { RootClass = p10.ClassName, ExpectedClass = p11.ClassName })
+		
+		return
+	elseif p11.Name ~= nil then
+		local var18
+		local name = p11.Name
+		local name_1 = p10.Name
+		
+		if type(name) == "table" then
+			var18 = table.find(name, name_1) ~= nil
+			var18 = nil
+		else
+			var18 = name == name_1
+		end
+		if var18 then
+			validateInstancesFromSchema(p10, p11, t, p12)
+			validateNoInstancesOutsideSchema(p10, t, p12)
+			
+			return
+		else
+			p12:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootName, { RootName = p10.Name, ExpectedName = p11.Name })
+		end
+	end
+end
+
+function t.run(p13, p14)
+	-- upvalues: errorSourceStringsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), createExpectedSchemaModule (ref), validateRootAgainstSchema (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), shouldValidateR15LegacyDuplicateModule (ref)
+	local rootInstance = p14.rootInstance
+	local uploadCategory = p14.uploadCategory
+	local uploadEnum = p14.uploadEnum
 	
 	if rootInstance == nil then
-		p10:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)
+		p13:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)
 		
 		return
 	end
 	local _ = nil
-	local var14 = if not uploadEnum.bundleType then if not getFFlagUGCValidationAnimationPackSupportModule() or uploadEnum.bundleType ~= Enum.BundleType.Animations then if getFFlagUGCValidationAnimationPackDisableModelStructureModule() or not getFFlagUGCValidationAnimationPackFolderStructureModule() then createExpectedSchemaModule.generateAnimationPackBundleSchema(nil) else createExpectedSchemaModule.generateAnimationPackBundleSchema(rootInstance) else createExpectedSchemaModule.generateBundleSchema(p11.entrypointInput) else createExpectedSchemaModule.generateAssetSchema(uploadCategory, uploadEnum.assetType, rootInstance)
-	local t = {}
+	local var19 = if not uploadEnum.bundleType then if not getFFlagUGCValidationAnimationPackSupportModule() or uploadEnum.bundleType ~= Enum.BundleType.Animations then if getFFlagUGCValidationAnimationPackDisableModelStructureModule() or not getFFlagUGCValidationAnimationPackFolderStructureModule() then createExpectedSchemaModule.generateAnimationPackBundleSchema(nil) else createExpectedSchemaModule.generateAnimationPackBundleSchema(rootInstance) else createExpectedSchemaModule.generateBundleSchema(p14.entrypointInput) else createExpectedSchemaModule.generateAssetSchema(uploadCategory, uploadEnum.assetType, rootInstance)
+	validateRootAgainstSchema(rootInstance, var19, p13)
 	
-	if var14.ClassName ~= rootInstance.ClassName then
-		p10:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootClass, {
-			RootClass = rootInstance.ClassName,
-			ExpectedClass = var14.ClassName
-		})
-		
-		return
-	elseif var14.Name ~= nil then
-		local var16
-		local name = var14.Name
-		local name_1 = rootInstance.Name
-		
-		if type(name) == "table" then
-			var16 = table.find(name, name_1) ~= nil
-			var16 = nil
-		else
-			var16 = name == name_1
-		end
-		if var16 then
-			validateInstancesFromSchema(rootInstance, var14, t, p10)
-			validateNoInstancesOutsideSchema(rootInstance, t, p10)
+	if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and shouldValidateR15LegacyDuplicateModule(p14) then
+		if p14.r15LegacyDuplicateRoot == nil then
+			p13:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
 			
 			return
-		else
-			p10:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootName, { RootName = rootInstance.Name, ExpectedName = var14.Name })
 		end
+		p13:setReportingRoot(p14.r15LegacyDuplicateRoot)
+		validateRootAgainstSchema(p14.r15LegacyDuplicateRoot, var19, p13)
+		p13:setReportingRoot(rootInstance)
 	end
 end
 

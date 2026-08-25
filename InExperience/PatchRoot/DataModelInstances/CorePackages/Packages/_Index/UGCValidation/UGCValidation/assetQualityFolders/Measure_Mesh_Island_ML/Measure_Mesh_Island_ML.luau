@@ -2,7 +2,7 @@
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local UGCValidationMeshIslandMLMinScore = game:DefineFastInt("UGCValidationMeshIslandMLMinScore", 92)
+local UGCValidationMeshIslandMLMinScore = game:DefineFastInt("UGCValidationMeshIslandMLMinScore", 9)
 
 return {
 	categories = { validationEnumsModule.UploadCategory.FULL_BODY },

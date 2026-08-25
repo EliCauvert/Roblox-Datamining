@@ -341,14 +341,13 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 		end
 	end, { var34.value })
 	local var81 = reactModule.useCallback(function(_, p17)
-		-- upvalues: var41 (ref), calculateNumberInputValueFromPositionsModule (copy), var34 (ref), flagsModule (copy), var49 (ref), var72 (ref), onChangeCallbackReasonModule (copy), var42 (ref)
+		-- upvalues: var41 (ref), flagsModule (copy), var34 (ref), var42 (ref), calculateNumberInputValueFromPositionsModule (copy), var49 (ref), var72 (ref), onChangeCallbackReasonModule (copy)
 		if var41.current then
-			var72(calculateNumberInputValueFromPositionsModule(var41.current.value, var41.current.position, p17.X, var34.step, if flagsModule.FoundationNumberInputBeta then var49 else nil), onChangeCallbackReasonModule.Drag)
-			
 			if flagsModule.FoundationNumberInputScrubCallbackProps and var34.onScrubStarted and not var42.current then
 				var34.onScrubStarted()
 				var42.current = true
 			end
+			var72(calculateNumberInputValueFromPositionsModule(var41.current.value, var41.current.position, p17.X, var34.step, if flagsModule.FoundationNumberInputBeta then var49 else nil), onChangeCallbackReasonModule.Drag)
 		end
 	end, {
 		var72,

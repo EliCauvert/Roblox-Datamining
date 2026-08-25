@@ -17,14 +17,7 @@ return function(_, p0, _)
 		local var2 = false
 		local ok, status = pcall(function()
 			-- upvalues: getFIntCanHideGuiGroupIdModule (copy), var2 (write), p0 (copy)
-			local var3 = getFIntCanHideGuiGroupIdModule()
-			
-			if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-				var2 = p0:IsInGroupAsync(var3)
-				
-				return
-			end
-			var2 = p0:IsInGroup(var3)
+			var2 = p0:IsInGroupAsync(getFIntCanHideGuiGroupIdModule())
 		end)
 		
 		if ok then

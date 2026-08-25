@@ -27,17 +27,14 @@ return reactModule.memo(function(p0)
 	local isFullscreen = p0.isFullscreen
 	local var11 = (p0.videoDwellTimeHundredthsSec or mediaGalleryConstantsModule.VIDEO_DWELL_TIME_HUNDREDTHS_SEC) / 100
 	local videoVisiblePercent = p0.videoVisiblePercent or (if fFlagMediaGalleryVideoVisiblePercent then mediaGalleryConstantsModule.VIDEO_PLAYBACK_VISIBLE_PERCENT else mediaGalleryConstantsModule.VIDEO_VISIBLE_PERCENT)
-	local _ = "media_gallery_item_%*_video_%*%*"
-	local _ = p0.itemIndex or "0"
-	local _ = p0.videoId or "0"
-	local _ = if isFullscreen then "_fullscreen" else ""
-	local var13 = if var9 then p0.toggleVideoPlaybackSignal else nil
-	local var14 = if var9 then p0.toggleMuteSignal else nil
-	local var15 = if var9 then p0.onVideoEnded else nil
-	local var16 = if var9 then p0.onVideoProgressChanged else nil
-	local var17 = if var9 then p0.onMutedChanged else nil
-	local var18, var19 = reactModule.useState(false)
-	local var20 = reactModule.useRef(nil)
+	local var13 = `media_gallery_item_{p0.itemIndex or "0"}_video_{p0.videoId or "0"}{if isFullscreen then "_fullscreen" else ""}`
+	local var14 = if var9 then p0.toggleVideoPlaybackSignal else nil
+	local var15 = if var9 then p0.toggleMuteSignal else nil
+	local var16 = if var9 then p0.onVideoEnded else nil
+	local var17 = if var9 then p0.onVideoProgressChanged else nil
+	local var18 = if var9 then p0.onMutedChanged else nil
+	local var19, var20 = reactModule.useState(false)
+	local var21 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), setIsVideoActive (ref)
 		if var9 and setIsVideoActive then
@@ -56,13 +53,13 @@ return reactModule.memo(function(p0)
 		BorderSizePixel = 0,
 		Size = p0.Size,
 		ZIndex = p0.ZIndex,
-		ref = var20
+		ref = var21
 	}, {
 		VideoPlayer = reactModule.createElement(videoPlayer, {
 			showMuteButton = true,
 			video = videoId,
 			thumbnail = var7,
-			shouldStartPlayback = var18,
+			shouldStartPlayback = var19,
 			muted = p0.muted ~= nil or p0.muted,
 			looped = if p0.looped ~= nil then false else p0.looped,
 			Size = UDim2.fromScale(1, 1),
@@ -94,22 +91,22 @@ return reactModule.memo(function(p0)
 				videoAnalytics,
 				videoPlaybackCoordinator_1.currentPlaybackSessionId
 			}),
-			onVideoProgressChanged = var16,
-			onVideoEnded = var15,
-			toggleVideoPlaybackSignal = var13,
-			toggleMuteSignal = var14,
-			onMutedChanged = var17
+			onVideoProgressChanged = var17,
+			onVideoEnded = var16,
+			toggleVideoPlaybackSignal = var14,
+			toggleMuteSignal = var15,
+			onMutedChanged = var18
 		}),
 		VideoPlaybackDetector = reactModule.createElement(videoPlaybackDetector, {
 			isVideoEligible = true,
-			videoKey = u207,
+			videoKey = var13,
 			itemIndex = p0.itemIndex,
-			itemFrameRef = var20,
+			itemFrameRef = var21,
 			isItemOccluded = p0.isMediaGalleryOccluded,
 			playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback and (p0.autoplay ~= nil or p0.autoplay) then videoPlaybackDetectionMethod.Viewport else nil,
 			autoplay = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else p0.autoplay ~= nil or p0.autoplay,
 			videoPlaybackCoordinator = videoPlaybackCoordinator_1,
-			onPlaybackChange = var19,
+			onPlaybackChange = var20,
 			videoDwellTimeInSec = var11,
 			videoVisiblePercent = videoVisiblePercent,
 			videoAnalytics = videoAnalytics

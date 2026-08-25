@@ -1,7 +1,6 @@
 ﻿local parent = script:FindFirstAncestor("PlayabilityRodux").Parent
 local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
 local fFlagLuaAppPlayableUxTreatment = require(parent.SharedFlags).FFlagLuaAppPlayableUxTreatment
-local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
 local resultModule = require(parent.Result)
 local t = {
 	new = function()
@@ -20,7 +19,7 @@ function t.mock()
 end
 
 function t.fromJsonData(p0)
-	-- upvalues: resultModule (ref), t (ref), fFlagLuaAppDemoModePlayButton (ref), fFlagLuaAppPlayableUxTreatment (ref)
+	-- upvalues: resultModule (ref), t (ref), fFlagLuaAppPlayableUxTreatment (ref)
 	if type(p0.universeId) ~= "number" and type(p0.universeId) ~= "string" then
 		return resultModule.error("PlayabilityStatus.fromJsonData expects universeId to be a number or a string")
 	elseif type(p0.isPlayable) ~= "boolean" then
@@ -34,7 +33,7 @@ function t.fromJsonData(p0)
 	var3.playabilityStatus = p0.playabilityStatus
 	var3.unplayableDisplayText = p0.unplayableDisplayText
 	
-	if fFlagLuaAppDemoModePlayButton and type(p0.demoModeAvailable) == "boolean" then
+	if type(p0.demoModeAvailable) == "boolean" then
 		var3.demoModeAvailable = p0.demoModeAvailable
 	end
 	if fFlagLuaAppPlayableUxTreatment then

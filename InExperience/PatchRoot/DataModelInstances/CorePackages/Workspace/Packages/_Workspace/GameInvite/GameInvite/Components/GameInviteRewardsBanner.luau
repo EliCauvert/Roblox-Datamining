@@ -56,7 +56,7 @@ return function(p1)
 		},
 		rewardsBody = {
 			"Roblox.ReferralRewards.RewardBannerBody",
-			gameName = if game.PlaceId == nil or game.PlaceId == 0 then "" elseif game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(game.PlaceId).Name else marketplaceService:GetProductInfo(game.PlaceId).Name,
+			gameName = if game.PlaceId == nil or game.PlaceId == 0 then "" else marketplaceService:GetProductInfoAsync(game.PlaceId).Name,
 			rewardName = if p1.rewardMetadata then p1.rewardMetadata.name else ""
 		}
 	}
@@ -65,7 +65,7 @@ return function(p1)
 	if game.CreatorId ~= nil and game.CreatorId ~= 0 then
 		creatorId = var7(game.CreatorId) or ""
 	end
-	local image
+	local var17
 	list.creatorName = creatorId
 	t.rewardsCreatorSupportText = list
 	local var12 = useLocalization(t)
@@ -73,8 +73,10 @@ return function(p1)
 	local createElement = reactModule.createElement
 	local fragment = reactModule.Fragment
 	local var15 = nil
-	local t_1 = {
-		RewardInfoModal = var13 and (p1.rewardMetadata and (var12 and (reactModule.createElement(gameInviteRewardsInfoModalModule, {
+	local t_1 = {}
+	
+	if var13 then
+		var17 = p1.rewardMetadata and (var12 and (reactModule.createElement(gameInviteRewardsInfoModalModule, {
 			title = var12.rewardsModalTitle,
 			rewardDetailsTitle = var12.rewardsDetailsTitle,
 			rewardDetailsBody = p1.rewardMetadata.description or "",
@@ -86,8 +88,10 @@ return function(p1)
 			expiryUtc = p1.rewardMetadata.rewardTimeOffset.endUtc or "",
 			modalOpen = var13,
 			setModalOpen = var14
-		}) or nil)))
-	}
+		}) or nil))
+	end
+	local image
+	t_1.RewardInfoModal = var17
 	local createElement_1 = reactModule.createElement
 	local view = foundationModule.View
 	local t_2 = {

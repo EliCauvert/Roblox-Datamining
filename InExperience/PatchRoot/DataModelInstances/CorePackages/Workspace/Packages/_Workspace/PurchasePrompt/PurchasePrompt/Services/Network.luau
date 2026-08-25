@@ -98,7 +98,7 @@ end
 
 local function getProductInfo(p9, p10)
 	-- upvalues: marketplaceService (ref)
-	return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(p9, p10) else marketplaceService:GetProductInfo(p9, p10)
+	return marketplaceService:GetProductInfoAsync(p9, p10)
 end
 
 local function getSubscriptionProductInfo(p11)
@@ -134,7 +134,7 @@ end
 
 local function getPlayerOwns(p15, p16, p17)
 	-- upvalues: marketplaceService (ref), enablePlayerOwnsBundleApiEngineFeature (ref)
-	return if p17 == Enum.InfoType.Asset then if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:PlayerOwnsAssetAsync(p15, p16) else marketplaceService:PlayerOwnsAsset(p15, p16) elseif enablePlayerOwnsBundleApiEngineFeature and p17 == Enum.InfoType.Bundle then if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:PlayerOwnsBundleAsync(p15, p16) else marketplaceService:PlayerOwnsBundle(p15, p16) elseif p17 == Enum.InfoType.GamePass then marketplaceService:UserOwnsGamePassAsync(p15.UserId, p16) else p17 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p15, p16)
+	return if p17 == Enum.InfoType.Asset then marketplaceService:PlayerOwnsAssetAsync(p15, p16) elseif enablePlayerOwnsBundleApiEngineFeature and p17 == Enum.InfoType.Bundle then marketplaceService:PlayerOwnsBundleAsync(p15, p16) elseif p17 == Enum.InfoType.GamePass then marketplaceService:UserOwnsGamePassAsync(p15.UserId, p16) else p17 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p15, p16)
 end
 
 local function performPurchase(p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29)

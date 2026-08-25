@@ -171,10 +171,10 @@ return reactModule.forwardRef(function(p0, p1)
 		var65,
 		var55
 	})
-	local var71 = reactModule.useCallback(function(p3, p4, p5, p6)
-		-- upvalues: var33 (ref), var31 (ref)
-		return var31.registerPopoverAsync(p3, p4, p5, p6, var33)
-	end, { var31.registerPopoverAsync, var33 })
+	local var71 = reactModule.useCallback(function(p3, p4, p5, p6, p7, p8)
+		-- upvalues: var31 (ref), flagsModule (copy)
+		return var31.registerPopoverAsync(p3, p4, p5, p6, p7, if flagsModule.FoundationPopoverPluginFocusable then p8 else nil)
+	end, { var31.registerPopoverAsync })
 	local var72 = reactModule.useRef(false)
 	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), var72 (ref), loggerModule (copy)
@@ -196,7 +196,8 @@ return reactModule.forwardRef(function(p0, p1)
 		registerPanelAsync = var71,
 		position = var70,
 		depth = if relativeIndex ~= nil then 0 else relativeIndex,
-		parentPopoverId = var33
+		parentPopoverId = var33,
+		isFocusable = if flagsModule.FoundationPopoverPluginFocusable then var30.isFocusable else nil
 	})
 	local _ = nil
 	local _ = nil
@@ -213,11 +214,11 @@ return reactModule.forwardRef(function(p0, p1)
 		-- upvalues: flagsModule (copy), var73 (ref), var30 (ref), var39 (ref), isPointInGuiObjectBoundsModule (copy)
 		if not flagsModule.FoundationPopoverClickOutsideInGuiShadow then return end
 		if var73 and var73.container and var30.onPressedOutside then
-			local inputBeganConnection = var73.container.InputBegan:Connect(function(p7)
+			local inputBeganConnection = var73.container.InputBegan:Connect(function(p9)
 				-- upvalues: var39 (copy), isPointInGuiObjectBoundsModule (copy), var30 (copy)
-				if p7.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+				if p9.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
 				if not var39 then return end
-				if not isPointInGuiObjectBoundsModule(var39, Vector2.new(p7.Position.X, p7.Position.Y)) then
+				if not isPointInGuiObjectBoundsModule(var39, Vector2.new(p9.Position.X, p9.Position.Y)) then
 					var30.onPressedOutside()
 				end
 			end)

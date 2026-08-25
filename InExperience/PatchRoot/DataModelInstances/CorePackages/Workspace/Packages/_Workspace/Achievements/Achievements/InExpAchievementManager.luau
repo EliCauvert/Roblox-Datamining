@@ -82,7 +82,7 @@ local t = {
 		if p8.achievementStrengthInNumbers.hasAchieved == false then
 			local localPlayer = p8.playersService.LocalPlayer
 			
-			if localPlayer and localPlayer.FollowUserId ~= 0 and ((if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then localPlayer:IsFriendsWithAsync(localPlayer.FollowUserId) else localPlayer:IsFriendsWith(localPlayer.FollowUserId)) and p8.playersService:GetPlayerByUserId(localPlayer.FollowUserId)) then
+			if localPlayer and localPlayer.FollowUserId ~= 0 and (localPlayer:IsFriendsWithAsync(localPlayer.FollowUserId) and p8.playersService:GetPlayerByUserId(localPlayer.FollowUserId)) then
 				p9(0)
 			end
 		end

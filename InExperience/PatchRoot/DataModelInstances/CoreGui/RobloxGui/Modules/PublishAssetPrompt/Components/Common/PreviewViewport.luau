@@ -21,6 +21,7 @@ local gamepadUtils = require(corePackagesService.Workspace.Packages.InputUi).Gam
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local interactionFrameModule = require(script.Parent.InteractionFrame)
 local constantsModule = require(script.Parent.Parent.Parent.Constants)
+local makeupPreviewUtilsModule = require(script.Parent.Parent.Parent.MakeupPreviewUtils)
 local images = UIBloxModule.App.ImageSet.Images
 local previewShrink = images["icons/actions/previewShrink"]
 local reset = images["icons/actions/reset"]
@@ -32,7 +33,8 @@ local _ = {
 local previewViewport = roactModule.PureComponent:extend("PreviewViewport")
 previewViewport.validateProps = tModule.strictInterface({
 	asset = tModule.union(tModule.instanceOf("Model"), tModule.instanceIsA("AnimationClip")),
-	closePreviewView = tModule.callback
+	closePreviewView = tModule.callback,
+	isMakeupPreview = tModule.optional(tModule.boolean)
 })
 
 local function _(p0)
@@ -53,12 +55,12 @@ function previewViewport.init(p1)
 	p1.cameraPanInPixels = Vector2.new(0, 0)
 	p1.cameraRef = roactModule.createRef()
 	p1.worldModelRef = roactModule.createRef()
-	local var15, var16 = roactModule.createBinding(CFrame.new())
-	p1.cameraCFrameBinding = var15
-	p1.updateCameraCFrameBinding = var16
-	local var17, var18 = roactModule.createBinding(CFrame.new())
-	p1.cameraFocusBinding = var17
-	p1.updateCameraFocusBinding = var18
+	local var16, var17 = roactModule.createBinding(CFrame.new())
+	p1.cameraCFrameBinding = var16
+	p1.updateCameraCFrameBinding = var17
+	local var18, var19 = roactModule.createBinding(CFrame.new())
+	p1.cameraFocusBinding = var18
+	p1.updateCameraFocusBinding = var19
 	
 	function p1.panByPixels(p2)
 		-- upvalues: p1 (ref)
@@ -105,15 +107,15 @@ function previewViewport.init(p1)
 	
 	function p1.zoomToPoint(p7, p8)
 		-- upvalues: p1 (ref)
-		local var19 = 0.9 ^ p7
-		local var20 = p1.zoomFactor * var19
+		local var20 = 0.9 ^ p7
+		local var21 = p1.zoomFactor * var20
 		
-		if var20 ~= math.clamp(var20, 0.3, 10) then return end
-		p1.zoomFactor = var20
+		if var21 ~= math.clamp(var21, 0.3, 10) then return end
+		p1.zoomFactor = var21
 		
 		if p8 then
-			local var21 = (p8 - (p1.absolutePosition + p1.absoluteSize / 2)) * Vector2.new(1, -1) * -1
-			p1.cameraPanInPixels = var21 - (var21 - p1.cameraPanInPixels) * var19
+			local var22 = (p8 - (p1.absolutePosition + p1.absoluteSize / 2)) * Vector2.new(1, -1) * -1
+			p1.cameraPanInPixels = var22 - (var22 - p1.cameraPanInPixels) * var20
 		end
 		p1:clampOffsets()
 		p1:updateCameraPosition()
@@ -161,21 +163,21 @@ function previewViewport.processAsset(value)
 			-- upvalues: playersService (copy), value (ref), asset (ref), animationClipProviderService (copy)
 			local ok, status = pcall(function()
 				-- upvalues: playersService (copy)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078) else playersService:GetHumanoidDescriptionFromOutfitId(1342485078)
+				return playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078)
 			end)
-			local var25 = if ok then if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15) else playersService:CreateHumanoidModelFromDescription(status, Enum.HumanoidRigType.R15) else nil
+			local var26 = if ok then playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15) else nil
 			
 			if not value.isMounted or asset ~= value.props.asset then return end
-			if not var25 then
+			if not var26 then
 				value:setLoadingState("failedToLoad")
 				
 				return
 			end
-			value.model = var25
+			value.model = var26
 			value:addModelToViewportIfNeeded()
-			local var26 = animationClipProviderService:RegisterActiveAnimationClip(asset)
+			local var27 = animationClipProviderService:RegisterActiveAnimationClip(asset)
 			value.animation = Instance.new("Animation")
-			value.animation.AnimationId = var26
+			value.animation.AnimationId = var27
 			local humanoid = value.model:FindFirstChildWhichIsA("Humanoid")
 			
 			if humanoid then
@@ -224,15 +226,24 @@ local _ = function(value, p13, p14)
 end
 
 function previewViewport.resetCameraPosition(value)
+	-- upvalues: makeupPreviewUtilsModule (ref)
 	if not value.model then return end
-	value.modelCFrame = value.model:GetModelCFrame()
+	local var29 = nil
+	local var30 = nil
+	
+	if value.props.isMakeupPreview then
+		local headPreviewCameraData, headPreviewCameraData_1 = makeupPreviewUtilsModule.getHeadPreviewCameraData(value.model)
+		var29 = headPreviewCameraData
+		var30 = headPreviewCameraData_1
+	end
+	value.modelCFrame = var29 or value.model:GetModelCFrame()
 	value.initialLookVector = value.modelCFrame.lookVector
 	local humanoidRootPart = value.model:FindFirstChild("HumanoidRootPart")
 	
 	if humanoidRootPart then
 		value.initialLookVector = humanoidRootPart.CFrame.lookVector
 	end
-	value.modelExtentsSize = value.model:GetExtentsSize()
+	value.modelExtentsSize = var30 or value.model:GetExtentsSize()
 	local modelExtentsSize = value.modelExtentsSize
 	value.cameraDistance = math.max(modelExtentsSize.X, modelExtentsSize.Y) / 2 * 3.732050807569 + modelExtentsSize.Z / 2
 	
@@ -260,8 +271,8 @@ function previewViewport.updateCameraPosition(p16)
 		return
 	end
 	local cFrame = CFrame.new(p16.modelCFrame.p + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), math.rad(p16.cameraDegreesAngle.Y)):VectorToWorldSpace(CFrame.fromAxisAngle(Vector3.new(1, 0, 0), math.rad(p16.cameraDegreesAngle.X)):VectorToWorldSpace(p16.initialLookVector)) * (p16.cameraDistance / p16.zoomFactor), p16.modelCFrame.p)
-	local var30 = p16:pointsToPixelsFactor() / p16.zoomFactor
-	p16.updateCameraCFrameBinding(cFrame + cFrame.UpVector * var30 * p16.cameraPanInPixels.Y + cFrame.RightVector * var30 * p16.cameraPanInPixels.X)
+	local var35 = p16:pointsToPixelsFactor() / p16.zoomFactor
+	p16.updateCameraCFrameBinding(cFrame + cFrame.UpVector * var35 * p16.cameraPanInPixels.Y + cFrame.RightVector * var35 * p16.cameraPanInPixels.X)
 	p16.updateCameraFocusBinding(p16.modelCFrame)
 end
 

@@ -8,25 +8,34 @@ local initiateShopItemPurchaseModule = require(inExperienceShop.initiateShopItem
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
+local fFlagLuaAppEnableGamePassFreeTrialsModule = require(inExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
 local t = {
 	owned = "Feature.Catalog.Label.Owned",
-	buy = "Feature.Catalog.Action.Buy"
+	buy = "Feature.Catalog.Action.Buy",
+	try = "Feature.Catalog.Action.Try"
 }
 
 return reactModule.memo(function(p0)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var5 = useLocalization(t)
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), button (ref), buttonVariant (ref), inputSize (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref)
+	local var6 = useLocalization(t)
 	
 	return if p0.isOwned or false then reactModule.createElement(button, {
 		isDisabled = true,
-		text = var5.owned,
+		text = var6.owned,
 		variant = buttonVariant.Standard,
 		size = inputSize.Small,
 		width = UDim.new(1, 0),
 		LayoutOrder = p0.LayoutOrder,
 		onActivated = function() end
+	}) elseif fFlagLuaAppEnableGamePassFreeTrialsModule and p0.showTry then reactModule.createElement(button, {
+		text = var6.try,
+		variant = buttonVariant.Standard,
+		size = inputSize.Small,
+		width = UDim.new(1, 0),
+		onActivated = function() end,
+		LayoutOrder = p0.LayoutOrder
 	}) else reactModule.createElement(button, {
-		text = var5.buy,
+		text = var6.buy,
 		variant = buttonVariant.Standard,
 		size = inputSize.Small,
 		width = UDim.new(1, 0),

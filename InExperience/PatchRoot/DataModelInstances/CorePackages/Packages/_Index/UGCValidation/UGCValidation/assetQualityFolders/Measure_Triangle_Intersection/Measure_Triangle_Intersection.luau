@@ -2,7 +2,7 @@
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateAQMeshQualityBlockUploadModule = require(parent.flags.getFFlagUGCValidateAQMeshQualityBlockUpload)
+local UGCValidationTriangleIntersectionMaxPercent = game:DefineFastInt("UGCValidationTriangleIntersectionMaxPercent", 20)
 
 return {
 	categories = {
@@ -13,40 +13,32 @@ return {
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
 	run = function(p0, p1)
-		-- upvalues: getFFlagUGCValidateAQMeshQualityBlockUploadModule (ref), errorSourceStringsModule (ref)
+		-- upvalues: errorSourceStringsModule (ref), UGCValidationTriangleIntersectionMaxPercent (ref)
 		local measureTriangleIntersection = p1.aqsSummaryData.Measure_Triangle_Intersection
 		
 		if measureTriangleIntersection == nil then
-			if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
-				error("Measure_Triangle_Intersection: AQS summary data is nil")
-				
-				return
-			end
 			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Triangle_Intersection" })
 			
 			return
-		else
-			for i, v in measureTriangleIntersection do
-				if i ~= "measurement_score" then
-					if v ~= nil and v.score ~= nil then
-						if tonumber(v.score) ~= 100 then
-							local t = {
-								partName = i,
-								intersecting_tri_face_percent = string.format("%.2f", (tonumber(v.intersecting_tri_face_percent) or 0) * 100),
-								score = tostring(math.floor(tonumber(v.score) or 0))
-							}
-							
-							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
-								p0:fail(errorSourceStringsModule.Keys.AQSWarn_TriangleIntersection, t)
-							else
-								p0:warn(errorSourceStringsModule.Keys.AQSWarn_TriangleIntersection, t)
-							end
-						end
-					end
-					p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Triangle_Intersection" })
+		end
+		local var3 = UGCValidationTriangleIntersectionMaxPercent / 100
+		
+		for i, v in measureTriangleIntersection do
+			if i ~= "measurement_score" then
+				if v ~= nil and v.intersecting_tri_face_percent ~= nil then
+					local intersectingTriFacePercent = tonumber(v.intersecting_tri_face_percent) or 0
 					
-					return
+					if var3 < intersectingTriFacePercent then
+						p0:warn(errorSourceStringsModule.Keys.AQSWarn_TriangleIntersection, {
+							partName = i,
+							intersecting_tri_face_percent = string.format("%.2f", intersectingTriFacePercent * 100),
+							threshold = tostring(UGCValidationTriangleIntersectionMaxPercent)
+						})
+					end
 				end
+				p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Triangle_Intersection" })
+				
+				return
 			end
 		end
 	end

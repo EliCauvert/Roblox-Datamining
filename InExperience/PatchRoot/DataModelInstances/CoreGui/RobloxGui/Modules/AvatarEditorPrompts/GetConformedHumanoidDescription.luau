@@ -5,15 +5,15 @@ local var3 = nil
 
 local function removeDefaultClothing(p0, p1, p2)
 	-- upvalues: avatarEditorService (ref)
-	local var5 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetAvatarRulesAsync() else avatarEditorService:GetAvatarRules()
+	local avatarRulesAsync = avatarEditorService:GetAvatarRulesAsync()
 	
-	if not var5.DefaultClothingAssetLists then
+	if not avatarRulesAsync.DefaultClothingAssetLists then
 		p2("No default clothing in avatar rules")
 		
 		return
 	end
-	local defaultShirtAssetIds = var5.DefaultClothingAssetLists.DefaultShirtAssetIds
-	local defaultPantAssetIds = var5.DefaultClothingAssetLists.DefaultPantAssetIds
+	local defaultShirtAssetIds = avatarRulesAsync.DefaultClothingAssetLists.DefaultShirtAssetIds
+	local defaultPantAssetIds = avatarRulesAsync.DefaultClothingAssetLists.DefaultPantAssetIds
 	
 	if not defaultShirtAssetIds or not defaultPantAssetIds then
 		p2("No default clothing ids in avatar rules")
@@ -48,7 +48,7 @@ return function(p3, p4)
 			-- upvalues: avatarEditorService (copy), p3 (copy), var2 (copy), var3 (copy), p4 (copy), p5 (ref), removeDefaultClothing (copy), p6 (ref)
 			local ok, status = pcall(function()
 				-- upvalues: avatarEditorService (copy), p3 (copy)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:ConformToAvatarRulesAsync(p3) else avatarEditorService:ConformToAvatarRules(p3)
+				return avatarEditorService:ConformToAvatarRulesAsync(p3)
 			end)
 			
 			if not ok then

@@ -188,7 +188,7 @@ return {
 		end
 		local ok, status = pcall(function()
 			-- upvalues: humanoid (ref), var17 (ref)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then humanoid:PlayEmoteAsync(var17) else humanoid:PlayEmote(var17)
+			return humanoid:PlayEmoteAsync(var17)
 		end)
 		
 		if ok and status then

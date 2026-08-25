@@ -18,7 +18,6 @@ local sduiErrorType = sduiErrorsModule.SduiErrorType
 local getSduiComponentWrapperModule = require(sduiCoreSystem.getSduiComponentWrapper)
 local getSduiActionHandlerRegistryModule = require(sduiCoreSystem.getSduiActionHandlerRegistry)
 local getSduiTokensStoreModule = require(sduiCoreSystem.ClientBinding.getSduiTokensStore)
-local fFlagSduiActionTelemetryHandler = require(parent.SharedFlags).FFlagSduiActionTelemetryHandler
 local _ = require(sduiCoreSystem.SduiContentTypes)
 local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
 local _ = require(sduiCoreSystem.SduiFocusNavigationTypes)
@@ -478,13 +477,13 @@ local function parseIcon(p44, _, _, _)
 end
 
 local function isValidActionConfig(p45, _)
-	-- upvalues: getSduiActionHandlerRegistryModule (ref), fFlagSduiActionTelemetryHandler (ref)
+	-- upvalues: getSduiActionHandlerRegistryModule (ref)
 	if typeof(p45) ~= "table" or typeof(p45.actionType) ~= "string" then
 		return false
 	end
 	local actionHandlerConfig = getSduiActionHandlerRegistryModule().getActionHandlerConfig(p45.actionType)
 	
-	return if fFlagSduiActionTelemetryHandler then actionHandlerConfig ~= nil and (if actionHandlerConfig.handler == nil then actionHandlerConfig.telemetryHandler ~= nil else true) else actionHandlerConfig ~= nil and actionHandlerConfig.handler ~= nil
+	return actionHandlerConfig ~= nil and (if actionHandlerConfig.handler == nil then actionHandlerConfig.telemetryHandler ~= nil else true)
 end
 
 local _ = function(p46)
@@ -496,13 +495,14 @@ local _ = function(p46)
 end
 
 local function parseCallback(p47, p48, p49, _)
-	-- upvalues: isValidActionConfig (ref), executeActionModule (ref), sduiErrorsModule (ref)
+	-- upvalues: getSduiActionHandlerRegistryModule (ref), executeActionModule (ref), sduiErrorsModule (ref)
 	local isNotFunction
 	local var70 = nil
 	
 	if typeof(p47) == "function" then
 		return p47
 	elseif typeof(p47) == "table" then
+		local var73
 		local var71 = getmetatable(p47)
 		
 		if var71 then
@@ -514,7 +514,21 @@ local function parseCallback(p47, p48, p49, _)
 		p47.sduiContext = p48
 		
 		return p47
-	elseif isValidActionConfig(p47, p48) then
+	elseif typeof(p47) == "table" and typeof(p47.actionType) == "string" then
+		local actionHandlerConfig = getSduiActionHandlerRegistryModule().getActionHandlerConfig(p47.actionType)
+		var73 = false
+		
+		if actionHandlerConfig ~= nil then
+			var73 = true
+			
+			if actionHandlerConfig.handler == nil then
+				local _ = actionHandlerConfig.telemetryHandler ~= nil
+			end
+		end
+	else
+		var73 = false
+	end
+	if var73 then
 		var70 = p47
 	end
 	if var70 then
@@ -528,13 +542,13 @@ local function parseCallback(p47, p48, p49, _)
 		
 		return t
 	end
-	local var74 = if typeof(p47) == "table" then p47.actionType else "unknown"
+	local var76 = if typeof(p47) == "table" then p47.actionType else "unknown"
 	error({
 		parserName = "parseCallback",
-		message = `Could not find action for: {p47} actionType: {var74}`,
+		message = `Could not find action for: {p47} actionType: {var76}`,
 		overrideValue = function()
-			-- upvalues: p48 (ref), sduiErrorsModule (copy), var74 (ref)
-			p48.dependencies.logger.reportCounter(sduiErrorsModule.SduiCounterName.ExecutedInvalidAction, { name = var74 })
+			-- upvalues: p48 (ref), sduiErrorsModule (copy), var76 (ref)
+			p48.dependencies.logger.reportCounter(sduiErrorsModule.SduiCounterName.ExecutedInvalidAction, { name = var76 })
 		end
 	})
 end
@@ -572,7 +586,7 @@ end
 
 local function parseUiComponent(p57, p58, p59, p60)
 	-- upvalues: sduiBuilderProcessingPhase (ref), sduiBuilderModule (ref), getSduiComponentWrapperModule (ref), reactModule (ref)
-	local var77, var78
+	local var79, var80
 	local _ = nil
 	local _ = nil
 	
@@ -589,8 +603,8 @@ local function parseUiComponent(p57, p58, p59, p60)
 			end
 			error("Unable to parse componentConfig during Eager phase")
 		end)
-		var77 = ok
-		var78 = status
+		var79 = ok
+		var80 = status
 	else
 		local ok, status = pcall(function()
 			-- upvalues: p57 (ref), getSduiComponentWrapperModule (copy), reactModule (copy), p58 (ref), p59 (ref)
@@ -604,27 +618,27 @@ local function parseUiComponent(p57, p58, p59, p60)
 			end
 			error(`Invalid input type {typeof(p57)}`)
 		end)
-		var77 = ok
-		var78 = status
+		var79 = ok
+		var80 = status
 	end
-	if var77 and var78 then
-		return var78
+	if var79 and var80 then
+		return var80
 	end
 	error({
 		parserName = "parseUiComponent",
-		message = if typeof(var78) == "string" then var78 else nil
+		message = if typeof(var80) == "string" then var80 else nil
 	})
 end
 
 local function parseVector2(p61, _, _, _)
-	local var81 = typeof(p61)
+	local var83 = typeof(p61)
 	
-	if var81 == "Vector2" then
+	if var83 == "Vector2" then
 		return p61
 	end
 	local ok, status = pcall(function()
-		-- upvalues: var81 (ref), p61 (ref)
-		if var81 == "string" then
+		-- upvalues: var83 (ref), p61 (ref)
+		if var83 == "string" then
 			local parts = string.split(p61, ",")
 			
 			if #parts == 2 then
@@ -633,8 +647,8 @@ local function parseVector2(p61, _, _, _)
 			error("Not enough components in string to parse Vector2")
 			
 			return
-		elseif var81 ~= "table" then
-			error(`Invalid input type for parseVector2: {var81}`)
+		elseif var83 ~= "table" then
+			error(`Invalid input type for parseVector2: {var83}`)
 			
 			return
 		elseif #p61 == 2 then
@@ -654,14 +668,14 @@ end
 
 local function parseNumber(p62, p63, p64, p65)
 	-- upvalues: parseFoundationTokenHelper (ref)
-	local var83 = typeof(p62)
+	local var85 = typeof(p62)
 	
-	if var83 == "number" then
+	if var85 == "number" then
 		return p62
-	elseif var83 ~= "string" then
+	elseif var85 ~= "string" then
 		error({
 			parserName = "parseNumber",
-			message = `Invalid input type for parseNumber: {var83}`
+			message = `Invalid input type for parseNumber: {var85}`
 		})
 		
 		return
@@ -689,14 +703,14 @@ local function parseNumber(p62, p63, p64, p65)
 end
 
 local function parseInteger(p66, _, _, _)
-	local var84 = typeof(p66)
+	local var86 = typeof(p66)
 	
-	if var84 == "number" then
+	if var86 == "number" then
 		return p66
-	elseif var84 ~= "string" then
+	elseif var86 ~= "string" then
 		error({
 			parserName = "parseInteger",
-			message = `Invalid input type for parseInteger: {var84}`
+			message = `Invalid input type for parseInteger: {var86}`
 		})
 		
 		return
@@ -723,11 +737,11 @@ local function parseInteger(p66, _, _, _)
 end
 
 local function parseBoolean(p67, _, _, _)
-	local var85 = typeof(p67)
+	local var87 = typeof(p67)
 	
-	if var85 == "boolean" then
+	if var87 == "boolean" then
 		return p67
-	elseif var85 == "number" then
+	elseif var87 == "number" then
 		if p67 == 1 then
 			return true
 		elseif p67 == 0 then
@@ -739,10 +753,10 @@ local function parseBoolean(p67, _, _, _)
 		})
 		
 		return
-	elseif var85 ~= "string" then
+	elseif var87 ~= "string" then
 		error({
 			parserName = "parseBoolean",
-			message = `Invalid input type for parseBoolean: {var85}`
+			message = `Invalid input type for parseBoolean: {var87}`
 		})
 		
 		return
@@ -761,63 +775,63 @@ local function parseBoolean(p67, _, _, _)
 end
 
 local function parseString(p68, _, _, _)
-	local var87 = typeof(p68)
+	local var89 = typeof(p68)
 	
-	if var87 == "string" then
+	if var89 == "string" then
 		return p68
-	elseif var87 == "number" or var87 == "boolean" then
+	elseif var89 == "number" or var89 == "boolean" then
 		return tostring(p68)
 	end
 	error({
 		parserName = "parseString",
-		message = `Invalid input type for parseString: {var87}`
+		message = `Invalid input type for parseString: {var89}`
 	})
 end
 
 local function parseImageString(p69, _, _, _)
 	-- upvalues: sduiResponsiveHelpersModule (ref)
-	local var88 = typeof(p69)
+	local var90 = typeof(p69)
 	
-	if var88 ~= "string" then
+	if var90 ~= "string" then
 		error({
 			parserName = "parseImageString",
-			message = `Invalid input type for parseImageString: {var88}`
+			message = `Invalid input type for parseImageString: {var90}`
 		})
 	end
-	local var89 = p69:split("://")
+	local var91 = p69:split("://")
 	
-	if not (#var89 > 1 and var89[1] == "rbxthumb") then
+	if not (#var91 > 1 and var91[1] == "rbxthumb") then
 		return p69
 	end
 	local t = {}
 	
-	for i, v in var89[2]:split("&") do
-		local var98 = v:split("=")
+	for i, v in var91[2]:split("&") do
+		local var100 = v:split("=")
 		
-		if #var98 == 2 then
-			t[var98[1]] = var98[2]
+		if #var100 == 2 then
+			t[var100[1]] = var100[2]
 		end
 	end
 	if t.mw == nil or t.mh == nil then
 		return p69
 	end
-	local var91 = tonumber(t.w)
-	local var92 = tonumber(t.h)
-	local var93 = tonumber(t.mw)
-	local var94 = tonumber(t.mh)
+	local var93 = tonumber(t.w)
+	local var94 = tonumber(t.h)
+	local var95 = tonumber(t.mw)
+	local var96 = tonumber(t.mh)
 	
-	if var91 == nil or var92 == nil or (var93 == nil or var94 == nil) or (t.type == nil or t.id == nil) then
+	if var93 == nil or var94 == nil or (var95 == nil or var96 == nil) or (t.type == nil or t.id == nil) then
 		error({
 			parserName = "parseImageString",
 			message = `Invalid params for rbxthumb in parseImageString: {p69}`
 		})
 	end
-	assert(var91, "inputWidth must exist")
-	assert(var92, "inputHeight must exist")
 	assert(var93, "inputWidth must exist")
 	assert(var94, "inputHeight must exist")
-	local var95, var96 = sduiResponsiveHelpersModule.adaptThumbnailDimensions(var91, var92, var93, var94, t.type)
-	local type = `rbxthumb://type={t.type}&id={t.id}&w={var95}&h={var96}`
+	assert(var95, "inputWidth must exist")
+	assert(var96, "inputHeight must exist")
+	local var97, var98 = sduiResponsiveHelpersModule.adaptThumbnailDimensions(var93, var94, var95, var96, t.type)
+	local type = `rbxthumb://type={t.type}&id={t.id}&w={var97}&h={var98}`
 	t.w = nil
 	t.h = nil
 	t.mw = nil
@@ -833,19 +847,19 @@ end
 
 local function parseImageSetOrImage(value, p70, p71, p72)
 	-- upvalues: t_3 (ref), parseIcon (ref), parseImageString (ref)
-	local var99 = typeof(value)
+	local var101 = typeof(value)
 	
-	if var99 == "table" then
+	if var101 == "table" then
 		return value
-	elseif var99 ~= "string" then
+	elseif var101 ~= "string" then
 		error({
 			parserName = "parseImageSetOrImage",
-			message = `Invalid input type for parseImageSetOrImage: {var99}`
+			message = `Invalid input type for parseImageSetOrImage: {var101}`
 		})
 	end
-	local var100 = value:split("/")
+	local var102 = value:split("/")
 	
-	return if if var100 and #var100 > 1 and t_3[var100[1]] then true else false then parseIcon(value, p70, p71, p72) else parseImageString(value, p70, p71, p72)
+	return if if var102 and #var102 > 1 and t_3[var102[1]] then true else false then parseIcon(value, p70, p71, p72) else parseImageString(value, p70, p71, p72)
 end
 
 local function isValidFocusNavActions(p73)
@@ -853,8 +867,8 @@ local function isValidFocusNavActions(p73)
 	if typeof(p73) ~= "table" then
 		return false
 	end
-	local var101 = nil
-	local var102 = nil
+	local var103 = nil
+	local var104 = nil
 	local keys = p73.keys
 	
 	if keys then
@@ -864,7 +878,7 @@ local function isValidFocusNavActions(p73)
 		for i, v in keys do
 			if typeof(i) == "EnumItem" then
 				if focusNavigationEventNameEnum[v] ~= nil then
-					var101 = true
+					var103 = true
 					continue
 				end
 				return false
@@ -882,7 +896,7 @@ local function isValidFocusNavActions(p73)
 			if focusNavigationEventNameEnum[v] ~= nil then
 				if typeof(v_1) == "table" then
 					if typeof(v_1.handler) == "function" then
-						var102 = true
+						var104 = true
 						continue
 					end
 					return false
@@ -892,7 +906,7 @@ local function isValidFocusNavActions(p73)
 			return false
 		end
 	end
-	return var101 or (var102 or false)
+	return var103 or (var104 or false)
 end
 
 local function parseFocusNavActions(p74, p75, p76, p77)
@@ -900,41 +914,41 @@ local function parseFocusNavActions(p74, p75, p76, p77)
 	if isValidFocusNavActions(p74) then
 		return p74
 	end
-	local var103 = typeof(p74)
+	local var105 = typeof(p74)
 	
-	if var103 ~= "table" then
+	if var105 ~= "table" then
 		error({
 			parserName = "parseFocusNavActions",
-			message = `Invalid input type for parseFocusNavActions: {var103}`
+			message = `Invalid input type for parseFocusNavActions: {var105}`
 		})
 	end
 	assert(typeof(p74) == "table", "input must be table")
 	local ok, status = pcall(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), t (copy), parseLuaTableEnumHelper (copy), p74 (ref), var103 (ref), t_1 (copy), parseEngineEnumHelper (copy), p75 (ref), p76 (ref), p77 (ref), inputHandlersModule (copy), parseCallback (copy)
+		-- upvalues: focusNavigationEventNameEnum (copy), t (copy), parseLuaTableEnumHelper (copy), p74 (ref), var105 (ref), t_1 (copy), parseEngineEnumHelper (copy), p75 (ref), p76 (ref), p77 (ref), inputHandlersModule (copy), parseCallback (copy)
 		if t[focusNavigationEventNameEnum] == nil then
-			local var104 = t
+			local var106 = t
 			local t_2 = {}
 			
 			for i, v in focusNavigationEventNameEnum do
 				t_2[v] = true
 			end
-			local var106 = "string"
+			local var108 = "string"
 			
-			var104[focusNavigationEventNameEnum] = function(p78, _, _, _)
-				-- upvalues: parseLuaTableEnumHelper (copy), var106 (ref), focusNavigationEventNameEnum (ref), t_2 (ref)
-				return parseLuaTableEnumHelper(p78, var106, focusNavigationEventNameEnum, t_2)
+			var106[focusNavigationEventNameEnum] = function(p78, _, _, _)
+				-- upvalues: parseLuaTableEnumHelper (copy), var108 (ref), focusNavigationEventNameEnum (ref), t_2 (ref)
+				return parseLuaTableEnumHelper(p78, var108, focusNavigationEventNameEnum, t_2)
 			end
 		end
-		local var107 = t[focusNavigationEventNameEnum]
-		local var108 = nil
-		local var109 = nil
+		local var109 = t[focusNavigationEventNameEnum]
+		local var110 = nil
+		local var111 = nil
 		local keys = p74.keys
 		
 		if keys then
 			if typeof(keys) ~= "table" then
 				error({
 					parserName = "parseFocusNavActions",
-					message = `Invalid input type for keys: {var103}`
+					message = `Invalid input type for keys: {var105}`
 				})
 			end
 			assert(typeof(keys) == "table", "keys must be table")
@@ -946,17 +960,17 @@ local function parseFocusNavActions(p74, p75, p76, p77)
 					return parseEngineEnumHelper(p79, keyCode)
 				end
 			end
-			local var110 = t_1[keyCode]
+			local var112 = t_1[keyCode]
 			
 			for i, v in keys do
-				local var111 = nil
+				local var113 = nil
 				
 				if typeof(i) == "string" then
 					keys[i] = nil
-					var111 = var110(i, p75, p76, p77)
+					var113 = var112(i, p75, p76, p77)
 				end
-				keys[var111] = var107(v, p75, p76, p77)
-				var108 = true
+				keys[var113] = var109(v, p75, p76, p77)
+				var110 = true
 			end
 		end
 		local events = p74.events
@@ -965,7 +979,7 @@ local function parseFocusNavActions(p74, p75, p76, p77)
 			if typeof(events) ~= "table" then
 				error({
 					parserName = "parseFocusNavActions",
-					message = `Invalid input type for events: {var103}`
+					message = `Invalid input type for events: {var105}`
 				})
 			end
 			assert(typeof(events) == "table", "events must be table")
@@ -973,14 +987,14 @@ local function parseFocusNavActions(p74, p75, p76, p77)
 			for i, v in events do
 				if typeof(v) == "table" and typeof(v.handler) ~= "function" then
 					events[i] = nil
-					events[var107(i, p75, p76, p77)] = {
+					events[var109(i, p75, p76, p77)] = {
 						handler = inputHandlersModule.onRelease(parseCallback(v, p75, p76, p77))
 					}
-					var109 = true
+					var111 = true
 				end
 			end
 		end
-		if not var108 and not var109 then
+		if not var110 and not var111 then
 			error("Invalid format. keys or events required")
 		end
 		return { keys = keys, events = events }

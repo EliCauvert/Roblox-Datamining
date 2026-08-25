@@ -49,13 +49,15 @@ function tbl:onBeforeSendingMessage(p3)
 	local moderationType = var18 and var18.moderationType
 	local newSending = messageModelModule.newSending
 	local joinDictionaries = immutable.JoinDictionaries
-	local t = { id = self.messageSendingId }
+	local t = {
+		id = self.messageSendingId,
+		order = var15,
+		conversationId = self.conversationId,
+		repliesTo = self.replyingToMessage,
+		sent = dateTime.now(),
+		moderationType = moderationType
+	}
 	var15 += 1
-	t.order = var15
-	t.conversationId = self.conversationId
-	t.repliesTo = self.replyingToMessage
-	t.sent = dateTime.now()
-	t.moderationType = moderationType
 	newSending = newSending(joinDictionaries(t, self:sendingMessagePayload()))
 	self.sendingMessageStableKey = newSending.stableKey
 	assert(newSending, "Failed to create sending message placeholder")

@@ -350,7 +350,7 @@ end
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new()
+function t_4.DebugPrintIntervalPerformanceTrackerResults()
 	-- upvalues: t (ref), t_1 (ref), t_4 (ref)
 	local t_2 = {
 		_renderSteppedConnection = nil,

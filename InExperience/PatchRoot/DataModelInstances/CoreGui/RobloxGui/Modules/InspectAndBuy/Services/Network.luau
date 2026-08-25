@@ -95,7 +95,7 @@ local function getProductInfo(p13)
 		-- upvalues: marketplaceService (copy), p13 (ref)
 		local ok, status = pcall(function()
 			-- upvalues: marketplaceService (copy), p13 (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(p13) else marketplaceService:GetProductInfo(p13)
+			return marketplaceService:GetProductInfoAsync(p13)
 		end)
 		
 		if ok then
@@ -113,7 +113,7 @@ local function getBatchItemDetails(p16, p17)
 		-- upvalues: avatarEditorService (copy), p16 (ref), p17 (ref)
 		local ok, status = pcall(function()
 			-- upvalues: avatarEditorService (copy), p16 (copy), p17 (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetBatchItemDetailsAsync(p16, p17) else avatarEditorService:GetBatchItemDetails(p16, p17)
+			return avatarEditorService:GetBatchItemDetailsAsync(p16, p17)
 		end)
 		
 		if ok then
@@ -141,7 +141,7 @@ local function getItemDetails(p21, p22)
 		-- upvalues: avatarEditorService (copy), p21 (ref), p22 (ref)
 		local ok, status = pcall(function()
 			-- upvalues: avatarEditorService (copy), p21 (copy), p22 (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetItemDetailsAsync(p21, p22) else avatarEditorService:GetItemDetails(p21, p22)
+			return avatarEditorService:GetItemDetailsAsync(p21, p22)
 		end)
 		
 		if ok then
@@ -185,7 +185,7 @@ local function getHumanoidDescriptionFromCostumeId(p28)
 		-- upvalues: playersService (copy), p28 (ref)
 		spawn(function()
 			-- upvalues: playersService (copy), p28 (copy), p29 (ref)
-			local var33 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:GetHumanoidDescriptionFromOutfitIdAsync(p28) else playersService:GetHumanoidDescriptionFromOutfitId(p28)
+			local var33 = playersService:GetHumanoidDescriptionFromOutfitIdAsync(p28)
 			
 			if var33 then
 				p29(var33)
@@ -274,7 +274,7 @@ local function getModelFromUserId(p35)
 		-- upvalues: playersService (copy), p35 (ref)
 		spawn(function()
 			-- upvalues: playersService (copy), p35 (copy), p36 (ref), p37 (ref)
-			local var34 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromUserIdAsync(p35) else playersService:CreateHumanoidModelFromUserId(p35)
+			local var34 = playersService:CreateHumanoidModelFromUserIdAsync(p35)
 			
 			if var34 then
 				p36(var34)

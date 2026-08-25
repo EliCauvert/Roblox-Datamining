@@ -1,0 +1,12 @@
+﻿local _ = require(script.Parent.ViewRecycler)
+local _ = require(script.ReactAdapter.ItemHooks)
+local reactRobloxModule = require(script.Parent.ReactRoblox)
+local _ = require(script.ReactAdapter.RecyclingScope)
+local _ = require(script.ReactAdapter.RecyclingViewport)
+local _ = require(script.ReactAdapter.VirtualList)
+local _ = require(script.ReactAdapter.createPinnedItem)
+local createReactAdapterModule = require(script.ReactAdapter.Private.createReactAdapter)
+local _ = require(script.ReactAdapter.createRecyclableComponent)
+local _ = require(script.ReactAdapter.createRecyclableView)
+
+return createReactAdapterModule({ createPortal = reactRobloxModule.createPortal })

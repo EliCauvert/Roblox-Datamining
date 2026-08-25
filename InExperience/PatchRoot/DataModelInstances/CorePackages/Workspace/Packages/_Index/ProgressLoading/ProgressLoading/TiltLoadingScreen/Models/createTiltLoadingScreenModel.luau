@@ -32,7 +32,7 @@ end
 
 local function defaultFetchProductInfo(p1)
 	-- upvalues: marketplaceService (ref)
-	return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(p1) else marketplaceService:GetProductInfo(p1)
+	return marketplaceService:GetProductInfoAsync(p1)
 end
 
 local function defaultFetchPlayerLocalizationChoice(p2)

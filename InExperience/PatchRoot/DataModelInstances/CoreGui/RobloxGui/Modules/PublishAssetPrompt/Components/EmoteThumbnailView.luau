@@ -69,17 +69,13 @@ function emoteThumbnailView.init(p2)
 		-- upvalues: playersService (copy), p2 (ref)
 		local ok, status = pcall(function()
 			-- upvalues: playersService (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078) else playersService:GetHumanoidDescriptionFromOutfitId(1342485078)
+			return playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078)
 		end)
 		
 		if not ok then
 			status = Instance.new("HumanoidDescription")
 		end
-		if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-			p2.character = playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15)
-		else
-			p2.character = playersService:CreateHumanoidModelFromDescription(status, Enum.HumanoidRigType.R15)
-		end
+		p2.character = playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15)
 		p2:addCharacterToViewportIfNeeded()
 	end)
 end

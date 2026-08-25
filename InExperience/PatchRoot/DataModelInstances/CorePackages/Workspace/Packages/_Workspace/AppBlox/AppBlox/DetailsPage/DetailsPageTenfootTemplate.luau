@@ -22,7 +22,6 @@ local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlag
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local fixConsoleEDPDirectionalNavigation = game:DefineFastFlag("FixConsoleEDPDirectionalNavigation", false)
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
-local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
 local fixDeviceSafePaddingAccess = game:DefineFastFlag("FixDeviceSafePaddingAccess", false)
 local t = {
 	itemPadding = 36,
@@ -32,7 +31,7 @@ local t = {
 }
 
 return function(p0)
-	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), fFlagLuaAppDemoModePlayButton (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fixDeviceSafePaddingAccess (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
+	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fixDeviceSafePaddingAccess (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
 	local var14 = t
 	
 	if p0.tokens then
@@ -65,7 +64,7 @@ return function(p0)
 	local renderFullscreenContent = p0.renderFullscreenContent
 	local var26, var27 = useAnimateFullscreenModule(if p0.isFullscreen == nil then false else p0.isFullscreen, renderFullscreenContent, var14.animationConfig)
 	local var28 = useDetailsPageRenderItemsModule(p0.componentList, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p0 (ref), var22 (ref), var25 (ref), var24 (ref), var23 (ref), var14 (write), fFlagLuaAppDemoModePlayButton (copy)
+		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p0 (ref), var22 (ref), var25 (ref), var24 (ref), var23 (ref), var14 (write)
 		return reactModule.createElement(detailsPageHeaderModule, {
 			thumbnailImageUrl = p0.thumbnailImageUrl,
 			thumbnailAspectRatio = p0.thumbnailAspectRatio,
@@ -83,7 +82,7 @@ return function(p0)
 			thumbnailShadowHeight = var14.thumbnailShadowHeight,
 			gradientHeight = var14.headerGradientHeight,
 			actionBarHeight = var14.actionBarHeight,
-			actionBarWidth = if fFlagLuaAppDemoModePlayButton then p0.actionBarWidth or var14.actionBarWidth else var14.actionBarWidth,
+			actionBarWidth = p0.actionBarWidth or var14.actionBarWidth,
 			itemPadding = var14.thumbnailMargin,
 			bottomMargin = var14.headerBottomMargin
 		})
@@ -92,8 +91,7 @@ return function(p0)
 		p0.subTitleText, p0.actionBarLabelText, p0.renderInfoContent,
 		p0.actionBarProps, var24, var23, p0.deviceType, var14.thumbnailShadowHeight,
 		var14.headerGradientHeight, var14.thumbnailMargin, var14.headerBottomMargin,
-		var14.actionBarHeight, var14.actionBarWidth,
-		if fFlagLuaAppDemoModePlayButton then p0.actionBarWidth else nil,
+		var14.actionBarHeight, var14.actionBarWidth, p0.actionBarWidth,
 		p0.renderActionBarLabelImpressionsDetector, var25
 	}), var19, var14.safeAreaSize)
 	local var29 = if not fixDeviceSafePaddingAccess then if fFlagEnableLeftNavOnConsole or fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil elseif fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil

@@ -12,6 +12,7 @@ local labeledTextBoxModule = require(parent.Common.LabeledTextBox)
 local publishInfoListModule = require(parent.Common.PublishInfoList)
 local makeupPartGridModule = require(parent.Common.MakeupPartGrid)
 local makeupPreviewUtilsModule = require(script.Parent.Parent.Parent.MakeupPreviewUtils)
+local getFFlagUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Flags.GetFFlagUploadMakeupSupport)
 local purchasePromptModule = require(corePackagesService.Workspace.Packages.PurchasePrompt)
 local publishAssetAnalytics = purchasePromptModule.PublishAssetAnalytics
 local setPromptVisibilityModule = require(script.Parent.Parent.Parent.Actions.SetPromptVisibility)
@@ -121,15 +122,15 @@ function publishMakeupLookPrompt.updatePreviewModel(p6)
 		local makeupEntries = p6.props.makeupEntries
 		task.spawn(function()
 			-- upvalues: makeupPreviewUtilsModule (copy), accessoryInstance (ref), makeupEntries (ref), p6 (ref)
-			local var17 = makeupPreviewUtilsModule.compositeMakeupFolder(accessoryInstance)
+			local var18 = makeupPreviewUtilsModule.compositeMakeupFolder(accessoryInstance)
 			local folderAccessories = makeupPreviewUtilsModule.getFolderAccessories(accessoryInstance, makeupEntries)
 			
-			if not var17 and #folderAccessories == 0 or not p6.isMounted then return end
-			local var19 = makeupPreviewUtilsModule.createMakeupHeadPreview(var17, Enum.AvatarAssetType.FaceMakeup, folderAccessories)
+			if not var18 and #folderAccessories == 0 or not p6.isMounted then return end
+			local var20 = makeupPreviewUtilsModule.createMakeupHeadPreview(var18, Enum.AvatarAssetType.FaceMakeup, folderAccessories)
 			
-			if var19 and p6.isMounted then
+			if var20 and p6.isMounted then
 				local previewModel = p6.state.previewModel
-				p6:setState({ previewModel = var19 }, function()
+				p6:setState({ previewModel = var20 }, function()
 					-- upvalues: previewModel (ref)
 					if previewModel then
 						previewModel:Destroy()
@@ -187,7 +188,7 @@ function publishMakeupLookPrompt.willUnmount(p10)
 end
 
 function publishMakeupLookPrompt.renderPromptBody(p11)
-	-- upvalues: roactModule (ref), uDim (ref), objectViewportModule (ref), labeledTextBoxModule (ref), robloxTranslatorModule (ref), publishInfoListModule (ref), makeupPartGridModule (ref)
+	-- upvalues: roactModule (ref), uDim (ref), objectViewportModule (ref), getFFlagUploadMakeupSupportModule (ref), labeledTextBoxModule (ref), robloxTranslatorModule (ref), publishInfoListModule (ref), makeupPartGridModule (ref)
 	local previewModel = p11.state.previewModel
 	
 	return roactModule.createFragment({
@@ -204,7 +205,8 @@ function publishMakeupLookPrompt.renderPromptBody(p11)
 			LayoutOrder = 1,
 			openPreviewView = p11.openPreviewView,
 			model = previewModel,
-			isLoading = previewModel == nil
+			isLoading = previewModel == nil,
+			isMakeupPreview = getFFlagUploadMakeupSupportModule()
 		}),
 		DescriptionInput = roactModule.createElement(labeledTextBoxModule, {
 			LayoutOrder = 2,
@@ -231,13 +233,14 @@ function publishMakeupLookPrompt.renderPromptBody(p11)
 end
 
 function publishMakeupLookPrompt.render(p12)
-	-- upvalues: roactModule (ref), basePublishPromptModule (ref), robloxTranslatorModule (ref)
+	-- upvalues: roactModule (ref), basePublishPromptModule (ref), getFFlagUploadMakeupSupportModule (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement(basePublishPromptModule, {
 		delayInputSeconds = 3,
 		promptBody = p12:renderPromptBody(),
 		screenSize = p12.props.screenSize,
 		showingPreviewView = p12.state.showingPreviewView,
 		closePreviewView = p12.closePreviewView,
+		isMakeupPreview = getFFlagUploadMakeupSupportModule(),
 		asset = p12.state.previewModel,
 		nameLabel = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
 		defaultName = p12.state.name,

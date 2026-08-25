@@ -44,40 +44,44 @@ function t:setReportingInstance(p4)
 	self._currentInstance = p4
 end
 
-function t:fail(p5, p6, p7)
+function t:setReportingRoot(p5)
+	self._rootInstance = p5
+end
+
+function t:fail(p6, p7, p8)
 	-- upvalues: validationEnumsModule (ref), getRelativePath (ref)
 	self._status = validationEnumsModule.Status.FAIL
 	table.insert(self._failures, {
-		failureStringKey = p5,
-		failureStringParams = p6 or {},
-		instancePath = getRelativePath(self._rootInstance, p7 or self._currentInstance)
+		failureStringKey = p6,
+		failureStringParams = p7 or {},
+		instancePath = getRelativePath(self._rootInstance, p8 or self._currentInstance)
 	})
 end
 
-function t:warn(p8, p9, p10)
+function t:warn(p9, p10, p11)
 	-- upvalues: getRelativePath (ref)
 	table.insert(self._warnings, {
-		failureStringKey = p8,
-		failureStringParams = p9 or {},
-		instancePath = getRelativePath(self._rootInstance, p10 or self._currentInstance)
+		failureStringKey = p9,
+		failureStringParams = p10 or {},
+		instancePath = getRelativePath(self._rootInstance, p11 or self._currentInstance)
 	})
 end
 
-function t.forceError(_, p11)
-	error({ __forceError = true, message = p11 })
+function t.forceError(_, p12)
+	error({ __forceError = true, message = p12 })
 end
 
-function t.fetchError(_, p12)
-	error({ __fetchError = true, message = p12 })
+function t.fetchError(_, p13)
+	error({ __fetchError = true, message = p13 })
 end
 
-function t:err(p13)
+function t:err(p14)
 	-- upvalues: getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), validationEnumsModule (ref)
 	if getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
-		print("Reporting:", self._testEnum, "has error:", p13)
+		print("Reporting:", self._testEnum, "has error:", p14)
 	end
 	self._status = validationEnumsModule.Status.ERROR
-	self._telemetryContext = p13
+	self._telemetryContext = p14
 	self._failures = {}
 	self._warnings = {}
 end

@@ -59,7 +59,6 @@ local fFlagSduiAppPolicyBindings = sharedFlagsModule.FFlagSduiAppPolicyBindings
 local fFlagGuacStickyShortcutBarEnabled = sharedFlagsModule.FFlagGuacStickyShortcutBarEnabled
 local fFlagEnableCoreContentAccountType = sharedFlagsModule.FFlagEnableCoreContentAccountType
 local fFlagEnableCoreContentBadge = sharedFlagsModule.FFlagEnableCoreContentBadge
-local fFlagEnableCoreContentThemeUseGuacForTokenOverrides = sharedFlagsModule.FFlagEnableCoreContentThemeUseGuacForTokenOverrides
 local fFlagEnableFlyoutUncheckedBadge = sharedFlagsModule.FFlagEnableFlyoutUncheckedBadge
 local fFlagEnableNonFlyoutUncheckedBadge = sharedFlagsModule.FFlagEnableNonFlyoutUncheckedBadge
 local getFFlagEnableAccountSwitcherUncheckedBadge = sharedFlagsModule.GetFFlagEnableAccountSwitcherUncheckedBadge
@@ -71,14 +70,14 @@ local fFlagAppChatOnConsoles = sharedFlagsModule.FFlagAppChatOnConsoles
 local fFlagMomentsAutoplayAmpPolicy = sharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local useOriginalPlatformChatPolicy = game:DefineFastFlag("UseOriginalPlatformChatPolicy", false)
 local fFlagFullscreenElementsIgnoreSafeArea = sharedFlagsModule.FFlagFullscreenElementsIgnoreSafeArea
-local friendsChatEnableConversationConsent = game:DefineFastFlag("FriendsChatEnableConversationConsent", false)
+local fFlagFriendsChatEnableConversationConsent = sharedFlagsModule.FFlagFriendsChatEnableConversationConsent
 local fFlagFriendsChatOsaSystemMessage = sharedFlagsModule.FFlagFriendsChatOsaSystemMessage
 game:DefineFastFlag("BehaviorCollectionControlEnabled", false)
 game:DefineFastFlag("LuaAppPromotionalEmailsCheckboxEnabledInAppPolicy", false)
 local getFFlagNotificationsComplianceShouldRestrictStream = sharedFlagsModule.GetFFlagNotificationsComplianceShouldRestrictStream
 
 return function(p0)
-	-- upvalues: isVRAppBuild (ref), luaAppEnableRecommendedCarouselForDesktop (ref), isSubjectToDesktopPolicies (ref), fFlagAppIaScrollAwayGuac (ref), fFlagEnableLeftNavOnConsole (ref), guiService (ref), isRunningInStudio (ref), disableWebViewSupportInStudio (ref), getFFlagLuafiedReportEntryPoints (ref), getFFlagEnableAbuseReport10ft (ref), getFFlagUseVoiceExitBetaLanguage (ref), getFFlagSeamlessVoiceConsentToastPolicy (ref), getFFlagExpChatGuacChatDisabledReason (ref), fFlagAEGIS2UseGuacToShowEnabledMessage (ref), fFlagAEGIS2UseGuacToShowFAEUpsell (ref), fFlagExpChatUseGuacForFOMOUpsell (ref), fFlagExpChatUseGuacForCrossAgeChat (ref), getFFlagDisableCDLQrCodeForMaquettes (ref), cryoModule (ref), var3 (ref), debugUseLegacyCrossPlayApi (ref), debugCrossPlaySystemUi (ref), debugOverrideCrossPlayUri (ref), crossPlayCapabilitiesModule (ref), debugOverrideCrossPlaySettingsKey (ref), debugOverrideCrossPlayQueryParam (ref), getFFlagUseEnablePremiumUserFeaturesAppPolicy (ref), getFFlagUseExternalBrowserForAgeGuidelines10ft (ref), fFlagGuacCanRenderTransferOnProfile (ref), getFFlagEnableGateNotificationPreferencesTab (ref), userInputService (ref), fFlagLuaAppHomeVngAppUpsell (ref), fFlagVngAppUpsellPcLayout (ref), fFlagFriendRequestNicknames (ref), fFlagLuaAppParentUpsellPolicy (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), getFFlagNotificationsComplianceShouldRestrictStream (ref), debugForceShowIllegalContentReportingUI (ref), fFlagRenameParentEmailForVerificationUpsell (ref), useOriginalPlatformChatPolicy (ref), fFlagAppChatOnConsoles (ref), fFlagFriendsChatOsaSystemMessage (ref), friendsChatEnableConversationConsent (ref), fFlagEnableAndroidTvAppPolicies (ref), getFFlagEnableMultiPageSignup (ref), getFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup (ref), fFlagEnableMicrosoftStorePaymentsPlatform (ref), fFlagEnableFriendsRenamingForAll (ref), fFlagEnableMilkyWayPaymentsPlatformV2 (ref), fFlagEnableScreentimeMoreTimeOption (ref), flyoutDisablePremiumEntrypoint1 (ref), guacDisableBlackbirdEntrypoints (ref), flyoutEnableGiftcardsWithRedeem (ref), guacAppPolicyDisableSignupCheckbox (ref), fFlagEnableFaceIDTextOnAddAuthMethodPage (ref), fFlagEnableMorePageExitButtonSupport (ref), fFlagEnableMorePageDirectionalLayoutRolloutFix (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagMomentsAutoplayAmpPolicy (ref), getFFlagEnableSupportCenter (ref), fFlagSduiAppPolicyBindings (ref), fFlagGuacStickyShortcutBarEnabled (ref), fFlagEnableCoreContentAccountType (ref), fFlagEnableCoreContentBadge (ref), fFlagEnableCoreContentThemeUseGuacForTokenOverrides (ref), fFlagEnableFlyoutUncheckedBadge (ref), fFlagEnableNonFlyoutUncheckedBadge (ref), getFFlagEnableAccountSwitcherUncheckedBadge (ref), fFlagShowGameAgeRating (ref), fFlagDefaultKidsToDarkTheme (ref), fFlagMacMenuBarContentUpdates (ref), fFlagUsesCancelSearchAppPolicy (ref), fFlagAppNavMyStatsTab (ref), fFlagFullscreenElementsIgnoreSafeArea (ref)
+	-- upvalues: isVRAppBuild (ref), luaAppEnableRecommendedCarouselForDesktop (ref), isSubjectToDesktopPolicies (ref), useOriginalPlatformChatPolicy (ref), fFlagAppChatOnConsoles (ref), fFlagAppIaScrollAwayGuac (ref), fFlagEnableLeftNavOnConsole (ref), guiService (ref), isRunningInStudio (ref), disableWebViewSupportInStudio (ref), getFFlagLuafiedReportEntryPoints (ref), getFFlagEnableAbuseReport10ft (ref), getFFlagUseVoiceExitBetaLanguage (ref), getFFlagSeamlessVoiceConsentToastPolicy (ref), getFFlagExpChatGuacChatDisabledReason (ref), fFlagAEGIS2UseGuacToShowEnabledMessage (ref), fFlagAEGIS2UseGuacToShowFAEUpsell (ref), fFlagExpChatUseGuacForFOMOUpsell (ref), fFlagExpChatUseGuacForCrossAgeChat (ref), getFFlagDisableCDLQrCodeForMaquettes (ref), cryoModule (ref), var3 (ref), debugUseLegacyCrossPlayApi (ref), debugCrossPlaySystemUi (ref), debugOverrideCrossPlayUri (ref), crossPlayCapabilitiesModule (ref), debugOverrideCrossPlaySettingsKey (ref), debugOverrideCrossPlayQueryParam (ref), getFFlagUseEnablePremiumUserFeaturesAppPolicy (ref), getFFlagUseExternalBrowserForAgeGuidelines10ft (ref), fFlagGuacCanRenderTransferOnProfile (ref), getFFlagEnableGateNotificationPreferencesTab (ref), userInputService (ref), fFlagLuaAppHomeVngAppUpsell (ref), fFlagVngAppUpsellPcLayout (ref), fFlagFriendRequestNicknames (ref), fFlagLuaAppParentUpsellPolicy (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), getFFlagNotificationsComplianceShouldRestrictStream (ref), debugForceShowIllegalContentReportingUI (ref), fFlagRenameParentEmailForVerificationUpsell (ref), fFlagFriendsChatOsaSystemMessage (ref), fFlagFriendsChatEnableConversationConsent (ref), fFlagEnableAndroidTvAppPolicies (ref), getFFlagEnableMultiPageSignup (ref), getFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup (ref), fFlagEnableMicrosoftStorePaymentsPlatform (ref), fFlagEnableFriendsRenamingForAll (ref), fFlagEnableMilkyWayPaymentsPlatformV2 (ref), fFlagEnableScreentimeMoreTimeOption (ref), flyoutDisablePremiumEntrypoint1 (ref), guacDisableBlackbirdEntrypoints (ref), flyoutEnableGiftcardsWithRedeem (ref), guacAppPolicyDisableSignupCheckbox (ref), fFlagEnableFaceIDTextOnAddAuthMethodPage (ref), fFlagEnableMorePageExitButtonSupport (ref), fFlagEnableMorePageDirectionalLayoutRolloutFix (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagMomentsAutoplayAmpPolicy (ref), getFFlagEnableSupportCenter (ref), fFlagSduiAppPolicyBindings (ref), fFlagGuacStickyShortcutBarEnabled (ref), fFlagEnableCoreContentAccountType (ref), fFlagEnableCoreContentBadge (ref), fFlagEnableFlyoutUncheckedBadge (ref), fFlagEnableNonFlyoutUncheckedBadge (ref), getFFlagEnableAccountSwitcherUncheckedBadge (ref), fFlagShowGameAgeRating (ref), fFlagDefaultKidsToDarkTheme (ref), fFlagMacMenuBarContentUpdates (ref), fFlagUsesCancelSearchAppPolicy (ref), fFlagAppNavMyStatsTab (ref), fFlagFullscreenElementsIgnoreSafeArea (ref)
 	local function _(p1, p2)
 		-- upvalues: p0 (ref), isVRAppBuild (copy)
 		return if p0[p1] == nil then if isVRAppBuild() then p2 else not p2 else p0[p1]
@@ -126,8 +125,8 @@ return function(p0)
 			return p0.SearchBar or false
 		end,
 		getMorePageContent = function()
-			-- upvalues: p0 (ref)
-			return p0.MorePageContent
+			-- upvalues: useOriginalPlatformChatPolicy (copy), p0 (ref), fFlagAppChatOnConsoles (copy)
+			return if useOriginalPlatformChatPolicy then p0.MorePageContent elseif fFlagAppChatOnConsoles then p0.MorePageContent2 else p0.MorePageContent
 		end,
 		getAboutPageType = function()
 			-- upvalues: p0 (ref)
@@ -807,13 +806,13 @@ return function(p0)
 			return if useOriginalPlatformChatPolicy then p0.CanSeeChatTab or false elseif fFlagAppChatOnConsoles then p0.CanSeeChatTab2 or false else p0.CanSeeChatTab or false
 		end,
 		getCanSeeFriendsTab = function()
-			-- upvalues: fFlagFriendsChatOsaSystemMessage (copy), friendsChatEnableConversationConsent (copy), p0 (ref)
+			-- upvalues: fFlagFriendsChatOsaSystemMessage (copy), fFlagFriendsChatEnableConversationConsent (copy), p0 (ref)
 			local t = {
 				VR = false,
 				Console = false,
 				Gamepad = false,
 				ContextCard = fFlagFriendsChatOsaSystemMessage,
-				ConversationConsent = friendsChatEnableConversationConsent
+				ConversationConsent = fFlagFriendsChatEnableConversationConsent
 			}
 			
 			for i, v in p0.FriendsTabRequiredCapabilities or {} do
@@ -833,9 +832,9 @@ return function(p0)
 		end,
 		getAgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function()
 			-- upvalues: getFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup (copy), getFFlagEnableMultiPageSignup (copy), p0 (ref)
-			local var24 = getFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup()
+			local var23 = getFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup()
 			
-			return if getFFlagEnableMultiPageSignup() then if p0.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages == nil then var24 else p0.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages else var24
+			return if getFFlagEnableMultiPageSignup() then if p0.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages == nil then var23 else p0.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages else var23
 		end,
 		getRobuxUpsellFlowMobile = function()
 			-- upvalues: p0 (ref)
@@ -1020,10 +1019,6 @@ return function(p0)
 		getCoreContentBadgeText = if fFlagEnableCoreContentBadge then function()
 			-- upvalues: p0 (ref)
 			return p0.CoreContentBadgeText
-		end else nil,
-		getCoreContentTheme = if fFlagEnableCoreContentThemeUseGuacForTokenOverrides then function()
-			-- upvalues: p0 (ref)
-			return p0.CoreContentTheme
 		end else nil,
 		getShowUncheckedBadge = if fFlagEnableFlyoutUncheckedBadge or fFlagEnableNonFlyoutUncheckedBadge then function()
 			-- upvalues: p0 (ref)

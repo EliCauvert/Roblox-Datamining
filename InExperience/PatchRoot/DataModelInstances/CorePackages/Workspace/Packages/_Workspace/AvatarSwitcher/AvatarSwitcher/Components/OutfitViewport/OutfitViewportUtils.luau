@@ -8,23 +8,13 @@ local avatarSwitcherMakeupSupport = game:DefineFastFlag("AvatarSwitcherMakeupSup
 
 function t.buildOutfitModel(p0, p1)
 	-- upvalues: playersService (ref), avatarEditorService (ref), fFlagAvatarSwitcherAccurateAvatarWarning (ref)
-	if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-		local var7 = avatarEditorService:ConformToAvatarRulesAsync(playersService:GetHumanoidDescriptionFromOutfitIdAsync(p0))
-		local var8 = playersService:CreateHumanoidModelFromDescriptionAsync(var7, p1)
-		
-		if fFlagAvatarSwitcherAccurateAvatarWarning then
-			return var8, var7
-		end
-		return var8
-	else
-		local var9 = avatarEditorService:ConformToAvatarRules(playersService:GetHumanoidDescriptionFromOutfitId(p0))
-		local var10 = playersService:CreateHumanoidModelFromDescription(var9, p1)
-		
-		if fFlagAvatarSwitcherAccurateAvatarWarning then
-			return var10, var9
-		end
-		return var10
+	local var7 = avatarEditorService:ConformToAvatarRulesAsync(playersService:GetHumanoidDescriptionFromOutfitIdAsync(p0))
+	local var8 = playersService:CreateHumanoidModelFromDescriptionAsync(var7, p1)
+	
+	if fFlagAvatarSwitcherAccurateAvatarWarning then
+		return var8, var7
 	end
+	return var8
 end
 
 function t.getCameraDistance(p2, p3)
@@ -53,10 +43,10 @@ function t.loadIdleAnimationForAvatar(p4)
 	local animation = idle:FindFirstChildOfClass("Animation")
 	
 	if animation then
-		local var17 = animator:LoadAnimation(animation)
-		var17.Looped = true
+		local var15 = animator:LoadAnimation(animation)
+		var15.Looped = true
 		
-		return var17
+		return var15
 	end
 	return nil
 end
@@ -79,35 +69,35 @@ local var5 = nil
 function t.playRandomEmote(p7)
 	-- upvalues: avatarSwitcherEmoteIds (ref), var5 (write), t (ref)
 	local humanoid = p7:FindFirstChildOfClass("Humanoid")
-	local var22 = humanoid and humanoid.RigType == Enum.HumanoidRigType.R15
-	local var23 = nil
+	local var20 = humanoid and humanoid.RigType == Enum.HumanoidRigType.R15
+	local var21 = nil
 	local ok, status = pcall(function()
 		-- upvalues: avatarSwitcherEmoteIds (copy)
 		return string.split(avatarSwitcherEmoteIds)
 	end)
 	
-	if var22 and ok and #status > 0 then
-		local var24
+	if var20 and ok and #status > 0 then
+		local var22
 		local _ = nil
 		repeat
-			var24 = status[math.random(#status)]
-		until not (var24 == var5 and #status ~= 1)
-		var23 = t.loadAnimationTrackForAvatar(var24, p7)
-		var5 = var24
+			var22 = status[math.random(#status)]
+		until not (var22 == var5 and #status ~= 1)
+		var21 = t.loadAnimationTrackForAvatar(var22, p7)
+		var5 = var22
 	end
 	task.spawn(function()
-		-- upvalues: var23 (write), p7 (ref), t (copy)
-		if var23 then
-			var23.Looped = false
-			var23:Play()
-			var23.Stopped:Wait()
+		-- upvalues: var21 (write), p7 (ref), t (copy)
+		if var21 then
+			var21.Looped = false
+			var21:Play()
+			var21.Stopped:Wait()
 		end
 		if p7.Parent == nil then return end
-		local var25 = t.loadIdleAnimationForAvatar(p7)
+		local var23 = t.loadIdleAnimationForAvatar(p7)
 		
-		if var25 then
-			var25.Looped = true
-			var25:Play()
+		if var23 then
+			var23.Looped = true
+			var23:Play()
 		end
 	end)
 end
@@ -154,10 +144,10 @@ end
 
 function t.hasMissingAssetsInDescription(value, p10)
 	-- upvalues: getAssetIdsInHumanoidDescription (ref)
-	local var27 = getAssetIdsInHumanoidDescription(value)
+	local var25 = getAssetIdsInHumanoidDescription(value)
 	
 	for i, v in p10 do
-		if not var27[v] then
+		if not var25[v] then
 			return true
 		end
 	end

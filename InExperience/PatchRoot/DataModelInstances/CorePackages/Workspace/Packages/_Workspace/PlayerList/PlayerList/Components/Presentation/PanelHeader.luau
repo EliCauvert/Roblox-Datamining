@@ -24,7 +24,8 @@ return reactModule.memo(function(p0)
 			LayoutOrder = 2,
 			icon = { name = foundationModule.Enums.IconName.X },
 			size = foundationModule.Enums.InputSize.XSmall,
-			onActivated = p0.onClose
+			onActivated = p0.onClose,
+			isDisabled = p0.isDisabled == true
 		})
 	})
 end)

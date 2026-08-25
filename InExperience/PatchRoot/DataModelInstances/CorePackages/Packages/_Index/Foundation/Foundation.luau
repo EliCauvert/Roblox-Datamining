@@ -134,6 +134,7 @@ local var79 = strictModule({
 	Snackbar = require(script.Components.Snackbar),
 	StatusBadge = require(script.Components.StatusBadge),
 	StatusIndicator = require(script.Components.StatusIndicator),
+	Stepper = require(script.Components.Stepper),
 	SystemBanner = require(script.Components.SystemBanner),
 	Tabs = require(script.Components.Tabs),
 	Text = require(script.Components.Text),

@@ -73,6 +73,8 @@ end
 
 local function AudienceRow(p4)
 	-- upvalues: reactModule (ref), icon (ref), iconName (ref), iconSize (ref), view (ref), list (ref), radioGroup (ref), inputSize (ref)
+	local testId = `{p4.testId}-row-{string.lower(p4.value)}`
+	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y radius-medium",
 		LayoutOrder = p4.LayoutOrder,
@@ -80,7 +82,7 @@ local function AudienceRow(p4)
 			-- upvalues: p4 (ref)
 			p4.onActivated(p4.value)
 		end, { p4.onActivated, p4.value }),
-		testId = `{u794}-button`
+		testId = `{testId}-button`
 	}, {
 		ListItem = reactModule.createElement(list.Item, {
 			LayoutOrder = p4.LayoutOrder,
@@ -98,11 +100,11 @@ local function AudienceRow(p4)
 					label = "",
 					isDisabled = p4.isDisabled or p4.isLocked,
 					size = inputSize.Medium,
-					testId = `{u794}-radio`,
+					testId = `{testId}-radio`,
 					value = p4.value
 				})
 			}),
-			testId = u794
+			testId = testId
 		})
 	})
 end
@@ -149,120 +151,120 @@ end
 
 local function useAudienceData(p14, p15, p16, p17, p18)
 	-- upvalues: reactModule (ref), fFlagBuildRehydrateOnPublishModule (ref), debug (ref), formatErrorModule (ref), signalsReactModule (ref), fFlagBuildAudiencePublishPromptModule (ref), contentMaturityUtilsModule (ref), t (ref), universeConfigurationModule (ref)
-	local var33 = reactModule.useMemo(function()
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: p17 (ref), p14 (ref)
 		return p17.getAndFetchConfiguration(p14)
 	end, { p14, p17 })
-	local var34, var35 = reactModule.useState(fFlagBuildRehydrateOnPublishModule)
+	local var35, var36 = reactModule.useState(fFlagBuildRehydrateOnPublishModule)
 	
 	if fFlagBuildRehydrateOnPublishModule then
 		reactModule.useEffect(function()
-			-- upvalues: var35 (ref), p17 (ref), p14 (ref), debug (copy), formatErrorModule (copy)
-			local var59 = true
-			var35(true)
+			-- upvalues: var36 (ref), p17 (ref), p14 (ref), debug (copy), formatErrorModule (copy)
+			local var60 = true
+			var36(true)
 			p17.refreshConfiguration(p14):catch(function(p19)
 				-- upvalues: debug (copy), formatErrorModule (copy), p14 (copy)
 				debug.log("warn", "AudienceConfigurationContent configuration refresh failed", { errorMessage = formatErrorModule(p19), universeId = p14 })
 			end):finally(function()
-				-- upvalues: var59 (write), var35 (copy)
-				if var59 then
-					var35(false)
+				-- upvalues: var60 (write), var36 (copy)
+				if var60 then
+					var36(false)
 				end
 			end)
 			
 			return function()
-				-- upvalues: var59 (write)
-				var59 = false
+				-- upvalues: var60 (write)
+				var60 = false
 			end
 		end, { p17, p14 })
 	end
-	local var49, var50
-	local var36 = reactModule.useMemo(function()
+	local var50, var51
+	local var37 = reactModule.useMemo(function()
 		-- upvalues: p15 (ref), p14 (ref)
 		return p15.getAndFetchEligibility(p14)
 	end, { p15, p14 })
-	local var37 = reactModule.useMemo(function()
+	local var38 = reactModule.useMemo(function()
 		-- upvalues: p15 (ref), p14 (ref)
 		return p15.getAndFetchLatestSubmission(p14)
 	end, { p15, p14 })
-	local var38 = signalsReactModule.useSignalState(var33.data)
-	local var39 = signalsReactModule.useSignalState(var33.status)
-	local var40 = signalsReactModule.useSignalState(var36.data)
-	local var41 = signalsReactModule.useSignalState(var36.status)
-	local var42 = signalsReactModule.useSignalState(var37.data)
-	local var43 = signalsReactModule.useSignalState(var37.status)
-	local var44 = var39 == "Ready" and var38 ~= nil
-	local var45 = var41 == "Ready" and var40 ~= nil
-	local isFailed = var43 == "Failed"
-	local var47 = var45 and ((var43 == "Ready" and var42 ~= nil) or isFailed)
+	local var39 = signalsReactModule.useSignalState(var34.data)
+	local var40 = signalsReactModule.useSignalState(var34.status)
+	local var41 = signalsReactModule.useSignalState(var37.data)
+	local var42 = signalsReactModule.useSignalState(var37.status)
+	local var43 = signalsReactModule.useSignalState(var38.data)
+	local var44 = signalsReactModule.useSignalState(var38.status)
+	local var45 = var40 == "Ready" and var39 ~= nil
+	local var46 = var42 == "Ready" and var41 ~= nil
+	local isFailed = var44 == "Failed"
+	local var48 = var46 and ((var44 == "Ready" and var43 ~= nil) or isFailed)
 	local _ = nil
 	local _ = nil
-	local var48 = nil
+	local var49 = nil
 	
 	if fFlagBuildRehydrateOnPublishModule then
-		local var51 = reactModule.useMemo(function()
+		local var52 = reactModule.useMemo(function()
 			-- upvalues: p16 (ref), p14 (ref)
 			return p16.getAndFetchEligibility(p14)
 		end, { p16, p14 })
-		local var52 = signalsReactModule.useSignalState(var51.data)
-		local var53 = signalsReactModule.useSignalState(var51.status)
-		local var54 = if var53 ~= "Ready" then var53 == "Failed" else true
+		local var53 = signalsReactModule.useSignalState(var52.data)
+		local var54 = signalsReactModule.useSignalState(var52.status)
+		local var55 = if var54 ~= "Ready" then var54 == "Failed" else true
 		
 		if fFlagBuildAudiencePublishPromptModule then
-			var48 = if not contentMaturityUtilsModule.isContentUnrated(p14) then nil elseif contentMaturityUtilsModule.isSealBroken(p14) then "RatingRequired" else "PublishRequired"
-			var50 = var48 ~= nil
-			var49 = var54
+			var49 = if not contentMaturityUtilsModule.isContentUnrated(p14) then nil elseif contentMaturityUtilsModule.isSealBroken(p14) then "RatingRequired" else "PublishRequired"
+			var51 = var49 ~= nil
+			var50 = var55
 		else
-			local var56
-			local var55 = var45 and (if var40.eligibility ~= "Required" then isFailed else true)
-			var50 = reactModule.useMemo(function()
-				-- upvalues: contentMaturityUtilsModule (copy), p14 (ref), var55 (ref)
-				return if contentMaturityUtilsModule.isSealBroken(p14) then contentMaturityUtilsModule.isContentUnrated(p14) or var55 else false
-			end, { var52, var55, p14 })
+			local var57
+			local var56 = var46 and (if var41.eligibility ~= "Required" then isFailed else true)
+			var51 = reactModule.useMemo(function()
+				-- upvalues: contentMaturityUtilsModule (copy), p14 (ref), var56 (ref)
+				return if contentMaturityUtilsModule.isSealBroken(p14) then contentMaturityUtilsModule.isContentUnrated(p14) or var56 else false
+			end, { var53, var56, p14 })
 			
-			if var41 ~= "Ready" then
-				var56 = false
+			if var42 ~= "Ready" then
+				var57 = false
 				
-				if var41 == "Failed" then
-					var56 = if var43 ~= "Ready" then var43 == "Failed" else true
+				if var42 == "Failed" then
+					var57 = if var44 ~= "Ready" then var44 == "Failed" else true
 				end
-				var49 = var54 and var56
+				var50 = var55 and var57
 			end
 		end
 	else
-		var49 = var47
-		var50 = var45 and (if var40.eligibility ~= "Required" then isFailed else true)
+		var50 = var48
+		var51 = var46 and (if var41.eligibility ~= "Required" then isFailed else true)
 	end
-	local var58
+	local var59
 	local t_1 = {
-		configurationData = var38,
-		isAudiencesReady = var44,
-		isConfigurationRefreshPending = var34,
-		isEligibilityResolved = var49,
-		isNonPrivateLocked = var50,
-		lockReason = var48
+		configurationData = var39,
+		isAudiencesReady = var45,
+		isConfigurationRefreshPending = var35,
+		isEligibilityResolved = var50,
+		isNonPrivateLocked = var51,
+		lockReason = var49
 	}
 	
 	if p18 ~= nil then
-		var58 = p18
-	elseif var44 then
-		local audiences = var38.audiences
-		var58 = if audiences ~= nil then nil else t[universeConfigurationModule.getPrivacyTypeForAudiences(audiences)]
+		var59 = p18
+	elseif var45 then
+		local audiences = var39.audiences
+		var59 = if audiences ~= nil then nil else t[universeConfigurationModule.getPrivacyTypeForAudiences(audiences)]
 	else
-		var58 = nil
+		var59 = nil
 	end
-	t_1.selectedAudience = var58
+	t_1.selectedAudience = var59
 	
 	return t_1
 end
 
 local function useQuestionnaireHandler(p20, p21)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), reactModule (ref), fFlagBuildRehydrateOnPublishModule (ref), refreshPublishEligibilityModule (ref), gameConfigurationActionsModule (ref)
-	local var60 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+	local var61 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 	}) else nil).creatorHub else localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
-	local var61 = useOpenWebView()
-	local var62 = reactModule.useCallback(function()
+	local var62 = useOpenWebView()
+	local var63 = reactModule.useCallback(function()
 		-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), refreshPublishEligibilityModule (copy), p20 (ref), p21 (ref)
 		if fFlagBuildRehydrateOnPublishModule then
 			refreshPublishEligibilityModule(p20)
@@ -274,9 +276,9 @@ local function useQuestionnaireHandler(p20, p21)
 	end, { p21, p20 })
 	
 	return reactModule.useCallback(function()
-		-- upvalues: var61 (ref), gameConfigurationActionsModule (copy), p20 (ref), var60 (ref), var62 (ref)
-		var61(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p20), var60, var62)
-	end, { var60, var61, var62, p20 })
+		-- upvalues: var62 (ref), gameConfigurationActionsModule (copy), p20 (ref), var61 (ref), var63 (ref)
+		var62(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p20), var61, var63)
+	end, { var61, var62, var63, p20 })
 end
 
 local _ = function(p22)
@@ -290,108 +292,108 @@ end
 
 local function useAudienceController(p23)
 	-- upvalues: useAudienceStores (ref), reactModule (ref), fFlagBuildAudiencePublishPromptModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), useAudienceData (ref), useQuestionnaireHandler (ref), getAudiencesForValue (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationActionsModule (ref), universeConfigurationModule (ref), debug (ref), formatErrorModule (ref), contentMaturityUtilsModule (ref)
-	local var63 = useAudienceStores()
-	local var64, var65 = reactModule.useState(nil)
-	local var66, var67 = reactModule.useState(false)
-	local var68 = nil
+	local var64 = useAudienceStores()
+	local var65, var66 = reactModule.useState(nil)
+	local var67, var68 = reactModule.useState(false)
+	local var69 = nil
 	
 	if fFlagBuildAudiencePublishPromptModule then
-		local var69 = reactModule.useRef(nil)
-		var68 = var69
+		local var70 = reactModule.useRef(nil)
+		var69 = var70
 		reactModule.useEffect(function()
-			-- upvalues: var69 (ref)
+			-- upvalues: var70 (ref)
 			return function()
-				-- upvalues: var69 (copy)
-				local current = var69.current
-				var69.current = nil
+				-- upvalues: var70 (copy)
+				local current = var70.current
+				var70.current = nil
 				
 				if current ~= nil then
 					current:cancel()
 				end
 			end
-		end, { var69, p23 })
+		end, { var70, p23 })
 	end
-	local var70, var71 = reactModule.useState(nil)
-	local var72 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
-		-- upvalues: var71 (ref)
-		var71(nil)
+	local var71, var72 = reactModule.useState(nil)
+	local var73 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
+		-- upvalues: var72 (ref)
+		var72(nil)
 	end, {}) else nil
-	local var73 = useAudienceData(p23, var63.questionnaireStore, var63.universeActivationStore, var63.universeConfigurationStore, var64)
-	local var74 = useQuestionnaireHandler(p23, var63.questionnaireStore)
-	local configurationData = var73.configurationData
-	local isAudiencesReady = var73.isAudiencesReady
-	local isConfigurationRefreshPending = var73.isConfigurationRefreshPending
-	local isEligibilityResolved = var73.isEligibilityResolved
-	local isNonPrivateLocked = var73.isNonPrivateLocked
-	local var75 = not isAudiencesReady or (var66 or isConfigurationRefreshPending)
+	local var74 = useAudienceData(p23, var64.questionnaireStore, var64.universeActivationStore, var64.universeConfigurationStore, var65)
+	local var75 = useQuestionnaireHandler(p23, var64.questionnaireStore)
+	local configurationData = var74.configurationData
+	local isAudiencesReady = var74.isAudiencesReady
+	local isConfigurationRefreshPending = var74.isConfigurationRefreshPending
+	local isEligibilityResolved = var74.isEligibilityResolved
+	local isNonPrivateLocked = var74.isNonPrivateLocked
+	local var76 = not isAudiencesReady or (var67 or isConfigurationRefreshPending)
 	
 	return {
 		handleAudienceActivated = reactModule.useCallback(function(p24)
-			-- upvalues: var71 (ref), var75 (ref), getAudiencesForValue (copy), configurationData (ref), var65 (ref), var67 (ref), var63 (ref), p23 (ref), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), debug (copy), formatErrorModule (copy), fFlagBuildAudiencePublishPromptModule (copy), isNonPrivateLocked (ref), var68 (write), contentMaturityUtilsModule (copy), isEligibilityResolved (ref)
+			-- upvalues: var72 (ref), var76 (ref), getAudiencesForValue (copy), configurationData (ref), var66 (ref), var68 (ref), var64 (ref), p23 (ref), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), debug (copy), formatErrorModule (copy), fFlagBuildAudiencePublishPromptModule (copy), isNonPrivateLocked (ref), var69 (write), contentMaturityUtilsModule (copy), isEligibilityResolved (ref)
 			local function _()
-				-- upvalues: var71 (copy), p24 (ref)
-				var71(function(p25)
+				-- upvalues: var72 (copy), p24 (ref)
+				var72(function(p25)
 					-- upvalues: p24 (copy)
 					return if p25 == p24 then nil else p24
 				end)
 			end
 			
 			local function applyAudienceChange()
-				-- upvalues: var75 (copy), getAudiencesForValue (copy), p24 (ref), configurationData (copy), var71 (copy), var65 (copy), var67 (copy), var63 (copy), p23 (copy), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), debug (copy), formatErrorModule (copy)
-				if var75 then
+				-- upvalues: var76 (copy), getAudiencesForValue (copy), p24 (ref), configurationData (copy), var72 (copy), var66 (copy), var68 (copy), var64 (copy), p23 (copy), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), debug (copy), formatErrorModule (copy)
+				if var76 then
 					return
 				end
-				local var80 = getAudiencesForValue(p24, configurationData.audiences)
-				var71(nil)
-				var65(p24)
-				var67(true)
-				var63.universeActivationStore.setAudiences(p23, var80):andThen(function(p27)
-					-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), p23 (copy), var63 (copy), universeConfigurationModule (copy), var80 (ref), debug (copy), formatErrorModule (copy), var65 (copy), var67 (copy)
+				local var81 = getAudiencesForValue(p24, configurationData.audiences)
+				var72(nil)
+				var66(p24)
+				var68(true)
+				var64.universeActivationStore.setAudiences(p23, var81):andThen(function(p27)
+					-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), p23 (copy), var64 (copy), universeConfigurationModule (copy), var81 (ref), debug (copy), formatErrorModule (copy), var66 (copy), var68 (copy)
 					if fFlagBuildRehydrateOnPublishModule then
 						gameConfigurationActionsModule.updateCachedAudience(p23, p27.audiences)
 					else
-						var63.universeConfigurationStore.updateSummary(p23, {
-							privacyType = universeConfigurationModule.getPrivacyTypeForAudiences(var80),
-							audiences = var80
+						var64.universeConfigurationStore.updateSummary(p23, {
+							privacyType = universeConfigurationModule.getPrivacyTypeForAudiences(var81),
+							audiences = var81
 						})
 					end
-					var63.universeActivationStore.activate(p23):andThen(function()
-						-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), var63 (copy), p23 (copy)
+					var64.universeActivationStore.activate(p23):andThen(function()
+						-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), var64 (copy), p23 (copy)
 						if not fFlagBuildRehydrateOnPublishModule then
-							var63.universeConfigurationStore.fetchConfiguration(p23)
+							var64.universeConfigurationStore.fetchConfiguration(p23)
 						end
 					end):catch(function(p28)
-						-- upvalues: debug (copy), formatErrorModule (copy), p23 (copy), var65 (copy)
+						-- upvalues: debug (copy), formatErrorModule (copy), p23 (copy), var66 (copy)
 						debug.log("warn", "AudienceConfigurationContent activate after audience update failed", { errorMessage = formatErrorModule(p28), universeId = p23 })
-						var65(nil)
+						var66(nil)
 					end):finally(function()
-						-- upvalues: var67 (copy)
-						var67(false)
+						-- upvalues: var68 (copy)
+						var68(false)
 					end)
 				end):catch(function(p26)
-					-- upvalues: debug (copy), formatErrorModule (copy), p23 (copy), var65 (copy), var67 (copy)
+					-- upvalues: debug (copy), formatErrorModule (copy), p23 (copy), var66 (copy), var68 (copy)
 					debug.log("warn", "AudienceConfigurationContent set audiences failed", { errorMessage = formatErrorModule(p26), universeId = p23 })
-					var65(nil)
-					var67(false)
+					var66(nil)
+					var68(false)
 				end)
 			end
 			
 			if fFlagBuildAudiencePublishPromptModule then
-				local var77 = isNonPrivateLocked and p24 ~= "Private"
+				local var78 = isNonPrivateLocked and p24 ~= "Private"
 				
-				if var77 then
-					var71(function(p29)
+				if var78 then
+					var72(function(p29)
 						-- upvalues: p24 (ref)
 						return if p29 == p24 then nil else p24
 					end)
 				end
-				if var75 then return end
-				if not var77 then
-					var67(true)
+				if var76 then return end
+				if not var78 then
+					var68(true)
 				end
-				local var78 = var68
-				local current = var78.current
-				var78.current = nil
+				local var79 = var69
+				local current = var79.current
+				var79.current = nil
 				
 				if current ~= nil then
 					current:cancel()
@@ -400,29 +402,29 @@ local function useAudienceController(p23)
 					applyAudienceChange()
 					
 					return
-				elseif not var77 then
-					var65(p24)
+				elseif not var78 then
+					var66(p24)
 				end
-				local var79 = var63.universeActivationStore.refreshEligibility(p23)
-				var78.current = var79
-				var79:catch(function(p31)
-					-- upvalues: var78 (ref), var79 (ref), debug (copy), formatErrorModule (copy), p23 (copy)
-					if var78.current == var79 then
+				local var80 = var64.universeActivationStore.refreshEligibility(p23)
+				var79.current = var80
+				var80:catch(function(p31)
+					-- upvalues: var79 (ref), var80 (ref), debug (copy), formatErrorModule (copy), p23 (copy)
+					if var79.current == var80 then
 						debug.log("warn", "AudienceConfigurationContent eligibility recheck failed", { errorMessage = formatErrorModule(p31), universeId = p23 })
 					end
 				end):finally(function()
-					-- upvalues: var78 (ref), var79 (ref), contentMaturityUtilsModule (copy), p23 (copy), var77 (ref), var65 (copy), var67 (copy), var71 (copy), p24 (ref), applyAudienceChange (ref)
-					if var78.current ~= var79 then return end
-					var78.current = nil
+					-- upvalues: var79 (ref), var80 (ref), contentMaturityUtilsModule (copy), p23 (copy), var78 (ref), var66 (copy), var68 (copy), var72 (copy), p24 (ref), applyAudienceChange (ref)
+					if var79.current ~= var80 then return end
+					var79.current = nil
 					
 					if not contentMaturityUtilsModule.isContentUnrated(p23) then
 						applyAudienceChange()
 						
 						return
-					elseif not var77 then
-						var65(nil)
-						var67(false)
-						var71(function(p30)
+					elseif not var78 then
+						var66(nil)
+						var68(false)
+						var72(function(p30)
 							-- upvalues: p24 (copy)
 							return if p30 == p24 then nil else p24
 						end)
@@ -431,7 +433,7 @@ local function useAudienceController(p23)
 				
 				return
 			elseif isNonPrivateLocked and p24 ~= "Private" then
-				var71(function(p32)
+				var72(function(p32)
 					-- upvalues: p24 (ref)
 					return if p32 == p24 then nil else p24
 				end)
@@ -443,23 +445,23 @@ local function useAudienceController(p23)
 				return
 			end
 		end, {
-			configurationData, var68, var75, isEligibilityResolved, isNonPrivateLocked,
-			var63.universeActivationStore, var63.universeConfigurationStore, p23
+			configurationData, var69, var76, isEligibilityResolved, isNonPrivateLocked,
+			var64.universeActivationStore, var64.universeConfigurationStore, p23
 		}),
-		handleQuestionnaire = var74,
-		isMutationPending = var66,
-		isNonPrivateLocked = var73.isNonPrivateLocked,
-		lockReason = var73.lockReason,
-		onTooltipPressedOutside = var72,
-		selectedAudience = var73.selectedAudience,
-		tooltipTarget = var70
+		handleQuestionnaire = var75,
+		isMutationPending = var67,
+		isNonPrivateLocked = var74.isNonPrivateLocked,
+		lockReason = var74.lockReason,
+		onTooltipPressedOutside = var73,
+		selectedAudience = var74.selectedAudience,
+		tooltipTarget = var71
 	}
 end
 
 local function AudienceHeader()
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref)
 	local GAME_CONFIGURATION_AUDIENCE_BODY, GAME_CONFIGURATION_AUDIENCE_PAGE_TITLE
-	local var81 = if fFlagBuildLocalization then useLocalization({
+	local var82 = if fFlagBuildLocalization then useLocalization({
 		body = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_BODY,
 		title = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PAGE_TITLE
 	}) else nil
@@ -467,8 +469,8 @@ local function AudienceHeader()
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		GAME_CONFIGURATION_AUDIENCE_BODY = var81.body
-		GAME_CONFIGURATION_AUDIENCE_PAGE_TITLE = var81.title
+		GAME_CONFIGURATION_AUDIENCE_BODY = var82.body
+		GAME_CONFIGURATION_AUDIENCE_PAGE_TITLE = var82.title
 	else
 		GAME_CONFIGURATION_AUDIENCE_BODY = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_BODY
 		GAME_CONFIGURATION_AUDIENCE_PAGE_TITLE = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PAGE_TITLE
@@ -493,7 +495,7 @@ end
 local function AudienceList(p33)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), radioGroup (ref), list (ref), inputSize (ref), AudienceRow (ref)
 	local GAME_CONFIGURATION_AUDIENCE_FRIENDS, GAME_CONFIGURATION_AUDIENCE_PRIVATE, GAME_CONFIGURATION_AUDIENCE_PUBLIC
-	local var82 = if fFlagBuildLocalization then useLocalization({
+	local var83 = if fFlagBuildLocalization then useLocalization({
 		friends = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_FRIENDS,
 		private = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PRIVATE,
 		["public"] = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PUBLIC
@@ -503,9 +505,9 @@ local function AudienceList(p33)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		GAME_CONFIGURATION_AUDIENCE_FRIENDS = var82.friends
-		GAME_CONFIGURATION_AUDIENCE_PRIVATE = var82.private
-		GAME_CONFIGURATION_AUDIENCE_PUBLIC = var82["public"]
+		GAME_CONFIGURATION_AUDIENCE_FRIENDS = var83.friends
+		GAME_CONFIGURATION_AUDIENCE_PRIVATE = var83.private
+		GAME_CONFIGURATION_AUDIENCE_PUBLIC = var83["public"]
 	else
 		GAME_CONFIGURATION_AUDIENCE_FRIENDS = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_FRIENDS
 		GAME_CONFIGURATION_AUDIENCE_PRIVATE = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PRIVATE
@@ -564,7 +566,7 @@ end
 local function EligibilityTooltip(p35)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useScaledValue (ref), buildExperienceAudienceTooltipMaxWidth (ref), fFlagBuildAudiencePublishPromptModule (ref), reactModule (ref), popover (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), radius (ref), popoverSide (ref), view (ref), text (ref)
 	local GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE, GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION, GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED, GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION
-	local var83 = if fFlagBuildLocalization then useLocalization({
+	local var84 = if fFlagBuildLocalization then useLocalization({
 		notEligible = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE,
 		notEligibleDescription = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION,
 		publishRequired = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED,
@@ -576,17 +578,17 @@ local function EligibilityTooltip(p35)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE = var83.notEligible
-		GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION = var83.notEligibleDescription
-		GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED = var83.publishRequired
-		GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION = var83.publishRequiredDescription
+		GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE = var84.notEligible
+		GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION = var84.notEligibleDescription
+		GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED = var84.publishRequired
+		GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION = var84.publishRequiredDescription
 	else
 		GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE
 		GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION
 		GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED
 		GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION
 	end
-	local var84 = fFlagBuildAudiencePublishPromptModule and p35.lockReason == "PublishRequired"
+	local var85 = fFlagBuildAudiencePublishPromptModule and p35.lockReason == "PublishRequired"
 	
 	return reactModule.createElement(popover.Root, {
 		isOpen = p35.isOpen,
@@ -607,18 +609,18 @@ local function EligibilityTooltip(p35)
 				sizeConstraint = {
 					MaxSize = Vector2.new(useScaledValue(buildExperienceAudienceTooltipMaxWidth), 1e999)
 				},
-				testId = if not fFlagBuildAudiencePublishPromptModule then nil elseif var84 then `{p35.testId}-eligibility-tooltip--publish` else `{p35.testId}-eligibility-tooltip--not-eligible`
+				testId = if not fFlagBuildAudiencePublishPromptModule then nil elseif var85 then `{p35.testId}-eligibility-tooltip--publish` else `{p35.testId}-eligibility-tooltip--not-eligible`
 			}, {
 				Title = reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "auto-xy text-title-small text-wrap text-align-x-left content-inverse-emphasis",
-					Text = if var84 then GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED else GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE,
+					Text = if var85 then GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED else GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE,
 					testId = `{p35.testId}-eligibility-tooltip--header`
 				}),
 				Text = reactModule.createElement(text, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-body-small text-wrap text-align-x-left content-inverse-default",
-					Text = if var84 then GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION else GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION,
+					Text = if var85 then GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION else GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION,
 					testId = `{p35.testId}-eligibility-tooltip--text`
 				})
 			})
@@ -660,9 +662,9 @@ end
 return function(p37)
 	-- upvalues: useAudienceController (ref), reactModule (ref), fFlagBuildAudiencePublishPromptModule (ref), view (ref), AudienceHeader (ref), AudienceList (ref), EligibilityTooltip (ref), EligibilityBanner (ref)
 	local testId = p37.testId or "audience-configuration-content"
-	local var86 = useAudienceController(p37.universeId)
-	local var87 = reactModule.useRef(nil)
+	local var87 = useAudienceController(p37.universeId)
 	local var88 = reactModule.useRef(nil)
+	local var89 = reactModule.useRef(nil)
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y padding-y-large",
@@ -671,21 +673,21 @@ return function(p37)
 	}, {
 		Header = reactModule.createElement(AudienceHeader),
 		List = reactModule.createElement(AudienceList, {
-			friendsLockIconRef = var87,
-			isDisabled = fFlagBuildAudiencePublishPromptModule and var86.isMutationPending,
-			isNonPrivateLocked = var86.isNonPrivateLocked,
-			onAudienceActivated = var86.handleAudienceActivated,
-			publicLockIconRef = var88,
-			selectedAudience = var86.selectedAudience,
+			friendsLockIconRef = var88,
+			isDisabled = fFlagBuildAudiencePublishPromptModule and var87.isMutationPending,
+			isNonPrivateLocked = var87.isNonPrivateLocked,
+			onAudienceActivated = var87.handleAudienceActivated,
+			publicLockIconRef = var89,
+			selectedAudience = var87.selectedAudience,
 			testId = testId
 		}),
 		Tooltip = reactModule.createElement(EligibilityTooltip, {
-			anchorRef = if var86.tooltipTarget == "Public" then var88 else var87,
-			isOpen = var86.tooltipTarget ~= nil,
-			lockReason = var86.lockReason,
-			onPressedOutside = var86.onTooltipPressedOutside,
+			anchorRef = if var87.tooltipTarget == "Public" then var89 else var88,
+			isOpen = var87.tooltipTarget ~= nil,
+			lockReason = var87.lockReason,
+			onPressedOutside = var87.onTooltipPressedOutside,
 			testId = testId
 		}),
-		ContextBanner = if var86.isNonPrivateLocked and (not fFlagBuildAudiencePublishPromptModule or var86.lockReason == "RatingRequired") then reactModule.createElement(EligibilityBanner, { onActivated = var86.handleQuestionnaire, testId = testId }) else nil
+		ContextBanner = if var87.isNonPrivateLocked and (not fFlagBuildAudiencePublishPromptModule or var87.lockReason == "RatingRequired") then reactModule.createElement(EligibilityBanner, { onActivated = var87.handleQuestionnaire, testId = testId }) else nil
 	})
 end

@@ -147,13 +147,13 @@ local function getPlayerGroupDetails(p3)
 		if v.GroupRank == nil then
 			local ok, status = pcall(function()
 				-- upvalues: p3 (ref), v (ref)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then p3:IsInGroupAsync(v.GroupId) else p3:IsInGroup(v.GroupId)
+				return p3:IsInGroupAsync(v.GroupId)
 			end)
 			t[i] = ok and status
 		else
 			local ok, status = pcall(function()
 				-- upvalues: p3 (ref), v (ref)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then v.GroupRank <= p3:GetRankInGroupAsync(v.GroupId) else v.GroupRank <= p3:GetRankInGroup(v.GroupId)
+				return v.GroupRank <= p3:GetRankInGroupAsync(v.GroupId)
 			end)
 			t[i] = ok and status
 		end

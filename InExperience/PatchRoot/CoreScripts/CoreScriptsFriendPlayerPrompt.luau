@@ -76,9 +76,7 @@ end
 
 function DoPromptRequestFriendPlayer(p5)
 	-- upvalues: localPlayer (write), friendRequestModalIxpEnabled (ref), IXPService (ref), friendRequestModalIxpLayer (ref), friendRequestModalRevampV4 (ref), userRelationshipModalsModule (ref), fFlagRemoveHardCodedFriendLimitPromptModule (ref), promptCreatorModule (ref), size150x150 (ref), headShot (ref), size352x352 (ref), avatarThumbnail (ref), robloxTranslatorModule (ref)
-	if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-		if localPlayer:IsFriendsWithAsync(p5.UserId) then return end
-	elseif localPlayer:IsFriendsWith(p5.UserId) then return end
+	if localPlayer:IsFriendsWithAsync(p5.UserId) then return end
 	if friendRequestModalIxpEnabled then
 		IXPService:LogFlagLinkedUserLayerExposure(friendRequestModalIxpLayer)
 	end
@@ -182,45 +180,39 @@ end
 
 function DoPromptUnfriendPlayer(p9)
 	-- upvalues: localPlayer (write), promptCreatorModule (ref), size150x150 (ref), headShot (ref), size352x352 (ref), avatarThumbnail (ref)
-	if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-		if localPlayer:IsFriendsWithAsync(p9.UserId) then
-			promptCreatorModule:CreatePrompt({
-				WindowTitle = "Unfriend Person?",
-				ConfirmationText = "Unfriend",
-				CancelText = "Cancel",
-				CancelActive = true,
-				Image = "",
-				ImageConsoleVR = "",
-				MainText = string.format("Would you like to remove %s from your friends list?", p9.Name),
-				FetchImageFunction = createFetchImageFunction(p9.UserId, size150x150, headShot),
-				FetchImageFunctionConsoleVR = createFetchImageFunction(p9.UserId, size352x352, avatarThumbnail),
-				PromptCompletedCallback = function(p10)
-					-- upvalues: p9 (ref), promptCreatorModule (copy), size150x150 (copy), headShot (copy), size352x352 (copy), avatarThumbnail (copy)
-					if p10 and not UnFriendPlayer(p9) then
-						while promptCreatorModule:IsCurrentlyPrompting() do
-							wait()
-						end
-						promptCreatorModule:CreatePrompt({
-							WindowTitle = "Error Unfriending Person",
-							ConfirmationText = "Okay",
-							CancelActive = false,
-							Image = "",
-							ImageConsoleVR = "",
-							MainText = string.format("An error occurred while unfriending %s. Please try again later.", p9.Name),
-							FetchImageFunction = createFetchImageFunction(p9.UserId, size150x150, headShot),
-							FetchImageFunctionConsoleVR = createFetchImageFunction(p9.UserId, size352x352, avatarThumbnail),
-							StripeColor = Color3.fromRGB(183, 34, 54)
-						})
+	if localPlayer:IsFriendsWithAsync(p9.UserId) then
+		promptCreatorModule:CreatePrompt({
+			WindowTitle = "Unfriend Person?",
+			ConfirmationText = "Unfriend",
+			CancelText = "Cancel",
+			CancelActive = true,
+			Image = "",
+			ImageConsoleVR = "",
+			MainText = string.format("Would you like to remove %s from your friends list?", p9.Name),
+			FetchImageFunction = createFetchImageFunction(p9.UserId, size150x150, headShot),
+			FetchImageFunctionConsoleVR = createFetchImageFunction(p9.UserId, size352x352, avatarThumbnail),
+			PromptCompletedCallback = function(p10)
+				-- upvalues: p9 (ref), promptCreatorModule (copy), size150x150 (copy), headShot (copy), size352x352 (copy), avatarThumbnail (copy)
+				if p10 and not UnFriendPlayer(p9) then
+					while promptCreatorModule:IsCurrentlyPrompting() do
+						wait()
 					end
+					promptCreatorModule:CreatePrompt({
+						WindowTitle = "Error Unfriending Person",
+						ConfirmationText = "Okay",
+						CancelActive = false,
+						Image = "",
+						ImageConsoleVR = "",
+						MainText = string.format("An error occurred while unfriending %s. Please try again later.", p9.Name),
+						FetchImageFunction = createFetchImageFunction(p9.UserId, size150x150, headShot),
+						FetchImageFunctionConsoleVR = createFetchImageFunction(p9.UserId, size352x352, avatarThumbnail),
+						StripeColor = Color3.fromRGB(183, 34, 54)
+					})
 				end
-			})
-			
-			return
-		else
-			return
-		end
-	elseif localPlayer:IsFriendsWith(p9.UserId) then
-	else
+			end
+		})
+		
+		return
 	end
 end
 

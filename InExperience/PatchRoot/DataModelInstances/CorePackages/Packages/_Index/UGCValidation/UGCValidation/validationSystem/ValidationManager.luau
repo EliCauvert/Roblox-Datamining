@@ -12,6 +12,7 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getFFlagDebugAllowHRDUploadOnBundleBackendModule = require(parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
+local getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagDebugUGCDisableAssetQualityChecksModule = require(parent.flags.getFFlagDebugUGCDisableAssetQualityChecks)
 local getEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
@@ -50,11 +51,11 @@ local function initRunVariables(p0, p1)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
-	local var38 = if getFFlagUGCValidateMigrateSchemaPropertiesModule() then p1.skipModules else {}
+	local var40 = if getFFlagUGCValidateMigrateSchemaPropertiesModule() then p1.skipModules else {}
 	
 	for i, v in validationModuleLoaderModule.allModules do
-		if not var38[i] and (not getFFlagDebugUGCDisableAssetQualityChecksModule() or not p1.skipAssetQualityChecks or not v.isAssetQualityModule) and (table.find(v.categories, p0) and (v.fflag() or v.shadowFlag())) then
-			local var39 = v.shadowFlag() and not v.fflag()
+		if not var40[i] and (not getFFlagDebugUGCDisableAssetQualityChecksModule() or not p1.skipAssetQualityChecks or not v.isAssetQualityModule) and (table.find(v.categories, p0) and (v.fflag() or v.shadowFlag())) then
+			local var41 = v.shadowFlag() and not v.fflag()
 			
 			for i_1, v_2 in v.requiredData do
 				t_2[v_2] = true
@@ -77,7 +78,7 @@ local function initRunVariables(p0, p1)
 				prereqs = t_3,
 				postreqs = {},
 				isQuality = isAssetQualityModule,
-				isShadow = var39
+				isShadow = var41
 			}
 		end
 	end
@@ -100,41 +101,41 @@ local function fetchQualityResults(p2, p3)
 		
 		return
 	end
-	local var44
+	local var46
 	local _ = nil
-	local var41 = nil
-	local var42 = nil
 	local var43 = nil
+	local var44 = nil
+	local var45 = nil
 	
 	if p2.consumerConfig.aqFetchStage == "scene" then
 		local ok, status = pcall(function()
-			-- upvalues: var43 (write), recreateSceneFromEditablesModule (copy), p2 (ref), var42 (write), assetQualityService (copy)
-			var43 = recreateSceneFromEditablesModule.createModelForGltfExport(p2)
-			var42 = assetQualityService:GenerateAssetQualityGltfFromInstanceAsync(var43)
+			-- upvalues: var45 (write), recreateSceneFromEditablesModule (copy), p2 (ref), var44 (write), assetQualityService (copy)
+			var45 = recreateSceneFromEditablesModule.createModelForGltfExport(p2)
+			var44 = assetQualityService:GenerateAssetQualityGltfFromInstanceAsync(var45)
 		end)
-		var44 = ok
-		var41 = status
+		var46 = ok
+		var43 = status
 		
 		if getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() then
-			if var44 then
+			if var46 then
 				for i = 1, 1 + getFIntUGCValidationFetchQualityMaxRetryModule() do
 					local ok, status = pcall(function()
-						-- upvalues: p2 (ref), i (ref), assetQualityService (copy), p3 (ref), var42 (write), httpService (copy)
+						-- upvalues: p2 (ref), i (ref), assetQualityService (copy), p3 (ref), var44 (write), httpService (copy)
 						p2.aqsFetchMetrics.fetchAttemptCount = i
-						local var45 = if p2.consumerConfig.aqFetchStage == "jobId" then assetQualityService:FetchAssetQualitySummaryFromJobIdAsync(p2.consumerConfig.aqFetchData, p3) else assetQualityService:FetchAssetQualitySummaryFromGltfAsync(var42, p3)
-						local var46 = 1000 * (os.clock() - os.clock())
-						p2.aqsFetchMetrics.visualizationUrl = var45.visualizationUrl
-						p2.aqsFetchMetrics.fetchTimeMs = var46
-						p2.aqsFetchMetrics.aqJobId = var45.aqJobId
-						p2.aqsSummaryData = httpService:JSONDecode(var45.rawJson)
+						local var47 = if p2.consumerConfig.aqFetchStage == "jobId" then assetQualityService:FetchAssetQualitySummaryFromJobIdAsync(p2.consumerConfig.aqFetchData, p3) else assetQualityService:FetchAssetQualitySummaryFromGltfAsync(var44, p3)
+						local var48 = 1000 * (os.clock() - os.clock())
+						p2.aqsFetchMetrics.visualizationUrl = var47.visualizationUrl
+						p2.aqsFetchMetrics.fetchTimeMs = var48
+						p2.aqsFetchMetrics.aqJobId = var47.aqJobId
+						p2.aqsSummaryData = httpService:JSONDecode(var47.rawJson)
 					end)
-					var44 = ok
-					var41 = status
+					var46 = ok
+					var43 = status
 					
-					if var44 then break end
+					if var46 then break end
 				end
 			end
-			if var44 then
+			if var46 then
 				p2.aqsFetchMetrics.fetchStatus = assetQualityFetchStatus.assetQualityFetchSuccess
 				
 				if getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
@@ -142,20 +143,20 @@ local function fetchQualityResults(p2, p3)
 					print(p2.aqsSummaryData)
 				end
 			else
-				p2.aqsFetchMetrics.fetchFailureReason = var41
+				p2.aqsFetchMetrics.fetchFailureReason = var43
 				p2.aqsSummaryData = fetchAllDesiredDataModule.DATA_FETCH_FAILURE
 				p2.aqsFetchMetrics.fetchStatus = assetQualityFetchStatus.assetQualityFetchFailure
 				
 				if getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
-					print("AQS fetch failure:", var41)
+					print("AQS fetch failure:", var43)
 				end
 			end
 			return
 		end
 	elseif p2.consumerConfig.aqFetchStage == "gltf" then
-		var42 = p2.consumerConfig.aqFetchData
+		var44 = p2.consumerConfig.aqFetchData
 	end
-	var44 = true
+	var46 = true
 end
 
 local function getNextLayer(p4, p5)
@@ -173,33 +174,33 @@ local function populateRelevantSourceStrings(p6)
 	-- upvalues: errorSourceStringsModule (ref)
 	local function _(p7)
 		-- upvalues: errorSourceStringsModule (copy), p6 (ref)
-		local var52 = p7:split(".")
-		local var53 = errorSourceStringsModule.Values[var52[#var52]]
+		local var54 = p7:split(".")
+		local var55 = errorSourceStringsModule.Values[var54[#var54]]
 		
-		if var53 then
-			p6.relevantSourceStrings[p7] = var53
+		if var55 then
+			p6.relevantSourceStrings[p7] = var55
 		end
 	end
 	
 	for i, v in p6.failureMap do
 		for i_2, v_1 in v do
 			local failureStringKey = v_1.failureStringKey
-			local var50 = failureStringKey:split(".")
-			local var51 = errorSourceStringsModule.Values[var50[#var50]]
+			local var52 = failureStringKey:split(".")
+			local var53 = errorSourceStringsModule.Values[var52[#var52]]
 			
-			if var51 then
-				p6.relevantSourceStrings[failureStringKey] = var51
+			if var53 then
+				p6.relevantSourceStrings[failureStringKey] = var53
 			end
 		end
 	end
 	for i, v_1 in p6.warningMap do
 		for i_2, v_2 in v_1 do
 			local failureStringKey = v_2.failureStringKey
-			local var48 = failureStringKey:split(".")
-			local var49 = errorSourceStringsModule.Values[var48[#var48]]
+			local var50 = failureStringKey:split(".")
+			local var51 = errorSourceStringsModule.Values[var50[#var50]]
 			
-			if var49 then
-				p6.relevantSourceStrings[failureStringKey] = var49
+			if var51 then
+				p6.relevantSourceStrings[failureStringKey] = var51
 			end
 		end
 	end
@@ -213,7 +214,7 @@ end
 
 local function reportFullResult(p9, p10, p11)
 	-- upvalues: assetQualityFetchStatus (ref), rbxAnalyticsService (ref), telemetryService (ref), t (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
-	local var54 = p10.aqsFetchMetrics.fetchStatus ~= assetQualityFetchStatus.assetQualityFetchNA
+	local var56 = p10.aqsFetchMetrics.fetchStatus ~= assetQualityFetchStatus.assetQualityFetchNA
 	telemetryService:LogEvent(t, {
 		customFields = {
 			validationJobId = p10.jobId,
@@ -230,9 +231,9 @@ local function reportFullResult(p9, p10, p11)
 			durationMs = p11,
 			uploadCategory = p10.uploadCategory,
 			aqFetchStatus = p10.aqsFetchMetrics.fetchStatus,
-			aqFetchAttemptCount = if var54 then p10.aqsFetchMetrics.fetchAttemptCount else 0,
-			aqFetchTimeMs = if var54 then p10.aqsFetchMetrics.fetchTimeMs else 0,
-			aqFetchFailureReason = if var54 then p10.aqsFetchMetrics.fetchFailureReason else "",
+			aqFetchAttemptCount = if var56 then p10.aqsFetchMetrics.fetchAttemptCount else 0,
+			aqFetchTimeMs = if var56 then p10.aqsFetchMetrics.fetchTimeMs else 0,
+			aqFetchFailureReason = if var56 then p10.aqsFetchMetrics.fetchFailureReason else "",
 			aqJobId = p10.aqsFetchMetrics.aqJobId or ""
 		}
 	})
@@ -333,14 +334,14 @@ local function runValidationOnRootInstance(p17)
 		warningMap = {},
 		relevantSourceStrings = {}
 	}
-	local var58 = getUploadCategoryModule(rootInstance, assetType, bundleType)
-	local var59, var60, var61 = initRunVariables(var58, consumerConfig)
-	p17.uploadCategory = var58
+	local var60 = getUploadCategoryModule(rootInstance, assetType, bundleType)
+	local var61, var62, var63 = initRunVariables(var60, consumerConfig)
+	p17.uploadCategory = var60
 	p17.aqsFetchMetrics = {
 		fetchStatus = assetQualityFetchStatus.assetQualityFetchNA,
 		aqJobId = if consumerConfig.aqFetchStage == "jobId" then consumerConfig.aqFetchData else nil
 	}
-	updateResultData(t, var60, validationTestWrapperModule(validationEnumsModule.ValidationModule.ExpectedRootSchema, p17, t.states), p17.jobId, consumerConfig.enforceShadowValidations)
+	updateResultData(t, var62, validationTestWrapperModule(validationEnumsModule.ValidationModule.ExpectedRootSchema, p17, t.states), p17.jobId, consumerConfig.enforceShadowValidations)
 	
 	if t.states[validationEnumsModule.ValidationModule.ExpectedRootSchema] ~= validationEnumsModule.Status.PASS then
 		populateRelevantSourceStrings(t)
@@ -349,34 +350,34 @@ local function runValidationOnRootInstance(p17)
 		
 		return t
 	end
-	fetchAllDesiredDataModule.storeDesiredData(p17, var61)
+	fetchAllDesiredDataModule.storeDesiredData(p17, var63)
 	
-	if #var59 > 0 then
+	if #var61 > 0 then
 		p17.aqsFetchMetrics.fetchStatus = assetQualityFetchStatus.assetQualityFetchInProgress
 		
 		if t_2[consumerConfig.source] then
 			runService:Run()
-			fetchQualityResults(p17, var59)
+			fetchQualityResults(p17, var61)
 			runService:Pause()
 		else
-			task.spawn(fetchQualityResults, p17, var59)
+			task.spawn(fetchQualityResults, p17, var61)
 		end
 	end
-	while next(var60) ~= nil do
-		local var62 = p17.aqsFetchMetrics.fetchStatus == assetQualityFetchStatus.assetQualityFetchInProgress
-		local var63 = getNextLayer(var60, not var62)
+	while next(var62) ~= nil do
+		local var64 = p17.aqsFetchMetrics.fetchStatus == assetQualityFetchStatus.assetQualityFetchInProgress
+		local var65 = getNextLayer(var62, not var64)
 		
-		if #var63 == 0 and not var62 then
+		if #var65 == 0 and not var64 then
 			error("Impossible to complete all layers")
 		end
-		for i, v in var63 do
-			updateResultData(t, var60, validationTestWrapperModule(v, p17, t.states), p17.jobId, consumerConfig.enforceShadowValidations)
+		for i, v in var65 do
+			updateResultData(t, var62, validationTestWrapperModule(v, p17, t.states), p17.jobId, consumerConfig.enforceShadowValidations)
 			
 			if t_3[consumerConfig.source] then
 				task.wait()
 			end
 		end
-		if var62 and not t_2[consumerConfig.source] then
+		if var64 and not t_2[consumerConfig.source] then
 			task.wait()
 		end
 	end
@@ -400,102 +401,157 @@ local _ = function(p18)
 	return p18[1]
 end
 
-function t_1.ValidateAsset(value, p19, p20)
-	-- upvalues: httpService (ref), constantsModule (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
-	local var65
+local _ = function(p19, p20, p21)
+	for i, v in p19 do
+		if v.Name == p20 then
+			return v
+		end
+	end
+	return if p21 then p19[1] else nil
+end
+
+local function synthesizeRootFromFolders(p22, p23, p24)
+	local folder = Instance.new("Folder")
+	
+	for i, v in p22 do
+		local var67
+		local allSelectedInstances = v.allSelectedInstances
+		
+		for i_1, v_1 in allSelectedInstances do
+			if v_1.Name == p23 then
+				var67 = v_1
+				if var67 ~= nil then
+					if var67:IsA("Folder") or var67:IsA("Model") then
+						for i_2, i_1 in var67:GetChildren() do
+							i_1:Clone().Parent = folder
+						end
+					else
+						var67:Clone().Parent = folder
+					end
+				end
+			end
+		end
+		var67 = if p24 then allSelectedInstances[1] else nil
+	end
+	return folder
+end
+
+function t_1.ValidateAsset(value, p25, p26)
+	-- upvalues: httpService (ref), constantsModule (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
+	local var69
 	local t = {
 		jobId = httpService:GenerateGUID(),
 		entrypointInput = value
 	}
 	
 	if #value == 0 then
-		var65 = nil
+		var69 = nil
 	else
 		for i, v in value do
 			if v.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-				var65 = v
+				var69 = v
 			end
 		end
-		var65 = value[1]
+		var69 = value[1]
 	end
-	t.rootInstance = var65
-	t.uploadEnum = { assetType = p19 }
-	t.consumerConfig = createConsumerConfigWithDefaults(p20)
+	local var70
+	t.rootInstance = var69
+	
+	if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() then
+		local r15Fixed = constantsModule.FOLDER_NAMES.R15Fixed
+		
+		for v, v in value do
+			if v.Name == r15Fixed then
+				var70 = v
+			end
+		end
+		var70 = nil
+	else
+		var70 = nil
+	end
+	t.r15LegacyDuplicateRoot = var70
+	t.uploadEnum = { assetType = p25 }
+	t.consumerConfig = createConsumerConfigWithDefaults(p26)
 	t.hsrAssets = {}
 	
 	return runValidationOnRootInstance(t)
 end
 
-function t_1.ValidateFinalizedBundle(p21, p22, p23)
-	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), httpService (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
+function t_1.ValidateFinalizedBundle(p27, p28, p29)
+	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), synthesizeRootFromFolders (ref), httpService (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
 	if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
-		r15plusUtilsModule.setIsBackendBundleUpload(if p23.source ~= "Publish" then p23.source == "Backend" else true)
+		r15plusUtilsModule.setIsBackendBundleUpload(if p29.source ~= "Publish" then p29.source == "Backend" else true)
 	end
-	local var67
+	local var72
 	local _ = nil
+	local var71 = nil
 	
-	if getFFlagUGCValidationAnimationPackSupportModule() and p22 == Enum.BundleType.Animations then
+	if getFFlagUGCValidationAnimationPackSupportModule() and p28 == Enum.BundleType.Animations then
 		local model = Instance.new("Model")
 		
-		for i, v in p21 do
-			local var70
+		for i, v in p27 do
+			local var76
 			local allSelectedInstances = v.allSelectedInstances
 			
 			if #allSelectedInstances == 0 then
-				var70 = nil
-				if var70 ~= nil then
-					var70:Clone().Parent = model
+				var76 = nil
+				if var76 ~= nil then
+					var76:Clone().Parent = model
 				end
 			end
 			for i_2, v_2 in allSelectedInstances do
 				if v_2.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-					var70 = v_2
+					var76 = v_2
 				end
 			end
-			var70 = allSelectedInstances[1]
+			var76 = allSelectedInstances[1]
 		end
-		var67 = model
+		var72 = model
+	elseif getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() then
+		var72 = synthesizeRootFromFolders(p27, constantsModule.FOLDER_NAMES.R15ArtistIntent, true)
+		var71 = synthesizeRootFromFolders(p27, constantsModule.FOLDER_NAMES.R15Fixed, true)
 	else
 		local folder = Instance.new("Folder")
 		
-		for i, v in p21 do
-			local var68
+		for i, v in p27 do
+			local var74
 			local allSelectedInstances = v.allSelectedInstances
 			
 			if #allSelectedInstances == 0 then
-				var68 = nil
-				if var68 ~= nil then
-					if var68:IsA("Folder") or var68:IsA("Model") then
-						for i_2, i_1 in var68:GetChildren() do
+				var74 = nil
+				if var74 ~= nil then
+					if var74:IsA("Folder") or var74:IsA("Model") then
+						for i_2, i_1 in var74:GetChildren() do
 							i_1:Clone().Parent = folder
 						end
 					else
-						var68:Clone().Parent = folder
+						var74:Clone().Parent = folder
 					end
 				end
 			end
 			for i_1, v_1 in allSelectedInstances do
 				if v_1.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-					var68 = v_1
+					var74 = v_1
 				end
 			end
-			var68 = allSelectedInstances[1]
+			var74 = allSelectedInstances[1]
 		end
-		var67 = folder
+		var72 = folder
 	end
-	local var71 = runValidationOnRootInstance({
+	local var77 = runValidationOnRootInstance({
 		jobId = httpService:GenerateGUID(),
-		entrypointInput = p21,
-		rootInstance = var67,
-		uploadEnum = { bundleType = p22 },
-		consumerConfig = createConsumerConfigWithDefaults(p23),
+		entrypointInput = p27,
+		rootInstance = var72,
+		r15LegacyDuplicateRoot = var71,
+		uploadEnum = { bundleType = p28 },
+		consumerConfig = createConsumerConfigWithDefaults(p29),
 		hsrAssets = {}
 	})
 	
 	if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
 		r15plusUtilsModule.setIsBackendBundleUpload(false)
 	end
-	return var71
+	return var77
 end
 
 return t_1

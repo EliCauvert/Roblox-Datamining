@@ -26,6 +26,26 @@ local t = {
 	end
 }
 local t_1 = {
+	[themeNameModule.CircuitRush] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.CircuitRush.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.CircuitRush.LightAttribute)
+		end
+	},
+	[themeNameModule.CosmicDust] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.CosmicDust.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.CosmicDust.LightAttribute)
+		end
+	},
 	[themeNameModule.Default] = {
 		Dark = function()
 			-- upvalues: foundation (ref)
@@ -36,6 +56,36 @@ local t_1 = {
 			return require(foundation.Generated.StyleRules.Default.LightAttribute)
 		end
 	},
+	[themeNameModule.ElectricLime] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.ElectricLime.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.ElectricLime.LightAttribute)
+		end
+	},
+	[themeNameModule.HyperPlum] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.HyperPlum.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.HyperPlum.LightAttribute)
+		end
+	},
+	[themeNameModule.InfernoBlast] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.InfernoBlast.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.InfernoBlast.LightAttribute)
+		end
+	},
 	[themeNameModule.Kids] = {
 		Dark = function()
 			-- upvalues: foundation (ref)
@@ -44,6 +94,96 @@ local t_1 = {
 		Light = function()
 			-- upvalues: foundation (ref)
 			return require(foundation.Generated.StyleRules.Kids.LightAttribute)
+		end
+	},
+	[themeNameModule.KineticEnergy] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.KineticEnergy.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.KineticEnergy.LightAttribute)
+		end
+	},
+	[themeNameModule.LavaGlow] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.LavaGlow.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.LavaGlow.LightAttribute)
+		end
+	},
+	[themeNameModule.NebulaDrift] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.NebulaDrift.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.NebulaDrift.LightAttribute)
+		end
+	},
+	[themeNameModule.NitroFrost] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.NitroFrost.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.NitroFrost.LightAttribute)
+		end
+	},
+	[themeNameModule.PixelPop] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.PixelPop.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.PixelPop.LightAttribute)
+		end
+	},
+	[themeNameModule.PolarFreeze] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.PolarFreeze.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.PolarFreeze.LightAttribute)
+		end
+	},
+	[themeNameModule.QuantumPulse] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.QuantumPulse.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.QuantumPulse.LightAttribute)
+		end
+	},
+	[themeNameModule.StarBurst] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.StarBurst.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.StarBurst.LightAttribute)
+		end
+	},
+	[themeNameModule.SuperCharge] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.SuperCharge.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.SuperCharge.LightAttribute)
 		end
 	}
 }

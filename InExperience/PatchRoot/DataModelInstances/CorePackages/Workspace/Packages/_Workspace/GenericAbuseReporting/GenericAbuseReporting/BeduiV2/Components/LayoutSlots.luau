@@ -60,9 +60,16 @@ local t = {
 	Layout = reactModule.forwardRef(function(p7, p8)
 		-- upvalues: reactModule (ref), sheet (ref)
 		return reactModule.createElement(reactModule.Fragment, nil, {
-			Content = reactModule.createElement(sheet.Content, { ref = p8 }, p7.body),
+			Content = reactModule.createElement(sheet.Content, { ref = p8, isContentFullBleed = p7.isContentFullBleed }, p7.body),
 			Actions = if p7.actions ~= nil then nil else reactModule.createElement(sheet.Actions, nil, p7.actions)
 		})
+	end),
+	ContentInset = reactModule.forwardRef(function(p9, _)
+		-- upvalues: reactModule (ref), view (ref)
+		return reactModule.createElement(view, {
+			tag = "col gap-medium size-full-0 auto-y padding-x-xlarge",
+			LayoutOrder = p9.layoutOrder
+		}, p9.children)
 	end)
 }
 local var11 = reactModule.createContext(t)
@@ -71,9 +78,9 @@ return {
 	INLINE_LANDSCAPE_WIDTH = 468,
 	sheetSlots = t,
 	inlineSlots = {
-		Body = reactModule.forwardRef(function(p9, p10)
+		Body = reactModule.forwardRef(function(p10, p11)
 			-- upvalues: useIsSlideAnimating (ref), reactModule (ref), view (ref)
-			return reactModule.createElement(view, { tag = "fill size-full-0", ref = p10 }, reactModule.createElement("ScrollingFrame", {
+			return reactModule.createElement(view, { tag = "fill size-full-0", ref = p11 }, reactModule.createElement("ScrollingFrame", {
 				ZIndex = 2,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -83,29 +90,29 @@ return {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				ScrollBarImageTransparency = useIsSlideAnimating():map(function(p11)
-					return if p11 then 1 else 0
+				ScrollBarImageTransparency = useIsSlideAnimating():map(function(p12)
+					return if p12 then 1 else 0
 				end)
 			}, reactModule.createElement(view, {
 				tag = "align-x-center size-full-0 auto-y margin-bottom-medium"
-			}, reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, p9.children))))
+			}, reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, p10.children))))
 		end),
-		Actions = reactModule.forwardRef(function(p12, p13)
+		Actions = reactModule.forwardRef(function(p13, p14)
 			-- upvalues: reactModule (ref), view (ref)
 			return reactModule.createElement(view, {
 				tag = "size-full-0 auto-y align-x-center padding-bottom-small",
-				ref = p13
+				ref = p14
 			}, reactModule.createElement(view, {
 				tag = "row size-full-0 auto-y gap-medium position-bottom-center",
 				ZIndex = 2
-			}, p12.children))
+			}, p13.children))
 		end),
 		Title = var9,
-		Layout = reactModule.forwardRef(function(p14, p15)
+		Layout = reactModule.forwardRef(function(p15, p16)
 			-- upvalues: reactModule (ref), var6 (ref), useTokens (ref), useIsSlideAnimating (ref), view (ref)
 			local var12 = reactModule.useContext(var6)
 			
-			return reactModule.createElement(view, { tag = "col size-full", ref = p15 }, {
+			return reactModule.createElement(view, { tag = "col size-full", ref = p16 }, {
 				BodyWrapper = reactModule.createElement(view, { tag = "fill size-full-0", LayoutOrder = 1 }, reactModule.createElement("ScrollingFrame", {
 					ZIndex = 2,
 					BackgroundTransparency = 1,
@@ -116,8 +123,8 @@ return {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.new(1, 0, 0, 0),
 					ScrollingDirection = Enum.ScrollingDirection.Y,
-					ScrollBarImageTransparency = useIsSlideAnimating():map(function(p16)
-						return if p16 then 1 else 0
+					ScrollBarImageTransparency = useIsSlideAnimating():map(function(p17)
+						return if p17 then 1 else 0
 					end)
 				}, reactModule.createElement(view, {
 					tag = {
@@ -131,25 +138,32 @@ return {
 						["size-full-0"] = not var12
 					}
 				}, {
-					Body = p14.body,
-					LandscapeActions = if var12 and p14.actions ~= nil then reactModule.createElement(view, {
+					Body = p15.body,
+					LandscapeActions = if var12 and p15.actions ~= nil then reactModule.createElement(view, {
 						tag = "auto-xy padding-bottom-small padding-top-small",
 						LayoutOrder = 1000
-					}, p14.actions) else nil
+					}, p15.actions) else nil
 				})))),
-				PortraitActionsWrapper = if var12 or p14.actions == nil then nil else reactModule.createElement(view, {
+				PortraitActionsWrapper = if var12 or p15.actions == nil then nil else reactModule.createElement(view, {
 					tag = "align-x-center size-full-0 auto-y padding-bottom-small",
 					LayoutOrder = 2
 				}, reactModule.createElement(view, {
 					tag = "row gap-medium position-bottom-center size-full-0 auto-y",
 					ZIndex = 2
-				}, p14.actions))
+				}, p15.actions))
 			})
+		end),
+		ContentInset = reactModule.forwardRef(function(p18, _)
+			-- upvalues: reactModule (ref), view (ref)
+			return reactModule.createElement(view, {
+				tag = "col gap-medium size-full-0 auto-y",
+				LayoutOrder = p18.layoutOrder
+			}, p18.children)
 		end)
 	},
-	LayoutSlotsProvider = function(p17)
+	LayoutSlotsProvider = function(p19)
 		-- upvalues: reactModule (ref), var11 (ref)
-		return reactModule.createElement(var11.Provider, { value = p17.slots }, p17.children)
+		return reactModule.createElement(var11.Provider, { value = p19.slots }, p19.children)
 	end,
 	useLayoutSlots = function()
 		-- upvalues: reactModule (ref), var11 (ref)

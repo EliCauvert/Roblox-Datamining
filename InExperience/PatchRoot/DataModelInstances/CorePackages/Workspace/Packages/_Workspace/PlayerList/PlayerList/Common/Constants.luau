@@ -24,5 +24,20 @@
 	MOBILE_EDGE_GAP = 8,
 	TEAM_LAYOUT_MULTIPLIER = 10000,
 	ROW_FLEX_TAG = "row align-y-center padding-x-large gap-xsmall",
-	PLATFORM_ROW_FLEX_TAG = "row align-y-center padding-x-large gap-xlarge"
+	CONTEXT_MENU_WIDTH = 327,
+	PLATFORM_ROW_FLEX_TAG = "row align-y-center padding-x-large gap-xlarge",
+	CONSOLE_FOCUS_ISOLATE = {
+		SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
+		SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
+		SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+		SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+	},
+	CONSOLE_FOCUS_SCROLL_ESCAPE_UP = {
+		SelectionBehaviorUp = Enum.SelectionBehavior.Escape,
+		SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
+		SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+		SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+	},
+	NOT_SELECTABLE = { Selectable = false },
+	SELECTABLE = { Selectable = true }
 }

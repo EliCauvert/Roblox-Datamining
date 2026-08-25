@@ -12,7 +12,7 @@ local fFlagBuildExperienceBuyRobuxContextModule = require(buildExperience.Flags.
 
 local function _()
 	-- upvalues: contentProviderService (ref), fFlagBuildExperienceBuyRobuxContextModule (ref)
-	return `{u123}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`
+	return `{u122}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`
 end
 
 return function(p0, p1)
@@ -48,6 +48,6 @@ return function(p0, p1)
 	return reactModule.useCallback(function()
 		-- upvalues: var9 (ref), p0 (ref), var8 (ref), contentProviderService (copy), fFlagBuildExperienceBuyRobuxContextModule (copy), var7 (ref), var10 (ref)
 		var9.current = p0 ~= nil
-		var8(`{u214}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`, var7, if p0 ~= nil then nil else var10)
+		var8(`{u212}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`, var7, if p0 ~= nil then nil else var10)
 	end, { var10, p0, var8, var7 })
 end

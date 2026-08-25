@@ -16,10 +16,9 @@ local useSduiDependenciesModule = require(serverDrivenUi.System.useSduiDependenc
 local useSduiSocialDataModule = require(serverDrivenUi.DataStore.useSduiSocialData)
 local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
 local fFlagSduiAppPolicyBindings = require(parent.SharedFlags).FFlagSduiAppPolicyBindings
-local fFlagSduiActionTelemetryHandler = require(parent.SharedFlags).FFlagSduiActionTelemetryHandler
 
 return reactModule.memo(function()
-	-- upvalues: reactModule (ref), sduiInstrumentation (ref), useSduiDependenciesModule (ref), getSduiServiceDependenciesStore (ref), useTokens (ref), getSduiTokensStore (ref), fFlagSduiAppPolicyBindings (ref), useAppPolicy (ref), getSduiPolicyStore (ref), registerDiscoveryActionsModule (ref), registerDiscoveryUiComponentsModule (ref), registerDiscoveryImpressionsModule (ref), fFlagSduiActionTelemetryHandler (ref), registerDiscoveryActionTelemetryHandlersModule (ref), useSduiSocialDataModule (ref), sduiInGameFriendsDataModule (ref)
+	-- upvalues: reactModule (ref), sduiInstrumentation (ref), useSduiDependenciesModule (ref), getSduiServiceDependenciesStore (ref), useTokens (ref), getSduiTokensStore (ref), fFlagSduiAppPolicyBindings (ref), useAppPolicy (ref), getSduiPolicyStore (ref), registerDiscoveryActionsModule (ref), registerDiscoveryUiComponentsModule (ref), registerDiscoveryImpressionsModule (ref), registerDiscoveryActionTelemetryHandlersModule (ref), useSduiSocialDataModule (ref), sduiInGameFriendsDataModule (ref)
 	local var10 = useSduiDependenciesModule(reactModule.useMemo(function()
 		-- upvalues: sduiInstrumentation (copy)
 		return sduiInstrumentation.new()
@@ -44,14 +43,11 @@ return reactModule.memo(function()
 		end, { var12 })
 	end
 	reactModule.useEffect(function()
-		-- upvalues: registerDiscoveryActionsModule (copy), registerDiscoveryUiComponentsModule (copy), registerDiscoveryImpressionsModule (copy), fFlagSduiActionTelemetryHandler (copy), registerDiscoveryActionTelemetryHandlersModule (copy)
+		-- upvalues: registerDiscoveryActionsModule (copy), registerDiscoveryUiComponentsModule (copy), registerDiscoveryImpressionsModule (copy), registerDiscoveryActionTelemetryHandlersModule (copy)
 		registerDiscoveryActionsModule()
 		registerDiscoveryUiComponentsModule()
 		registerDiscoveryImpressionsModule()
-		
-		if fFlagSduiActionTelemetryHandler then
-			registerDiscoveryActionTelemetryHandlersModule()
-		end
+		registerDiscoveryActionTelemetryHandlersModule()
 	end, {})
 	local var13 = useSduiSocialDataModule()
 	reactModule.useEffect(function()

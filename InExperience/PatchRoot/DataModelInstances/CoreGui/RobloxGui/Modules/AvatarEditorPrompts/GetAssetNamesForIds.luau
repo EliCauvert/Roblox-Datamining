@@ -7,7 +7,7 @@ return function(p0)
 		-- upvalues: avatarEditorService (copy), p0 (ref)
 		local ok, status = pcall(function()
 			-- upvalues: avatarEditorService (copy), p0 (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetBatchItemDetailsAsync(p0, Enum.AvatarItemType.Asset) else avatarEditorService:GetBatchItemDetails(p0, Enum.AvatarItemType.Asset)
+			return avatarEditorService:GetBatchItemDetailsAsync(p0, Enum.AvatarItemType.Asset)
 		end)
 		
 		if not ok then

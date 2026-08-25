@@ -55,7 +55,7 @@ return function()
 		-- upvalues: avatarEditorService (copy), fFlagAvatarSwitcherAccurateAvatarWarning (copy), var16 (ref), cryoModule (copy)
 		local ok, status = pcall(function()
 			-- upvalues: avatarEditorService (copy), p3 (ref)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetOutfitDetailsAsync(p3) else avatarEditorService:GetOutfitDetails(p3)
+			return avatarEditorService:GetOutfitDetailsAsync(p3)
 		end)
 		
 		if not ok then
@@ -117,7 +117,7 @@ return function()
 		else
 			local ok, status = pcall(function()
 				-- upvalues: avatarEditorService (copy)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetOutfitsAsync(Enum.OutfitSource.Created, Enum.OutfitType.Avatar) else avatarEditorService:GetOutfits(Enum.OutfitSource.Created, Enum.OutfitType.Avatar)
+				return avatarEditorService:GetOutfitsAsync(Enum.OutfitSource.Created, Enum.OutfitType.Avatar)
 			end)
 			
 			if ok then

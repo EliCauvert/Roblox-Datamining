@@ -17,12 +17,7 @@ return function(p0)
 			end
 			local ok, status = pcall(function()
 				-- upvalues: marketplaceService (copy), var2 (write), p1 (copy), setGameProductInfoModule (copy)
-				if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-					p1:dispatch(setGameProductInfoModule(marketplaceService:GetProductInfoAsync(var2)))
-					
-					return
-				end
-				p1:dispatch(setGameProductInfoModule(marketplaceService:GetProductInfo(var2)))
+				p1:dispatch(setGameProductInfoModule(marketplaceService:GetProductInfoAsync(var2)))
 			end)
 			
 			if not ok then

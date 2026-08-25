@@ -1,6 +1,7 @@
 ﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
 local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
 local t = {}
+local _ = require(script.Parent.custom_options)
 local t_1 = {}
 t_1.__index = t_1
 

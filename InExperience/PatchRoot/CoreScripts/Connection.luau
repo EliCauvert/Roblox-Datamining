@@ -103,6 +103,7 @@ if RAKickLogic2 then
 end
 local fFlagConnectionAmpUpsellOnLeave = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionAmpUpsellOnLeave
 local fFlagConnectionAmpParentalApprovalUpsell = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionAmpParentalApprovalUpsell
+local fFlagConnectionParentalApprovalLeaveOnly = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionParentalApprovalLeaveOnly
 local fFlagConnectionUpsellAnalytics = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionUpsellAnalytics
 local fFlagUniversalFeatureRestrictionReceivers = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local fFlagDebugEnablePioneerUX = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagDebugEnablePioneerUX
@@ -778,6 +779,17 @@ if fFlagConnectionAmpParentalApprovalUpsell then
 			Text = var50.PrimaryButtonText,
 			LocalizationKey = var50.PrimaryButtonLocalizationKey,
 			Callback = var50.createParentalApprovalCallback(t, var64, 9)
+		}
+	}
+end
+if fFlagConnectionParentalApprovalLeaveOnly then
+	t_6[t_1.RECONNECT_PARENT_APPROVAL_REQUIRED] = {
+		{
+			Text = "Leave",
+			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
+			LayoutOrder = 1,
+			Primary = true,
+			Callback = var65
 		}
 	}
 end

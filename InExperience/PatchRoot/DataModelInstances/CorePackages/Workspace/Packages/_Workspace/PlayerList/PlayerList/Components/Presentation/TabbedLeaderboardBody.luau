@@ -1,14 +1,14 @@
 ﻿local parent = script.Parent.Parent.Parent
 local parent_1 = parent.Parent
 local reactModule = require(parent_1.React)
+local cryoModule = require(parent_1.Cryo)
 local view = require(parent_1.Foundation).View
 local leaderboardTabsBodyModule = require(parent.Components.Presentation.LeaderboardTabsBody)
 
 return reactModule.memo(function(p0)
-	-- upvalues: reactModule (ref), view (ref), leaderboardTabsBodyModule (ref)
+	-- upvalues: reactModule (ref), leaderboardTabsBodyModule (ref), cryoModule (ref), view (ref)
 	local server, server_1 = reactModule.useState("server")
-	
-	return reactModule.createElement(view, p0.panelProps, {
+	local t = {
 		Header = p0.panelHeader,
 		HeaderDivider = p0.panelDivider,
 		LeaderboardTabsBody = reactModule.createElement(leaderboardTabsBodyModule, {
@@ -20,5 +20,10 @@ return reactModule.memo(function(p0)
 			end, {}),
 			serverBody = p0.serverBody
 		})
-	})
+	}
+	
+	if p0.children then
+		t = cryoModule.Dictionary.join(t, p0.children)
+	end
+	return reactModule.createElement(view, p0.panelProps, t)
 end)

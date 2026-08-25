@@ -25,8 +25,6 @@ local fFlagLuaAppDisablePlayableWhenLoadingForce = require(parent.SharedFlags).F
 local fFlagLuaAppPlayButtonAmpAgeCheckFlow = require(parent.SharedFlags).FFlagLuaAppPlayButtonAmpAgeCheckFlow
 local fFlagLuaAppParentApprovedExperiences = require(parent.SharedFlags).FFlagLuaAppParentApprovedExperiences
 local fFlagLuaAppPlayButtonLoadingDurationTelemetry = require(parent.SharedFlags).FFlagLuaAppPlayButtonLoadingDurationTelemetry
-local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
-local fFlagEnableDemoModeRegionalAvailability = require(parent.SharedFlags).FFlagEnableDemoModeRegionalAvailability
 
 local function selectPlayButtonState(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: retrievalStatus (ref), playButtonStatesModule (ref), playabilityStatusEnum (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), fFlagLuaAppParentUpsellPolicy (ref), fFlagLuaAppParentApprovedExperiences (ref), getFFlagIsSquadEnabled (ref)
@@ -43,12 +41,12 @@ local function selectPlayButtonState(p0, p1, p2, p3, p4, p5, p6)
 end
 
 local function _(p7, p8)
-	-- upvalues: playButtonStatesModule (ref), playabilityStatusEnum (ref), fFlagEnableDemoModeRegionalAvailability (ref)
-	return if p8 == nil then nil elseif (if p7 ~= playButtonStatesModule.PaidAccess then if p7 ~= playButtonStatesModule.FiatPaidAccess then p8.playabilityStatus == playabilityStatusEnum.FiatPurchaseDeviceRestricted or fFlagEnableDemoModeRegionalAvailability and (p8.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRegionalAvailability and p7 == playButtonStatesModule.UnplayableOther) else true else true) and p8.demoModeAvailable then playButtonStatesModule.DemoMode else nil
+	-- upvalues: playButtonStatesModule (ref), playabilityStatusEnum (ref)
+	return if p8 == nil then nil elseif (if p7 ~= playButtonStatesModule.PaidAccess then if p7 ~= playButtonStatesModule.FiatPaidAccess then p8.playabilityStatus == playabilityStatusEnum.FiatPurchaseDeviceRestricted or (p8.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRegionalAvailability and p7 == playButtonStatesModule.UnplayableOther) else true else true) and p8.demoModeAvailable then playButtonStatesModule.DemoMode else nil
 end
 
 return function(p9, p10, p11, p12, p13, p14)
-	-- upvalues: useDispatch (ref), reactModule (ref), fetchGamePlayButtonDataModule (ref), fFlagLuaAppParentUpsellPolicy (ref), useAppPolicy (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), fFlagLuaAppDisablePlayableWhenLoadingForce (ref), getFFlagIsSquadEnabled (ref), useCurrentSquadSelector (ref), useIsExperienceInvitePendingModule (ref), useSelector (ref), fFlagLuaAppEnablePlayableStateWhenLoading (ref), playButtonStatesModule (ref), apiPostPreparePurchaseModule (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), gamesProductInfoReducer (ref), selectPlayButtonState (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useRouteName (ref), sendPlayButtonLoadingDuration (ref), fFlagLuaAppDemoModePlayButton (ref), playabilityStatusEnum (ref), fFlagEnableDemoModeRegionalAvailability (ref)
+	-- upvalues: useDispatch (ref), reactModule (ref), fetchGamePlayButtonDataModule (ref), fFlagLuaAppParentUpsellPolicy (ref), useAppPolicy (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), fFlagLuaAppDisablePlayableWhenLoadingForce (ref), getFFlagIsSquadEnabled (ref), useCurrentSquadSelector (ref), useIsExperienceInvitePendingModule (ref), useSelector (ref), fFlagLuaAppEnablePlayableStateWhenLoading (ref), playButtonStatesModule (ref), apiPostPreparePurchaseModule (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), gamesProductInfoReducer (ref), selectPlayButtonState (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useRouteName (ref), sendPlayButtonLoadingDuration (ref), playabilityStatusEnum (ref)
 	local var9 = useDispatch()
 	reactModule.useEffect(function()
 		-- upvalues: p11 (ref), var9 (ref), fetchGamePlayButtonDataModule (copy), p9 (ref), p10 (ref)
@@ -166,7 +164,7 @@ return function(p9, p10, p11, p12, p13, p14)
 	end
 	return {
 		playButtonState = var15,
-		secondaryPlayButtonState = if not fFlagLuaAppDemoModePlayButton then if var14 == nil then nil elseif (if var15 ~= playButtonStatesModule.PaidAccess then if var15 ~= playButtonStatesModule.FiatPaidAccess then var14.playabilityStatus == playabilityStatusEnum.FiatPurchaseDeviceRestricted or fFlagEnableDemoModeRegionalAvailability and (var14.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRegionalAvailability and var15 == playButtonStatesModule.UnplayableOther) else true else true) and var14.demoModeAvailable then playButtonStatesModule.DemoMode else nil else nil,
+		secondaryPlayButtonState = if var14 == nil then nil elseif (if var15 ~= playButtonStatesModule.PaidAccess then if var15 ~= playButtonStatesModule.FiatPaidAccess then var14.playabilityStatus == playabilityStatusEnum.FiatPurchaseDeviceRestricted or (var14.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRegionalAvailability and var15 == playButtonStatesModule.UnplayableOther) else true else true) and var14.demoModeAvailable then playButtonStatesModule.DemoMode else nil,
 		playabilityStatus = var14
 	}
 end

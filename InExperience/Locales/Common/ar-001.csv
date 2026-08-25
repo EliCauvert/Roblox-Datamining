@@ -135,6 +135,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,جودة الأصل: �
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,جودة الأصل: يحتوي الجزء {partName} على نسبة {intersecting_tri_face_percent}% من الوجوه المثلثة المتداخلة (النتيجة: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,جودة الأصل: يحتوي الجزء {partName} على نسبة {uv_outside_bound_vert_percent}% من رؤوس إحداثيات UV خارج الحدود (النتيجة: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,جودة الأصل: يحتوي الجزء {partName} على نسبة {similar_vertex_percent}% من رؤوس الإحداثيات المماثلة (النتيجة: {score}).
+Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"يجب وضع نقطة اتصال الإكسسوار ""{AttachmentName}"" في الجزء ""{PartName}"" بالقرب من سطح mesh. الموضع الحالي [{CurrentPosition}] خارج النطاق الصالح. انقله ليكون أقرب إلى [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,المقبض مربوط بالمفصل {jointName}، وهو ليس جزءًا من المخطط المسموح به. يُسمح فقط بمفاصل R15 القياسية ومفاصل نقل الإكساء.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,يجب على {assetType} استخدام نقل الإكساء، لكن المفصل المطلوب {requiredJointName} غير موجود لديك.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,المقبض مربوط بالمفصل {jointName}، ولكن يجب أن يكون هذا الأصل مربوطًا تلقائيًا. يمكنك فقط الربط بـ {validJointNameList}.
@@ -148,6 +149,7 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,تعذَّر العثور
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,الحالات التالية ليست جزءًا من المخطط المعتمد ويجب إزالتها: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,يجب أن يكون الأصل الذي تم تحميله من نوع {ExpectedClass} لكنه من نوع {RootClass}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,يجب أن يُسمّى الأصل الذي تم تحميله {ExpectedClass}، ولكنه مُسمّى حاليًا {RootClass}.
+Common.UGCValidation.ErrorLabel.ContentNotEditable,لا تزال الخاصية {InstanceFullName}.{FieldName} تحتوي على محتوى قابل للتحرير غير محفوظ. احفظها كأصل قبل النشر وحاول مرة أخرى.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"يحتوي جزء الجسد ""{bodyPartName}"" في CurveAnimation على مسار موضع (الإزاحة). يمكن تدوير أجزاء جسد الحركة فقط؛ ومسارات الموضع غير مسموح بها. يُرجى إزالة مسار الموضع من جزء الجسد هذا."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"يتحرك جزء الجسد ""{bodyPartName}"" في CurveAnimation بمقدار {distance} من الأزرار عن موضعه الأولي. الحد الأقصى المسموح به للإزاحة هو {maxDistance} من الأزرار. يُرجى تقليل حركة موضع جزء الجسد."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"يحتوي CurveAnimation على عظام HRD/DRD، ويحتوي جزء الجسد ""{bodyPartName}"" على مسار موضع (الإزاحة). عند وجود أي عظام في الحركات، لا يجوز لأي أجزاء من الجسد أن تحتوي على إزاحة لمنع انفصال المفاصل. يُرجى إزالة جميع مسارات الموضع من أجزاء الجسد."
@@ -188,6 +190,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,يحتوي CurveAni
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,تحتوي CurveAnimation على Curves بها عدد كبير جدًا من المفاتيح. الحد الأقصى لكل Curve هو {maxAllowed}. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,تحتوي CurveAnimation على أكثر من {maxAllowed} من عناصر MarkerCurve. يُرجى التأكد من عدم وجود أكثر من {maxAllowed} من عناصر MarkerCurve التابعة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,تحتوي CurveAnimation على MarkerCurve به {count} من العلامات. الحد الأقصى لكل MarkerCurve هو {maxAllowed}. يُرجى إصلاح الحركة.
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,تحدد الحركة المنشورة الحد الأقصى لإزاحة الجزء وهو {taggedTranslation} من الأزرار، لكن بيانات الحركة الخاصة بها تُحسب على أنها {calculatedTranslation} من الأزرار. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,تحتوي CurveAnimation على عنصر فرعي غير متوقع: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,يجب أن تكون الرؤوس الديناميكية في المتجر محصورة بشكل صحيح بحيث تصطف قمم العينين والفم على القفص مع قمم الشبكة. يرجى تحسين القفص ومحاذاته مع الشبكة.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,تعذّر اكتشاف تعبير الابتسامة للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير الابتسامة.
@@ -246,7 +249,9 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"حجم أصل mesh لل
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,يجب أن توجد نقطة الاتصال {attName} مرة واحدة بالضبط ضمن العناصر الفرعية للجزء {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,يحتوي '{RootInstanceName}' (أو العناصر الفرعية له) على سمات. يتعين عليك إزالة السمات مما يلي: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"يحتوي {ClassName} ""{InstancePath}"" على خصائص غير صالحة: {ProblematicProperties}. لقد تم تجاوز حد البايت المحدد (الحد 0 يعني أن الخاصية يجب أن تكون فارغة)، أو أن إحدى الخصائص تحتوي على قيم NaN/Inf أو تجاوزت الحد الافتراضي للحجم."
+Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"يجب وضع نقطة اتصال rig ""{AttachmentName}"" في الجزء ""{PartName}"" بالقرب من حدود المفصل حيث يتصل جزء الجسد هذا بجزء مجاور. الموضع الحالي [{CurrentPosition}] بعيد جدًا عن مستوى الاتصال. انقله ليكون أقرب إلى [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,لرفع أصل على منصة Roblox، يجب عليك تحديد حالة واحدة بالضبط ونوع الرفع المرتبط بها.
+Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,هذا الأصل أكبر من الحد المسموح به للرفع (حجمه {sizeBytes} بايت متجاوزًا الحد الأقصى البالغ {maxSizeBytes} بايت). يرجى تقليل حجمه والمحاولة مرة أخرى.
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,يجب ألا تحتوي الحالة {ProblematicDescendantPath} على أي وسوم.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,سلسلة أخطاء الاختبار الثانية المُستخدمة للتحقق من سير عمل مزامنة الترجمة المرتكزة على المركز من البداية للنهاية
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,يحتوي MeshPart الخاص بالرأس على محرك وجه لـ {jointName}، والذي لا يمكن استخدامه في نظام FACs. يُرجى إعادة تسمية هذه المفصل ثم إعادة استيراد الرأس.
@@ -378,6 +383,7 @@ CommonUI.Features.Label.Unchecked,لم يتم التحقُّق
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,الاتصال بـ
+CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,بناء
 CommonUI.Features.StudioCTA.Tooltip.Body,تحميل الاستوديو مجاناً!
 CommonUI.Features.StudioCTA.Tooltip.Title,بدء الإنشاء على Roblox
@@ -1281,15 +1287,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.Upload,رفع
 Feature.Avatar.BackgroundGeneration.Action.View,عرض
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,أنشئ خلفيات باستخدام اشتراك Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,منتجك جاهز للاستخدام.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,تم إنشاء هذه الخلفية باستخدام الذكاء الاصطناعي. ومن خلال النشر، فإنك تؤكد أنها تتبع معايير مجتمع منصّة Roblox ولا تستخدم محتوى لا تملك الحق في استخدامه. ستتم مراجعتها قبل ظهورها في مقتنياتك، ولا يمكن تحرير العناصر المنشورة.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,تم إنشاء هذه الخلفية باستخدام الذكاء الاصطناعي. ومن خلال الرفع، فإنك تؤكد أنها تتبع معايير مجتمع منصّة Roblox ولا تستخدم محتوى لا تملك الحق في استخدامه. ستتم مراجعتها قبل ظهورها في مقتنياتك، ولا يمكن تحرير العناصر المرفوعة.
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,افتح خلفيات حصرية مجانية مع اشتراك Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,لم يستوفِ العنصر معايير المجتمع
 Feature.Avatar.BackgroundGeneration.Error.Moderation,هذه المطالبة لا تتبع قواعدنا الإرشادية. حاوِل وصف شيء آخر.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,هذه الخلفية لا تتوافق مع معايير مجتمع Roblox، لذا لم تتم إضافتها إلى مقتنياتك. حاول إنشاء خلفية جديدة.
 Feature.Avatar.BackgroundGeneration.Error.System,حدث خطأ ما أثناء إنشاء الخلفية. يُرجى المحاولة مرة أخرى.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,حصريًا مع اشتراك Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,صِف الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Generating,جارٍ إنشاء الخلفية...
@@ -1297,6 +1308,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,جارٍ تحضير الخ�
 Feature.Avatar.BackgroundGeneration.Title,إنشاء خلفية
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,النشر في المقتنيات
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,الرفع إلى المقتنيات
 Feature.Avatar.Backgrounds.Title,الخلفيات
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,التعديل غير متاح لنمط الجسد هذا.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,الرجوع إلى ألوان الجسد الأصلية
@@ -1861,6 +1874,7 @@ Feature.Build.Label.BackToBuild,الرجوع إلى البناء
 Feature.Build.Label.Building,جارٍ البناء...
 Feature.Build.Label.CaptureLibrary,مكتبة اللقطات
 Feature.Build.Label.ContentRating,تصنيف المحتوى
+Feature.Build.Label.Created,تم الإنشاء
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}، {YEAR}
 Feature.Build.Label.CreatorHub,مركز المصمم
 Feature.Build.Label.Deleted,تم الحذف
@@ -1874,11 +1888,13 @@ Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
 Feature.Build.Label.Hi,مرحبًا
 Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
+Feature.Build.Label.Images2D,الصور ثنائية الأبعاد
 Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,محدودة
 Feature.Build.Label.Loading,
+Feature.Build.Label.Models3D,النماذج ثلاثية الأبعاد
 Feature.Build.Label.NoLimit,لا يوجد حدّ
 Feature.Build.Label.NotStarted,لم يتم البدء
 Feature.Build.Label.Pending,معلّق
@@ -1888,15 +1904,19 @@ Feature.Build.Label.Private,خاص
 Feature.Build.Label.Public,عامّ
 Feature.Build.Label.PubliclyUnavailable,غير متاحة علنًا
 Feature.Build.Label.Published,منشور
+Feature.Build.Label.Purchased,تم الشراء
 Feature.Build.Label.Ready,جاهزة
 Feature.Build.Label.ResetsDaily,تتم إعادة التعيين يوميًا
 Feature.Build.Label.RestoredVersion,تمت استعادة {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,بحث
+Feature.Build.Label.SearchAssets,البحث في الأصول
 Feature.Build.Label.SearchGames,البحث في الألعاب
 Feature.Build.Label.SearchTasks,البحث في المهام
 Feature.Build.Label.SelectOption,حدّد خيارًا
 Feature.Build.Label.ShareAddedFriends,مشاركة مع الأصدقاء الذين أضفتهم
+Feature.Build.Label.Shared,تمت المشاركة
+Feature.Build.Label.Sounds,الأصوات
 Feature.Build.Label.Thinking,جارٍ التفكير
 Feature.Build.Label.Title,العنوان
 Feature.Build.Label.TitleDescription,العنوان والوصف
@@ -1964,6 +1984,7 @@ Feature.Build.Label.ToolThumbnailRunning,جارٍ إعداد الصورة الم
 Feature.Build.Label.UniverseNumber,الكون {UNIVERSE_ID}
 Feature.Build.Label.Unknown,غير معروف
 Feature.Build.Label.UnlimitedUsed,تم استخدام {USED} • بلا حد أقصى
+Feature.Build.Label.Updated,تم التحديث
 Feature.Build.Label.Usage,الاستخدام
 Feature.Build.Label.UsageUsed,تم استخدام {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -1977,6 +1998,8 @@ Feature.Build.Message.AccountRequirements,لا يفي حسابك بمتطلبا�
 Feature.Build.Message.AccountTooNew,حسابك جديد جدًا بحيث لا يمكن النشر. حاول مرة أخرى بعد يومين من إنشائه.
 Feature.Build.Message.AllFriendsAdded,لقد أضفت جميع أصدقائك كمختبري لعب.
 Feature.Build.Message.AnswerBuildQuestion,أجب عن سؤال ميزة Build أدناه.
+Feature.Build.Message.AssetDetailsUnavailable,تفاصيل الأصل غير متاحة.
+Feature.Build.Message.AssetsLoadFailed,تعذّر تحميل الأصول.
 Feature.Build.Message.AudienceIneligible,غير مؤهل لهذا الجمهور
 Feature.Build.Message.BuildAccountBlocked,ميزة Build غير متاحة لحسابك في الوقت الحالي.
 Feature.Build.Message.BuildBusy,ميزة Build مشغولة حاليًا. انتظر دقيقة وحاول مرة أخرى.
@@ -2007,6 +2030,7 @@ Feature.Build.Message.InvitesLoadFailed,تعذَّر تحميل الدعوات
 Feature.Build.Message.LimitBelowSpend,لا يمكن أن يقل الحد عن {ALREADY_SPENT} من عملات Robux التي تم إنفاقها اليوم بالفعل.
 Feature.Build.Message.LinkCopied,تم نسخ الرابط إلى الحافظة.
 Feature.Build.Message.LoadingVersions,جارٍ تحميل سجل الإصدارات...
+Feature.Build.Message.NoAssetsFound,لم يتم العثور على أي أصول.
 Feature.Build.Message.NoDescriptionProvided,لم يتم تقديم وصف.
 Feature.Build.Message.NoFriendsToAdd,ليس لديك أي أصدقاء لإضافتهم حتى الآن. ابحث عن أشخاص للتواصل معهم على منصّة Roblox أولًا.
 Feature.Build.Message.NoResults,
@@ -2042,6 +2066,7 @@ Feature.Build.Message.WorkingOnTasks,جارٍ العمل على مهامك
 Feature.Build.Title.AdCampaignActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AddFriendsToPlaytest,أضف الأصدقاء لمساعدتك في اختبار اللعب
 Feature.Build.Title.ArchiveThisGame,هل تريد أرشفة هذه اللعبة؟
+Feature.Build.Title.AssetLibrary,المكتبة
 Feature.Build.Title.Audience,الجمهور
 Feature.Build.Title.BuildQuestion,لدى ميزة Build سؤال
 Feature.Build.Title.BuildQuestions,لدى ميزة Build بعض الأسئلة
@@ -2583,6 +2608,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,اضغط مطولًا للرد
 Feature.Chat.Label.Members,الأعضاء
 Feature.Chat.Label.MessageNotAvailable,هذه الرسالة غير متوفرة
 Feature.Chat.Label.MuteInGameChatToastNotifications,كتم إشعارات الدردشة داخل اللعبة
+Feature.Chat.Label.MuteInGamePartyToastNotifications,كتم إشعارات الفرقة داخل اللعبة
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,لم يتم العثور على أي رسائل دردشة
 Feature.Chat.Label.NoDescriptionYet,لا يوجد وصف حتى الآن.
@@ -3022,7 +3048,7 @@ Feature.GameDetails.Label.SomethingElse,شيء آخر
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.TellUsMorePlaceholder,أخبرنا بالمزيد
 Feature.GameDetails.Label.TooRepetitive,متكررة جدًا
-Feature.GameDetails.Label.Updated,تم التحديث
+Feature.GameDetails.Label.Updated,
 Feature.GameDetails.Label.VoiceChat,المحادثة الصوتية
 Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
@@ -3216,7 +3242,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,توسيع
-Feature.Moments.Action.GenerateText,
+Feature.Moments.Action.GenerateText,إنشاء نص
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,غير مفيد
 Feature.Moments.Action.GenerateTextFeedbackPolicy,غير لائق أو ينتهك القواعد الإرشادية
 Feature.Moments.Action.Hide,إخفاء التفاصيل
@@ -3305,7 +3331,7 @@ Feature.Moments.Label.Tone.Hype,حماسي
 Feature.Moments.Label.Tone.Neutral,محايد
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,ما الخطأ الذي حدث؟
-Feature.Moments.Title.GenerateTextOptions,إنشاء نص
+Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
 Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
 Feature.Moments.Title.ReportPost,الإبلاغ عن المنشور
@@ -3666,6 +3692,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,يوفر اشتراكك في P
 Feature.RobloxSubscription.Body.GenericError,لم نتمكن من إكمال هذا الإجراء في الوقت الحالي. يُرجى إعادة المحاولة.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,هذا الاشتراك غير متاح للشراء على هذا الجهاز.
 Feature.RobloxSubscription.Description.AgeCheckTrial,تحقق من عمرك من خلال إجراء عملية تقدير العمر واحصل على أسبوع مجاني من اشتراك Roblox Plus كتعبير عن شكرنا لك. لا يلزم وجود طريقة دفع للاستمتاع بهذه الفترة التجريبية المجانية.
+Feature.RobloxSubscription.Description.Benefit.Customize,التخصيص باستخدام إطارات الملف الشخصي وسمات التطبيق
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,خصم بنسبة 10% في أول 60 يومًا، ثم خصم بنسبة 20% على العناصر والأفاتارات
 Feature.RobloxSubscription.Description.ExclusiveBenefits,متعة أكثر مقابل عدد أقل من عملات Robux. اشترِك في Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,خوادم خاصة مجانية

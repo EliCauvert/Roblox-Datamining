@@ -296,7 +296,7 @@ function SocialContextToastDispatcher(p25)
 		if p27.FollowUserId == localPlayer.UserId then
 			local ok, status = pcall(function()
 				-- upvalues: localPlayer (ref), p27 (ref)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then localPlayer:IsFriendsWithAsync(p27.UserId) else localPlayer:IsFriendsWith(p27.UserId)
+				return localPlayer:IsFriendsWithAsync(p27.UserId)
 			end)
 			
 			if ok and status then

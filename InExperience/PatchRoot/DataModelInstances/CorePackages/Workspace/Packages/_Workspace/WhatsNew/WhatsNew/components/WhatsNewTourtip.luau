@@ -89,12 +89,14 @@ return reactModule.memo(function()
 	
 	if var22 then
 		table.insert(t, {
+			testId = "whats-new-tourtip--action-1",
 			isDisabled = var15,
 			text = var13.back,
 			variant = buttonVariant.Standard,
 			onActivated = var20
 		})
 		table.insert(t, {
+			testId = "whats-new-tourtip--action-2",
 			text = if var16 then var13.done else var13.next,
 			variant = buttonVariant.Emphasis,
 			onActivated = var19

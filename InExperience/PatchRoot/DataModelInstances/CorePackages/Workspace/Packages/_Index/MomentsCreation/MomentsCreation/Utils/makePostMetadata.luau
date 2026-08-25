@@ -1,4 +1,6 @@
-﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
+﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
+local _ = require(momentsCreation.Parent.MomentsTypes)
+local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local momentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
 local function convertTextOverlayStyle(p0)
@@ -23,7 +25,7 @@ local function convertTextOverlay(p1)
 end
 
 return function(p2)
-	-- upvalues: convertTextOverlay (ref), momentsPostCtaUseCaptureUniverse (ref)
+	-- upvalues: convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref)
 	local t = { caption = p2.description }
 	
 	if p2.edits then
@@ -47,15 +49,27 @@ return function(p2)
 			end
 			t.textOverlays = t_1
 		end
+		if getFFlagMomentsTTSAudioOverlayModule and p2.edits.tts and (p2.edits.tts.text ~= nil and p2.edits.tts.text ~= "") then
+			local tts = p2.edits.tts
+			t.textToSpeech = {
+				{
+					pitch = 0,
+					speed = 1,
+					text = tts.text,
+					voiceId = tts.voiceId,
+					startTime = tts.startTime
+				}
+			}
+		end
 	end
-	local var5 = p2.universeIdOverride or p2.universeId
+	local var7 = p2.universeIdOverride or p2.universeId
 	
 	if momentsPostCtaUseCaptureUniverse then
 		local universeId = p2.universeId
-		var5 = if universeId == nil or universeId <= 0 then p2.universeIdOverride else universeId
+		var7 = if universeId == nil or universeId <= 0 then p2.universeIdOverride else universeId
 	end
-	if var5 and p2.placeId then
-		t.primaryCta = { experienceId = var5, placeId = p2.placeId }
+	if var7 and p2.placeId then
+		t.primaryCta = { experienceId = var7, placeId = p2.placeId }
 	end
 	if p2.captureType == Enum.CaptureType.Video then
 		t.durationSeconds = p2.assetTotalDuration

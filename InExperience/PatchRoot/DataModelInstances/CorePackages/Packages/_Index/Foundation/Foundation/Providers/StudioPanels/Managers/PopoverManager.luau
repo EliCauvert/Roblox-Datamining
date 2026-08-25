@@ -41,95 +41,105 @@ function t.new(p5, p6)
 	return tbl
 end
 
-function t:openAtAsync(p7, p8, p9, p10)
+function t:openAtAsync(p7, p8, p9, p10, p11)
 	-- upvalues: flagsModule (ref)
-	local var7 = self:_acquirePanelAsync(p8, if p9 == nil then 0 else p9, p10)
-	var7.panel.Enabled = false
-	self._panels:SetAttachmentAsync(var7.uri, {
+	local var8
+	local var7 = if p9 == nil then 0 else p9
+	
+	if flagsModule.FoundationPopoverPluginFocusable then
+		var8 = p11 == true
+		var8 = nil
+	else
+		var8 = false
+	end
+	local var9 = self:_acquirePanelAsync(p8, var7, p10, var8)
+	var9.panel.Enabled = false
+	self._panels:SetAttachmentAsync(var9.uri, {
 		TargetWidgetUri = p7.targetWidgetUri,
 		TargetAnchorPoint = p7.targetAnchorPoint,
 		SubjectAnchorPoint = p7.subjectAnchorPoint,
 		Offset = p7.offset
 	})
-	self._panels:SetSizeAsync(var7.uri, Vector2.new(0, 0))
-	var7.panel.Enabled = true
-	var7.open = true
+	self._panels:SetSizeAsync(var9.uri, Vector2.new(0, 0))
+	var9.panel.Enabled = true
+	var9.open = true
 	local _ = nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		local generation = var7.generation
+		local generation = var9.generation
 		
 		return {
-			container = var7.panel,
-			popoverId = var7.id,
+			container = var9.panel,
+			popoverId = var9.id,
 			setSizeAsync = function(value)
-				-- upvalues: var7 (ref), generation (ref), self (ref)
-				if var7.generation == generation and var7.open then
-					self._panels:SetSizeAsync(var7.uri, Vector2.new(math.ceil(math.min(3000, value.X)), math.ceil(math.min(3000, value.Y))))
+				-- upvalues: var9 (ref), generation (ref), self (ref)
+				if var9.generation == generation and var9.open then
+					self._panels:SetSizeAsync(var9.uri, Vector2.new(math.ceil(math.min(3000, value.X)), math.ceil(math.min(3000, value.Y))))
 					
 					return
 				end
 			end,
-			updateAsync = function(p11)
-				-- upvalues: var7 (ref), generation (ref), self (ref)
-				if var7.generation == generation and var7.open and var7.uri then
-					self._panels:SetAttachmentAsync(var7.uri, {
-						TargetWidgetUri = p11.targetWidgetUri,
-						TargetAnchorPoint = p11.targetAnchorPoint,
-						SubjectAnchorPoint = p11.subjectAnchorPoint,
-						Offset = p11.offset
+			updateAsync = function(p12)
+				-- upvalues: var9 (ref), generation (ref), self (ref)
+				if var9.generation == generation and var9.open and var9.uri then
+					self._panels:SetAttachmentAsync(var9.uri, {
+						TargetWidgetUri = p12.targetWidgetUri,
+						TargetAnchorPoint = p12.targetAnchorPoint,
+						SubjectAnchorPoint = p12.subjectAnchorPoint,
+						Offset = p12.offset
 					})
 					
 					return
 				end
 			end,
 			close = function()
-				-- upvalues: self (ref), var7 (ref), generation (ref)
-				self:_closePopover(var7, true, generation)
+				-- upvalues: self (ref), var9 (ref), generation (ref)
+				self:_closePopover(var9, true, generation)
 			end
 		}
 	end
 	return {
-		container = var7.panel,
-		popoverId = var7.id,
+		container = var9.panel,
+		popoverId = var9.id,
 		setSizeAsync = function(value)
-			-- upvalues: self (ref), var7 (ref)
-			self._panels:SetSizeAsync(var7.uri, Vector2.new(math.ceil(math.min(3000, value.X)), math.ceil(math.min(3000, value.Y))))
+			-- upvalues: self (ref), var9 (ref)
+			self._panels:SetSizeAsync(var9.uri, Vector2.new(math.ceil(math.min(3000, value.X)), math.ceil(math.min(3000, value.Y))))
 		end,
-		updateAsync = function(p12)
-			-- upvalues: var7 (ref), self (ref)
-			if var7.uri then
-				self._panels:SetAttachmentAsync(var7.uri, {
-					TargetWidgetUri = p12.targetWidgetUri,
-					TargetAnchorPoint = p12.targetAnchorPoint,
-					SubjectAnchorPoint = p12.subjectAnchorPoint,
-					Offset = p12.offset
+		updateAsync = function(p13)
+			-- upvalues: var9 (ref), self (ref)
+			if var9.uri then
+				self._panels:SetAttachmentAsync(var9.uri, {
+					TargetWidgetUri = p13.targetWidgetUri,
+					TargetAnchorPoint = p13.targetAnchorPoint,
+					SubjectAnchorPoint = p13.subjectAnchorPoint,
+					Offset = p13.offset
 				})
 				
 				return
 			end
 		end,
 		close = function()
-			-- upvalues: self (ref), var7 (ref)
-			self:_closePopover(var7, true)
+			-- upvalues: self (ref), var9 (ref)
+			self:_closePopover(var9, true)
 		end
 	}
 end
 
-function t:_createPanelAsync(p13, p14)
-	-- upvalues: studioUriModule (ref)
-	local var8 = self._plugin:CreateQWidgetPluginGui(p13, {
+function t:_createPanelAsync(p14, p15, p16)
+	-- upvalues: flagsModule (ref), studioUriModule (ref)
+	local var10 = self._plugin:CreateQWidgetPluginGui(p14, {
 		InitialEnabled = true,
 		Tooltip = true,
 		Transparent = true,
 		Resizable = true,
-		Id = p13,
-		Title = p13,
-		ZIndex = p14 + 200
+		Id = p14,
+		Focusable = if flagsModule.FoundationPopoverPluginFocusable then p16 else nil,
+		Title = p14,
+		ZIndex = p15 + 200
 	})
-	var8.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	var10.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	
-	return var8, studioUriModule.join(self._pluginUri, { Category = "Panels", ItemId = p13 })
+	return var10, studioUriModule.join(self._pluginUri, { Category = "Panels", ItemId = p14 })
 end
 
 function t:_makePopoverId()
@@ -137,21 +147,22 @@ function t:_makePopoverId()
 	return `Popovers{if self._uriScope then `/{self._uriScope}` else ""}/{httpService:GenerateGUID(false)}`
 end
 
-function t:_createPopoverAsync(p15, p16)
+function t:_createPopoverAsync(p17, p18, p19)
 	-- upvalues: flagsModule (ref)
-	local var9, var10 = self:_createPanelAsync(p15, p16)
+	local var11, var12 = self:_createPanelAsync(p17, p18, p19)
 	local t = {
 		open = false,
 		generation = 0,
 		parentPopoverId = nil,
 		onClose = nil,
-		id = p15,
-		uri = var10,
-		panel = var9,
-		depth = p16
+		id = p17,
+		uri = var12,
+		panel = var11,
+		depth = p18,
+		isFocusable = p19
 	}
 	
-	local var12 = function()
+	local var14 = function()
 		-- upvalues: flagsModule (copy), self (ref), t (ref)
 		if flagsModule.FoundationPopoverPluginOverlayMeasurement then
 			self:_closePopover(t, false, t.generation)
@@ -161,12 +172,12 @@ function t:_createPopoverAsync(p15, p16)
 		self:_closePopover(t)
 	end
 	
-	if var9:IsA("PluginGui") then
-		var9:BindToClose(var12)
+	if var11:IsA("PluginGui") then
+		var11:BindToClose(var14)
 	end
-	var9.InputBegan:Connect(function(p17)
+	var11.InputBegan:Connect(function(p20)
 		-- upvalues: t (ref), self (ref)
-		if p17.UserInputType == Enum.UserInputType.MouseButton1 and t.open then
+		if p20.UserInputType == Enum.UserInputType.MouseButton1 and t.open then
 			self:_closeChildPopovers(t)
 		end
 	end)
@@ -174,80 +185,91 @@ function t:_createPopoverAsync(p15, p16)
 	return t
 end
 
-function t:_activatePopover(p18, p19, p20)
+function t:_activatePopover(p21, p22, p23)
 	-- upvalues: flagsModule (ref)
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		p18.generation += 1
+		p21.generation += 1
 	end
-	p18.onClose = p19
-	p18.parentPopoverId = p20
-	p18.open = false
-	self._active[p18.id] = p18
+	p21.onClose = p22
+	p21.parentPopoverId = p23
+	p21.open = false
+	self._active[p21.id] = p21
 end
 
-function t:_tryAcquireFromPool(p21, p22, p23)
-	local var13 = self._pool[p22]
-	local var14 = if var13 then table.remove(var13) else nil
+function t:_tryAcquireFromPool(p24, p25, p26, p27)
+	-- upvalues: flagsModule (ref)
+	local var15 = self._pool[p25]
+	local removed = nil
 	
-	if var14 then
-		self:_activatePopover(var14, p21, p23)
+	if not flagsModule.FoundationPopoverPluginFocusable then
+		removed = if var15 then table.remove(var15) else nil
+	elseif var15 then
+		for i = #var15, 1, -1 do
+			if var15[i].isFocusable ~= p27 then
+				continue
+			end
+			removed = table.remove(var15, i)
+		end
+	end
+	if removed then
+		self:_activatePopover(removed, p24, p26)
 		
-		return var14
+		return removed
 	end
 	return nil
 end
 
-function t:_acquirePanelAsync(p24, p25, p26)
-	local var15 = self:_tryAcquireFromPool(p24, p25, p26)
+function t:_acquirePanelAsync(p28, p29, p30, p31)
+	local var17 = self:_tryAcquireFromPool(p28, p29, p30, p31)
 	
-	if var15 then
-		return var15
+	if var17 then
+		return var17
 	end
-	local var16 = self:_createPopoverAsync(self:_makePopoverId(), p25)
-	self:_activatePopover(var16, p24, p26)
+	local var18 = self:_createPopoverAsync(self:_makePopoverId(), p29, p31)
+	self:_activatePopover(var18, p28, p30)
 	
-	return var16
+	return var18
 end
 
-function t:prewarmPoolAsync(p27)
+function t:prewarmPoolAsync(p32)
 	if self._didPrewarm then return end
-	for i = 0, math.max(0, p27) do
+	for i = 0, math.max(0, p32) do
 		if self._pool[i] == nil then
 			self._pool[i] = {}
 		end
-		local var17 = self._pool[i]
+		local var19 = self._pool[i]
 		
-		if #var17 == 0 then
-			local var18 = self:_createPopoverAsync(self:_makePopoverId(), i)
-			var18.panel.Enabled = false
-			table.insert(var17, var18)
+		if #var19 == 0 then
+			local var20 = self:_createPopoverAsync(self:_makePopoverId(), i, false)
+			var20.panel.Enabled = false
+			table.insert(var19, var20)
 		end
 	end
 	self._didPrewarm = true
 end
 
-function t:_closeChildPopovers(p28)
+function t:_closeChildPopovers(p33)
 	local t = {}
 	
 	for i, v in self._active do
-		if v.open and v.id ~= p28.id then
-			local var20
+		if v.open and v.id ~= p33.id then
+			local var22
 			local active = self._active
 			local parentPopoverId = v.parentPopoverId
 			while parentPopoverId do
-				if parentPopoverId == p28.id then
-					var20 = true
+				if parentPopoverId == p33.id then
+					var22 = true
 				else
-					local var21 = active[parentPopoverId]
+					local var23 = active[parentPopoverId]
 					
-					if not var21 then break end
-					parentPopoverId = var21.parentPopoverId
+					if not var23 then break end
+					parentPopoverId = var23.parentPopoverId
 				end
-				if var20 then
+				if var22 then
 					table.insert(t, v)
 				end
 			end
-			var20 = false
+			var22 = false
 		end
 	end
 	for i, v in t do
@@ -255,23 +277,23 @@ function t:_closeChildPopovers(p28)
 	end
 end
 
-function t:_closePopover(p29, p30, p31)
+function t:_closePopover(p34, p35, p36)
 	-- upvalues: flagsModule (ref)
-	if flagsModule.FoundationPopoverPluginOverlayMeasurement and p31 ~= nil and p29.generation ~= p31 then return end
-	if not p29.open then return end
-	p29.open = false
-	p29.panel.Enabled = false
+	if flagsModule.FoundationPopoverPluginOverlayMeasurement and p36 ~= nil and p34.generation ~= p36 then return end
+	if not p34.open then return end
+	p34.open = false
+	p34.panel.Enabled = false
 	
-	if not p30 and p29.onClose then
-		p29.onClose()
+	if not p35 and p34.onClose then
+		p34.onClose()
 	end
-	self._active[p29.id] = nil
-	local depth = p29.depth
+	self._active[p34.id] = nil
+	local depth = p34.depth
 	
 	if not self._pool[depth] then
 		self._pool[depth] = {}
 	end
-	table.insert(self._pool[depth], p29)
+	table.insert(self._pool[depth], p34)
 end
 
 function t:closeAll()

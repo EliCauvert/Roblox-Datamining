@@ -416,17 +416,16 @@ function t:_setupReskin()
 		end)
 	end
 	playerContextualMenuStore.setContextMenuOpener(function(p8, p9, p10)
-		-- upvalues: contextMenuControllerModule (ref), playerContextualMenuStore (copy), status (ref), playerListVisibilityStore (copy)
+		-- upvalues: contextMenuControllerModule (ref), playerContextualMenuStore (copy), status (ref)
 		task.spawn(function()
-			-- upvalues: contextMenuControllerModule (copy), p8 (ref), playerContextualMenuStore (copy), status (copy), p9 (ref), p10 (ref), playerListVisibilityStore (copy)
+			-- upvalues: contextMenuControllerModule (copy), p8 (ref), playerContextualMenuStore (copy), status (copy), p9 (ref), p10 (ref)
 			local var73 = contextMenuControllerModule.buildMenuData(p8, playerContextualMenuStore.closeContextMenu, status)
 			
-			if p8.Parent == nil then return end
-			var73.anchorPosition = p9
-			
-			if playerContextualMenuStore.setMenuDataIfCurrent(var73, p10) and status then
-				playerListVisibilityStore.setVisible(false)
+			if p8.Parent == nil then
+				return
 			end
+			var73.anchorPosition = p9
+			playerContextualMenuStore.setMenuDataIfCurrent(var73, p10)
 		end)
 	end)
 	local playerListInitialVisibleStateModule = require(parent.PlayerListInitialVisibleState)

@@ -63,7 +63,7 @@ return {
 		end,
 		postRequestFunction = function(p5, p6)
 			-- upvalues: var3 (ref), appChatNetworkingTelemetryModule (ref), var5 (ref), getFFlagDebugUnfilteredThreads (ref), httpService (ref), chunkAndLogString (ref)
-			var3:debug(`Returned: [ requestMethod = "{p6.requestMethod}", url = "{p6.url}", statusCode = {p5.StatusCode}{if p5.HttpError ~= Enum.HttpError.OK then `, HttpError = {p5.HttpError}` else ""}]`)
+			var3:debug(`Returned: [ requestMethod = "{p6.requestMethod}", url = "{p6.url}", statusCode = {p5.StatusCode}{p5.HttpError ~= Enum.HttpError.OK and `, HttpError = {p5.HttpError}` or ""}]`)
 			appChatNetworkingTelemetryModule.emit(var5, {
 				url = p6.url,
 				statusCode = p5.StatusCode,

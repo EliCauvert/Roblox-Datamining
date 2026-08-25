@@ -20,11 +20,7 @@ function t.Init()
 	t.player = var4
 	
 	if var4.Character == nil and runService:IsServer() then
-		if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-			var4:LoadCharacterAsync()
-		else
-			var4:LoadCharacter()
-		end
+		var4:LoadCharacterAsync()
 	end
 	t.WaitForExpression(function()
 		-- upvalues: var4 (ref)

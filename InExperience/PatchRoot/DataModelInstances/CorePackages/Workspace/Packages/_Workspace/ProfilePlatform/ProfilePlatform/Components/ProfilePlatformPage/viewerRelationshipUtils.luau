@@ -44,7 +44,7 @@ return {
 	end,
 	isViewerTrustedFriendsFromViewerRelationship = function(_)
 -- FATAL: Failed to generate AST for `isViewerTrustedFriendsFromViewerRelationship` function:
-runtime : [KeyError] :11990: 31
+runtime : [KeyError] :11990: 29
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

@@ -69,7 +69,7 @@ local isEngineTruncationEnabledForIngameSettingsModule = require(robloxGui.Modul
 local voiceChatMultistreamSubscriptionsEnabledEngineFeature = game:GetEngineFeature("VoiceChatMultistreamSubscriptionsEnabled")
 local luaFlagVoiceChatDisableSubscribeRetryForMultistream = game:DefineFastFlag("LuaFlagVoiceChatDisableSubscribeRetryForMultistream", true)
 local playerListRefactorUsernameFormatting = game:DefineFastFlag("PlayerListRefactorUsernameFormatting", false)
-local correctlyPositionMuteButton = game:DefineFastFlag("CorrectlyPositionMuteButton", false)
+local checkShareGameButtonInMuteAllLayout = game:DefineFastFlag("CheckShareGameButtonInMuteAllLayout", false)
 local onlyCaptureFocusIfOnPlayerPage = game:DefineFastFlag("OnlyCaptureFocusIfOnPlayerPage", false)
 local settingsHubPlayersButtonsResponsiveThreshold = game:DefineFastInt("SettingsHubPlayersButtonsResponsiveThreshold", 200)
 local getFFlagCleanupMuteSelfButtonModule = require(robloxGui.Modules.Settings.Flags.GetFFlagCleanupMuteSelfButton)
@@ -79,7 +79,7 @@ local muteStatusIcons = default.MuteStatusIcons
 local playerMuteStatusIcons = default.PlayerMuteStatusIcons
 
 return (function()
-	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), localizationService (ref), localization (ref), uiblox (ref), builderIconsModule (ref), localPlayer (write), utilityModule (ref), blockingUtilityModule (ref), themeModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule_1 (ref), getFFlagDefaultFriendingLabelTextNonEmptyModule (ref), voiceAnalyticsModule (ref), settingsHubPlayersButtonsResponsiveThreshold (ref), getFFlagEnableConsoleJoinVoiceModule (ref), getFFlagCleanupMuteSelfButtonModule (ref), checkButtonFrameBeforeDestroy (ref), guiService (ref), blockingAnalyticsModule (ref), onBlockButtonActivatedModule (ref), robloxTranslatorModule (ref), muteStatusIcons (ref), luaFlagVoiceChatDisableSubscribeRetryForMultistream (ref), voiceChatMultistreamSubscriptionsEnabledEngineFeature (ref), default (ref), constantsModule (ref), create (ref), fFlagEnableSideSheet (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getFFlagEnableLeaveGameUpsellEntrypointModule (ref), fFlagIEMTabFocusNav (ref), playerMuteStatusIcons (ref), reportAbuseMenuNewContainerPageModule (ref), var50 (ref), uDim2 (ref), enableConsoleJoinVoiceTranslation (ref), status (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), checkForNilUserIdOnPlayerList (ref), userProfileStore (ref), isEngineTruncationEnabledForIngameSettingsModule (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), playersService (ref), userInputService (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), runService (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), var25 (write), gameInviteAnalytics (ref), eventStream (ref), diag (ref), socialUtilModule (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref), correctlyPositionMuteButton (ref), cryoModule (ref), onlyCaptureFocusIfOnPlayerPage (ref), getFFlagDestroyPlayerCardOnLeaveModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), fFlagMenuButtonsMountWithIEMModule (ref)
+	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), localizationService (ref), localization (ref), uiblox (ref), builderIconsModule (ref), localPlayer (write), utilityModule (ref), blockingUtilityModule (ref), themeModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule_1 (ref), getFFlagDefaultFriendingLabelTextNonEmptyModule (ref), voiceAnalyticsModule (ref), settingsHubPlayersButtonsResponsiveThreshold (ref), getFFlagEnableConsoleJoinVoiceModule (ref), getFFlagCleanupMuteSelfButtonModule (ref), checkButtonFrameBeforeDestroy (ref), guiService (ref), blockingAnalyticsModule (ref), onBlockButtonActivatedModule (ref), robloxTranslatorModule (ref), muteStatusIcons (ref), luaFlagVoiceChatDisableSubscribeRetryForMultistream (ref), voiceChatMultistreamSubscriptionsEnabledEngineFeature (ref), default (ref), constantsModule (ref), create (ref), fFlagEnableSideSheet (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getFFlagEnableLeaveGameUpsellEntrypointModule (ref), fFlagIEMTabFocusNav (ref), playerMuteStatusIcons (ref), reportAbuseMenuNewContainerPageModule (ref), var50 (ref), uDim2 (ref), enableConsoleJoinVoiceTranslation (ref), status (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), checkForNilUserIdOnPlayerList (ref), userProfileStore (ref), isEngineTruncationEnabledForIngameSettingsModule (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), playersService (ref), userInputService (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), runService (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), var25 (write), gameInviteAnalytics (ref), eventStream (ref), diag (ref), socialUtilModule (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref), checkShareGameButtonInMuteAllLayout (ref), cryoModule (ref), onlyCaptureFocusIfOnPlayerPage (ref), getFFlagDestroyPlayerCardOnLeaveModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), fFlagMenuButtonsMountWithIEMModule (ref)
 	local players = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	players.PageListLayout.Padding = UDim.new(0, 16)
 	players.playSessionId = ""
@@ -1663,7 +1663,7 @@ return (function()
 	end
 	
 	local var104 = function(_)
-		-- upvalues: players (ref), fFlagIEMTabFocusNav (copy), var98 (write), playersService (copy), var50 (copy), localPlayer (copy), utilityModule (copy), var87 (write), var56 (write), default (copy), fFlagHidePeoplePageInviteFriends (copy), fFlagAddInviteFriendsIntegration (copy), fFlagEnableSideSheet (copy), var55 (write), runService (copy), var63 (write), create (copy), var64 (write), uDim2 (copy), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), var25 (copy), gameInviteAnalytics (copy), eventStream (copy), rbxAnalyticsService (copy), diag (copy), var91 (write), getFFlagEnableConsoleJoinVoiceModule (copy), shouldShowJoinVoiceButton (ref), var58 (write), var86 (write), var66 (write), guiService (copy), t_3 (ref), t_4 (ref), var96 (write), muteButtonUpdate (ref), socialUtilModule (copy), playerListRefactorUsernameFormatting (copy), formatUsername (copy), isEngineTruncationEnabledForIngameSettingsModule (copy), managePlayerNameCutoff (ref), friendStatusCreate (ref), resizeFriendButton (ref), resizeBlockButton (write), resizeInspectButton (ref), reportAbuseButtonCreate (ref), var92 (write), var74 (write), robloxTranslatorModule (copy), getFFlagVoiceChatUILoggingModule (copy), name (copy), players_1 (ref), constantsModule (copy), updateAllMuteButtons (ref), correctlyPositionMuteButton (copy), checkForNilUserIdOnPlayerList (copy), cryoModule (copy), userProfileStore (copy), resizePlatformName (ref), var101 (write), getFFlagCleanupMuteSelfButtonModule (copy), pollImage (ref), userInputService (copy), onlyCaptureFocusIfOnPlayerPage (copy)
+		-- upvalues: players (ref), fFlagIEMTabFocusNav (copy), var98 (write), playersService (copy), var50 (copy), localPlayer (copy), utilityModule (copy), var87 (write), var56 (write), default (copy), fFlagHidePeoplePageInviteFriends (copy), fFlagAddInviteFriendsIntegration (copy), fFlagEnableSideSheet (copy), var55 (write), runService (copy), var63 (write), create (copy), var64 (write), uDim2 (copy), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), var25 (copy), gameInviteAnalytics (copy), eventStream (copy), rbxAnalyticsService (copy), diag (copy), var91 (write), getFFlagEnableConsoleJoinVoiceModule (copy), shouldShowJoinVoiceButton (ref), var58 (write), var86 (write), var66 (write), guiService (copy), t_3 (ref), t_4 (ref), var96 (write), muteButtonUpdate (ref), socialUtilModule (copy), playerListRefactorUsernameFormatting (copy), formatUsername (copy), isEngineTruncationEnabledForIngameSettingsModule (copy), managePlayerNameCutoff (ref), friendStatusCreate (ref), resizeFriendButton (ref), resizeBlockButton (write), resizeInspectButton (ref), reportAbuseButtonCreate (ref), var92 (write), var74 (write), robloxTranslatorModule (copy), getFFlagVoiceChatUILoggingModule (copy), name (copy), players_1 (ref), constantsModule (copy), updateAllMuteButtons (ref), checkShareGameButtonInMuteAllLayout (copy), checkForNilUserIdOnPlayerList (copy), cryoModule (copy), userProfileStore (copy), resizePlatformName (ref), var101 (write), getFFlagCleanupMuteSelfButtonModule (copy), pollImage (ref), userInputService (copy), onlyCaptureFocusIfOnPlayerPage (copy)
 		players.LastSelectableObjects = {}
 		
 		if fFlagIEMTabFocusNav and not players.ButtonsContainer.Visible then
@@ -1674,16 +1674,16 @@ return (function()
 		if var50 then
 			table.sort(var98, function(p66, p67)
 				-- upvalues: localPlayer (copy)
-				local var224 = p66.Name:lower()
-				local var225 = p67.Name:lower()
+				local var225 = p66.Name:lower()
+				local var226 = p67.Name:lower()
 				
 				if p66 == localPlayer then
-					var224 = " "
-				end
-				if p67 == localPlayer then
 					var225 = " "
 				end
-				return var224 < var225
+				if p67 == localPlayer then
+					var226 = " "
+				end
+				return var225 < var226
 			end)
 		else
 			table.sort(var98, function(p68, p69)
@@ -1882,6 +1882,7 @@ return (function()
 			end
 		end
 		if voiceUIVisible then
+			local var222
 			var56 = var92()
 			var56.Activated:connect(function()
 				-- upvalues: var74 (copy), robloxTranslatorModule (copy), var56 (copy), default (copy), getFFlagVoiceChatUILoggingModule (copy), name (copy), players_1 (copy), constantsModule (copy), updateAllMuteButtons (copy)
@@ -1900,14 +1901,20 @@ return (function()
 			end)
 			var56.LayoutOrder = 1
 			
-			if correctlyPositionMuteButton then
+			if checkShareGameButtonInMuteAllLayout then
+				var222 = var55 ~= nil
+				var222 = nil
+			else
+				var222 = true
+			end
+			if var222 then
 				layoutMuteAll()
 			else
 				var56.Parent = var63
 			end
 			var66()
 		end
-		local var222 = if checkForNilUserIdOnPlayerList then cryoModule.List.filterMap(var98, function(p72)
+		local var223 = if checkForNilUserIdOnPlayerList then cryoModule.List.filterMap(var98, function(p72)
 			return if p72.UserId then tostring(p72.UserId) else nil
 		end) else cryoModule.List.filter(var98, function(p71)
 			return tostring(p71.UserId)
@@ -1916,37 +1923,37 @@ return (function()
 		for var218, v_2 in ipairs(var98) do
 			t_3[v_2.Name].DisplayNameLabel.Text = v_2.DisplayName
 		end
-		userProfileStore.get().fetchNamesByUserIds(var222, function(p73)
+		userProfileStore.get().fetchNamesByUserIds(var223, function(p73)
 			-- upvalues: t_3 (copy), resizePlatformName (copy)
 			for i, v in p73.data do
-				local var230 = t_3[v.names.getUsername(false)]
+				local var231 = t_3[v.names.getUsername(false)]
 				
-				if var230 then
+				if var231 then
 					local inExperienceCombinedName = v.names.getInExperienceCombinedName(false)
 					
-					if string.len(inExperienceCombinedName) > 0 and inExperienceCombinedName ~= var230.DisplayNameLabel.Text then
-						var230.DisplayNameLabel.Text = inExperienceCombinedName
+					if string.len(inExperienceCombinedName) > 0 and inExperienceCombinedName ~= var231.DisplayNameLabel.Text then
+						var231.DisplayNameLabel.Text = inExperienceCombinedName
 					end
-					local rightSideButtons = var230:FindFirstChild("RightSideButtons")
-					local var233 = if v.names.getPlatformName(false) ~= "" then v.names.getPlatformName(false) else nil
+					local rightSideButtons = var231:FindFirstChild("RightSideButtons")
+					local var234 = if v.names.getPlatformName(false) ~= "" then v.names.getPlatformName(false) else nil
 					
 					if game:GetEngineFeature("PlatformFriendsService") and game:GetEngineFeature("PlatformFriendsProfile") then
-						resizePlatformName(rightSideButtons, var233, v.getPlatformProfileId(false))
+						resizePlatformName(rightSideButtons, var234, v.getPlatformProfileId(false))
 					else
-						resizePlatformName(rightSideButtons, var233)
+						resizePlatformName(rightSideButtons, var234)
 					end
 				end
 			end
 		end)
-		local var223 = 0
+		local var224 = 0
 		
 		if var87 and not var101 then
 			name:debug("Setting Up Playerlist Mic Update Renderstep Hook")
 			runService:BindToRenderStep("player-list-mute-update", Enum.RenderPriority.Last.Value, function()
-				-- upvalues: var223 (write), updateAllMuteButtons (copy), getFFlagCleanupMuteSelfButtonModule (copy), var63 (copy), pollImage (copy)
-				var223 += 1
+				-- upvalues: var224 (write), updateAllMuteButtons (copy), getFFlagCleanupMuteSelfButtonModule (copy), var63 (copy), pollImage (copy)
+				var224 += 1
 				
-				if var223 % 3 == 0 then
+				if var224 % 3 == 0 then
 					updateAllMuteButtons()
 					local muteSelfButtonImageLabel = nil
 					
@@ -1987,15 +1994,15 @@ return (function()
 		end
 		utilityModule:OnResized("MenuPlayerListExtraPageSize", function(_, _)
 			-- upvalues: utilityModule (copy), var98 (copy), players (copy)
-			local var235 = if utilityModule:IsSmallTouchScreen() or utilityModule:IsPortrait() then 85 else 20
-			local var236 = #var98 + 1
+			local var236 = if utilityModule:IsSmallTouchScreen() or utilityModule:IsPortrait() then 85 else 20
+			local var237 = #var98 + 1
 			
 			if utilityModule:IsSmallTouchScreen() and utilityModule:IsPortrait() then
-				players.Page.Size = UDim2.new(1, 0, 0, var235 + var236 * 123 - 5)
+				players.Page.Size = UDim2.new(1, 0, 0, var236 + var237 * 123 - 5)
 				
 				return
 			end
-			players.Page.Size = UDim2.new(1, 0, 0, var235 + var236 * 80 - 5)
+			players.Page.Size = UDim2.new(1, 0, 0, var236 + var237 * 80 - 5)
 		end)
 	end
 	
@@ -2010,7 +2017,7 @@ return (function()
 	
 	if game:GetEngineFeature("VoiceChatSupported") then
 		default:asyncInit():andThen(function()
-			-- upvalues: var87 (write), default (copy), var50 (copy), getFFlagCleanupMuteSelfButtonModule (copy), var57 (write), var93 (write), updateAllMuteButtons (ref), t_1 (ref), var56 (write), var66 (write), var88 (write), getFFlagEnableConsoleJoinVoiceModule (copy), var58 (write), var104 (ref), correctlyPositionMuteButton (copy), var76 (ref), destroyAllUserMuteButtons (ref), resetButtonRow (ref)
+			-- upvalues: var87 (write), default (copy), var50 (copy), getFFlagCleanupMuteSelfButtonModule (copy), var57 (write), var93 (write), updateAllMuteButtons (ref), t_1 (ref), var56 (write), var66 (write), var88 (write), getFFlagEnableConsoleJoinVoiceModule (copy), var58 (write), var104 (ref), var76 (ref), destroyAllUserMuteButtons (ref), resetButtonRow (ref)
 			var87 = true
 			default:SetupParticipantListeners()
 			
@@ -2077,7 +2084,7 @@ return (function()
 				end
 			end)
 			
-			if correctlyPositionMuteButton and not getFFlagCleanupMuteSelfButtonModule() then
+			if not getFFlagCleanupMuteSelfButtonModule() then
 				var104()
 			end
 			default.showVoiceUI.Event:Connect(function()

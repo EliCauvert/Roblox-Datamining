@@ -152,6 +152,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Kualitas aset: tekstur
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Kualitas aset: {partName} memiliki {intersecting_tri_face_percent}% permukaan segitiga yang berpotongan (skor: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Kualitas aset: {partName} memiliki {uv_outside_bound_vert_percent}% verteks UV di luar batas (skor: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Kualitas aset: {partName} memiliki {similar_vertex_percent}% verteks yang serupa (skor: {score}).
+Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,Sambungan aksesori '{AttachmentName}' di '{PartName}' harus ditempatkan dekat dengan permukaan mesh. Posisi saat ini [{CurrentPosition}] berada di luar wilayah yang valid. Pindahkan lebih dekat ke [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handel terikat ke sendi {jointName}, yang bukan bagian dari skema yang diizinkan. Hanya sendi R15 standar dan sendi transfer skinning yang diizinkan."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} harus menggunakan transfer skinning, tetapi kamu tidak memiliki sendi yang diperlukan {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Handel terikat ke sendi {jointName}, tetapi aset ini harus di-skin secara otomatis. Kamu hanya boleh melakukan skinning ke {validJointNameList}."
@@ -165,6 +166,7 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Tidak dapat menemukan {Ex
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Instance berikut bukan bagian dari skema yang disetujui dan harus dihapus: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Aset yang di-upload seharusnya berupa {ExpectedClass}, tetapi terdeteksi sebagai {RootClass}."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Aset yang di-upload seharusnya diberi nama {ExpectedClass}, tetapi saat ini bernama {RootClass}."
+Common.UGCValidation.ErrorLabel.ContentNotEditable,"{InstanceFullName}.{FieldName} masih memiliki konten yang dapat diedit dan belum disimpan. Simpan sebagai aset sebelum memublikasikannya, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Bagian tubuh '{bodyPartName}' di CurveAnimation memiliki track Posisi (translasi). Bagian tubuh animasi hanya boleh diputar; track posisi tidak diizinkan. Hapus track Posisi dari bagian tubuh ini.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Bagian tubuh '{bodyPartName}' dalam CurveAnimation bergerak {distance} kotak dari posisi awalnya. Translasi maksimum yang diizinkan adalah {maxDistance} kotak. Kurangi pergerakan posisi bagian tubuh tersebut.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation berisi tulang HRD/DRD dan bagian tubuh '{bodyPartName}' memiliki track Posisi (translasi). Jika ada tulang dalam animasi, tidak ada bagian tubuh yang boleh melakukan translasi untuk mencegah pemisahan sendi. Hapus semua track Posisi dari bagian tubuh."
@@ -205,6 +207,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation memi
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation berisi Curve dengan terlalu banyak key. Jumlah maksimum yang diizinkan per Curve adalah {maxAllowed}. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation berisi lebih dari {maxAllowed} MarkerCurve. Pastikan descendant MarkerCurve tidak lebih dari {maxAllowed}.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation berisi MarkerCurve dengan {count} Marker. Jumlah maksimum yang diizinkan per MarkerCurve adalah {maxAllowed}. Perbaiki animasi.
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"Animasi yang dipublikasikan menetapkan translasi maksimum bagian sebesar {taggedTranslation} kotak, tetapi hasil perhitungan data animasinya adalah {calculatedTranslation} kotak. Publikasikan ulang animasi."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation berisi child yang tidak diharapkan: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Kepala Dinamis di marketplace harus dikurung dengan benar sehingga titik lengkung mata dan mulut pada cage sejajar dengan titik lengkung mesh. Tingkatkan kurungan (caging) dan keselarasan dengan mesh.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Tidak dapat mendeteksi ekspresi senyum untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi senyum.
@@ -263,7 +266,9 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Ukuran mesh {partName} p
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Sambungan {attName} harus ada tepat 1 kali di dalam {partName} descendant.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (atau descendant-nya) berisi Atribut. Kamu perlu menghapus Atribut dari daftar berikut: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' memiliki properti yang tidak valid: {ProblematicProperties}. Batas byte yang ditampilkan terlampaui (batas 0 berarti properti harus kosong); properti lain berisi nilai NaN/Inf atau melebihi batas ukuran defaultnya.
+Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Sambungan rig '{AttachmentName}' di '{PartName}' harus ditempatkan di dekat batas sendi tempat bagian tubuh ini terhubung ke bagian yang berdekatan. Posisi saat ini [{CurrentPosition}] terlalu jauh dari bidang sambungan. Pindahkan lebih dekat ke [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Untuk meng-upload aset ke Roblox, kamu harus memilih persis 1 kejadian dan tipe upload yang terhubung."
+Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Aset ini terlalu besar untuk di-upload ({sizeBytes} byte melebihi batas maksimum {maxSizeBytes} byte). Kecilkan ukurannya, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instance {ProblematicDescendantPath} tidak boleh memiliki tag.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,String kesalahan uji kedua yang digunakan untuk memverifikasi alur kerja sinkronisasi terjemahan Hub-first dari awal hingga akhir.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Meshpart kepala memiliki animasi wajah untuk {jointName}, yang tidak dapat digunakan di FACS. Ganti nama sendi ini, lalu impor ulang kepalamu."
@@ -395,6 +400,7 @@ CommonUI.Features.Label.Unchecked,Belum diperiksa
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,Terhubung ke
+CommonUI.Features.Labels.Retry,Coba lagi
 CommonUI.Features.NavBar.Build,
 CommonUI.Features.StudioCTA.Tooltip.Body,Download Studio secara GRATIS!
 CommonUI.Features.StudioCTA.Tooltip.Title,Mulai berkreasi di Roblox
@@ -1301,15 +1307,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publikasikan
+Feature.Avatar.BackgroundGeneration.Action.Upload,Upload
 Feature.Avatar.BackgroundGeneration.Action.View,Lihat
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Buat latar belakang dengan Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Kreasimu siap digunakan.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Latar belakang ini dibuat dengan AI. Dengan memublikasikan, kamu mengonfirmasi bahwa latar belakang ini mematuhi Standar Komunitas Roblox dan tidak menggunakan konten yang haknya tidak kamu miliki. Latar belakang ini akan di-review sebelum muncul di inventarismu, dan item yang dipublikasikan tidak dapat diedit."
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Latar belakang ini dibuat dengan AI. Dengan meng-upload, kamu mengonfirmasi bahwa latar belakang ini mematuhi Standar Komunitas Roblox dan tidak menggunakan konten yang haknya tidak kamu miliki. Latar belakang ini akan di-review sebelum muncul di inventarismu. Item yang di-upload tidak dapat diedit."
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Buka latar belakang eksklusif gratis dengan Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item tidak memenuhi Standar Komunitas
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Prompt itu tidak mengikuti pedoman kami. Coba deskripsikan sesuatu yang lain.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Latar belakang ini tidak mengikuti Standar Komunitas Roblox, jadi tidak ditambahkan ke inventarismu. Coba buat yang baru."
 Feature.Avatar.BackgroundGeneration.Error.System,Terjadi kesalahan saat membuat latar belakangmu. Coba lagi.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Eksklusif dengan Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Deskripsikan latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Membuat latar belakangmu…
@@ -1317,6 +1328,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Mempersiapkan latar belakan
 Feature.Avatar.BackgroundGeneration.Title,Buat Latar Belakang
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publikasikan ke inventaris
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Upload ke inventaris
 Feature.Avatar.Backgrounds.Title,Latar Belakang
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Penyesuaian tidak tersedia untuk gaya tubuh ini.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Kembali ke warna tubuh asli
@@ -1881,6 +1894,7 @@ Feature.Build.Label.BackToBuild,Kembali ke Build
 Feature.Build.Label.Building,Membangun...
 Feature.Build.Label.CaptureLibrary,Perpustakaan Media
 Feature.Build.Label.ContentRating,Rating konten
+Feature.Build.Label.Created,Dibuat
 Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,Pusat Kreator
 Feature.Build.Label.Deleted,Dihapus
@@ -1894,11 +1908,13 @@ Feature.Build.Label.FriendsOnly,Khusus teman
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
 Feature.Build.Label.Hi,Hai
 Feature.Build.Label.IconThumbnails,Ikon & thumbnail
+Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Terbatas
 Feature.Build.Label.Loading,
+Feature.Build.Label.Models3D,Model 3D
 Feature.Build.Label.NoLimit,Tidak ada batas
 Feature.Build.Label.NotStarted,Belum dimulai
 Feature.Build.Label.Pending,Pending
@@ -1908,15 +1924,19 @@ Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Publik
 Feature.Build.Label.PubliclyUnavailable,Tidak tersedia untuk umum
 Feature.Build.Label.Published,Dipublikasikan
+Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Siap
 Feature.Build.Label.ResetsDaily,Reset setiap hari
 Feature.Build.Label.RestoredVersion,{VERSION} dipulihkan
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
+Feature.Build.Label.SearchAssets,Cari aset
 Feature.Build.Label.SearchGames,Cari game
 Feature.Build.Label.SearchTasks,Cari tugas
 Feature.Build.Label.SelectOption,Pilih opsi
 Feature.Build.Label.ShareAddedFriends,Bagikan kepada teman yang kamu tambahkan
+Feature.Build.Label.Shared,Dibagikan
+Feature.Build.Label.Sounds,Suara
 Feature.Build.Label.Thinking,Sedang memproses
 Feature.Build.Label.Title,Judul
 Feature.Build.Label.TitleDescription,Judul & deskripsi
@@ -1984,6 +2004,7 @@ Feature.Build.Label.ToolThumbnailRunning,Mengatur thumbnail game
 Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Tidak Diketahui
 Feature.Build.Label.UnlimitedUsed,{USED} digunakan • Tidak ada batas
+Feature.Build.Label.Updated,Di-update
 Feature.Build.Label.Usage,Penggunaan
 Feature.Build.Label.UsageUsed,{USED} digunakan
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -1997,6 +2018,8 @@ Feature.Build.Message.AccountRequirements,Akunmu tidak memenuhi persyaratan untu
 Feature.Build.Message.AccountTooNew,Akunmu terlalu baru untuk dipublikasikan. Coba lagi setelah 2 hari.
 Feature.Build.Message.AllFriendsAdded,Kamu telah menambahkan semua temanmu sebagai playtester.
 Feature.Build.Message.AnswerBuildQuestion,Jawab pertanyaan Build di bawah ini.
+Feature.Build.Message.AssetDetailsUnavailable,Detail aset tidak tersedia.
+Feature.Build.Message.AssetsLoadFailed,Tidak bisa me-load aset.
 Feature.Build.Message.AudienceIneligible,Tidak memenuhi syarat untuk audiens ini
 Feature.Build.Message.BuildAccountBlocked,Build tidak tersedia untuk akunmu saat ini.
 Feature.Build.Message.BuildBusy,"Build sibuk. Tunggu sebentar, lalu coba lagi."
@@ -2027,6 +2050,7 @@ Feature.Build.Message.InvitesLoadFailed,Tidak dapat me-load undangan
 Feature.Build.Message.LimitBelowSpend,Batasan tidak boleh kurang dari {ALREADY_SPENT} Robux yang sudah digunakan hari ini.
 Feature.Build.Message.LinkCopied,Link disalin ke clipboard.
 Feature.Build.Message.LoadingVersions,Me-load riwayat versi...
+Feature.Build.Message.NoAssetsFound,Tidak ada aset yang ditemukan.
 Feature.Build.Message.NoDescriptionProvided,Tidak ada deskripsi yang diberikan.
 Feature.Build.Message.NoFriendsToAdd,Kamu belum memiliki teman untuk ditambahkan. Temukan pengguna untuk terhubung di Roblox terlebih dahulu.
 Feature.Build.Message.NoResults,
@@ -2062,6 +2086,7 @@ Feature.Build.Message.WorkingOnTasks,Mengerjakan tugasmu
 Feature.Build.Title.AdCampaignActive,Kampanye iklan aktif
 Feature.Build.Title.AddFriendsToPlaytest,Tambahkan teman untuk membantumu melakukan playtest
 Feature.Build.Title.ArchiveThisGame,Arsipkan game ini?
+Feature.Build.Title.AssetLibrary,Perpustakaan
 Feature.Build.Title.Audience,Audiens
 Feature.Build.Title.BuildQuestion,Build memiliki pertanyaan
 Feature.Build.Title.BuildQuestions,Build memiliki beberapa pertanyaan
@@ -2601,6 +2626,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,Tekan lama untuk membalas
 Feature.Chat.Label.Members,Anggota
 Feature.Chat.Label.MessageNotAvailable,Pesan ini tidak tersedia
 Feature.Chat.Label.MuteInGameChatToastNotifications,Bisukan notifikasi chat dalam game
+Feature.Chat.Label.MuteInGamePartyToastNotifications,Bisukan notifikasi party dalam game
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,Chat tidak ditemukan
 Feature.Chat.Label.NoDescriptionYet,Belum ada deskripsi.
@@ -3040,7 +3066,7 @@ Feature.GameDetails.Label.SomethingElse,
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.TellUsMorePlaceholder,Beri tahu kami lebih banyak
 Feature.GameDetails.Label.TooRepetitive,Terlalu repetitif
-Feature.GameDetails.Label.Updated,Di-update
+Feature.GameDetails.Label.Updated,
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.WhyThisAd,Kenapa saya melihat iklan ini?
 Feature.GameDetails.Label.Yes,
@@ -3164,7 +3190,7 @@ Feature.Groups.Title.UnableToJoin,Tidak dapat bergabung ke {groupName}
 Feature.Home.ActionSeeAll,
 Feature.Home.ClientCacheFallbackBanner.Action.Refresh,
 Feature.Home.ClientCacheFallbackBanner.Label.Error,
-Feature.Home.ClientCacheFallbackBanner.Label.ErrorRefreshingToastTitle,Coba lagi
+Feature.Home.ClientCacheFallbackBanner.Label.ErrorRefreshingToastTitle,
 Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents,Refresh halaman untuk load konten
 Feature.Home.HeadingFriends,Teman ({friendCount})
 Feature.Home.Label.HappeningNow,Berlangsung sekarang
@@ -3234,7 +3260,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Perluas
-Feature.Moments.Action.GenerateText,
+Feature.Moments.Action.GenerateText,Buat Teks
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Tidak membantu
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Tidak pantas atau melanggar pedoman
 Feature.Moments.Action.Hide,Sembunyikan detail
@@ -3323,7 +3349,7 @@ Feature.Moments.Label.Tone.Hype,Seru
 Feature.Moments.Label.Tone.Neutral,Netral
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
-Feature.Moments.Title.GenerateTextOptions,Buat Teks
+Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Laporkan postingan
@@ -3684,6 +3710,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Subscription Plus-mu sudah mem
 Feature.RobloxSubscription.Body.GenericError,Kami tidak dapat menyelesaikannya saat ini. Coba lagi.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Subscription ini tidak tersedia untuk dibeli di perangkat ini.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verifikasi usiamu dengan pemeriksaan usia dan dapatkan Roblox Plus gratis selama 1 minggu sebagai ucapan terima kasih kami. Tidak diperlukan metode pembayaran untuk menikmati uji coba gratis ini.
+Feature.RobloxSubscription.Description.Benefit.Customize,Kustomisasi dengan bingkai profil dan tema aplikasi
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Diskon 10% untuk 60 hari pertama, kemudian diskon 20% untuk item dan avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Lebih seru, lebih hemat Robux. Subscribe Roblox Plus."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privat gratis

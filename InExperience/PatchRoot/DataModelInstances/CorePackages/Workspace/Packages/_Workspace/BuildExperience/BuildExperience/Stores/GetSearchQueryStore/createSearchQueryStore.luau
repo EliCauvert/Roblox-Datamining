@@ -11,13 +11,18 @@ return function(p0)
 	local cancel = p0.cancel or task.cancel
 	local var7, var8 = signalsModule.createSignal("")
 	local var9, var10 = signalsModule.createSignal("")
-	local var11 = nil
+	local var11, var12 = signalsModule.createSignal(false)
+	local var13 = signalsModule.createComputed(function(p1)
+		-- upvalues: var11 (ref), var7 (ref)
+		return var11(p1) and var7(p1) == ""
+	end)
+	local var14 = nil
 	
 	local function _()
-		-- upvalues: var11 (write), cancel (ref)
-		if var11 ~= nil then
-			pcall(cancel, var11)
-			var11 = nil
+		-- upvalues: var14 (write), cancel (ref)
+		if var14 ~= nil then
+			pcall(cancel, var14)
+			var14 = nil
 		end
 	end
 	
@@ -32,37 +37,68 @@ return function(p0)
 			-- upvalues: signalsReactModule (copy), var9 (ref)
 			return signalsReactModule.useSignalState(var9)
 		end,
+		getIsSearchActive = var11,
+		useIsSearchActive = function()
+			-- upvalues: signalsReactModule (copy), var11 (ref)
+			return signalsReactModule.useSignalState(var11)
+		end,
+		getShowEmptyState = var13,
+		useShowEmptyState = function()
+			-- upvalues: signalsReactModule (copy), var13 (ref)
+			return signalsReactModule.useSignalState(var13)
+		end,
 		setQuery = function(value)
-			-- upvalues: var8 (ref), var11 (write), cancel (ref), var9 (ref), debounceMs (ref), schedule (ref), var10 (ref)
+			-- upvalues: var8 (ref), var14 (write), cancel (ref), var9 (ref), debounceMs (ref), schedule (ref), var10 (ref)
 			var8(value)
 			
-			if var11 ~= nil then
-				pcall(cancel, var11)
-				var11 = nil
+			if var14 ~= nil then
+				pcall(cancel, var14)
+				var14 = nil
 			end
 			if value == var9() then
 				return
 			end
-			var11 = schedule(debounceMs / 1000, function()
-				-- upvalues: var11 (copy), var10 (copy), value (ref)
-				var11 = nil
+			var14 = schedule(debounceMs / 1000, function()
+				-- upvalues: var14 (copy), var10 (copy), value (ref)
+				var14 = nil
 				var10(value)
 			end)
 		end,
+		setIsSearchActive = var12,
+		beginSearch = function()
+			-- upvalues: var12 (ref)
+			var12(true)
+		end,
+		endSearch = function()
+			-- upvalues: var14 (write), cancel (ref), var8 (ref), var10 (ref), var12 (ref)
+			if var14 ~= nil then
+				pcall(cancel, var14)
+				var14 = nil
+			end
+			var8("")
+			var10("")
+			var12(false)
+		end,
+		endSearchIfEmpty = function()
+			-- upvalues: var7 (ref), var12 (ref)
+			if var7() == "" then
+				var12(false)
+			end
+		end,
 		clear = function()
-			-- upvalues: var11 (write), cancel (ref), var8 (ref), var10 (ref)
-			if var11 ~= nil then
-				pcall(cancel, var11)
-				var11 = nil
+			-- upvalues: var14 (write), cancel (ref), var8 (ref), var10 (ref)
+			if var14 ~= nil then
+				pcall(cancel, var14)
+				var14 = nil
 			end
 			var8("")
 			var10("")
 		end,
 		destroy = function()
-			-- upvalues: var11 (write), cancel (ref)
-			if var11 ~= nil then
-				pcall(cancel, var11)
-				var11 = nil
+			-- upvalues: var14 (write), cancel (ref)
+			if var14 ~= nil then
+				pcall(cancel, var14)
+				var14 = nil
 			end
 		end
 	}

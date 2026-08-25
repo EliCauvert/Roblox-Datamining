@@ -14,7 +14,7 @@ return function(p0, p1, p2)
 			local var5 = if p1 == Enum.AvatarItemType.Asset then Enum.InfoType.Asset else Enum.InfoType.Bundle
 			local ok, status = pcall(function()
 				-- upvalues: marketplaceService (copy), p0 (copy), var5 (write)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(p0, var5) else marketplaceService:GetProductInfo(p0, var5)
+				return marketplaceService:GetProductInfoAsync(p0, var5)
 			end)
 			
 			if ok then

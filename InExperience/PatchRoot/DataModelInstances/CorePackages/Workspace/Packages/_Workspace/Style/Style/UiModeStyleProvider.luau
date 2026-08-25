@@ -13,7 +13,7 @@ local colorMode = foundationModule.Enums.ColorMode
 local getUIScale = require(parent.Display).GetDisplayStore(false).getUIScale
 local enableDisplaySize = game:DefineFastFlag("LuaAppEnableWindowsHandheldTokenScale", false) and game:GetEngineFeature("EnableDisplaySize") or game:DefineFastFlag("DebugLuaAppEnableTokenScale", false)
 local fFlagAppNavBarPerItemThemeOverride = require(parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride
-local var8 = if fFlagAppNavBarPerItemThemeOverride then require(script.Parent.UiModeTokenOverridesContext) else nil
+local var8 = if fFlagAppNavBarPerItemThemeOverride then require(script.Parent.UiModeBrandThemeContext) else nil
 local t = { dark = colorMode.Dark, light = colorMode.Light }
 
 local function _()
@@ -62,10 +62,13 @@ local function UiModeStyleProvider(p0)
 	
 	return reactModule.createElement(foundationProvider, {
 		device = var15.deviceType,
-		theme = t[var15.themeName:lower()],
+		colorMode = t[var15.themeName:lower()],
+		themeName = var15.foundationThemeName,
 		preferences = var15.settings,
 		tokenOverrides = var15.tokenOverrides
-	}, reactModule.createElement(sceneOverridesRegistryModule, { isActive = var15.tokenOverrides ~= nil }, reactModule.createElement(appStyleProvider, { style = var15 }, p0.children)))
+	}, reactModule.createElement(sceneOverridesRegistryModule, {
+		isActive = if var15.tokenOverrides == nil then var15.foundationThemeName ~= nil else true
+	}, reactModule.createElement(appStyleProvider, { style = var15 }, p0.children)))
 end
 
 return function(p1)
@@ -80,9 +83,15 @@ return function(p1)
 	end
 	cloned.style = cryoModule.Dictionary.join(cloned.style, {
 		themeName = var22,
-		tokenOverrides = tokenOverrides or cryoModule.None
+		tokenOverrides = tokenOverrides or cryoModule.None,
+		foundationThemeName = if p1.foundationThemeName then p1.foundationThemeName else cryoModule.None
 	})
 	local var24 = reactModule.createElement(appearanceContextModule.Provider, { value = { theme = var22, setTheme = var21 } }, reactModule.createElement(UiModeStyleProvider, cloned))
 	
-	return if fFlagAppNavBarPerItemThemeOverride then reactModule.createElement(var8.Provider, { value = p1.tokenOverridesByTheme or {} }, var24) else var24
+	return if fFlagAppNavBarPerItemThemeOverride then reactModule.createElement(var8.Provider, {
+		value = {
+			tokenOverridesByTheme = p1.tokenOverridesByTheme or {},
+			foundationThemeName = p1.foundationThemeName
+		}
+	}, var24) else var24
 end

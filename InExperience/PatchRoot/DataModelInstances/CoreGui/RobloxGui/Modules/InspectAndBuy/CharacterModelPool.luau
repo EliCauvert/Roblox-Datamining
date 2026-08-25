@@ -8,17 +8,8 @@ t.__index = t
 
 local function setupCharacterModels(value)
 	-- upvalues: playersService (ref), robloxReplicatedStorageService (ref)
-	local humanoidDescription, humanoidDescription_1
-	local _ = nil
-	local _ = nil
-	
-	if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-		humanoidDescription = playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R6)
-		humanoidDescription_1 = playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
-	else
-		humanoidDescription = playersService:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R6)
-		humanoidDescription_1 = playersService:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
-	end
+	local humanoidDescription = playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R6)
+	local humanoidDescription_1 = playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
 	humanoidDescription.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 	humanoidDescription_1.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 	humanoidDescription.HumanoidRootPart.Anchored = true
@@ -109,10 +100,8 @@ function t._doUpdateR6(p11, p12)
 		
 		if p11.mockApplyDescription then
 			p11.mockApplyDescription(p11.r6, p12)
-		elseif game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-			p11.r6.Humanoid:ApplyDescriptionAsync(p12)
 		else
-			p11.r6.Humanoid:ApplyDescription(p12)
+			p11.r6.Humanoid:ApplyDescriptionAsync(p12)
 		end
 		p13(p11:getCurrentCharacter())
 	end)
@@ -126,10 +115,8 @@ function t._doSimpleUpdateR15(p14, p15)
 		
 		if p14.mockApplyDescription then
 			p14.mockApplyDescription(p14.r15current, p15)
-		elseif game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-			p14.r15current.Humanoid:ApplyDescriptionAsync(p15)
 		else
-			p14.r15current.Humanoid:ApplyDescription(p15)
+			p14.r15current.Humanoid:ApplyDescriptionAsync(p15)
 		end
 		p16(p14.r15current)
 	end)
@@ -144,10 +131,8 @@ function t._updateOffscreenR15(p17, p18)
 		
 		if p17.mockApplyDescription then
 			p17.mockApplyDescription(p17.r15offScreen, p18)
-		elseif game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-			p17.r15offScreen.Humanoid:ApplyDescriptionAsync(p18)
 		else
-			p17.r15offScreen.Humanoid:ApplyDescription(p18)
+			p17.r15offScreen.Humanoid:ApplyDescriptionAsync(p18)
 		end
 		p19(p17.r15offScreen)
 	end)

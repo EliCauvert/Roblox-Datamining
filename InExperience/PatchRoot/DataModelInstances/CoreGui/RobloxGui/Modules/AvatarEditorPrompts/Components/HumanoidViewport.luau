@@ -108,12 +108,7 @@ function humanoidViewport.loadHumanoidModel(p8)
 		local var25 = nil
 		pcall(function()
 			-- upvalues: var25 (write), playersService (copy), humanoidDescription (copy), rigType (copy)
-			if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-				var25 = playersService:CreateHumanoidModelFromDescriptionAsync(humanoidDescription, rigType)
-				
-				return
-			end
-			var25 = playersService:CreateHumanoidModelFromDescription(humanoidDescription, rigType)
+			var25 = playersService:CreateHumanoidModelFromDescriptionAsync(humanoidDescription, rigType)
 		end)
 		
 		if not p8.mounted then return end

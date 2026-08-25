@@ -305,7 +305,7 @@ local function watchPlayersService(p0, p1, p2)
 		if playersService.LocalPlayer then
 			promiseModule.try(function()
 				-- upvalues: p8 (ref), playersService (copy)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then p8:IsFriendsWithAsync(playersService.LocalPlayer.UserId) else p8:IsFriendsWith(playersService.LocalPlayer.UserId)
+				return p8:IsFriendsWithAsync(playersService.LocalPlayer.UserId)
 			end):andThen(function(p10)
 				-- upvalues: displaySystemMessageModule (copy), fFlagConnectionsToFriendsRename (copy), p8 (ref), p0 (copy)
 				if p10 then

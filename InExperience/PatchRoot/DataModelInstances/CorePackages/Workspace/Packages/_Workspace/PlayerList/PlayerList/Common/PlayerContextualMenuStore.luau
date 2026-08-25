@@ -47,19 +47,18 @@ local var17 = false
 local var18 = 0
 
 local function closeContextMenu()
-	-- upvalues: var8 (write), var5 (write), var18 (write), var13 (write), var9 (write), var16 (write)
+	-- upvalues: var8 (write), var18 (write), var13 (write), var5 (write), var9 (write), var16 (write)
 	local var27 = var8(false)
-	
-	if var27 ~= nil then
-		if var5 == nil then
-			var5 = require(script.Parent.PlayerListContextMenuTelemetry)
-		end
-		var5.logAction("menu_close", var27.telemetry)
-	end
 	var18 += 1
 	var13(nil)
-	var9(nil)
+	
+	if var27 == nil then return end
+	if var5 == nil then
+		var5 = require(script.Parent.PlayerListContextMenuTelemetry)
+	end
+	var5.logAction("menu_close", var27.telemetry)
 	var13(nil)
+	var9(nil)
 	
 	if var16 then
 		var16()
