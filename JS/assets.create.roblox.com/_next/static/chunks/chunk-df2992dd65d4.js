@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1c6acfc3-8717-02e9-638a-cc8cf5e49763")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1b928f7e-c770-ef79-e43d-51e04a2445c7")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -97,11 +97,11 @@
         });
         return !0 === e[M.CreatorHubPublishingParameters.EnablePublishingConsolidation]
     };
-    var P = e.i(443967),
+    var P = e.i(592822),
         k = e.i(197649),
-        L = e.i(278705),
-        N = e.i(634851),
-        R = e.i(270737);
+        L = e.i(446955),
+        N = e.i(175793),
+        R = e.i(816388);
     let D = () => u.default.createElement("div", {
             className: "flex items-center justify-center shrink-0 width-600"
         }, u.default.createElement("span", {
@@ -303,9 +303,9 @@
         };
     var es = e.i(339544),
         er = e.i(475642),
-        eo = e.i(514961),
-        el = e.i(427650),
-        eu = e.i(74706),
+        eo = e.i(237164),
+        el = e.i(909638),
+        eu = e.i(818733),
         ed = e.i(211388);
     let ec = "CreatorHub.MomentsCreations.local",
         em = e => "".concat(ec, ".").concat(e),
@@ -766,7 +766,7 @@
         }
     }
 
-    function e6(e) {
+    function e9(e) {
         if (void 0 !== e) return null === e ? null : {
             position: e.position,
             rotation: e.rotation,
@@ -777,7 +777,7 @@
         }
     }
 
-    function e9(e) {
+    function e6(e) {
         var t, n;
         return null == (t = e) ? t : {
             position: (0, eY.exists)(t, "position") ? t.position : void 0,
@@ -851,12 +851,12 @@
                     endTime: (0, eY.exists)(i, "endTime") ? i.endTime : void 0
                 } : void 0,
                 music: (0, eY.exists)(n, "music") ? e3(n.music) : void 0,
-                textOverlays: (0, eY.exists)(n, "textOverlays") ? null === n.textOverlays ? null : n.textOverlays.map(e9) : void 0,
+                textOverlays: (0, eY.exists)(n, "textOverlays") ? null === n.textOverlays ? null : n.textOverlays.map(e6) : void 0,
                 stickerOverlays: (0, eY.exists)(n, "stickerOverlays") ? null === n.stickerOverlays ? null : n.stickerOverlays.map(e8) : void 0
             } : void 0,
             screenshotCaptureEdits: (0, eY.exists)(e, "screenshotCaptureEdits") ? null == (a = e.screenshotCaptureEdits) ? a : {
                 music: (0, eY.exists)(a, "music") ? e3(a.music) : void 0,
-                textOverlays: (0, eY.exists)(a, "textOverlays") ? null === a.textOverlays ? null : a.textOverlays.map(e9) : void 0
+                textOverlays: (0, eY.exists)(a, "textOverlays") ? null === a.textOverlays ? null : a.textOverlays.map(e6) : void 0
             } : void 0
         }
     }
@@ -1340,7 +1340,7 @@
                                                                         }
                                                                     }(e.trim),
                                                                     textOverlays: void 0 === e.textOverlays ? void 0 : null === e.textOverlays ? null : e.textOverlays.map(te),
-                                                                    stickerOverlays: void 0 === e.stickerOverlays ? void 0 : null === e.stickerOverlays ? null : e.stickerOverlays.map(e6)
+                                                                    stickerOverlays: void 0 === e.stickerOverlays ? void 0 : null === e.stickerOverlays ? null : e.stickerOverlays.map(e9)
                                                                 }
                                                             }(e.edits)
                                                         }
@@ -2691,8 +2691,8 @@
             })]
         })
     }, [B.TranslationNamespace.Creations]);
-    var t6 = e.i(522163),
-        t9 = e.i(392782);
+    var t9 = e.i(407116),
+        t6 = e.i(392782);
     let ne = "UniverseId",
         nt = "PlaceId",
         nn = /(?:https?:\/\/)?create\.roblox\.com\/dashboard\/creations\/experiences\/(\d+)/,
@@ -2749,7 +2749,7 @@
                 try {
                     let e;
                     if (d.idType === nt) {
-                        let t = null == (o = (await t9.default.multigetPlaceDetails([m]))[0]) ? void 0 : o.universeId;
+                        let t = null == (o = (await t6.default.multigetPlaceDetails([m]))[0]) ? void 0 : o.universeId;
                         if (!t) {
                             tL(tM.ResolveExperience, "Experience not found", {
                                 ...h,
@@ -2760,7 +2760,7 @@
                         }
                         e = t
                     } else e = m;
-                    let l = null == (r = (await t9.default.getDetails([e])).data) ? void 0 : r[0];
+                    let l = null == (r = (await t6.default.getDetails([e])).data) ? void 0 : r[0];
                     if (!(null == l ? void 0 : l.id)) {
                         tL(tM.ResolveExperience, "Experience not found", {
                             ...h,
@@ -2795,7 +2795,7 @@
                 className: "flex flex-row gap-x-medium items-end width-full",
                 children: [(0, i.jsx)("div", {
                     className: "grow-1 min-width-0",
-                    children: (0, i.jsx)(t6.TextInput, {
+                    children: (0, i.jsx)(t9.TextInput, {
                         label: a("CreateMomentModal.ExperienceInput.Label"),
                         placeholder: a("CreateMomentModal.ExperienceInput.Placeholder"),
                         value: l,
@@ -2821,8 +2821,8 @@
                 })]
             })
         }, [B.TranslationNamespace.Creations, B.TranslationNamespace.Controls]);
-    var no = e.i(340206),
-        nl = e.i(110273);
+    var no = e.i(890561),
+        nl = e.i(480904);
     let nu = (0, s.withTranslation)(e => {
         let {
             value: t,
@@ -2860,7 +2860,7 @@
             })
         })
     }, [B.TranslationNamespace.Creations]);
-    var nd = e.i(660882),
+    var nd = e.i(552258),
         nc = e.i(321211);
     let nm = ["mp4", "mov"],
         np = ["video/mp4", "video/quicktime"];
@@ -3291,7 +3291,7 @@
                 })
             })
         };
-    var nw = e.i(523586);
+    var nw = e.i(875224);
     let nS = e => {
             let {
                 selected: t,
@@ -3592,8 +3592,8 @@
         n7 = e.i(239328),
         n3 = e.i(776344),
         n8 = e.i(823062),
-        n6 = e.i(198528),
-        n9 = e.i(949599),
+        n9 = e.i(198528),
+        n6 = e.i(949599),
         ie = e.i(704443),
         it = e.i(696564),
         ii = e.i(418162);
@@ -4038,7 +4038,7 @@
                 return "Message.GrantedItemCannotBePublished"
         }
     };
-    var iE = e.i(222563),
+    var iE = e.i(312176),
         iP = e.i(431498);
     let ik = (0, nN.makeStyles)()(e => ({
             dialogPaper: {
@@ -4481,7 +4481,7 @@
             (0, u.useEffect)(() => {
                 o ? (b(null), I(q.uuidService.generateRandomUuid()), (0, it.getValidTimedOptionsTypes)().then(() => {
                     let e = new Set(it.ValidTimedOptionsAssetTypes.map(e => iU(e))),
-                        t = 3 === e.size && Array.from(n9.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).every(t => e.has(t));
+                        t = 3 === e.size && Array.from(n6.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).every(t => e.has(t));
                     if (S(t), t) C({
                         showClothing: !1,
                         showMakeup: !1,
@@ -4489,10 +4489,10 @@
                         showCategorySubtypeDropdowns: !0
                     });
                     else {
-                        let t = [...e].every(e => n9.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e) || n9.MAKEUP_ASSET_TYPES.includes(e)),
+                        let t = [...e].every(e => n6.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e) || n6.MAKEUP_ASSET_TYPES.includes(e)),
                             n = e.has(m.Asset.EyeMakeup),
-                            i = n9.CLOTHING_ASSET_TYPES.some(t => e.has(t) && !n9.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(t)),
-                            a = Array.from(n9.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(t => e.has(t));
+                            i = n6.CLOTHING_ASSET_TYPES.some(t => e.has(t) && !n6.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(t)),
+                            a = Array.from(n6.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(t => e.has(t));
                         C({
                             showClothing: i || a,
                             showMakeup: n,
@@ -4531,10 +4531,10 @@
                     l()
                 }, [l]),
                 j = !w,
-                E = j ? (t = new Set(it.ValidTimedOptionsAssetTypes.map(e => iU(e))), n = n9.CLOTHING_ASSET_TYPES.some(e => t.has(e) && !n9.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e)), a = Array.from(n9.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(e => t.has(e)), r = T.showCategorySubtypeDropdowns && (!a || n) ? n9.CLOTHING_ASSET_TYPES.filter(e => t.has(e)) : Array.from(n9.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).filter(e => t.has(e)), {
+                E = j ? (t = new Set(it.ValidTimedOptionsAssetTypes.map(e => iU(e))), n = n6.CLOTHING_ASSET_TYPES.some(e => t.has(e) && !n6.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e)), a = Array.from(n6.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(e => t.has(e)), r = T.showCategorySubtypeDropdowns && (!a || n) ? n6.CLOTHING_ASSET_TYPES.filter(e => t.has(e)) : Array.from(n6.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).filter(e => t.has(e)), {
                     clothing: r,
-                    makeup: n9.MAKEUP_ASSET_TYPES.filter(e => t.has(e)),
-                    accessories: T.showCategorySubtypeDropdowns ? n9.ACCESSORY_ASSET_TYPES.filter(e => t.has(e)) : []
+                    makeup: n6.MAKEUP_ASSET_TYPES.filter(e => t.has(e)),
+                    accessories: T.showCategorySubtypeDropdowns ? n6.ACCESSORY_ASSET_TYPES.filter(e => t.has(e)) : []
                 }) : void 0;
             return j ? (0, i.jsx)(iO, {
                 open: o,
@@ -4677,7 +4677,7 @@
             }] = (0, ee.useQueryParams)(["filterIndex", "publishSettings"]), [, W] = (0, ee.useQueryParams)(["activeTab", "filterIndex"]), [, Y] = (0, ee.useQueryParams)(iq), J = (0, u.useMemo)(() => {
                 let e = I.default.getAssetType(n);
                 return e !== m.Asset.AllCatalogAsset || Number(H) > 0 ? e : x.TAXONOMY_HOST_ASSET
-            }, [n, H]), X = (J in n9.AvatarMenuMap || J === m.Asset.AllCatalogAsset) && o, Z = (0, n6.normalizeSingleQueryParam)(K), $ = !!X && l && !A && ("true" === Z || "1" === Z);
+            }, [n, H]), X = (J in n6.AvatarMenuMap || J === m.Asset.AllCatalogAsset) && o, Z = (0, n9.normalizeSingleQueryParam)(K), $ = !!X && l && !A && ("true" === Z || "1" === Z);
             (0, u.useEffect)(() => {
                 l && void 0 !== Z && ($ || Y({
                     publishSettings: null
@@ -4765,8 +4765,8 @@
                     var e, t;
                     if (!j) return !1;
                     let i = ei || null == H ? void 0 : Number(H);
-                    if (void 0 !== i && n9.AvatarMenuMap[J]) {
-                        let e = n9.AvatarMenuMap[J][i];
+                    if (void 0 !== i && n6.AvatarMenuMap[J]) {
+                        let e = n6.AvatarMenuMap[J][i];
                         if (e) return (0, ii.getIsRentableType)(e.assetType, e.bundleType)
                     }
                     return (0, ii.getIsRentableType)(null != (e = null == (t = n.submenuItem) ? void 0 : t.type) ? e : J, void 0)
@@ -4964,8 +4964,8 @@
     function iX(e) {
         return null != e.universeId ? e.universeId : "experienceId" in e && "number" == typeof e.experienceId ? e.experienceId : void 0
     }
-    var iZ = e.i(187901),
-        i$ = e.i(258858);
+    var iZ = e.i(744806),
+        i$ = e.i(406769);
     let i0 = (e, t) => {
             let {
                 user: n
@@ -5205,7 +5205,7 @@
                 })
             })
         }, [B.TranslationNamespace.Creations, B.TranslationNamespace.Controls]);
-    var i7 = e.i(947591),
+    var i7 = e.i(984722),
         i3 = e.i(493924);
     let i8 = e => {
         let {
@@ -5238,8 +5238,8 @@
             })
         })
     };
-    var i6 = e.i(886493),
-        i9 = e.i(799724),
+    var i9 = e.i(812787),
+        i6 = e.i(343915),
         ae = e.i(125677),
         at = e.i(20227),
         an = e.i(494601);
@@ -5265,7 +5265,7 @@
                 })]
             })
         };
-    var as = e.i(977690),
+    var as = e.i(605741),
         ar = e.i(540513),
         ao = e.i(914040);
     let al = (0, s.withTranslation)(e => {
@@ -5380,7 +5380,7 @@
             }, [t, a]);
             return (0, i.jsxs)("div", {
                 className: "flex flex-col gap-y-xsmall width-full",
-                children: [(0, i.jsx)(t6.TextInput, {
+                children: [(0, i.jsx)(t9.TextInput, {
                     id: "moment-description-".concat(o),
                     label: r("MomentsTable.Header.Description"),
                     value: l,
@@ -5416,16 +5416,16 @@
             }, [t, d]), g = (0, u.useCallback)(() => {
                 t.status === ef && (null == m || m(t.draftId))
             }, [t, m]);
-            return (0, i.jsxs)(i6.TableRow, {
+            return (0, i.jsxs)(i9.TableRow, {
                 isHoverable: !0,
                 "data-testid": "moment-row-".concat(h),
-                children: [(0, i.jsx)(i6.TableCell, {
+                children: [(0, i.jsx)(i9.TableCell, {
                     children: (0, i.jsx)(al, {
                         moment: t
                     })
-                }), (0, i.jsx)(i6.TableCell, {
+                }), (0, i.jsx)(i9.TableCell, {
                     children: t.experienceName
-                }), (0, i.jsx)(i6.TableCell, {
+                }), (0, i.jsx)(i9.TableCell, {
                     children: t.status === eh ? (0, i.jsx)("span", {
                         "data-testid": "moment-description-".concat(h),
                         children: t.description || "-"
@@ -5434,24 +5434,24 @@
                         disabled: null != a && a === h,
                         onBlur: c
                     }, "moment-description-".concat(h, "-").concat(t.modifiedAt))
-                }), o ? (0, i.jsx)(i6.TableCell, {
+                }), o ? (0, i.jsx)(i9.TableCell, {
                     children: (0, i.jsx)("span", {
                         "data-testid": "moment-content-language-".concat(h),
                         children: tF(t.locale)
                     })
-                }) : null, (0, i.jsx)(i6.TableCell, {
+                }) : null, (0, i.jsx)(i9.TableCell, {
                     children: (0, i.jsx)(aa, {
                         label: l,
                         status: t.status
                     })
-                }), (0, i.jsx)(i6.TableCell, {
+                }), (0, i.jsx)(i9.TableCell, {
                     align: "end",
                     children: (0, i.jsxs)("div", {
                         className: "inline-flex items-center gap-xsmall",
-                        children: [(0, i.jsx)(i9.Tooltip, {
+                        children: [(0, i.jsx)(i6.Tooltip, {
                             position: "top-center",
                             title: n,
-                            children: (0, i.jsx)(i9.TooltipTrigger, {
+                            children: (0, i.jsx)(i6.TooltipTrigger, {
                                 asChild: !0,
                                 children: (0, i.jsx)(N.IconButton, {
                                     ariaLabel: n,
@@ -5538,29 +5538,29 @@
                     className: (0, k.clsx)(v, "flex flex-col gap-xlarge width-full self-stretch"),
                     children: (0, i.jsxs)("div", {
                         className: "flex flex-col gap-y-medium width-full",
-                        children: [(0, i.jsxs)(i6.Table, {
+                        children: [(0, i.jsxs)(i9.Table, {
                             className: "width-full",
                             variant: "Framed",
-                            children: [(0, i.jsx)(i6.TableHeader, {
-                                children: (0, i.jsxs)(i6.TableRow, {
-                                    children: [(0, i.jsx)(i6.TableHeaderCell, {
+                            children: [(0, i.jsx)(i9.TableHeader, {
+                                children: (0, i.jsxs)(i9.TableRow, {
+                                    children: [(0, i.jsx)(i9.TableHeaderCell, {
                                         children: p("MomentsTable.Header.Moments")
-                                    }), (0, i.jsx)(i6.TableHeaderCell, {
+                                    }), (0, i.jsx)(i9.TableHeaderCell, {
                                         children: p("MomentsTable.Header.ExperienceName")
-                                    }), (0, i.jsx)(i6.TableHeaderCell, {
+                                    }), (0, i.jsx)(i9.TableHeaderCell, {
                                         children: p("MomentsTable.Header.Description")
-                                    }), g ? (0, i.jsx)(i6.TableHeaderCell, {
+                                    }), g ? (0, i.jsx)(i9.TableHeaderCell, {
                                         children: p("CreateMomentModal.LanguageInput.Label")
-                                    }) : null, (0, i.jsx)(i6.TableHeaderCell, {
+                                    }) : null, (0, i.jsx)(i9.TableHeaderCell, {
                                         children: p("MomentsTable.Header.Status")
-                                    }), (0, i.jsx)(i6.TableHeaderCell, {
+                                    }), (0, i.jsx)(i9.TableHeaderCell, {
                                         align: "end",
                                         children: " "
                                     })]
                                 })
-                            }), (0, i.jsx)(i6.TableBody, {
-                                children: 0 === y.length ? (0, i.jsx)(i6.TableRow, {
-                                    children: (0, i.jsx)(i6.TableCell, {
+                            }), (0, i.jsx)(i9.TableBody, {
+                                children: 0 === y.length ? (0, i.jsx)(i9.TableRow, {
+                                    children: (0, i.jsx)(i9.TableCell, {
                                         colSpan: g ? 6 : 5,
                                         align: "center",
                                         className: "padding-y-xxlarge",
@@ -5582,7 +5582,7 @@
                                     onPublishMoment: r
                                 }, t1(e)))
                             })]
-                        }), y.length > 0 ? (0, i.jsx)(i6.TablePagination, {
+                        }), y.length > 0 ? (0, i.jsx)(i9.TablePagination, {
                             page: I,
                             rowsPerPage: T,
                             totalRows: y.length,
@@ -6300,5 +6300,5 @@
     })
 }]);
 
-//# debugId=1c6acfc3-8717-02e9-638a-cc8cf5e49763
-//# sourceMappingURL=3z45wrws_8-i6.js.map
+//# debugId=1b928f7e-c770-ef79-e43d-51e04a2445c7
+//# sourceMappingURL=3f26ryftnfeko.js.map

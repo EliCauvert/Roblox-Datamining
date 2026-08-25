@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "dbb170f2-bd7f-e3a8-eb26-54ee5a9c875e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f3fdb88f-cd14-98a4-6ba4-3335833295cd")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 174528, e => {
@@ -13,8 +13,8 @@
         i = e.i(416340),
         s = e.i(260241),
         c = e.i(721281),
-        l = (e.i(76145), e.i(197649), e.i(438082)),
-        u = e.i(694533);
+        l = (e.i(440174), e.i(197649), e.i(652670)),
+        u = e.i(62093);
 
     function d(e, t) {
         let {
@@ -627,9 +627,9 @@
             ...Y,
             ...e.style
         }
-    })).displayName = "VisuallyHidden", e.i(94572);
-    var J = e.i(751818);
-    e.i(899659), (0, J.s)(".foundation-web-dialog-overlay{bottom:0;display:grid;left:0;overflow-y:auto;place-items:center;position:fixed;right:0;top:0}.foundation-web-dialog-close-container{right:var(--size-300);top:var(--size-300);z-index:1}.foundation-web-dialog-hero-media{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:calc(var(--stroke-standard)*-1);margin-right:calc(var(--stroke-standard)*-1);margin-top:calc(var(--stroke-standard)*-1);overflow:clip}.foundation-web-dialog-content[data-size=Small]{max-width:calc(var(--size-100)*80);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Medium]{max-width:calc(var(--size-100)*120);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Large]{max-width:calc(var(--size-100)*160);min-width:calc(var(--size-100)*75)}@keyframes foundation-web-dialog-backdrop-fade-in{0%{opacity:0}to{opacity:1}}@keyframes foundation-web-dialog-backdrop-fade-out{0%{opacity:1}to{opacity:0}}@keyframes foundation-web-dialog-content-scale-in{0%{transform:scale(.975)}to{transform:scale(1)}}@keyframes foundation-web-dialog-content-scale-out{0%{transform:scale(1)}to{transform:scale(.975)}}@media (prefers-reduced-motion:no-preference){.foundation-web-dialog-overlay[data-state=open]{animation:foundation-web-dialog-backdrop-fade-in var(--time-100) var(--ease-linear)}.foundation-web-dialog-overlay[data-state=closed]{animation:foundation-web-dialog-backdrop-fade-out var(--time-100) var(--ease-linear)}.foundation-web-dialog-content[data-state=open]{animation:foundation-web-dialog-content-scale-in var(--time-300) var(--ease-standard-out)}.foundation-web-dialog-content[data-state=closed]{animation:foundation-web-dialog-content-scale-out var(--time-300) var(--ease-standard-out)}}");
+    })).displayName = "VisuallyHidden", e.i(727563);
+    var J = e.i(589214);
+    e.i(57385), (0, J.s)(".foundation-web-dialog-overlay{bottom:0;display:grid;left:0;overflow-y:auto;place-items:center;position:fixed;right:0;top:0}.foundation-web-dialog-close-container{right:var(--size-300);top:var(--size-300);z-index:1}.foundation-web-dialog-hero-media{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:calc(var(--stroke-standard)*-1);margin-right:calc(var(--stroke-standard)*-1);margin-top:calc(var(--stroke-standard)*-1);overflow:clip}.foundation-web-dialog-content[data-size=Small]{max-width:calc(var(--size-100)*80);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Medium]{max-width:calc(var(--size-100)*120);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Large]{max-width:calc(var(--size-100)*160);min-width:calc(var(--size-100)*75)}@keyframes foundation-web-dialog-backdrop-fade-in{0%{opacity:0}to{opacity:1}}@keyframes foundation-web-dialog-backdrop-fade-out{0%{opacity:1}to{opacity:0}}@keyframes foundation-web-dialog-content-scale-in{0%{transform:scale(.975)}to{transform:scale(1)}}@keyframes foundation-web-dialog-content-scale-out{0%{transform:scale(1)}to{transform:scale(.975)}}@media (prefers-reduced-motion:no-preference){.foundation-web-dialog-overlay[data-state=open]{animation:foundation-web-dialog-backdrop-fade-in var(--time-100) var(--ease-linear)}.foundation-web-dialog-overlay[data-state=closed]{animation:foundation-web-dialog-backdrop-fade-out var(--time-100) var(--ease-linear)}.foundation-web-dialog-content[data-state=open]{animation:foundation-web-dialog-content-scale-in var(--time-300) var(--ease-standard-out)}.foundation-web-dialog-content[data-state=closed]{animation:foundation-web-dialog-content-scale-out var(--time-300) var(--ease-standard-out)}}");
     (0, i.createContext)({
         size: "Medium",
         isModal: !0,
@@ -639,7 +639,7 @@
         hasDescription: !1,
         type: "Default"
     });
-    e.i(634865);
+    e.i(715377);
     var $ = e.i(157310),
         ee = e.i(677753),
         et = function(e, t) {
@@ -1098,8 +1098,8 @@
             }
         }
     }
-    var eg = e.i(514961),
-        ev = e.i(427650),
+    var eg = e.i(237164),
+        ev = e.i(909638),
         ey = e.i(79187),
         ew = e.i(982234),
         eb = e.i(199834),
@@ -1436,7 +1436,7 @@
                     color: "secondary",
                     component: "span",
                     children: [R, (0, o.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/7535f798ae48fb1be5014713abe8780c1f1d33f9/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/6820ecf8901d6ac1cff9d78bdf0431f8706f04bd/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -1499,5 +1499,5 @@
     }], 174528)
 }]);
 
-//# debugId=dbb170f2-bd7f-e3a8-eb26-54ee5a9c875e
-//# sourceMappingURL=3dvlvmb-we_tn.js.map
+//# debugId=f3fdb88f-cd14-98a4-6ba4-3335833295cd
+//# sourceMappingURL=32iu6034urt5z.js.map
