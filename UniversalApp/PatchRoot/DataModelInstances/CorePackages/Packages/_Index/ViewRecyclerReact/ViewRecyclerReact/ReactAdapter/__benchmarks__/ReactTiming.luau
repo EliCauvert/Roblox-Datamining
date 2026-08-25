@@ -2206,19 +2206,18 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144)
 		run = function()
 			-- upvalues: var368 (write), repeated (ref), repeated_1 (ref), var360 (write), var366 (ref), var367 (ref), var354 (ref), var355 (ref), var344 (write), var345 (write), var346 (write), var347 (write), var348 (write), p144 (ref), var359 (write), hasItemText (copy), screenGui (ref), findMeasuredObjects (copy), var364 (ref), listItemViewFrame1 (ref), p142 (ref), t (ref), captureCompletionPhase (copy), t_1 (ref), observeCompletionPhases (copy), t_2 (write), var370 (write)
 			var368 = not var368
-			local _ = "%*:state-preserved"
-			local _ = if var368 then repeated else repeated_1
+			local var374 = `{if var368 then repeated else repeated_1}:state-preserved`
 			var360 = if var368 then "first-wrapped" else "second-wrapped"
-			local var374 = if var368 then var366 else var367
-			local var375 = if var368 then 0 else 40
-			local var376 = if var368 then 400 else 200
-			local var377 = if var368 then var354 else var355
+			local var375 = if var368 then var366 else var367
+			local var376 = if var368 then 0 else 40
+			local var377 = if var368 then 400 else 200
+			local var378 = if var368 then var354 else var355
 			var344 = nil
 			var345 = nil
 			var346 = nil
 			var347 = nil
 			var348 = nil
-			local var378 = p144()
+			local var379 = p144()
 			var359 = true
 			local t_3 = {
 				assignmentDelivered = function()
@@ -2226,62 +2225,62 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144)
 					return var344 ~= nil
 				end,
 				commitCompleted = function()
-					-- upvalues: var345 (copy), hasItemText (copy), screenGui (copy), ? (ref)
-					return var345 ~= nil and hasItemText(screenGui, u1510)
+					-- upvalues: var345 (copy), hasItemText (copy), screenGui (copy), var374 (ref)
+					return var345 ~= nil and hasItemText(screenGui, var374)
 				end,
 				layoutSettled = function()
-					-- upvalues: findMeasuredObjects (copy), screenGui (copy), ? (ref), var376 (ref), var346 (copy), p144 (copy)
-					local var381, var382 = findMeasuredObjects(screenGui, u1516)
-					local var383 = var381 ~= nil and (var382 ~= nil and (var381.AbsoluteSize.X == var376 - 20 and (var381.AbsoluteSize.Y > 0 and var382.AbsoluteSize.Y > 0)))
+					-- upvalues: findMeasuredObjects (copy), screenGui (copy), var374 (ref), var377 (ref), var346 (copy), p144 (copy)
+					local var382, var383 = findMeasuredObjects(screenGui, var374)
+					local var384 = var382 ~= nil and (var383 ~= nil and (var382.AbsoluteSize.X == var377 - 20 and (var382.AbsoluteSize.Y > 0 and var383.AbsoluteSize.Y > 0)))
 					
-					if var383 and var346 == nil then
+					if var384 and var346 == nil then
 						var346 = p144()
 					end
-					return var383
+					return var384
 				end,
 				measurementSettled = function()
-					-- upvalues: findMeasuredObjects (copy), screenGui (copy), ? (ref), var377 (ref), var347 (copy), p144 (copy)
-					local var384, var385 = findMeasuredObjects(screenGui, u1528)
-					local var386 = var384 ~= nil and (var385 ~= nil and math.abs(var377.getItemLayout(1).length - var385.AbsoluteSize.Y) <= 0.01)
+					-- upvalues: findMeasuredObjects (copy), screenGui (copy), var374 (ref), var378 (ref), var347 (copy), p144 (copy)
+					local var385, var386 = findMeasuredObjects(screenGui, var374)
+					local var387 = var385 ~= nil and (var386 ~= nil and math.abs(var378.getItemLayout(1).length - var386.AbsoluteSize.Y) <= 0.01)
 					
-					if var386 and var347 == nil then
+					if var387 and var347 == nil then
 						var347 = p144()
 					end
-					return var386
+					return var387
 				end,
 				hostObserved = function()
-					-- upvalues: findMeasuredObjects (copy), screenGui (copy), ? (ref), var364 (copy), var374 (ref), listItemViewFrame1 (copy), var348 (copy), p144 (copy)
-					local var387 = findMeasuredObjects(screenGui, u1541)
-					local var388 = var387 ~= nil and (var387 == var364 and (var387:IsDescendantOf(var374) and var387:FindFirstAncestor("ListItemViewFrame1") == listItemViewFrame1))
+					-- upvalues: findMeasuredObjects (copy), screenGui (copy), var374 (ref), var364 (copy), var375 (ref), listItemViewFrame1 (copy), var348 (copy), p144 (copy)
+					local var388 = findMeasuredObjects(screenGui, var374)
+					local var389 = var388 ~= nil and (var388 == var364 and (var388:IsDescendantOf(var375) and var388:FindFirstAncestor("ListItemViewFrame1") == listItemViewFrame1))
 					
-					if var388 and var348 == nil then
+					if var389 and var348 == nil then
 						var348 = p144()
 					end
-					return var388
+					return var389
 				end
 			}
 			local t_4 = {}
 			p142.ReactRoblox.act(function()
-				-- upvalues: t (copy), var375 (ref), captureCompletionPhase (copy), t_3 (ref), t_4 (ref), t_1 (copy)
-				t.current.CanvasPosition = Vector2.new(0, var375)
+				-- upvalues: t (copy), var376 (ref), captureCompletionPhase (copy), t_3 (ref), t_4 (ref), t_1 (copy)
+				t.current.CanvasPosition = Vector2.new(0, var376)
 				captureCompletionPhase(t_3, t_4, t_1, "afterMutation")
 			end)
 			observeCompletionPhases(p142, t_3, function()
-				-- upvalues: findMeasuredObjects (copy), screenGui (copy), ? (ref), var360 (copy), var344 (copy), var345 (copy), var346 (copy), var347 (copy), var348 (copy), var376 (ref)
-				local var389, var390 = findMeasuredObjects(screenGui, u1565)
+				-- upvalues: findMeasuredObjects (copy), screenGui (copy), var374 (ref), var360 (copy), var344 (copy), var345 (copy), var346 (copy), var347 (copy), var348 (copy), var377 (ref)
+				local var390, var391 = findMeasuredObjects(screenGui, var374)
 				
-				return `wrapped recycling transfer to {var360}; assignment={var344 ~= nil}, commit={var345 ~= nil}, content={var389 ~= nil}, layout={var346 ~= nil}, measurement={var347 ~= nil}, host={var348 ~= nil}, contentWidth={if var389 == nil then "nil" else var389.AbsoluteSize.X}, expectedWidth={var376 - 20}, hostHeight={if var390 == nil then "nil" else var390.AbsoluteSize.Y}`
+				return `wrapped recycling transfer to {var360}; assignment={var344 ~= nil}, commit={var345 ~= nil}, content={var390 ~= nil}, layout={var346 ~= nil}, measurement={var347 ~= nil}, host={var348 ~= nil}, contentWidth={if var390 == nil then "nil" else var390.AbsoluteSize.X}, expectedWidth={var377 - 20}, hostHeight={if var391 == nil then "nil" else var391.AbsoluteSize.Y}`
 			end, t_1, t_4)
 			t_2 = {
-				assignmentMs = (assert(var344, "wrapped transfer assignment was not delivered") - var378) * 1000,
-				commitMs = (assert(var345, "wrapped transfer presentation was not committed") - var378) * 1000,
-				layoutMs = (assert(var346, "wrapped transfer layout did not settle") - var378) * 1000,
-				measurementMs = (assert(var347, "wrapped transfer measurement was not settled") - var378) * 1000,
-				hostMs = (assert(var348, "wrapped transfer host was not observed") - var378) * 1000
+				assignmentMs = (assert(var344, "wrapped transfer assignment was not delivered") - var379) * 1000,
+				commitMs = (assert(var345, "wrapped transfer presentation was not committed") - var379) * 1000,
+				layoutMs = (assert(var346, "wrapped transfer layout did not settle") - var379) * 1000,
+				measurementMs = (assert(var347, "wrapped transfer measurement was not settled") - var379) * 1000,
+				hostMs = (assert(var348, "wrapped transfer host was not observed") - var379) * 1000
 			}
 			var370 += 1
 			
-			return (p144() - var378) * 1000
+			return (p144() - var379) * 1000
 		end,
 		getEvidence = function()
 			-- upvalues: var341 (write), var342 (write), var370 (write), findMeasuredObjects (copy), screenGui (ref), var368 (write), repeated (ref), repeated_1 (ref), var364 (ref), var343 (write), t_2 (write), t_1 (ref)
@@ -2311,27 +2310,27 @@ end
 var19 = function(p151, p152, p153, p154)
 	-- upvalues: createRecyclingTransferArm (ref), createWrappedRecyclingTransferArm (ref), responsibilityCatalogModule (ref)
 	local clock = p154.clock or os.clock
-	local var392 = createRecyclingTransferArm(p151, "ReadyOnCommit", clock)
-	local var393 = createRecyclingTransferArm(p151, "ReadyOnAssignment", clock)
-	local var394 = createWrappedRecyclingTransferArm(p151, "ReadyOnCommit", clock)
-	local var395 = createWrappedRecyclingTransferArm(p151, "ReadyOnAssignment", clock)
-	local var396 = p152.run(var392.run, p154)
+	local var393 = createRecyclingTransferArm(p151, "ReadyOnCommit", clock)
+	local var394 = createRecyclingTransferArm(p151, "ReadyOnAssignment", clock)
+	local var395 = createWrappedRecyclingTransferArm(p151, "ReadyOnCommit", clock)
+	local var396 = createWrappedRecyclingTransferArm(p151, "ReadyOnAssignment", clock)
 	local var397 = p152.run(var393.run, p154)
 	local var398 = p152.run(var394.run, p154)
 	local var399 = p152.run(var395.run, p154)
+	local var400 = p152.run(var396.run, p154)
 	local t = {
 		fixedSizeMeasurementMilestone = "notRequiredUniformLayout",
-		untilCommit = var392.getEvidence(),
-		immediate = var393.getEvidence()
+		untilCommit = var393.getEvidence(),
+		immediate = var394.getEvidence()
 	}
 	local t_1 = {
-		wrappedUntilCommit = var394.getEvidence(),
-		wrappedImmediate = var395.getEvidence()
+		wrappedUntilCommit = var395.getEvidence(),
+		wrappedImmediate = var396.getEvidence()
 	}
-	var392.destroy()
 	var393.destroy()
 	var394.destroy()
 	var395.destroy()
+	var396.destroy()
 	
 	return p153.create({
 		suite = "view-recycler-react",
@@ -2352,7 +2351,7 @@ var19 = function(p151, p152, p153, p154)
 			operationsPerSample = 1,
 			includesSchedulerWaits = true
 		},
-		arms = { untilCommit = var396, immediate = var397 },
+		arms = { untilCommit = var397, immediate = var398 },
 		evidence = t
 	}), p153.create({
 		suite = "view-recycler-react",
@@ -2373,7 +2372,7 @@ var19 = function(p151, p152, p153, p154)
 			operationsPerSample = 1,
 			includesSchedulerWaits = true
 		},
-		arms = { wrappedUntilCommit = var398, wrappedImmediate = var399 },
+		arms = { wrappedUntilCommit = var399, wrappedImmediate = var400 },
 		evidence = t_1
 	}), p153.create({
 		suite = "view-recycler-react",
@@ -2394,7 +2393,7 @@ var19 = function(p151, p152, p153, p154)
 			operationsPerSample = 1,
 			includesSchedulerWaits = true
 		},
-		arms = { untilCommit = var396, immediate = var397 },
+		arms = { untilCommit = var397, immediate = var398 },
 		evidence = t
 	})
 end
@@ -2422,10 +2421,10 @@ local function measureRecyclingScopeHighWater(p155, p156, p157, p158, p159)
 		arms = {
 			viewRecycler = p156.run(function()
 				-- upvalues: p155 (ref), p158 (ref), clock (ref), t (write)
-				local var404, var405 = p155.LifecycleWorkloads.recyclingScopeHighWater(p158, clock)
-				t = var405
+				local var405, var406 = p155.LifecycleWorkloads.recyclingScopeHighWater(p158, clock)
+				t = var406
 				
-				return var404
+				return var405
 			end, p159)
 		},
 		evidence = t
@@ -2435,22 +2434,22 @@ end
 local function measureCompositionChurn(p160, p161, p162, p163, p164)
 	-- upvalues: responsibilityCatalogModule (ref)
 	local clock = p164.clock or os.clock
-	local var407 = p160.LifecycleWorkloads.compositionChurn(p163)
-	local var408 = 0
+	local var408 = p160.LifecycleWorkloads.compositionChurn(p163)
 	local var409 = 0
-	local var410 = p161.run(function()
-		-- upvalues: var407 (ref), clock (ref), var408 (write), var409 (write)
-		local assignmentUpdates = var407.getAssignmentUpdates()
-		local flushes = var407.getFlushes()
-		local var413 = clock()
-		var407.run()
-		local var414 = (clock() - var413) * 1000
-		var408 = var407.getAssignmentUpdates() - assignmentUpdates
-		var409 = var407.getFlushes() - flushes
+	local var410 = 0
+	local var411 = p161.run(function()
+		-- upvalues: var408 (ref), clock (ref), var409 (write), var410 (write)
+		local assignmentUpdates = var408.getAssignmentUpdates()
+		local flushes = var408.getFlushes()
+		local var414 = clock()
+		var408.run()
+		local var415 = (clock() - var414) * 1000
+		var409 = var408.getAssignmentUpdates() - assignmentUpdates
+		var410 = var408.getFlushes() - flushes
 		
-		return var414
+		return var415
 	end, p164)
-	var407.destroy()
+	var408.destroy()
 	
 	return p162.create({
 		suite = "view-recycler-react",
@@ -2467,11 +2466,11 @@ local function measureCompositionChurn(p160, p161, p162, p163, p164)
 			includesSchedulerWaits = false,
 			operationsPerSample = p163
 		},
-		arms = { viewRecycler = var410 },
+		arms = { viewRecycler = var411 },
 		evidence = {
-			assignmentUpdates = var408,
+			assignmentUpdates = var409,
 			coalescedUpdates = p163,
-			placementFlushes = var409,
+			placementFlushes = var410,
 			completionPhaseCounts = { compositionPublication = { synchronousFlush = 1 } }
 		}
 	})
@@ -2489,18 +2488,18 @@ return {
 		assert(itemCount >= 10 and itemCount % 1 == 0, "itemCount must be an integer of at least 10")
 		assert(scrollStepCount >= 1 and scrollStepCount % 1 == 0, "scrollStepCount must be a positive integer")
 		assert(propagationItemCount >= 20 and propagationItemCount % 1 == 0, "propagationItemCount must be an integer of at least 20")
-		local var421 = createItems(itemCount)
-		local var422, var423 = createItemTypes(p165)
+		local var422 = createItems(itemCount)
+		local var423, var424 = createItemTypes(p165)
 		local t = {}
 		
 		for i, v in ipairs(mountVisibleRows) do
 			assert(v >= 1 and v <= itemCount, "mount visible-row scale is out of range")
-			table.insert(t, measureCompletedMount(p165, p166, p167, var421, var422, v, p168))
+			table.insert(t, measureCompletedMount(p165, p166, p167, var422, var423, v, p168))
 		end
-		table.insert(t, measureCompletedTraversal(p165, p166, p167, var421, var422, itemCount, scrollStepCount, false, p168))
-		table.insert(t, measureCompletedTraversal(p165, p166, p167, var421, var423, itemCount, scrollStepCount, true, p168))
+		table.insert(t, measureCompletedTraversal(p165, p166, p167, var422, var423, itemCount, scrollStepCount, false, p168))
+		table.insert(t, measureCompletedTraversal(p165, p166, p167, var422, var424, itemCount, scrollStepCount, true, p168))
 		table.insert(t, measureHostSizeSettlePhases(p165, p166, p167, p168))
-		local _, var425 = createItemTypes(p165)
+		local _, var426 = createItemTypes(p165)
 		
 		for i_1, v_1 in ipairs({
 			"at-start",
@@ -2508,19 +2507,19 @@ return {
 			"before-visible-anchor",
 			"at-end"
 		}) do
-			table.insert(t, measureAssignmentPropagation(p165, p166, p167, var425, createPropagationScenario(p165, v_1, propagationItemCount), propagationItemCount, p168))
+			table.insert(t, measureAssignmentPropagation(p165, p166, p167, var426, createPropagationScenario(p165, v_1, propagationItemCount), propagationItemCount, p168))
 		end
-		local var426, var427, var428 = var19(p165, p166, p167, p168)
-		table.insert(t, var426)
+		local var427, var428, var429 = var19(p165, p166, p167, p168)
 		table.insert(t, var427)
 		table.insert(t, var428)
+		table.insert(t, var429)
 		table.insert(t, measureRecyclingScopeHighWater(p165, p166, p167, lifecycleItemCount, p168))
 		table.insert(t, measureCompositionChurn(p165, p166, p167, lifecycleItemCount, p168))
-		table.insert(t, measureDeclarativeReconciliation(p165, p166, p167, var422, p168))
-		table.insert(t, measurePropSynchronization(p165, p166, p167, var422, p168))
-		local var429, var430 = measureAssignmentBinding(p165, p166, p167, p168)
-		table.insert(t, var429)
+		table.insert(t, measureDeclarativeReconciliation(p165, p166, p167, var423, p168))
+		table.insert(t, measurePropSynchronization(p165, p166, p167, var423, p168))
+		local var430, var431 = measureAssignmentBinding(p165, p166, p167, p168)
 		table.insert(t, var430)
+		table.insert(t, var431)
 		table.insert(t, measurePresentationCommit(p165, p166, p167, p168))
 		table.insert(t, measureVirtualListTeardown(p165, p166, p167, p168))
 		
