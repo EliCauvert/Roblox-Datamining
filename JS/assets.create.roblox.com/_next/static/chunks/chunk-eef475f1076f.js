@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6d0535ea-8167-12f7-a263-a413de5edcd5")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b0f32ea0-e89c-fd0e-ca08-c0facb09a918")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 522829, e => {
@@ -4281,79 +4281,84 @@
         F = Object.values(i.AnnotationType),
         K = n.RAQIV2UIPseudoDimension.PercentileType,
         j = n.RAQIV2UIPseudoDimension.AggregationType,
-        z = new Set(Object.values(n.RAQIV2AggregationType)),
-        Y = new Set(Object.values(n.RAQIV2PercentileType));
+        z = n.RAQIV2UIPseudoDimension.LatestPlaceVersion,
+        Y = new Set(Object.values(n.RAQIV2AggregationType)),
+        q = new Set(Object.values(n.RAQIV2PercentileType));
 
-    function q(e, t) {
+    function X(e, t) {
         for (let r of e)
             if (r === t) return !0;
         return !1
     }
 
-    function X(e) {
+    function W(e) {
         return G.includes(e) || Q.includes(e)
     }
 
-    function W(e) {
+    function $(e) {
         return G.includes(e)
     }
 
-    function $(e) {
-        return F.includes(e)
-    }
-
     function J(e) {
-        return q(U, e) || x.test(e)
+        return $(e) || e === z
     }
 
     function Z(e) {
-        return "string" == typeof e && H.has(e)
+        return F.includes(e)
     }
 
     function ee(e) {
-        return "string" == typeof e && q(z, e)
+        return X(U, e) || x.test(e)
     }
 
     function et(e) {
-        return "string" == typeof e && q(Y, e)
+        return "string" == typeof e && H.has(e)
     }
 
     function er(e) {
-        return (0, s.isNumericUIMetric)(e)
+        return "string" == typeof e && X(Y, e)
     }
 
     function en(e) {
+        return "string" == typeof e && X(q, e)
+    }
+
+    function ea(e) {
+        return (0, s.isNumericUIMetric)(e)
+    }
+
+    function ei(e) {
         return "string" == typeof e && e.length > 0
     }
-    let ea = I(function(e, t) {
+    let eo = I(function(e, t) {
             let r = C(e, t);
-            if (!J(r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known chart aggregation.'));
+            if (!ee(r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known chart aggregation.'));
             return r
         }),
-        ei = I(function(e, t) {
+        es = I(function(e, t) {
             if ("none" !== e && "weekly" !== e) throw new u.CustomDashboardValidationError(t, "".concat(t, ' must be "none" or "weekly".'));
             return e
         }),
-        eo = I(function(e, t) {
+        ec = I(function(e, t) {
             let r = C(e, t);
             if (r !== l.SummaryCardTitleSource.Auto && r !== l.SummaryCardTitleSource.Custom) throw new u.CustomDashboardValidationError(t, "".concat(t, ' must be "Auto" or "Custom".'));
             return r
         });
 
-    function es(e, t) {
+    function eu(e, t) {
         let r = D(e, t),
             n = w(r.pseudoDimensionKey, "".concat(t, ".pseudoDimensionKey"));
         if (n !== K && n !== j) throw new u.CustomDashboardValidationError("".concat(t, ".pseudoDimensionKey"), "".concat(t, ".pseudoDimensionKey must be a supported pseudo-dimension key."));
         let a = w(r.variantKey, "".concat(t, ".variantKey"));
-        if (n === K && !et(a)) throw new u.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI percentile for PercentileType."));
-        if (n === j && !ee(a)) throw new u.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI aggregation for AggregationType."));
+        if (n === K && !en(a)) throw new u.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI percentile for PercentileType."));
+        if (n === j && !er(a)) throw new u.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI aggregation for AggregationType."));
         return {
             pseudoDimensionKey: n,
             variantKey: a
         }
     }
 
-    function ec(e, t) {
+    function el(e, t) {
         if (function(e) {
                 for (let t of e) {
                     let e = t.codePointAt(0);
@@ -4367,74 +4372,74 @@
         return e
     }
 
-    function eu(e) {
-        let t = ec(V(e), "name");
+    function ed(e) {
+        let t = el(V(e), "name");
         if (0 === t.length) throw new u.CustomDashboardValidationError("name", "Dashboard name is required.");
         if (t.length > l.MAX_DASHBOARD_NAME_LENGTH) throw new u.CustomDashboardValidationError("name", "Dashboard name cannot exceed ".concat(l.MAX_DASHBOARD_NAME_LENGTH, " characters."));
         return t
     }
 
-    function el(e) {
+    function eh(e) {
         if (void 0 === e) return;
-        let t = ec(V(e), "description");
+        let t = el(V(e), "description");
         if (t.length > l.MAX_DASHBOARD_DESCRIPTION_LENGTH) throw new u.CustomDashboardValidationError("description", "Description cannot exceed ".concat(l.MAX_DASHBOARD_DESCRIPTION_LENGTH, " characters."));
         return 0 === t.length ? void 0 : t
     }
 
-    function ed(e, t) {
+    function em(e, t) {
         if (null == e) return [];
         if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         return e.map((e, r) => {
             let n = D(e, "".concat(t, "[").concat(r, "]")),
-                a = ec(w(n.dimension, "".concat(t, "[").concat(r, "].dimension")), "".concat(t, "[").concat(r, "].dimension")),
+                a = el(w(n.dimension, "".concat(t, "[").concat(r, "].dimension")), "".concat(t, "[").concat(r, "].dimension")),
                 {
                     values: i
                 } = n;
-            if (!Array.isArray(i) || 0 === i.length || !i.every(en)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "].values"), "".concat(t, "[").concat(r, "].values must be a non-empty array of non-empty strings."));
+            if (!Array.isArray(i) || 0 === i.length || !i.every(ei)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "].values"), "".concat(t, "[").concat(r, "].values must be a non-empty array of non-empty strings."));
             return {
                 dimension: a,
-                values: i.map((e, n) => ec(e, "".concat(t, "[").concat(r, "].values[").concat(n, "]")))
+                values: i.map((e, n) => el(e, "".concat(t, "[").concat(r, "].values[").concat(n, "]")))
             }
         })
     }
 
-    function eh(e, t) {
-        if (null == e) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
-        return ed(e, t)
-    }
-
-    function em(e, t) {
-        if (null == e) return;
-        let r = ec(V(C(e, t)), t);
-        if (r.length > l.MAX_TILE_TITLE_LENGTH) throw new u.CustomDashboardValidationError(t, "Tile title cannot exceed ".concat(l.MAX_TILE_TITLE_LENGTH, " characters."));
-        return 0 === r.length ? void 0 : r
-    }
-
     function ep(e, t) {
-        if (null == e) return;
-        if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
-        let r = e.map((e, r) => {
-            let n = w(e, "".concat(t, "[").concat(r, "]"));
-            if (!W(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a canonical RAQI dimension."));
-            return n
-        });
-        return r.length > 0 ? r : void 0
+        if (null == e) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        return em(e, t)
     }
 
     function ef(e, t) {
         if (null == e) return;
+        let r = el(V(C(e, t)), t);
+        if (r.length > l.MAX_TILE_TITLE_LENGTH) throw new u.CustomDashboardValidationError(t, "Tile title cannot exceed ".concat(l.MAX_TILE_TITLE_LENGTH, " characters."));
+        return 0 === r.length ? void 0 : r
+    }
+
+    function eg(e, t) {
+        if (null == e) return;
         if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         let r = e.map((e, r) => {
             let n = w(e, "".concat(t, "[").concat(r, "]"));
-            if (!$(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known annotation type."));
+            if (!$(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a canonical RAQI dimension."));
             return n
         });
         return r.length > 0 ? r : void 0
     }
 
-    function eg(e, t) {
+    function ey(e, t) {
+        if (null == e) return;
+        if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        let r = e.map((e, r) => {
+            let n = w(e, "".concat(t, "[").concat(r, "]"));
+            if (!Z(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known annotation type."));
+            return n
+        });
+        return r.length > 0 ? r : void 0
+    }
+
+    function ev(e, t) {
         let r, n = D(e, t),
-            a = (r = ev(n.variantSelections, "".concat(t, ".variantSelections"), es)).length > 0 ? r : void 0;
+            a = (r = eA(n.variantSelections, "".concat(t, ".variantSelections"), eu)).length > 0 ? r : void 0;
         if (void 0 !== n.metricKey && null !== n.metricKey && void 0 !== n.computedMetric && null !== n.computedMetric) throw new u.CustomDashboardValidationError(t, "".concat(t, " must not include both metricKey and computedMetric."));
         return void 0 !== n.computedMetric && null !== n.computedMetric ? {
             computedMetric: function(e, t) {
@@ -4457,30 +4462,30 @@
         } : {
             metricKey: function(e, t) {
                 let r = C(e, t);
-                if (!er(r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known RAQI metric.'));
+                if (!ea(r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known RAQI metric.'));
                 return r
             }(n.metricKey, "".concat(t, ".metricKey")),
             variantSelections: a
         }
     }
 
-    function ey(e, t) {
+    function eb(e, t) {
         let r = D(e, t);
         return {
-            metric: eg(r.metric, "".concat(t, ".metric")),
-            seriesKey: ec(w(r.seriesKey, "".concat(t, ".seriesKey")), "".concat(t, ".seriesKey")),
-            displayName: void 0 !== r.displayName && null !== r.displayName ? ec(V(C(r.displayName, "".concat(t, ".displayName"))), "".concat(t, ".displayName")) : void 0,
-            aggregation: ea(r.aggregation, "".concat(t, ".aggregation"))
+            metric: ev(r.metric, "".concat(t, ".metric")),
+            seriesKey: el(w(r.seriesKey, "".concat(t, ".seriesKey")), "".concat(t, ".seriesKey")),
+            displayName: void 0 !== r.displayName && null !== r.displayName ? el(V(C(r.displayName, "".concat(t, ".displayName"))), "".concat(t, ".displayName")) : void 0,
+            aggregation: eo(r.aggregation, "".concat(t, ".aggregation"))
         }
     }
 
-    function ev(e, t, r) {
+    function eA(e, t, r) {
         if (null == e) return [];
         if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         return e.map((e, n) => r(e, "".concat(t, "[").concat(n, "]")))
     }
 
-    function eb(e, t) {
+    function eD(e, t) {
         let r = D(e, t);
         if ("Component" === r.type) {
             let e = D(r.component, "".concat(t, ".component"));
@@ -4495,7 +4500,7 @@
                             let r = D(e.dataSpec, "".concat(t, ".dataSpec")),
                                 n = D(e.chartSpec, "".concat(t, ".chartSpec")),
                                 i = C(n.chartType, "".concat(t, ".chartSpec.chartType"));
-                            if (!q(k, i)) throw new u.CustomDashboardValidationError("".concat(t, ".chartSpec.chartType"), "".concat(t, '.chartSpec.chartType "').concat(i, '" is not supported.'));
+                            if (!X(k, i)) throw new u.CustomDashboardValidationError("".concat(t, ".chartSpec.chartType"), "".concat(t, '.chartSpec.chartType "').concat(i, '" is not supported.'));
                             let s = A(n.overlays) ? n.overlays : void 0,
                                 c = s ? {
                                     genreBenchmark: M(s.genreBenchmark, "".concat(t, ".chartSpec.overlays.genreBenchmark")),
@@ -4504,36 +4509,36 @@
                                     previousPeriod: T(s.previousPeriod, "".concat(t, ".chartSpec.overlays.previousPeriod")),
                                     quota: M(s.quota, "".concat(t, ".chartSpec.overlays.quota"))
                                 } : void 0,
-                                l = ev(r.metrics, "".concat(t, ".dataSpec.metrics"), ey),
+                                l = eA(r.metrics, "".concat(t, ".dataSpec.metrics"), eb),
                                 d = i === a.ChartType.Table;
                             if (!d && 1 !== l.length) throw new u.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain exactly one metric."));
                             if (d && (l.length < 1 || l.length > o.MAX_TABLE_METRIC_COLUMNS)) throw new u.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain between 1 and ").concat(o.MAX_TABLE_METRIC_COLUMNS, " metrics for table charts."));
                             let h = r.breakdownDimensions,
-                                m = null == h ? void 0 : ev(h, "".concat(t, ".dataSpec.breakdownDimensions"), (e, t) => {
+                                m = null == h ? void 0 : eA(h, "".concat(t, ".dataSpec.breakdownDimensions"), (e, t) => {
                                     var r;
                                     let n = null != (r = N(e, t)) ? r : "";
-                                    if (n.length > 0 && !W(n)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a canonical RAQI dimension."));
+                                    if (n.length > 0 && !J(n)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a persistable breakdown dimension."));
                                     return n
                                 }).filter(e => e.length > 0);
                             return {
                                 type: "Chart",
                                 tileId: w(e.tileId, "".concat(t, ".tileId")),
-                                title: em(e.title, "".concat(t, ".title")),
+                                title: ef(e.title, "".concat(t, ".title")),
                                 dataSpec: {
                                     metrics: l,
-                                    aggregation: ea(r.aggregation, "".concat(t, ".dataSpec.aggregation")),
+                                    aggregation: eo(r.aggregation, "".concat(t, ".dataSpec.aggregation")),
                                     breakdownDimensions: m,
                                     granularity: function(e, t) {
                                         let r = C(e, t);
-                                        if (!q(P, r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known time interval.'));
+                                        if (!X(P, r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known time interval.'));
                                         return r
                                     }(r.granularity, "".concat(t, ".dataSpec.granularity")),
-                                    filters: eh(r.filters, "".concat(t, ".dataSpec.filters"))
+                                    filters: ep(r.filters, "".concat(t, ".dataSpec.filters"))
                                 },
                                 chartSpec: {
                                     chartType: i,
                                     overlays: c,
-                                    smoothing: ei(n.smoothing, "".concat(t, ".chartSpec.smoothing"))
+                                    smoothing: es(n.smoothing, "".concat(t, ".chartSpec.smoothing"))
                                 }
                             }
                         }(r, t)
@@ -4548,10 +4553,10 @@
                         let r = D(e, t);
                         if ("SummaryCard" !== r.type) throw new u.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "SummaryCard".'));
                         let n = A(r.overlays) ? r.overlays : void 0,
-                            a = eg(r.metric, "".concat(t, ".metric")),
+                            a = ev(r.metric, "".concat(t, ".metric")),
                             i = function(e, t) {
                                 let r = C(e, t);
-                                if (!(q(O, r) || x.test(r))) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
+                                if (!(X(O, r) || x.test(r))) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
                                 return r
                             }(r.aggregation, "".concat(t, ".aggregation")),
                             o = a.metricKey ? y(a.metricKey, i) : i;
@@ -4559,14 +4564,14 @@
                         return {
                             type: "SummaryCard",
                             tileId: w(r.tileId, "".concat(t, ".tileId")),
-                            title: em(r.title, "".concat(t, ".title")),
-                            titleSource: eo(r.titleSource, "".concat(t, ".titleSource")),
+                            title: ef(r.title, "".concat(t, ".title")),
+                            titleSource: ec(r.titleSource, "".concat(t, ".titleSource")),
                             metric: a,
                             aggregation: o,
                             overlays: n ? {
                                 periodOverPeriod: M(n.periodOverPeriod, "".concat(t, ".overlays.periodOverPeriod"))
                             } : void 0,
-                            filters: eh(r.filters, "".concat(t, ".filters"))
+                            filters: ep(r.filters, "".concat(t, ".filters"))
                         }
                     }(e.summaryCard, "".concat(t, ".component.summaryCard"))
                 }
@@ -4576,7 +4581,7 @@
         if ("Grid" === r.type) {
             let e = r.columnCount;
             if (1 !== e && 2 !== e) throw new u.CustomDashboardValidationError("".concat(t, ".columnCount"), "".concat(t, ".columnCount must be 1 or 2."));
-            let n = ev(r.children, "".concat(t, ".children"), eb);
+            let n = eA(r.children, "".concat(t, ".children"), eD);
             if (0 === n.length || n.length > e && !n.every(d)) throw new u.CustomDashboardValidationError("".concat(t, ".children"), "".concat(t, ".children must contain between 1 and ").concat(e, " child node(s)."));
             return {
                 type: "Grid",
@@ -4586,12 +4591,12 @@
         }
         if ("Flex" === r.type || "Stack" === r.type) return {
             type: r.type,
-            children: ev(r.children, "".concat(t, ".children"), eb)
+            children: eA(r.children, "".concat(t, ".children"), eD)
         };
         throw new u.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Component", "Grid", "Flex", or "Stack".'))
     }
 
-    function eA(e) {
+    function eC(e) {
         let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
             {
                 enforceTileCaps: r = !0
@@ -4600,7 +4605,7 @@
             i = D(a.page, "config.page");
         if (i.mode !== l.DashboardPageMode.Untabbed) throw new u.CustomDashboardValidationError("config.page.mode", 'config.page.mode must be "Untabbed" in v1.');
         let o = D(i.surface, "config.page.surface"),
-            s = ev(o.bodyNodes, "config.page.surface.bodyNodes", eb),
+            s = eA(o.bodyNodes, "config.page.surface.bodyNodes", eD),
             c = new Set,
             d = 0,
             h = 0,
@@ -4636,7 +4641,7 @@
                                         if (null == e) return;
                                         let r = D(e, t);
                                         if ("Relative" === r.type) {
-                                            if (!Z(r.rangeType) || r.rangeType === n.RAQIV2DateRangeType.Custom) throw new u.CustomDashboardValidationError("".concat(t, ".rangeType"), "".concat(t, ".rangeType must be a preset date range."));
+                                            if (!et(r.rangeType) || r.rangeType === n.RAQIV2DateRangeType.Custom) throw new u.CustomDashboardValidationError("".concat(t, ".rangeType"), "".concat(t, ".rangeType must be a preset date range."));
                                             if (!m(r.rangeType)) throw new u.CustomDashboardValidationError("".concat(t, ".rangeType"), "".concat(t, ".rangeType must span less than ").concat(56, " days."));
                                             return {
                                                 type: "Relative",
@@ -4658,15 +4663,15 @@
                                     }(r.defaultSelection, "".concat(t, ".defaultSelection"))
                                 }
                             }(a.timeRangeOptions, "".concat(t, ".timeRangeOptions")),
-                            filterDimensions: ep(a.filterDimensions, "".concat(t, ".filterDimensions")),
-                            defaultFilters: (r = ed(a.defaultFilters, "".concat(t, ".defaultFilters"))).length > 0 ? r : void 0,
-                            breakdownDimensions: ep(a.breakdownDimensions, "".concat(t, ".breakdownDimensions")),
+                            filterDimensions: eg(a.filterDimensions, "".concat(t, ".filterDimensions")),
+                            defaultFilters: (r = em(a.defaultFilters, "".concat(t, ".defaultFilters"))).length > 0 ? r : void 0,
+                            breakdownDimensions: eg(a.breakdownDimensions, "".concat(t, ".breakdownDimensions")),
                             defaultBreakdown: function(e, t) {
                                 if (null == e) return;
                                 if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
                                 let r = e.map((e, r) => {
                                     let n = w(e, "".concat(t, "[").concat(r, "]"));
-                                    if (!X(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known RAQI dimension."));
+                                    if (!W(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known RAQI dimension."));
                                     return n
                                 });
                                 return r.length > 0 ? r : void 0
@@ -4682,8 +4687,8 @@
                                 if (null == e) return;
                                 let a = D(e, t);
                                 return {
-                                    supportedAnnotationTypes: null != (r = ef(a.supportedAnnotationTypes, "".concat(t, ".supportedAnnotationTypes"))) ? r : [],
-                                    defaultAnnotationTypes: null != (n = ef(a.defaultAnnotationTypes, "".concat(t, ".defaultAnnotationTypes"))) ? n : [],
+                                    supportedAnnotationTypes: null != (r = ey(a.supportedAnnotationTypes, "".concat(t, ".supportedAnnotationTypes"))) ? r : [],
+                                    defaultAnnotationTypes: null != (n = ey(a.defaultAnnotationTypes, "".concat(t, ".defaultAnnotationTypes"))) ? n : [],
                                     showAnnotationsControl: void 0 === a.showAnnotationsControl || null === a.showAnnotationsControl || E(a.showAnnotationsControl, "".concat(t, ".showAnnotationsControl"))
                                 }
                             }(a.annotationOptions, "".concat(t, ".annotationOptions"))
@@ -4694,14 +4699,14 @@
             }
         }
     }
-    e.s(["isCanonicalRAQIV2Dimension", 0, W, "isChartAggregation", 0, J, "isDateRangeType", 0, Z, "isDefaultAnnotationType", 0, $, "isDefaultBreakdownDimension", 0, X, "isMetricKey", 0, er, "isRAQIV2AggregationType", 0, ee, "isRAQIV2PercentileType", 0, et, "validateCustomDashboardConfig", 0, eA, "validateCustomDashboardDocument", 0, function(e) {
+    e.s(["isCanonicalRAQIV2Dimension", 0, $, "isChartAggregation", 0, ee, "isDateRangeType", 0, et, "isDefaultAnnotationType", 0, Z, "isDefaultBreakdownDimension", 0, W, "isMetricKey", 0, ea, "isPersistableBreakdownDimension", 0, J, "isRAQIV2AggregationType", 0, er, "isRAQIV2PercentileType", 0, en, "validateCustomDashboardConfig", 0, eC, "validateCustomDashboardDocument", 0, function(e) {
         let t, r = D(e, "document");
         if (r.schemaVersion !== l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION) throw new u.CustomDashboardValidationError("schemaVersion", "schemaVersion must equal ".concat(l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION, " (got ").concat(String(r.schemaVersion), "). Run applyMigrations first."));
         let {
             status: n
         } = r;
-        if (!("string" == typeof n && q(B, n))) throw new u.CustomDashboardValidationError("status", 'status must be "draft" or "published".');
-        void 0 !== r.description && null !== r.description && (t = el(C(r.description, "description")));
+        if (!("string" == typeof n && X(B, n))) throw new u.CustomDashboardValidationError("status", 'status must be "draft" or "published".');
+        void 0 !== r.description && null !== r.description && (t = eh(C(r.description, "description")));
         let a = E(r.isPinned, "isPinned"),
             i = a ? _(r.pinnedAt, "pinnedAt") : void 0;
         if (void 0 === r.config || null === r.config) throw new u.CustomDashboardValidationError("config", "config is required. Service-layer create() must substitute EMPTY_DASHBOARD_CONFIG before validation.");
@@ -4709,7 +4714,7 @@
             id: w(r.id, "id"),
             schemaVersion: l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION,
             universeId: S(r.universeId, "universeId"),
-            name: eu(C(r.name, "name")),
+            name: ed(C(r.name, "name")),
             description: t,
             status: n,
             isPinned: a,
@@ -4721,11 +4726,11 @@
             createdByUsername: w(r.createdByUsername, "createdByUsername"),
             updatedByUserId: I(S)(r.updatedByUserId, "updatedByUserId"),
             updatedByUsername: I(w)(r.updatedByUsername, "updatedByUsername"),
-            config: eA(r.config, {
+            config: eC(r.config, {
                 enforceTileCaps: !1
             })
         }
-    }, "validateDashboardDescription", 0, el, "validateDashboardName", 0, eu], 646877), e.s(["addChartTileToConfig", 0, function(e) {
+    }, "validateDashboardDescription", 0, eh, "validateDashboardName", 0, ed], 646877), e.s(["addChartTileToConfig", 0, function(e) {
         let {
             config: n,
             tile: a,
@@ -4735,7 +4740,7 @@
             tileId: i
         };
         return {
-            config: eA((0, t.withChartRows)(n, [...(0, t.getChartRows)(n), (0, r.singleTileRow)(o)])),
+            config: eC((0, t.withChartRows)(n, [...(0, t.getChartRows)(n), (0, r.singleTileRow)(o)])),
             tile: o
         }
     }], 296150)
@@ -5084,5 +5089,5 @@
     }], 302610)
 }]);
 
-//# debugId=6d0535ea-8167-12f7-a263-a413de5edcd5
-//# sourceMappingURL=0htqw2w2b4mxq.js.map
+//# debugId=b0f32ea0-e89c-fd0e-ca08-c0facb09a918
+//# sourceMappingURL=3-2nt8066a5o2.js.map

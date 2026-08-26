@@ -233,6 +233,9 @@ Roblox.LangDynamic["Notifications.Preferences"] = {
     "Label.NotificationTypeCloudBilling": "Billing and Payments",
     "Description.NotificationTypeCloudBilling": "Notifications about Extended Services",
     "Description.NotificationTypeCloudDataStores": "Notifications about Data Stores, such as storage quota thresholds",
-    "Label.CategoryMarketplace": "Marketplace"
+    "Label.CategoryMarketplace": "Marketplace",
+    "Label.NotificationTypeTransactionRefunded": "Transaction Refunded",
+    "Description.NotificationTypeTransactionRefunded": "Refunded transaction updates from my sales",
+    "Description.UnsubscribeFromTransactionRefunded": "Stop notifying me about refunded transactions from my sales"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Notifications.Preferences");

@@ -1320,6 +1320,16 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.MemberSearchHint": "Start typing to search members",
     "Label.NoMembersFound": "No members found",
     "Label.MemberSearchError": "Something went wrong. Please try again.",
-    "Description.UnrestrictedMessagesCategory": "Members can send unrestricted messages and attach images in this category."
+    "Description.UnrestrictedMessagesCategory": "Members can send unrestricted messages and attach images in this category.",
+    "Message.UpdateRolesetPropertiesVisibilityPrivate": "Visibility: Private",
+    "Message.UpdateRolesetPositionTopRole": "top role",
+    "Label.UpdateRoleSetPosition": "Update Role Position",
+    "Message.UpdateRolesetProperties": "{actor} updated roleset {roleSetName}'s properties",
+    "Message.UpdateRolesetPropertiesName": "Name: {newName}",
+    "Message.UpdateRolesetPropertiesDescription": "Description: {newDescription}",
+    "Message.UpdateRolesetPropertiesColor": "Color: {newColor}",
+    "Message.UpdateRolesetPropertiesVisibilityPublic": "Visibility: Public",
+    "Message.UpdateRolesetPosition": "{actor} updated roleset {roleSetName}'s position from {oldPosition} to {newPosition}",
+    "Message.UpdateRolesetPositionBelowRole": "below {roleAboveName}"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");

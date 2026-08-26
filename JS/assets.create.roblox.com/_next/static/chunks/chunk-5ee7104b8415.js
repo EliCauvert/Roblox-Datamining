@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "17ddaf1d-b83c-caf7-280b-abc98ca7a2ff")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "4a71415d-5c9a-ebb0-bf35-d75c99d7c989")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 261482, 858148, 966956, 719743, 477749, e => {
@@ -3706,8 +3706,13 @@
             namespace: "content-suitability",
             name: "questionnaireV2Q1Release",
             defaultValue: !1
+        }),
+        n = (0, s.defineFlag)({
+            namespace: "content-suitability",
+            name: "questionnaireSectionStepperEnabled",
+            defaultValue: !1
         });
-    e.s(["questionnaireV2Allowlist", 0, r, "questionnaireV2Q1Release", 0, i], 779433), e.s(["default", 0, () => {
+    e.s(["questionnaireSectionStepperEnabled", 0, n, "questionnaireV2Allowlist", 0, r, "questionnaireV2Q1Release", 0, i], 779433), e.s(["default", 0, () => {
         let {
             ready: e,
             value: s
@@ -4331,5 +4336,5 @@
     }])
 }]);
 
-//# debugId=17ddaf1d-b83c-caf7-280b-abc98ca7a2ff
-//# sourceMappingURL=1-xe3nsby1zpl.js.map
+//# debugId=4a71415d-5c9a-ebb0-bf35-d75c99d7c989
+//# sourceMappingURL=0br7fyizur1cm.js.map

@@ -3,71 +3,73 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "4bb34187-8761-efcb-1c7c-7167d187f38c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d2d93675-7e90-060e-f40c-6fef90848a38")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 605050, e => {
     "use strict";
     var t = e.i(675454);
-    let r = (0, e.i(272593).createClientConfiguration)("core-content", "bedev2"),
-        n = new t.CoreContentApi(r);
-    e.s(["default", 0, n])
+    let n = (0, e.i(272593).createClientConfiguration)("core-content", "bedev2"),
+        r = new t.CoreContentApi(n);
+    e.s(["default", 0, r])
 }, 29929, e => {
     "use strict";
     let t;
-    var r, n, i, o, a, l, s, u, c, d, p, v, b, h, y, C, g, f, w, m = e.i(650502),
-        E = e.i(864392),
-        P = ((r = {}).ShowVrDeviceOption = "showVrDeviceOption", r.ShowIXPClientTest = "showIXPClientTest", r.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", r.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", r.EnableIA = "enableIA", r.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", r.EnableDevexEarnedRobux = "enableDevexEarnedRobux", r.EnableExperienceGenre = "enableExperienceGenre", r.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", r.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", r.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", r.EnableEventRequestFeaturing = "enableEventRequestFeaturing", r.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", r),
-        R = ((n = {}).EnableRightsManager = "enableRightsManager", n.EnableBulkFiling = "enableBulkFiling", n.EnableOnDemandSearch = "enableOnDemandSearch", n.EnableEditRegistration = "enableEditRegistration", n.EnableImageSearch = "enableImageSearch", n.EnableClaimsAgainstMe = "enableClaimsAgainstMe", n.EnableGenAiOptOut = "enableGenAiOptOut", n.EnableInExperienceIpReporting = "enableInExperienceIpReporting", n.EnableIpContentSearch = "enableIpContentSearch", n.EnableTrademark = "enableTrademark", n),
-        A = ((i = {}).EnableIPRecommender = "enableIPRecommender", i),
-        S = ((o = S || {}).EnableVideoOnboarding = "enableVideoOnboarding", o),
-        I = ((a = I || {}).EnableSignalLookup = "enableSignalLookup", a.AlwaysShow = "alwaysShow", a),
+    var n, r, i, o, a, l, s, u, c, d, p, v, b, h, y, C, g, f, w, m, E = e.i(650502),
+        P = e.i(864392),
+        A = ((n = {}).ShowVrDeviceOption = "showVrDeviceOption", n.ShowIXPClientTest = "showIXPClientTest", n.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", n.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", n.EnableIA = "enableIA", n.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", n.EnableDevexEarnedRobux = "enableDevexEarnedRobux", n.EnableExperienceGenre = "enableExperienceGenre", n.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", n.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", n.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", n.EnableEventRequestFeaturing = "enableEventRequestFeaturing", n.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", n),
+        R = ((r = {}).EnableRightsManager = "enableRightsManager", r.EnableBulkFiling = "enableBulkFiling", r.EnableOnDemandSearch = "enableOnDemandSearch", r.EnableEditRegistration = "enableEditRegistration", r.EnableImageSearch = "enableImageSearch", r.EnableClaimsAgainstMe = "enableClaimsAgainstMe", r.EnableGenAiOptOut = "enableGenAiOptOut", r.EnableInExperienceIpReporting = "enableInExperienceIpReporting", r.EnableIpContentSearch = "enableIpContentSearch", r.EnableTrademark = "enableTrademark", r),
+        S = ((i = {}).EnableIPRecommender = "enableIPRecommender", i),
+        I = ((o = I || {}).EnableVideoOnboarding = "enableVideoOnboarding", o),
+        U = ((a = U || {}).EnableSignalLookup = "enableSignalLookup", a.AlwaysShow = "alwaysShow", a),
         T = T || {},
-        U = ((l = U || {}).mobileVariant = "mobileVariant", l),
-        x = x || {},
-        q = ((s = {}).ShowEditInStudioButton = "showEditInStudioButton", s.EnableCreationsNavLayout = "enableCreationsIPNavLayout", s),
-        k = ((u = {}).EnablePublishingConsolidation = "enablePublishingConsolidation", u),
-        H = ((c = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", c.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", c.EnableAudienceControls = "enableAudienceControls", c.EnableNewBadgePattern = "enableNewBadgePattern", c.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", c.EnableAudiencesReplacement = "enableAudiencesReplacement", c),
-        O = ((d = {}).EnableTalentHubV2 = "enableTalentHubV2", d.EnableTalentHubV2M2 = "enableTalentHubV2M2", d),
-        K = ((p = {}).StarterPlaceTemplateId = "starterPlaceTemplateId", p),
-        G = ((v = G || {}).EnableExperienceWebhooks = "enableExperienceWebhooks", v),
-        D = ((b = D || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", b),
-        L = ((h = L || {}).EnableChangelogCMS = "enableChangelogCMS", h),
-        M = ((y = {}).CreatorDashboard = "CreatorDashboard", y.CreatorHubHomePage = "CreatorHub.HomePage.UserId", y.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", y.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", y.CreatorHubLandingPage = "CreatorHub.LandingPage", y.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", y.CreatorHubNavigation = "CreatorHub.Navigation", y.CreatorHubNavigationUser = "CreatorHub.Navigation.User", y.CreatorHubPublishing = "CreatorHub.Publishing.UserId", y.LicenseManager = "CreatorDashboard.LicenseManager", y.RightsManager = "CreatorDashboard.RightsManager", y.StarterPlaceCreation = "CRK.StarterPlace.StarterPlaceCreation", y.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", y.CreatorHubDocumentation = "CreatorHub.CreatorDocumentation.UserId", y.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", y.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", y.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", y.CreatorHubChangelog = "CreatorHub.Changelog", y.TalentHub = "CreatorHub.TalentHub.UserId", y),
-        N = ((C = N || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", C.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", C.ShowSecrets = "showSecrets", C.ShowQualitySignalCards = "showQualitySignalCards", C);
-    let B = {
-        CreatorDashboard: P,
-        "CreatorHub.HomePage.UserId": S,
-        "CreatorHub.HomePage.OpportunitiesSection.UserId": I,
+        x = ((l = x || {}).mobileVariant = "mobileVariant", l),
+        q = q || {},
+        k = ((s = {}).ShowEditInStudioButton = "showEditInStudioButton", s.EnableCreationsNavLayout = "enableCreationsIPNavLayout", s),
+        H = ((u = {}).EnableBulkAssetUpload = "enableBulkAssetUpload", u),
+        O = ((c = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", c.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", c.EnableAudienceControls = "enableAudienceControls", c.EnableNewBadgePattern = "enableNewBadgePattern", c.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", c.EnableAudiencesReplacement = "enableAudiencesReplacement", c),
+        K = ((d = {}).EnableTalentHubV2 = "enableTalentHubV2", d.EnableTalentHubV2M2 = "enableTalentHubV2M2", d),
+        G = ((p = {}).StarterPlaceTemplateId = "starterPlaceTemplateId", p),
+        D = ((v = D || {}).EnableExperienceWebhooks = "enableExperienceWebhooks", v),
+        L = ((b = L || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", b),
+        B = ((h = B || {}).EnableChangelogCMS = "enableChangelogCMS", h),
+        M = ((y = {}).EnableSectionStepper = "enableSectionStepper", y),
+        N = ((C = {}).CreatorDashboard = "CreatorDashboard", C.CreatorHubHomePage = "CreatorHub.HomePage.UserId", C.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", C.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", C.CreatorHubLandingPage = "CreatorHub.LandingPage", C.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", C.CreatorHubNavigation = "CreatorHub.Navigation", C.CreatorHubNavigationUser = "CreatorHub.Navigation.User", C.CreatorHubPublishing = "CreatorHub.Publishing.UserId", C.LicenseManager = "CreatorDashboard.LicenseManager", C.RightsManager = "CreatorDashboard.RightsManager", C.StarterPlaceCreation = "CRK.StarterPlace.StarterPlaceCreation", C.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", C.CreatorHubDocumentation = "CreatorHub.CreatorDocumentation.UserId", C.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", C.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", C.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", C.CreatorHubChangelog = "CreatorHub.Changelog", C.TalentHub = "CreatorHub.TalentHub.UserId", C.ContentSuitabilityQuestionnaire = "ContentSuitability.Questionnaire.UserId", C),
+        V = ((g = V || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", g.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", g.ShowSecrets = "showSecrets", g.ShowQualitySignalCards = "showQualitySignalCards", g);
+    let _ = {
+        CreatorDashboard: A,
+        "CreatorHub.HomePage.UserId": I,
+        "CreatorHub.HomePage.OpportunitiesSection.UserId": U,
         "CreatorHub.LandingPage": T,
-        "CreatorHub.LandingPage.UserId": U,
-        "CreatorHub.Navigation": x,
-        "CreatorHub.Navigation.User": q,
-        "CreatorHub.Publishing.UserId": k,
-        "CreatorDashboard.LicenseManager": A,
+        "CreatorHub.LandingPage.UserId": x,
+        "CreatorHub.Navigation": q,
+        "CreatorHub.Navigation.User": k,
+        "CreatorHub.Publishing.UserId": H,
+        "CreatorDashboard.LicenseManager": S,
         "CreatorDashboard.RightsManager": R,
-        "CRK.StarterPlace.StarterPlaceCreation": K,
+        "CRK.StarterPlace.StarterPlaceCreation": G,
         "CreatorSuccess.OrganizationsV2": {},
-        "CreatorHub.CreatorDocumentation.UserId": ((g = {}).EnableCourses = "enableCourses", g),
-        "CreatorHub.CreatorDocumentation.Search.UserId": ((f = {}).SearchVersion = "searchVersion", f),
-        "CreatorHub.Creations.Permission": H,
-        "CreatorHub.ExperienceWebhooks.UserId": G,
-        "CreatorHub.HomePage.ExperienceTile.UserId": D,
-        "CreatorHub.Changelog": L,
-        "CreatorHub.TalentHub.UserId": O
+        "CreatorHub.CreatorDocumentation.UserId": ((f = {}).EnableCourses = "enableCourses", f),
+        "CreatorHub.CreatorDocumentation.Search.UserId": ((w = {}).SearchVersion = "searchVersion", w),
+        "CreatorHub.Creations.Permission": O,
+        "CreatorHub.ExperienceWebhooks.UserId": D,
+        "CreatorHub.HomePage.ExperienceTile.UserId": L,
+        "CreatorHub.Changelog": B,
+        "CreatorHub.TalentHub.UserId": K,
+        "ContentSuitability.Questionnaire.UserId": M
     };
-    async function V(e) {
-        let t = (0, m.getBEDEV2ServiceBasePath)("product-experimentation-platform"),
-            r = Object.values(B[e]).join(","),
-            n = "".concat(t, "/v1/projects/1/layers/").concat(e, "/values?parameters=").concat(r);
-        return (await fetch(n, {
+    async function j(e) {
+        let t = (0, E.getBEDEV2ServiceBasePath)("product-experimentation-platform"),
+            n = Object.values(_[e]).join(","),
+            r = "".concat(t, "/v1/projects/1/layers/").concat(e, "/values?parameters=").concat(n);
+        return (await fetch(r, {
             credentials: "include"
         })).json()
     }
-    let _ = (0, E.default)(V);
-    w = async function(e, t) {
-        let r = (0, m.getBEDEV2ServiceBasePath)("product-experimentation-platform"),
-            n = await fetch("".concat(r, "/v1/projects/1/values"), {
+    let F = (0, P.default)(j);
+    m = async function(e, t) {
+        let n = (0, E.getBEDEV2ServiceBasePath)("product-experimentation-platform"),
+            r = await fetch("".concat(n, "/v1/projects/1/values"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -81,30 +83,30 @@
                 }),
                 credentials: "include"
             });
-        return (await n.json()).layers[e].parameters
-    }, t = [], e.s(["CreatorHubCreationsPermissionParameters", () => H, "CreatorHubPublishingParameters", () => k, "IXPLayers", () => M, "LicenseManagerParameters", () => A, "TalentHubParameters", () => O, "fetchIXPParametersForCurrentUser", 0, _], 29929)
+        return (await r.json()).layers[e].parameters
+    }, t = [], e.s(["ContentSuitabilityQuestionnaireParameters", () => M, "CreatorHubCreationsPermissionParameters", () => O, "IXPLayers", () => N, "LicenseManagerParameters", () => S, "TalentHubParameters", () => K, "fetchIXPParametersForCurrentUser", 0, F], 29929)
 }, 864392, e => {
     "use strict";
     e.s(["default", 0, function(e) {
         let t = new Map;
-        return r => {
-            if (t.has(r)) return t.get(r);
-            let n = e(r);
-            return t.set(r, n), n
+        return n => {
+            if (t.has(n)) return t.get(n);
+            let r = e(n);
+            return t.set(n, r), r
         }
     }])
 }, 198528, e => {
     "use strict";
     var t = e.i(416340),
-        r = e.i(237401);
-    e.s(["default", 0, (e, n) => {
-        let i = (0, r.useRouter)();
+        n = e.i(237401);
+    e.s(["default", 0, (e, r) => {
+        let i = (0, n.useRouter)();
         return [(0, t.useMemo)(() => {
             let t = {};
-            for (let r of e) t[r] = i.query[r];
+            for (let n of e) t[n] = i.query[n];
             return t
         }, [e, i.query]), (0, t.useCallback)(function(t) {
-            var r;
+            var n;
             let o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
                     skipHistory: !1
                 },
@@ -113,22 +115,22 @@
                 };
             e.forEach(e => {
                 if (!Object.hasOwn(t, e)) return;
-                let r = t[e];
-                null == r ? delete a[e] : Array.isArray(r) ? a[e] = r.map(e => e.toString()) : a[e] = r.toString()
-            }), r = i.query, Array.from(new Set([...Object.keys(r), ...Object.keys(a)])).every(e => ((e, t) => {
+                let n = t[e];
+                null == n ? delete a[e] : Array.isArray(n) ? a[e] = n.map(e => e.toString()) : a[e] = n.toString()
+            }), n = i.query, Array.from(new Set([...Object.keys(n), ...Object.keys(a)])).every(e => ((e, t) => {
                 if (null == e && null == t) return !0;
                 if (null == e || null == t) return !1;
-                let r = Array.isArray(e) ? e : [e],
-                    n = Array.isArray(t) ? t : [t];
-                return r.length === n.length && r.every((e, t) => e === n[t])
-            })(r[e], a[e])) || (o.skipHistory ? i.replace({
+                let n = Array.isArray(e) ? e : [e],
+                    r = Array.isArray(t) ? t : [t];
+                return n.length === r.length && n.every((e, t) => e === r[t])
+            })(n[e], a[e])) || (o.skipHistory ? i.replace({
                 pathname: i.pathname,
                 query: a
             }) : i.push({
                 pathname: i.pathname,
                 query: a
-            }, void 0, n))
-        }, [i, e, n])]
+            }, void 0, r))
+        }, [i, e, r])]
     }, "normalizeSingleQueryParam", 0, e => {
         let t = Array.isArray(e) ? e[0] : e;
         return "" === t || null == t ? void 0 : t
@@ -140,17 +142,17 @@
 }, 927868, e => {
     "use strict";
     e.s(["getEnumKeyByValue", 0, (e, t) => {
-        let r = Object.entries(e).find(e => {
-            let [, r] = e;
-            return r === t
+        let n = Object.entries(e).find(e => {
+            let [, n] = e;
+            return n === t
         });
-        return r ? r[0] : null
+        return n ? n[0] : null
     }, "isValidArrayEnumValue", 0, (e, t) => e.includes(t), "isValidEnumValue", 0, (e, t) => Object.values(e).includes(t)])
 }, 745873, e => {
     "use strict";
     var t = e.i(221628),
-        r = e.i(416340),
-        n = e.i(458451),
+        n = e.i(416340),
+        r = e.i(458451),
         i = e.i(533414),
         o = e.i(157310),
         a = e.i(279149),
@@ -173,37 +175,37 @@
                 }
             })
         },
-        p = (0, r.createContext)(null);
+        p = (0, n.createContext)(null);
     e.s(["GroupsProvider", 0, e => {
         let {
             children: o
         } = e, {
             user: a
-        } = (0, n.useRobloxAuthentication)(), {
+        } = (0, r.useRobloxAuthentication)(), {
             data: l,
             isLoading: s,
             refetch: u
-        } = d(), [c, v] = (0, i.useLocalStorage)("creatorHubGroups.".concat(null == a ? void 0 : a.id), null), [b, h] = (0, i.useLocalStorage)("creatorHubGroup.".concat(null == a ? void 0 : a.id), null), [y, C] = (0, i.useLocalStorage)("creatorHubGroupData.".concat(null == a ? void 0 : a.id), {}), g = (0, r.useCallback)(e => {
+        } = d(), [c, v] = (0, i.useLocalStorage)("creatorHubGroups.".concat(null == a ? void 0 : a.id), null), [b, h] = (0, i.useLocalStorage)("creatorHubGroup.".concat(null == a ? void 0 : a.id), null), [y, C] = (0, i.useLocalStorage)("creatorHubGroupData.".concat(null == a ? void 0 : a.id), {}), g = (0, n.useCallback)(e => {
             h(e);
             let t = null === e ? "user" : e;
             C(e => {
-                let r = {
+                let n = {
                     lastSelected: Date.now(),
                     priority: 1
                 };
                 if (e[t]) {
                     let {
-                        priority: n,
+                        priority: r,
                         lastSelected: i
                     } = e[t];
-                    "number" != typeof n || Number.isNaN(n) || "number" != typeof i || Number.isNaN(i) || (r.priority = n * (1 + Math.log10(1 + 10 / Math.max(Date.now() - i, 864e5))))
+                    "number" != typeof r || Number.isNaN(r) || "number" != typeof i || Number.isNaN(i) || (n.priority = r * (1 + Math.log10(1 + 10 / Math.max(Date.now() - i, 864e5))))
                 }
                 return {
                     ...e,
-                    [t]: r
+                    [t]: n
                 }
             })
-        }, [h, C]), f = (0, r.useMemo)(() => {
+        }, [h, C]), f = (0, n.useMemo)(() => {
             if (null == l ? void 0 : l.groups) return null == l ? void 0 : l.groups;
             if (null === c) return [];
             try {
@@ -211,7 +213,7 @@
             } catch (e) {
                 return []
             }
-        }, [c, null == l ? void 0 : l.groups]), w = (0, r.useMemo)(() => {
+        }, [c, null == l ? void 0 : l.groups]), w = (0, n.useMemo)(() => {
             var e;
             return b && null != (e = f.find(e => {
                 let {
@@ -220,10 +222,10 @@
                 return t === b
             })) ? e : null
         }, [b, f]);
-        (0, r.useEffect)(() => {
+        (0, n.useEffect)(() => {
             (null == a ? void 0 : a.id) && (null == l ? void 0 : l.groups) && !s && v(null == l ? void 0 : l.groups)
         }, [null == l ? void 0 : l.groups, f, s, v, null == a ? void 0 : a.id]);
-        let m = (0, r.useMemo)(() => ({
+        let m = (0, n.useMemo)(() => ({
             groups: f,
             currentGroup: w,
             groupData: y,
@@ -236,41 +238,41 @@
             children: o
         })
     }, "useCurrentGroup", 0, () => {
-        let e = (0, r.useContext)(p);
+        let e = (0, n.useContext)(p);
         if (null === e) throw Error("useCurrentGroup must be used within a GroupsProvider");
         return e.currentGroup
     }, "useGroups", 0, () => {
-        let e = (0, r.useContext)(p);
+        let e = (0, n.useContext)(p);
         if (null === e) throw Error("useGroups must be used within a GroupsProvider");
         return e
     }], 745873)
 }, 675454, e => {
     "use strict";
     var t = e.i(677753),
-        r = function(e, t) {
-            return (r = Object.setPrototypeOf || ({
+        n = function(e, t) {
+            return (n = Object.setPrototypeOf || ({
                 __proto__: []
             }) instanceof Array && function(e, t) {
                 e.__proto__ = t
             } || function(e, t) {
-                for (var r in t) Object.prototype.hasOwnProperty.call(t, r) && (e[r] = t[r])
+                for (var n in t) Object.prototype.hasOwnProperty.call(t, n) && (e[n] = t[n])
             })(e, t)
         };
 
-    function n(e, t) {
+    function r(e, t) {
         if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
-        function n() {
+        function r() {
             this.constructor = e
         }
-        r(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
+        n(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
     }
 
-    function i(e, t, r, n) {
-        return new(r || (r = Promise))(function(i, o) {
+    function i(e, t, n, r) {
+        return new(n || (n = Promise))(function(i, o) {
             function a(e) {
                 try {
-                    s(n.next(e))
+                    s(r.next(e))
                 } catch (e) {
                     o(e)
                 }
@@ -278,7 +280,7 @@
 
             function l(e) {
                 try {
-                    s(n.throw(e))
+                    s(r.throw(e))
                 } catch (e) {
                     o(e)
                 }
@@ -286,16 +288,16 @@
 
             function s(e) {
                 var t;
-                e.done ? i(e.value) : ((t = e.value) instanceof r ? t : new r(function(e) {
+                e.done ? i(e.value) : ((t = e.value) instanceof n ? t : new n(function(e) {
                     e(t)
                 })).then(a, l)
             }
-            s((n = n.apply(e, t || [])).next())
+            s((r = r.apply(e, t || [])).next())
         })
     }
 
     function o(e, t) {
-        var r, n, i, o = {
+        var n, r, i, o = {
                 label: 0,
                 sent: function() {
                     if (1 & i[0]) throw i[1];
@@ -312,10 +314,10 @@
         function l(l) {
             return function(s) {
                 var u = [l, s];
-                if (r) throw TypeError("Generator is already executing.");
+                if (n) throw TypeError("Generator is already executing.");
                 for (; a && (a = 0, u[0] && (o = 0)), o;) try {
-                    if (r = 1, n && (i = 2 & u[0] ? n.return : u[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, u[1])).done) return i;
-                    switch (n = 0, i && (u = [2 & u[0], i.value]), u[0]) {
+                    if (n = 1, r && (i = 2 & u[0] ? r.return : u[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, u[1])).done) return i;
+                    switch (r = 0, i && (u = [2 & u[0], i.value]), u[0]) {
                         case 0:
                         case 1:
                             i = u;
@@ -326,7 +328,7 @@
                                 done: !1
                             };
                         case 5:
-                            o.label++, n = u[1], u = [0];
+                            o.label++, r = u[1], u = [0];
                             continue;
                         case 7:
                             u = o.ops.pop(), o.trys.pop();
@@ -353,9 +355,9 @@
                     }
                     u = t.call(e, o)
                 } catch (e) {
-                    u = [6, e], n = 0
+                    u = [6, e], r = 0
                 } finally {
-                    r = i = 0
+                    n = i = 0
                 }
                 if (5 & u[0]) throw u[1];
                 return {
@@ -394,21 +396,21 @@
     }
 
     function c(e) {
-        var r;
-        return null == (r = e) ? r : {
-            selectStatus: r.selectStatus,
-            reasons: r.reasons.map(u),
-            indicator: (0, t.exists)(r, "indicator") ? r.indicator : void 0,
-            engagedPlayersCount: (0, t.exists)(r, "engagedPlayersCount") ? r.engagedPlayersCount : void 0,
-            engagedPlayersUpdatedAt: (0, t.exists)(r, "engagedPlayersUpdatedAt") ? null === r.engagedPlayersUpdatedAt ? null : new Date(r.engagedPlayersUpdatedAt) : void 0,
-            thresholdTrigger: r.thresholdTrigger,
-            thresholdReset: r.thresholdReset,
-            gracePeriodDays: r.gracePeriodDays,
-            publishedToGatedAudience: r.publishedToGatedAudience,
-            reasonsMetadata: r.reasonsMetadata,
-            underReview: (0, t.exists)(r, "underReview") ? r.underReview : void 0,
-            ownerEveryoneTierWithoutSubscription: r.ownerEveryoneTierWithoutSubscription,
-            activeAllowlists: (0, t.exists)(r, "activeAllowlists") ? null === r.activeAllowlists ? null : r.activeAllowlists.map(a) : void 0
+        var n;
+        return null == (n = e) ? n : {
+            selectStatus: n.selectStatus,
+            reasons: n.reasons.map(u),
+            indicator: (0, t.exists)(n, "indicator") ? n.indicator : void 0,
+            engagedPlayersCount: (0, t.exists)(n, "engagedPlayersCount") ? n.engagedPlayersCount : void 0,
+            engagedPlayersUpdatedAt: (0, t.exists)(n, "engagedPlayersUpdatedAt") ? null === n.engagedPlayersUpdatedAt ? null : new Date(n.engagedPlayersUpdatedAt) : void 0,
+            thresholdTrigger: n.thresholdTrigger,
+            thresholdReset: n.thresholdReset,
+            gracePeriodDays: n.gracePeriodDays,
+            publishedToGatedAudience: n.publishedToGatedAudience,
+            reasonsMetadata: n.reasonsMetadata,
+            underReview: (0, t.exists)(n, "underReview") ? n.underReview : void 0,
+            ownerEveryoneTierWithoutSubscription: n.ownerEveryoneTierWithoutSubscription,
+            activeAllowlists: (0, t.exists)(n, "activeAllowlists") ? null === n.activeAllowlists ? null : n.activeAllowlists.map(a) : void 0
         }
     }
 
@@ -443,35 +445,35 @@
         }
     }
 
-    function y(e, r) {
+    function y(e, n) {
         return null == e ? e : {
             hasDeposit: e.hasDeposit,
             createdTime: (0, t.exists)(e, "createdTime") ? null === e.createdTime ? null : new Date(e.createdTime) : void 0
         }
     }
     var C = function(e) {
-        function r() {
+        function n() {
             return null !== e && e.apply(this, arguments) || this
         }
-        return n(r, e), r.prototype.coreContentBatchGetUniversePublishEligibilityRaw = function(e, r) {
+        return r(n, e), n.prototype.coreContentBatchGetUniversePublishEligibilityRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.coreContentBatchGetUniversePublishEligibilityRequest || void 0 === e.coreContentBatchGetUniversePublishEligibilityRequest) throw new t.RequiredError("coreContentBatchGetUniversePublishEligibilityRequest", "Required parameter requestParameters.coreContentBatchGetUniversePublishEligibilityRequest was null or undefined when calling coreContentBatchGetUniversePublishEligibility.");
-                            return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/universe-eligibility/batch",
                                 schemaPath: "/v1/universe-eligibility/batch",
                                 method: "POST",
                                 headers: i,
-                                query: n,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         universeIds: e.universeIds
                                     }
                                 }(e.coreContentBatchGetUniversePublishEligibilityRequest)
-                            }, r)];
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return null == e ? e : {
@@ -481,33 +483,33 @@
                     }
                 })
             })
-        }, r.prototype.coreContentBatchGetUniversePublishEligibility = function(e, t) {
+        }, n.prototype.coreContentBatchGetUniversePublishEligibility = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.coreContentBatchGetUniversePublishEligibilityRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.coreContentGetCreatorEligibilityRaw = function(e, r) {
+        }, n.prototype.coreContentGetCreatorEligibilityRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.userId || void 0 === e.userId) throw new t.RequiredError("userId", "Required parameter requestParameters.userId was null or undefined when calling coreContentGetCreatorEligibility.");
-                            return n = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/creator-eligibility/{userId}".replace("{".concat("userId", "}"), encodeURIComponent(String(e.userId))),
                                 schemaPath: "/v1/creator-eligibility/{userId}",
                                 method: "GET",
                                 headers: i,
-                                query: n
-                            }, r)];
+                                query: r
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return null == e ? e : {
@@ -524,33 +526,33 @@
                     }
                 })
             })
-        }, r.prototype.coreContentGetCreatorEligibility = function(e, t) {
+        }, n.prototype.coreContentGetCreatorEligibility = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.coreContentGetCreatorEligibilityRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.coreContentGetRealtimeSelectStatusForUniverseRaw = function(e, r) {
+        }, n.prototype.coreContentGetRealtimeSelectStatusForUniverseRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new t.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling coreContentGetRealtimeSelectStatusForUniverse.");
-                            return n = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/universe-eligibility/{universeId}/realtime-select-status".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/universe-eligibility/{universeId}/realtime-select-status",
                                 method: "GET",
                                 headers: i,
-                                query: n
-                            }, r)];
+                                query: r
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return null == e ? e : {
@@ -561,33 +563,33 @@
                     }
                 })
             })
-        }, r.prototype.coreContentGetRealtimeSelectStatusForUniverse = function(e, t) {
+        }, n.prototype.coreContentGetRealtimeSelectStatusForUniverse = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.coreContentGetRealtimeSelectStatusForUniverseRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.coreContentGetUniverseCreatorEligibilityRaw = function(e, r) {
+        }, n.prototype.coreContentGetUniverseCreatorEligibilityRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new t.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling coreContentGetUniverseCreatorEligibility.");
-                            return n = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/universe-eligibility/{universeId}/creator-eligibility".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/universe-eligibility/{universeId}/creator-eligibility",
                                 method: "GET",
                                 headers: i,
-                                query: n
-                            }, r)];
+                                query: r
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return null == e ? e : {
@@ -597,110 +599,110 @@
                     }
                 })
             })
-        }, r.prototype.coreContentGetUniverseCreatorEligibility = function(e, t) {
+        }, n.prototype.coreContentGetUniverseCreatorEligibility = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.coreContentGetUniverseCreatorEligibilityRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.coreContentNotifyUniversePublicPublishRaw = function(e, r) {
+        }, n.prototype.coreContentNotifyUniversePublicPublishRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.coreContentNotifyUniversePublicPublishRequest || void 0 === e.coreContentNotifyUniversePublicPublishRequest) throw new t.RequiredError("coreContentNotifyUniversePublicPublishRequest", "Required parameter requestParameters.coreContentNotifyUniversePublicPublishRequest was null or undefined when calling coreContentNotifyUniversePublicPublish.");
-                            return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/universe-eligibility/notify-public-publish",
                                 schemaPath: "/v1/universe-eligibility/notify-public-publish",
                                 method: "POST",
                                 headers: i,
-                                query: n,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         universeId: e.universeId
                                     }
                                 }(e.coreContentNotifyUniversePublicPublishRequest)
-                            }, r)];
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.VoidApiResponse(a)]
                     }
                 })
             })
-        }, r.prototype.coreContentNotifyUniversePublicPublish = function(e, t) {
+        }, n.prototype.coreContentNotifyUniversePublicPublish = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.coreContentNotifyUniversePublicPublishRaw(e, t)];
                         case 1:
-                            return r.sent(), [2]
+                            return n.sent(), [2]
                     }
                 })
             })
-        }, r
+        }, n
     }(t.BaseAPI);
     (function(e) {
-        function r() {
+        function n() {
             return null !== e && e.apply(this, arguments) || this
         }
-        n(r, e), r.prototype.internalCoreContentEnqueueSafetyCheckRaw = function(e, r) {
+        r(n, e), n.prototype.internalCoreContentEnqueueSafetyCheckRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.internalCoreContentEnqueueSafetyCheckRequest || void 0 === e.internalCoreContentEnqueueSafetyCheckRequest) throw new t.RequiredError("internalCoreContentEnqueueSafetyCheckRequest", "Required parameter requestParameters.internalCoreContentEnqueueSafetyCheckRequest was null or undefined when calling internalCoreContentEnqueueSafetyCheck.");
-                            return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/internal/safety-check/enqueue",
                                 schemaPath: "/v1/internal/safety-check/enqueue",
                                 method: "POST",
                                 headers: i,
-                                query: n,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         universeId: e.universeId,
                                         sfcType: e.sfcType
                                     }
                                 }(e.internalCoreContentEnqueueSafetyCheckRequest)
-                            }, r)];
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.VoidApiResponse(a)]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentEnqueueSafetyCheck = function(e, t) {
+        }, n.prototype.internalCoreContentEnqueueSafetyCheck = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.internalCoreContentEnqueueSafetyCheckRaw(e, t)];
                         case 1:
-                            return r.sent(), [2]
+                            return n.sent(), [2]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentGetUniverseAllowlistRaw = function(e, r) {
+        }, n.prototype.internalCoreContentGetUniverseAllowlistRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new t.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling internalCoreContentGetUniverseAllowlist.");
-                            return n = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/internal/universe-allowlist/{universeId}".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/internal/universe-allowlist/{universeId}",
                                 method: "GET",
                                 headers: i,
-                                query: n
-                            }, r)];
+                                query: r
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return h(e)
@@ -708,31 +710,31 @@
                     }
                 })
             })
-        }, r.prototype.internalCoreContentGetUniverseAllowlist = function(e, t) {
+        }, n.prototype.internalCoreContentGetUniverseAllowlist = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.internalCoreContentGetUniverseAllowlistRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentHandleUniverseAllowlistDecisionWebhookRaw = function(e, r) {
+        }, n.prototype.internalCoreContentHandleUniverseAllowlistDecisionWebhookRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
-                            return n = {}, (i = {})["Content-Type"] = "application/json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/internal/moderation/universe-allowlist/decision",
                                 schemaPath: "/v1/internal/moderation/universe-allowlist/decision",
                                 method: "POST",
                                 headers: i,
-                                query: n,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         annotations: void 0 === e.annotations ? void 0 : null === e.annotations ? null : e.annotations.map(s),
@@ -771,7 +773,7 @@
                                         user: e.user
                                     }
                                 }(e.internalCoreContentHandleUniverseAllowlistDecisionWebhookRequest)
-                            }, r)];
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return h(e)
@@ -779,61 +781,61 @@
                     }
                 })
             })
-        }, r.prototype.internalCoreContentHandleUniverseAllowlistDecisionWebhook = function() {
+        }, n.prototype.internalCoreContentHandleUniverseAllowlistDecisionWebhook = function() {
             return i(this, arguments, void 0, function(e, t) {
-                return void 0 === e && (e = {}), o(this, function(r) {
-                    switch (r.label) {
+                return void 0 === e && (e = {}), o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.internalCoreContentHandleUniverseAllowlistDecisionWebhookRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentInvestigateUniverseRaw = function(e, r) {
+        }, n.prototype.internalCoreContentInvestigateUniverseRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, l;
+                var r, i, l;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new t.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling internalCoreContentInvestigateUniverse.");
-                            return n = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, i = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/internal/investigation/{universeId}".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/internal/investigation/{universeId}",
                                 method: "GET",
                                 headers: i,
-                                query: n
-                            }, r)];
+                                query: r
+                            }, n)];
                         case 1:
                             return l = o.sent(), [2, new t.JSONApiResponse(l, function(e) {
-                                var r, n, i;
+                                var n, r, i;
                                 return null == e ? e : {
-                                    universeEligibility: null == (r = e.universeEligibility) ? r : {
-                                        selectStatus: r.selectStatus,
-                                        reasons: r.reasons.map(u),
-                                        indicator: (0, t.exists)(r, "indicator") ? r.indicator : void 0,
-                                        engagedPlayersCount: (0, t.exists)(r, "engagedPlayersCount") ? r.engagedPlayersCount : void 0,
-                                        engagedPlayersUpdatedAt: (0, t.exists)(r, "engagedPlayersUpdatedAt") ? null === r.engagedPlayersUpdatedAt ? null : new Date(r.engagedPlayersUpdatedAt) : void 0,
-                                        thresholdTrigger: r.thresholdTrigger,
-                                        thresholdReset: r.thresholdReset,
-                                        gracePeriodDays: r.gracePeriodDays,
-                                        publishedToGatedAudience: r.publishedToGatedAudience,
-                                        reasonsMetadata: r.reasonsMetadata,
-                                        underReview: (0, t.exists)(r, "underReview") ? r.underReview : void 0,
-                                        ownerEveryoneTierWithoutSubscription: r.ownerEveryoneTierWithoutSubscription,
-                                        activeAllowlists: (0, t.exists)(r, "activeAllowlists") ? null === r.activeAllowlists ? null : r.activeAllowlists.map(a) : void 0
+                                    universeEligibility: null == (n = e.universeEligibility) ? n : {
+                                        selectStatus: n.selectStatus,
+                                        reasons: n.reasons.map(u),
+                                        indicator: (0, t.exists)(n, "indicator") ? n.indicator : void 0,
+                                        engagedPlayersCount: (0, t.exists)(n, "engagedPlayersCount") ? n.engagedPlayersCount : void 0,
+                                        engagedPlayersUpdatedAt: (0, t.exists)(n, "engagedPlayersUpdatedAt") ? null === n.engagedPlayersUpdatedAt ? null : new Date(n.engagedPlayersUpdatedAt) : void 0,
+                                        thresholdTrigger: n.thresholdTrigger,
+                                        thresholdReset: n.thresholdReset,
+                                        gracePeriodDays: n.gracePeriodDays,
+                                        publishedToGatedAudience: n.publishedToGatedAudience,
+                                        reasonsMetadata: n.reasonsMetadata,
+                                        underReview: (0, t.exists)(n, "underReview") ? n.underReview : void 0,
+                                        ownerEveryoneTierWithoutSubscription: n.ownerEveryoneTierWithoutSubscription,
+                                        activeAllowlists: (0, t.exists)(n, "activeAllowlists") ? null === n.activeAllowlists ? null : n.activeAllowlists.map(a) : void 0
                                     },
-                                    creatorEligibility: null == (n = e.creatorEligibility) ? n : {
-                                        creatorEligibility: n.creatorEligibility.map(d),
-                                        creatorTier: v(n.creatorTier),
-                                        ageBracket: n.ageBracket,
-                                        warnings: n.warnings.map(p),
-                                        warningMetadata: n.warningMetadata,
-                                        allowlistTier: n.allowlistTier.map(v),
-                                        everyoneTierWithoutSubscription: n.everyoneTierWithoutSubscription,
-                                        countryCode: n.countryCode
+                                    creatorEligibility: null == (r = e.creatorEligibility) ? r : {
+                                        creatorEligibility: r.creatorEligibility.map(d),
+                                        creatorTier: v(r.creatorTier),
+                                        ageBracket: r.ageBracket,
+                                        warnings: r.warnings.map(p),
+                                        warningMetadata: r.warningMetadata,
+                                        allowlistTier: r.allowlistTier.map(v),
+                                        everyoneTierWithoutSubscription: r.everyoneTierWithoutSubscription,
+                                        countryCode: r.countryCode
                                     },
                                     effectiveCreatorTier: v(e.effectiveCreatorTier),
                                     contentCatalog: null == (i = e.contentCatalog) ? i : {
@@ -848,32 +850,32 @@
                     }
                 })
             })
-        }, r.prototype.internalCoreContentInvestigateUniverse = function(e, t) {
+        }, n.prototype.internalCoreContentInvestigateUniverse = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.internalCoreContentInvestigateUniverseRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentListAllowlistsRaw = function(e, r) {
+        }, n.prototype.internalCoreContentListAllowlistsRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.internalCoreContentListAllowlistsRequest || void 0 === e.internalCoreContentListAllowlistsRequest) throw new t.RequiredError("internalCoreContentListAllowlistsRequest", "Required parameter requestParameters.internalCoreContentListAllowlistsRequest was null or undefined when calling internalCoreContentListAllowlists.");
-                            return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/internal/universe-allowlist/list",
                                 schemaPath: "/v1/internal/universe-allowlist/list",
                                 method: "POST",
                                 headers: i,
-                                query: n,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         allowlistType: e.allowlistType,
@@ -884,7 +886,7 @@
                                         cursor: e.cursor
                                     }
                                 }(e.internalCoreContentListAllowlistsRequest)
-                            }, r)];
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return null == e ? e : {
@@ -896,74 +898,74 @@
                     }
                 })
             })
-        }, r.prototype.internalCoreContentListAllowlists = function(e, t) {
+        }, n.prototype.internalCoreContentListAllowlists = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.internalCoreContentListAllowlistsRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentPromoteUniverseCreatorPublishEligibilityRaw = function(e, r) {
+        }, n.prototype.internalCoreContentPromoteUniverseCreatorPublishEligibilityRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.internalCoreContentPromoteUniverseCreatorPublishEligibilityRequest || void 0 === e.internalCoreContentPromoteUniverseCreatorPublishEligibilityRequest) throw new t.RequiredError("internalCoreContentPromoteUniverseCreatorPublishEligibilityRequest", "Required parameter requestParameters.internalCoreContentPromoteUniverseCreatorPublishEligibilityRequest was null or undefined when calling internalCoreContentPromoteUniverseCreatorPublishEligibility.");
-                            return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/internal/universe-eligibility/promote-creator-publish-eligibility",
                                 schemaPath: "/v1/internal/universe-eligibility/promote-creator-publish-eligibility",
                                 method: "POST",
                                 headers: i,
-                                query: n,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         universeId: e.universeId
                                     }
                                 }(e.internalCoreContentPromoteUniverseCreatorPublishEligibilityRequest)
-                            }, r)];
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.VoidApiResponse(a)]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentPromoteUniverseCreatorPublishEligibility = function(e, t) {
+        }, n.prototype.internalCoreContentPromoteUniverseCreatorPublishEligibility = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.internalCoreContentPromoteUniverseCreatorPublishEligibilityRaw(e, t)];
                         case 1:
-                            return r.sent(), [2]
+                            return n.sent(), [2]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentRevokeUniverseAllowlistRaw = function(e, r) {
+        }, n.prototype.internalCoreContentRevokeUniverseAllowlistRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new t.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling internalCoreContentRevokeUniverseAllowlist.");
                             if (null === e.internalCoreContentRevokeUniverseAllowlistRequest || void 0 === e.internalCoreContentRevokeUniverseAllowlistRequest) throw new t.RequiredError("internalCoreContentRevokeUniverseAllowlistRequest", "Required parameter requestParameters.internalCoreContentRevokeUniverseAllowlistRequest was null or undefined when calling internalCoreContentRevokeUniverseAllowlist.");
-                            return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/internal/universe-allowlist/{universeId}".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/internal/universe-allowlist/{universeId}",
                                 method: "PATCH",
                                 headers: i,
-                                query: n,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         allowlistTypes: e.allowlistTypes.map(l)
                                     }
                                 }(e.internalCoreContentRevokeUniverseAllowlistRequest)
-                            }, r)];
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return h(e)
@@ -971,39 +973,39 @@
                     }
                 })
             })
-        }, r.prototype.internalCoreContentRevokeUniverseAllowlist = function(e, t) {
+        }, n.prototype.internalCoreContentRevokeUniverseAllowlist = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.internalCoreContentRevokeUniverseAllowlistRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
-        }, r.prototype.internalCoreContentUpsertUniverseAllowlistRaw = function(e, r) {
+        }, n.prototype.internalCoreContentUpsertUniverseAllowlistRaw = function(e, n) {
             return i(this, void 0, void 0, function() {
-                var n, i, a;
+                var r, i, a;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
                             if (null === e.internalCoreContentUpsertUniverseAllowlistRequest || void 0 === e.internalCoreContentUpsertUniverseAllowlistRequest) throw new t.RequiredError("internalCoreContentUpsertUniverseAllowlistRequest", "Required parameter requestParameters.internalCoreContentUpsertUniverseAllowlistRequest was null or undefined when calling internalCoreContentUpsertUniverseAllowlist.");
-                            return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                                 path: "/v1/internal/universe-allowlist",
                                 schemaPath: "/v1/internal/universe-allowlist",
                                 method: "POST",
                                 headers: i,
-                                query: n,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         universeId: e.universeId,
                                         allowlistTypes: e.allowlistTypes.map(l)
                                     }
                                 }(e.internalCoreContentUpsertUniverseAllowlistRequest)
-                            }, r)];
+                            }, n)];
                         case 1:
                             return a = o.sent(), [2, new t.JSONApiResponse(a, function(e) {
                                 return h(e)
@@ -1011,16 +1013,16 @@
                     }
                 })
             })
-        }, r.prototype.internalCoreContentUpsertUniverseAllowlist = function(e, t) {
+        }, n.prototype.internalCoreContentUpsertUniverseAllowlist = function(e, t) {
             return i(this, void 0, void 0, function() {
-                return o(this, function(r) {
-                    switch (r.label) {
+                return o(this, function(n) {
+                    switch (n.label) {
                         case 0:
                             return [4, this.internalCoreContentUpsertUniverseAllowlistRaw(e, t)];
                         case 1:
-                            return [4, r.sent().value()];
+                            return [4, n.sent().value()];
                         case 2:
-                            return [2, r.sent()]
+                            return [2, n.sent()]
                     }
                 })
             })
@@ -1061,10 +1063,10 @@
 }, 196945, e => {
     "use strict";
     var t = e.i(865800),
-        r = e.i(416340),
-        n = e.i(323356);
+        n = e.i(416340),
+        r = e.i(323356);
     e.i(221628), e.i(149285);
-    var i = (0, r.createContext)({
+    var i = (0, n.createContext)({
         ref: {
             current: null
         },
@@ -1078,56 +1080,56 @@
     e.s(["default", 0, function(e) {
         var o, a, l, s, u = e.children,
             c = (0, t.a)(e, ["children"]),
-            d = (0, r.useRef)(null),
-            p = (0, r.useState)(!1),
+            d = (0, n.useRef)(null),
+            p = (0, n.useState)(!1),
             v = p[0],
             b = p[1],
-            h = (0, r.useState)([]),
+            h = (0, n.useState)([]),
             y = h[0],
             C = h[1],
-            g = (0, r.useCallback)(function(e, r) {
-                void 0 === e && (e = {}), void 0 === r && (r = function() {
+            g = (0, n.useCallback)(function(e, n) {
+                void 0 === e && (e = {}), void 0 === n && (n = function() {
                     return !0
-                }), C(function(n) {
-                    return (0, t.b)((0, t.b)([], n, !0), [{
+                }), C(function(r) {
+                    return (0, t.b)((0, t.b)([], r, !0), [{
                         props: e,
-                        shouldClose: r
+                        shouldClose: n
                     }], !1)
                 })
             }, [C]),
-            f = (0, r.useCallback)(function() {
+            f = (0, n.useCallback)(function() {
                 b(!1)
             }, [b]);
-        (0, r.useEffect)(function() {
+        (0, n.useEffect)(function() {
             y.length > 0 && b(!0)
         }, [y.length]);
-        var w = (0, r.useMemo)(function() {
+        var w = (0, n.useMemo)(function() {
             return {
                 ref: d,
                 enqueue: g,
                 close: f
             }
         }, [f, g]);
-        return r.default.createElement(r.default.Fragment, null, r.default.createElement(i.Provider, {
+        return n.default.createElement(n.default.Fragment, null, n.default.createElement(i.Provider, {
             value: w
-        }, u), r.default.createElement(n.S, (0, t._)({}, (null == (o = y[0]) ? void 0 : o.props) || {}, c, {
+        }, u), n.default.createElement(r.S, (0, t._)({}, (null == (o = y[0]) ? void 0 : o.props) || {}, c, {
             TransitionProps: (0, t._)((0, t._)({}, (null == (l = null == (a = y[0]) ? void 0 : a.props) ? void 0 : l.TransitionProps) || {}), {
                 onExited: function(e) {
-                    var r, n, i, o;
+                    var n, r, i, o;
                     C(function(e) {
-                        var r = e.slice(1);
-                        return (0, t.b)([], r, !0)
-                    }), (null == (n = null == (r = y[0]) ? void 0 : r.props.TransitionProps) ? void 0 : n.onExited) && (null == (o = null == (i = y[0]) ? void 0 : i.props.TransitionProps) || o.onExited(e))
+                        var n = e.slice(1);
+                        return (0, t.b)([], n, !0)
+                    }), (null == (r = null == (n = y[0]) ? void 0 : n.props.TransitionProps) ? void 0 : r.onExited) && (null == (o = null == (i = y[0]) ? void 0 : i.props.TransitionProps) || o.onExited(e))
                 }
             }),
             onClose: function(e, t) {
-                var r, n, i;
-                (null == (r = y[0]) ? void 0 : r.shouldClose(t)) && b(!1), (null == (n = y[0]) ? void 0 : n.props.onClose) && (null == (i = y[0]) || i.props.onClose(e, t))
+                var n, r, i;
+                (null == (n = y[0]) ? void 0 : n.shouldClose(t)) && b(!1), (null == (r = y[0]) ? void 0 : r.props.onClose) && (null == (i = y[0]) || i.props.onClose(e, t))
             },
             open: v
         }), null == (s = y[0]) ? void 0 : s.props.children))
     }, "useSnackbar", 0, function() {
-        var e = (0, r.useContext)(i);
+        var e = (0, n.useContext)(i);
         return {
             ref: e.ref,
             enqueue: e.enqueue,
@@ -1137,8 +1139,8 @@
 }, 823062, e => {
     "use strict";
     var t = e.i(416340);
-    let r = (0, t.createContext)(null),
-        n = [],
+    let n = (0, t.createContext)(null),
+        r = [],
         i = ["pageload", "click", "impression", "hover", "webvitals", "apivitals", "formvitals", "error", "session"],
         o = new Set(["TTFB", "FCP", "LCP", "FID", "CLS", "INP"]);
     e.s(["UnifiedLoggerProvider", 0, e => {
@@ -1148,7 +1150,7 @@
             unifiedLogger: s,
             pageLoggerConfig: u,
             path: c
-        } = e, d = null != (a = null == u ? void 0 : u.tags) ? a : n, p = null == u ? void 0 : u.rosId, v = (0, t.useMemo)(() => ({
+        } = e, d = null != (a = null == u ? void 0 : u.tags) ? a : r, p = null == u ? void 0 : u.rosId, v = (0, t.useMemo)(() => ({
             tags: d,
             rosId: p,
             path: c
@@ -1161,11 +1163,11 @@
         }, [v]), (0, t.useLayoutEffect)(() => {
             let e = e => {
                 var t;
-                let r, n = (r = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== r && o.has(r)) ? b.current : h.current;
-                void 0 !== n.path && (e.parameters = {
+                let n, r = (n = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== n && o.has(n)) ? b.current : h.current;
+                void 0 !== r.path && (e.parameters = {
                     ...e.parameters,
-                    path: n.path
-                }), n.tags.forEach(t => e.addTag(t)), void 0 !== n.rosId && e.addTag("owner: ".concat(n.rosId))
+                    path: r.path
+                }), r.tags.forEach(t => e.addTag(t)), void 0 !== r.rosId && e.addTag("owner: ".concat(r.rosId))
             };
             return i.forEach(t => {
                 s.events.on(t, e)
@@ -1179,15 +1181,15 @@
             unifiedLogger: s,
             pageContext: v
         }), [s, v]);
-        return t.default.createElement(r.Provider, {
+        return t.default.createElement(n.Provider, {
             value: y
         }, l)
     }, "useUnifiedLoggerProvider", 0, function() {
-        let e = (0, t.useContext)(r);
+        let e = (0, t.useContext)(n);
         if (null === e) throw Error("useUnifiedLoggerProvider must be used within a UnifiedLoggerProvider");
         return e
     }])
 }]);
 
-//# debugId=4bb34187-8761-efcb-1c7c-7167d187f38c
-//# sourceMappingURL=1in1nqaqbqxfd.js.map
+//# debugId=d2d93675-7e90-060e-f40c-6fef90848a38
+//# sourceMappingURL=13-u8gqhhhlrn.js.map

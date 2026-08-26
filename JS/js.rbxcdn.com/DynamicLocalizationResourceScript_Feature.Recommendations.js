@@ -24,6 +24,7 @@ Roblox.LangDynamic["Feature.Recommendations"] = {
     "Label.AppleOnly": "Apple Only",
     "Label.Card.Remaining": "Remaining:",
     "Action.Add": "Add to Cart",
-    "Action.Remove": "Remove from Cart"
+    "Action.Remove": "Remove from Cart",
+    "Heading.RecommendedOffers": "Recommended Offers"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Recommendations");

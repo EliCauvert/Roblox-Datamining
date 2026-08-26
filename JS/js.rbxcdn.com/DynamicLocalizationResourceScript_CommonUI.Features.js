@@ -110,7 +110,7 @@ Roblox.LangDynamic["CommonUI.Features"] = {
     "Label.InviteConnections": "Invite Connections",
     "Label.JoinConnections": "Join Connections",
     "Label.Connection": "Connection",
-    "Label.Connect": "Connect",
+    "Label.Connect": "Friends",
     "Label.Sitemap": "Sitemap",
     "Label.CreateAccount": "Create account",
     "Label.X": "Roblox Plus",
