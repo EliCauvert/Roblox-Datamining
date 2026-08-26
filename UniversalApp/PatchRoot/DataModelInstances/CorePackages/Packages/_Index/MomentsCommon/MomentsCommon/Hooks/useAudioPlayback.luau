@@ -138,17 +138,17 @@ return function(p1, p2, p3)
 			current.Volume = 0.2
 		end
 	end, { var4.enabled, var3.enabled })
-	local var1 = useCallback(function()
+	local var15 = useCallback(function()
 		-- upvalues: var3 (ref)
 		var3.disable()
 	end, {})
 	useEffect(function()
-		-- upvalues: var2 (ref), var14 (ref), var1 (ref)
+		-- upvalues: var2 (ref), var14 (ref), var15 (ref)
 		local t = {}
 		
 		if var2.current then
 			table.insert(t, game:GetService("RunService").RenderStepped:Connect(var14))
-			table.insert(t, var2.current.Ended:Connect(var1))
+			table.insert(t, var2.current.Ended:Connect(var15))
 		end
 		return function()
 			-- upvalues: t (ref)
@@ -156,7 +156,7 @@ return function(p1, p2, p3)
 				v:Disconnect()
 			end
 		end
-	end, { var14, var1 })
+	end, { var14, var15 })
 	
 	return {
 		timeline = {

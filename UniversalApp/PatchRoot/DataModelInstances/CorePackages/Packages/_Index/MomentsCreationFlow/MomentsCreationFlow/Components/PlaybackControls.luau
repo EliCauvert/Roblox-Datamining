@@ -52,8 +52,8 @@ return function(p1)
 				knobVisibility = foundationModule.Enums.Visibility.None,
 				variant = foundationModule.Enums.SliderVariant.Standard,
 				onValueChanged = reactModule.useCallback(function(p2)
-					-- upvalues: p2 (ref)
-					p2.playbackController.timeline.seek(p2 * p2.playbackController.timeline.duration)
+					-- upvalues: p1 (ref)
+					p1.playbackController.timeline.seek(p2 * p1.playbackController.timeline.duration)
 				end, {
 					p1.playbackController.timeline.duration,
 					p1.playbackController.timeline.seek

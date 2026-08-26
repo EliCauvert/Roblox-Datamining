@@ -73,9 +73,9 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 	local highlightPosition = var17.highlightPosition
 	local highlightWidth = var17.highlightWidth
 	local activeItemHeight = var17.activeItemHeight
-	local var18 = if flagsModule.FoundationFixTabsFitBorderWidth then var18.size else nil
+	local var18 = if flagsModule.FoundationFixTabsFitBorderWidth then var2.size else nil
 	local createElement = reactModule.createElement
-	local var19 = withCommonPropsModule(var18, {
+	local var19 = withCommonPropsModule(var2, {
 		tag = if flagsModule.FoundationUnifiedScrimScrolling then "auto-y no-clip" else "auto-y clip",
 		Size = UDim2.fromScale(1, 0),
 		sizeConstraint = if flagsModule.FoundationUnifiedScrimScrolling and not var6 then {
@@ -98,20 +98,20 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 		LayoutOrder = 1,
 		tag = "auto-y",
 		Size = UDim2.fromScale(1, 0),
-		testId = `{var18.testId}--wrapper`
+		testId = `{var2.testId}--wrapper`
 	}
 	local t_5 = {}
 	local createElement_3 = reactModule.createElement
 	local var21 = if flagsModule.FoundationUnifiedScrimScrolling then overflowScrollContainerModule else overflowScrollContainerModule_1
 	local var22 = if flagsModule.FoundationUnifiedScrimScrolling then {
 		LayoutOrder = 1,
-		size = var18.size,
-		scrimBottomInset = var17.Stroke.Thick,
-		testId = `{var18.testId}--scroll-container`
+		size = var2.size,
+		scrimBottomInset = var1.Stroke.Thick,
+		testId = `{var2.testId}--scroll-container`
 	} else {
 		LayoutOrder = 1,
-		size = var18.size,
-		testId = `{var18.testId}--scroll-container`
+		size = var2.size,
+		testId = `{var2.testId}--scroll-container`
 	}
 	local t_6 = {}
 	local createElement_4 = reactModule.createElement
@@ -121,7 +121,7 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 	local t_8 = { ["row flex-y-fill auto-xy"] = true }
 	
 	if flagsModule.FoundationFixTabsFitBorderWidth then
-		var14 = not var22
+		var14 = not var6
 		
 		if var14 then
 			var14 = true
@@ -132,14 +132,14 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 			end
 		end
 	else
-		var14 = not var22
+		var14 = not var6
 	end
 	t_8["gap-large"] = var14
 	t_7.tag = t_8
-	t_7.Size = if var22 then UDim2.fromScale(1, 0) else nil
-	t_7.testId = `{var18.testId}--list`
-	t_6.TabList = createElement_4(viewModule, t_7, dashModule.map(var18.tabs, function(p2, p3)
-		-- upvalues: reactModule (copy), tabItemModule (copy), activeTabId (ref), var21 (ref), var18 (ref), var16 (write)
+	t_7.Size = if var6 then UDim2.fromScale(1, 0) else nil
+	t_7.testId = `{var2.testId}--list`
+	t_6.TabList = createElement_4(viewModule, t_7, dashModule.map(var2.tabs, function(p2, p3)
+		-- upvalues: reactModule (copy), tabItemModule (copy), activeTabId (ref), var5 (ref), var2 (ref), var16 (write)
 		return reactModule.createElement(tabItemModule, {
 			id = p2.id,
 			text = p2.text,
@@ -147,12 +147,12 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 			key = tostring(p2.id),
 			icon = p2.icon,
 			isActive = p2.id == activeTabId,
-			onActivated = var21,
+			onActivated = var5,
 			LayoutOrder = p3,
-			fillBehavior = var18.fillBehavior,
-			size = var18.size,
+			fillBehavior = var2.fillBehavior,
+			size = var2.size,
 			isDisabled = p2.isDisabled,
-			testId = `{var18.testId}--item-{p5.id}`,
+			testId = `{var2.testId}--item-{p5.id}`,
 			ref = var16[p2.id]
 		})
 	end))
@@ -160,35 +160,35 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 	t_5.Border = reactModule.createElement(viewModule, {
 		LayoutOrder = 2,
 		AnchorPoint = Vector2.new(0, 1),
-		Size = UDim2.new(1, 0, 0, var17.Stroke.Thick),
+		Size = UDim2.new(1, 0, 0, var1.Stroke.Thick),
 		Position = UDim2.fromScale(0, 1),
-		backgroundStyle = var17.Color.Stroke.Default,
-		testId = `{var18.testId}--border`
+		backgroundStyle = var1.Color.Stroke.Default,
+		testId = `{var2.testId}--border`
 	})
 	t_3.Wrapper = createElement_2(var20, t_4, t_5)
 	t_3.Content = if var7 and var7.content then reactModule.createElement(viewModule, {
 		LayoutOrder = 2,
 		tag = "auto-y",
 		Size = UDim2.fromScale(1, 0),
-		testId = `{var18.testId}--content`
+		testId = `{var2.testId}--content`
 	}, var7.content) else nil
 	t_1.Tabs = createElement_1(viewModule, t_2, t_3)
 	t_1.AnimatedBorder = reactModule.createElement(viewModule, {
 		LayoutOrder = 0,
-		ZIndex = var18.ZIndex + 1,
+		ZIndex = var2.ZIndex + 1,
 		Size = highlightWidth:map(function(p2)
-			-- upvalues: var17 (ref)
-			return UDim2.fromOffset(p2, var17.Stroke.Thick)
+			-- upvalues: var1 (ref)
+			return UDim2.fromOffset(p2, var1.Stroke.Thick)
 		end),
 		AnchorPoint = if flagsModule.FoundationFixTabsBorderPosition then Vector2.new(0, 1) else nil,
 		Position = reactModule.joinBindings({ highlightPosition, activeItemHeight }):map(function(p2)
-			-- upvalues: flagsModule (copy), var17 (ref)
+			-- upvalues: flagsModule (copy), var1 (ref)
 			local var23 = p2[2]
 			
-			return UDim2.fromOffset(p2[1], if flagsModule.FoundationFixTabsBorderPosition then var23 else var23 - var23.Stroke.Thick)
+			return UDim2.fromOffset(p2[1], if flagsModule.FoundationFixTabsBorderPosition then var23 else var23 - var1.Stroke.Thick)
 		end),
-		backgroundStyle = var17.Color.System.Contrast,
-		testId = `{var18.testId}--animated-border`
+		backgroundStyle = var1.Color.System.Contrast,
+		testId = `{var2.testId}--animated-border`
 	})
 	
 	return createElement(viewModule, var19, t_1)

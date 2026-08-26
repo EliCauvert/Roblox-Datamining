@@ -5,7 +5,7 @@ return {
 	name = "Components [Planned]",
 	group = "Foundation",
 	roact = require(parent_1.Roact),
-	storyRoots = require(parent.GetStories)("planned"),
+	storyRoots = require(parent.GetStories).getStorybookRoots("planned"),
 	mapStory = require(parent.StoryMiddleware),
 	packages = {
 		React = require(parent_1.React),

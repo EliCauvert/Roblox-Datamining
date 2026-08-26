@@ -75,9 +75,9 @@ local function parseDateTimeFromText(p1)
 			
 			return DateTime.fromLocalTime(tonumber(var11), tonumber(var9), tonumber(var10), var6, var7, 0)
 		elseif var8 == 5 then
-			local var12, var13, var14 = var13:match("^(%d%d%d%d)[/%.%-](%d%d)[/%.%-](%d%d)$")
+			local var12, var13, var14 = var5:match("^(%d%d%d%d)[/%.%-](%d%d)[/%.%-](%d%d)$")
 			
-			return DateTime.fromLocalTime(tonumber(var12), tonumber(var13), tonumber(var14), var14, var7, 0)
+			return DateTime.fromLocalTime(tonumber(var12), tonumber(var13), tonumber(var14), var6, var7, 0)
 		end
 		error("Invalid date format: " .. var19)
 	end)

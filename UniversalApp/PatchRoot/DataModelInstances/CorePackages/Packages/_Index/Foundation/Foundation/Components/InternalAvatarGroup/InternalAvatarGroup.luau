@@ -1,7 +1,9 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
+local builderIconsModule = require(parent.BuilderIcons)
 local reactModule = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
+local icon = builderIconsModule.Icon
 local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
 local iconModule = require(foundation.Components.Icon)
 local iconSizeModule = require(foundation.Enums.IconSize)
@@ -24,7 +26,7 @@ local t = {
 }
 
 local function AvatarOverflow(p1)
-	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), iconSizeModule (ref), textModule (ref)
+	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconSizeModule (ref), textModule (ref)
 	local emphasis = useTokensModule()[usePresentationContext().colorNamespace or colorNamespaceModule.Color].Content.Emphasis
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
@@ -32,7 +34,7 @@ local function AvatarOverflow(p1)
 		Size = p1.Size,
 		backgroundStyle = useCumulativeBackgroundModule(p1.backplateStyle, p1.backgroundStyle)
 	}), if p1.isEllipsed then reactModule.createElement(iconModule, {
-		name = "three-dots-horizontal",
+		name = icon.ThreeDotsHorizontal,
 		size = iconSizeModule.XSmall,
 		style = emphasis,
 		testId = `{p1.testId}--ellipses`
@@ -79,7 +81,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 			LayoutOrder = i,
 			Position = uDim2,
 			ZIndex = var5,
-			testId = `{var1.testId}--avatar-{var21}`,
+			testId = `{var1.testId}--avatar-{var22}`,
 			backgroundStyle = shift300,
 			backplateStyle = backplateStyle
 		})

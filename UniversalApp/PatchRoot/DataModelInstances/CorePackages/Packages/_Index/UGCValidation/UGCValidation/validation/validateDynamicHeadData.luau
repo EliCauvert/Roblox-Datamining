@@ -37,14 +37,14 @@ local function validateFacialBounds(p1, p2)
 	-- upvalues: pcallDeferredModule (ref), getExpectedPartSizeModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), var1 (ref)
 	local isServer = p2.isServer
 	local var4, var5 = pcallDeferredModule(function()
-		-- upvalues: getExpectedPartSizeModule (copy), p1 (ref), p2 (ref), getEditableMeshFromContextModule (copy), UGCValidationService (copy), var4 (copy)
+		-- upvalues: getExpectedPartSizeModule (copy), p1 (ref), p2 (ref), getEditableMeshFromContextModule (copy), UGCValidationService (copy), var1 (copy)
 		local var6 = getExpectedPartSizeModule(p1, p2)
 		local var7, var8 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 		
 		if not var7 then
 			error("Failed to retrieve MeshContent")
 		end
-		return UGCValidationService:ValidateEditableMeshFacialBounds(var8, var6, var6)
+		return UGCValidationService:ValidateEditableMeshFacialBounds(var8, var1, var6)
 	end, p2)
 	
 	if var4 then
@@ -75,13 +75,13 @@ local function validateFacialExpressiveness(p1, p2)
 		if not var7 then
 			error("Failed to retrieve MeshContent")
 		end
-		return UGCValidationService:ValidateEditableMeshFacialExpressiveness(var8, var8, var6)
+		return UGCValidationService:ValidateEditableMeshFacialExpressiveness(var8, var3, var6)
 	end, p2)
 	
 	if var4 then
-		if var5 < var5 then
+		if var5 < var2 then
 			return false, {
-				string.format("DynamicHead (%s) did not pass threshold (%f < %f) for percent change when emoting", p1:GetFullName(), var5, var5)
+				string.format("DynamicHead (%s) did not pass threshold (%f < %f) for percent change when emoting", p1:GetFullName(), var5, var2)
 			}
 		end
 		return true

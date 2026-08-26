@@ -236,7 +236,7 @@ t.defaultRenderers = {
 				CopyToClipboardButton = reactModule.createElement(foundationModule.IconButton, {
 					size = foundationModule.Enums.InputSize.Small,
 					icon = { name = foundationModule.Enums.IconName.TwoStackedSquares },
-					onActivated = var12(text_1)
+					onActivated = var9(text_1)
 				})
 			}) else nil,
 			CodeWrapper = reactModule.createElement(foundationModule.View, {
@@ -454,7 +454,7 @@ t.defaultRenderers = {
 }
 
 function t.render(p8, p9)
-	-- upvalues: t (ref), dashModule (ref), builderSans (ref), code (ref), uDim2 (ref), var10 (ref), processChildren (ref), render (ref)
+	-- upvalues: t (ref), dashModule (ref), builderSans (ref), code (ref), uDim2 (ref), var1 (ref), processChildren (ref), render (ref)
 	t.renderers = p9.userRenderers
 	local var12 = dashModule.joinDeep({
 		isInline = false,
@@ -470,7 +470,7 @@ function t.render(p8, p9)
 		linkStyles = {
 			linkColor = `#{p9.tokens.Color.Content.Link.Color3:ToHex()}`
 		},
-		linkCallback = p9.linkCallback or var12,
+		linkCallback = p9.linkCallback or var1,
 		colorScheme = p9.colorScheme,
 		processChildren = processChildren
 	}, table.clone(p9.markdownRendererProps or {}))

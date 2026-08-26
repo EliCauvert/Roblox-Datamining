@@ -114,7 +114,7 @@ return {
 		for i, v_1 in var3 do
 			local keyPrefix = `{v_1.keyPrefix}-{v_1.day}`
 			local var6 = var4[keyPrefix]
-			table.insert(list, reactModule.createElement(var5, {
+			table.insert(list, reactModule.createElement(var1, {
 				key = keyPrefix,
 				applyEmphasis = v_1.applyEmphasis,
 				bandPosition = var6.bandPosition,
@@ -135,7 +135,7 @@ return {
 		return reactModule.createElement(viewModule, {
 			tag = "size-full-0 auto-y",
 			LayoutOrder = p1.LayoutOrder,
-			ref = var5,
+			ref = var2,
 			Size = p1.Size,
 			testId = `{p1.testId}--weekAndDates`
 		}, list)

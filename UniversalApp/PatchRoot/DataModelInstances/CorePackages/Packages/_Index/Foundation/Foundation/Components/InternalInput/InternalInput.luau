@@ -146,7 +146,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	if not var1 then
 		return reactModule.createElement(viewModule, withCommonPropsModule(var2, dashModule.union(t_2, t_3)), var2.children)
 	end
-	local var1 = if flagsModule.FoundationInternalInputBeta then if typeof(text) == "string" then reactModule.createElement(inputLabelModule, {
+	local var16 = if flagsModule.FoundationInternalInputBeta then if typeof(text) == "string" then reactModule.createElement(inputLabelModule, {
 		Text = text,
 		textStyle = var11.labelStyle,
 		size = getInputTextSizeModule(var2.size),
@@ -163,8 +163,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}
 	}, t_2)), {
 		Input = reactModule.createElement(viewModule, t_3, var2.children),
-		InputLabel = if not flagsModule.FoundationInternalInputBeta then if var2.label.hint == nil or var2.label.hint == "" then var1 else reactModule.createElement(viewModule, { tag = "col gap-xxsmall auto-xy" }, {
-			InputLabel = var1,
+		InputLabel = if not flagsModule.FoundationInternalInputBeta then if var2.label.hint == nil or var2.label.hint == "" then var16 else reactModule.createElement(viewModule, { tag = "col gap-xxsmall auto-xy" }, {
+			InputLabel = var16,
 			Hint = reactModule.createElement(inputHintModule, {
 				LayoutOrder = 2,
 				text = var2.label.hint,

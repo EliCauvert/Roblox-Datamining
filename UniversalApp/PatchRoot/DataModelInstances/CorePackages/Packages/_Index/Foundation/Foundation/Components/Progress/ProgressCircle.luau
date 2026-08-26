@@ -93,7 +93,7 @@ local function ProgressGradient(p1)
 		Transparency = reactModule.useMemo(function()
 			-- upvalues: var1 (ref), isIndeterminate (ref)
 			local transparency = var1.Color.Content.Emphasis.Transparency
-			local var2 = if isIndeterminate then 1 else var2.Color.Shift.Shift_200.Transparency
+			local var2 = if isIndeterminate then 1 else var1.Color.Shift.Shift_200.Transparency
 			
 			return NumberSequence.new({
 				NumberSequenceKeypoint.new(0, transparency),

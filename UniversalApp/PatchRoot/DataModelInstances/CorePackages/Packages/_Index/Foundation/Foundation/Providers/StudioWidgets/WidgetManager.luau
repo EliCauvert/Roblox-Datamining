@@ -81,7 +81,7 @@ function t:_flushWith(p1, p2)
 		local var3 = p3.Widget:FindFirstAncestorWhichIsA("LayerCollector") ~= nil
 		
 		if flagsModule.FoundationWidgetManagerSnapshotFlush and not var3 then
-			table.insert(var3, p3)
+			table.insert(var1, p3)
 		end
 		return var3
 	end)

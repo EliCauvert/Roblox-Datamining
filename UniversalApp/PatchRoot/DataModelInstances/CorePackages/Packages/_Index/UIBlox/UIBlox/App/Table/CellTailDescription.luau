@@ -62,12 +62,12 @@ function cellTailDescription.render(p1)
 	local var1 = p1.props.infoIcon ~= nil
 	
 	return if text or showArrow or var1 then withStyleModule(function(p2)
-		-- upvalues: p2 (ref), roactModule (copy), reactModule (copy), text (ref), renderTextOverride (ref), showArrow (ref), imageSetComponentModule (copy), UIBloxConfigModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imagesModule (copy), var1 (ref)
+		-- upvalues: p1 (ref), roactModule (copy), reactModule (copy), text (ref), renderTextOverride (ref), showArrow (ref), imageSetComponentModule (copy), UIBloxConfigModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imagesModule (copy), var1 (ref)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			[reactModule.Tag] = if p2.props.testId then `data-testid={p2.props.testId}` else nil
+			[reactModule.Tag] = if p1.props.testId then `data-testid={p1.props.testId}` else nil
 		}, {
 			ListLayout = roactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
@@ -75,7 +75,7 @@ function cellTailDescription.render(p1)
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 8)
 			}),
-			Description = p2.getDescription(text, p2.props.textColor or p2.Theme.TextDefault, p2.props.textFont or p2.Font.Body, 1, renderTextOverride),
+			Description = p1.getDescription(text, p1.props.textColor or p2.Theme.TextDefault, p1.props.textFont or p2.Font.Body, 1, renderTextOverride),
 			RightArrow = showArrow and (roactModule.createElement(imageSetComponentModule.Label, {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
@@ -89,7 +89,7 @@ function cellTailDescription.render(p1)
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				Size = if UIBloxConfigModule.enableScalingForSomeEdpIcons then UDim2.fromOffset(getIconSizeModule(iconSizeModule.Small, p2), getIconSizeModule(iconSizeModule.Small, p2)) else UDim2.fromOffset(getIconSizeModule(iconSizeModule.Small), getIconSizeModule(iconSizeModule.Small)),
-				Image = p2.props.infoIcon,
+				Image = p1.props.infoIcon,
 				ImageColor3 = p2.Theme.IconEmphasis.Color,
 				ImageTransparency = p2.Theme.IconEmphasis.Transparency
 			}) or nil)

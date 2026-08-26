@@ -23,7 +23,7 @@ local function getReactPackagePrefixes()
 			table.insert(t, var2:GetFullName():gsub("^game%.", ""))
 		end
 	end
-	var2 = t
+	var1 = t
 	
 	return t
 end

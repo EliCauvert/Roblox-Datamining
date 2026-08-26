@@ -26,15 +26,15 @@ function composeStyleVariant(p1, ...)
 		-- upvalues: var1 (ref), dashModule (copy), mergeTags (copy)
 		if p2 == nil then return end
 		for i, v in p2 do
-			local var2 = var2
-			local var3 = var2[i] or {}
+			local var2 = var1
+			local var3 = var1[i] or {}
 			local var4 = dashModule.join(var3, v)
 			var4.tag = mergeTags(var3.tag, v.tag)
 			var2[i] = var4
 		end
 	end, ...)
 	
-	return var2
+	return var1
 end
 
 return composeStyleVariant

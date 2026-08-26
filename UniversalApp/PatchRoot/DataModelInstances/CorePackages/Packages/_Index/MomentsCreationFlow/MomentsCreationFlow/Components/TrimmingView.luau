@@ -69,29 +69,29 @@ return function(p1)
 		var5.current = false
 		var7(nil)
 	end, {}), useCallback(function(p2)
-		-- upvalues: var4 (ref), p2 (ref), var5 (ref), var7 (ref)
-		var4.current = p2.playbackController.playback.isPlaying
-		var5.current = p2.playbackController.volume.isMuted
-		p2.playbackController.volume.mute()
-		p2.playbackController.playback.pause()
+		-- upvalues: var4 (ref), p1 (ref), var5 (ref), var7 (ref)
+		var4.current = p1.playbackController.playback.isPlaying
+		var5.current = p1.playbackController.volume.isMuted
+		p1.playbackController.volume.mute()
+		p1.playbackController.playback.pause()
 		var7(p2)
 	end, {
 		p1.playbackController.playback.isPlaying,
 		p1.playbackController.volume.isMuted
 	}), useCallback(function(p2, p3)
-		-- upvalues: p2 (ref)
-		p2.onTrimUpdate({
-			startTime = math.clamp(p2 or (if p2.trimEdit then p2.trimEdit.startTime else 0), 0, p2.playbackController.timeline.timeLength),
-			endTime = math.clamp(p3 or (if p2.trimEdit then p2.trimEdit.endTime else p2.playbackController.timeline.timeLength), 0, p2.playbackController.timeline.timeLength)
+		-- upvalues: p1 (ref)
+		p1.onTrimUpdate({
+			startTime = math.clamp(p2 or (if p1.trimEdit then p1.trimEdit.startTime else 0), 0, p1.playbackController.timeline.timeLength),
+			endTime = math.clamp(p3 or (if p1.trimEdit then p1.trimEdit.endTime else p1.playbackController.timeline.timeLength), 0, p1.playbackController.timeline.timeLength)
 		})
-		p2.playbackController.timeline.seek(0)
+		p1.playbackController.timeline.seek(0)
 	end, {
 		p1.onTrimUpdate,
 		p1.trimEdit,
 		p1.playbackController.timeline.timeLength
 	}), useCallback(function(p2)
-		-- upvalues: p2 (ref)
-		p2.playbackController.timeline.seek(p2 * p2.playbackController.timeline.duration)
+		-- upvalues: p1 (ref)
+		p1.playbackController.timeline.seek(p2 * p1.playbackController.timeline.duration)
 	end, {
 		p1.playbackController.timeline.seek,
 		p1.playbackController.timeline.duration
@@ -111,9 +111,9 @@ return function(p1)
 	}, {
 		Padding = reactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, var2.Padding.Small),
-			PaddingBottom = UDim.new(0, math.max(var12.bottom, var2.Padding.Small)),
-			PaddingLeft = UDim.new(0, math.max(var12.left, var2.Padding.XLarge)),
-			PaddingRight = UDim.new(0, math.max(var12.right, var2.Padding.XLarge))
+			PaddingBottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Small)),
+			PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+			PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 		}),
 		Nav = reactModule.createElement(view, {
 			LayoutOrder = 1,

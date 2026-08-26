@@ -71,7 +71,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			var21 = 0
 		end
 		var17(otterModule.ease(math.clamp(var21, 0, maxValue), {
-			duration = var21.Time.Time_200,
+			duration = var2.Time.Time_200,
 			easingStyle = Enum.EasingStyle.Quad,
 			startingValue = current.CanvasPosition.X
 		}))
@@ -88,11 +88,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		-- upvalues: var8 (ref), controlStateModule (copy)
 		var8(if p3 ~= controlStateModule.Hover then p3 == controlStateModule.Pressed else true)
 	end, {})
-	local var1 = reactModule.useCallback(function(p3)
+	local var23 = reactModule.useCallback(function(p3)
 		-- upvalues: var10 (ref), controlStateModule (copy)
 		var10(if p3 ~= controlStateModule.Hover then p3 == controlStateModule.Pressed else true)
 	end, {})
-	local var1 = reactModule.useCallback(function(p3)
+	local var24 = reactModule.useCallback(function(p3)
 		-- upvalues: var12 (ref), controlStateModule (copy)
 		var12(if p3 ~= controlStateModule.Hover then p3 == controlStateModule.Pressed else true)
 	end, {})
@@ -145,7 +145,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				preferredInput = forcePreferredInput,
 				isVisible = var1.forceScrimsVisible or var5,
 				onActivated = var20,
-				onStateChanged = var1,
+				onStateChanged = var23,
 				testId = `{var1.testId}--scrim-start`
 			}),
 			ScrimEnd = reactModule.createElement(scrimModule, {
@@ -157,7 +157,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				preferredInput = forcePreferredInput,
 				isVisible = var1.forceScrimsVisible or var3,
 				onActivated = var21,
-				onStateChanged = var1,
+				onStateChanged = var24,
 				testId = `{var1.testId}--scrim-end`
 			})
 		})

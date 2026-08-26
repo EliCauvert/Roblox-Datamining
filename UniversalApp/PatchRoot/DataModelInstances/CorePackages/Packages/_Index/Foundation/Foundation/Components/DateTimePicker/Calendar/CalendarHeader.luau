@@ -77,11 +77,11 @@ return function(p1)
 				items = var8,
 				maxHeight = var5,
 				onItemChanged = reactModule.useCallback(function(p2)
-					-- upvalues: p2 (ref), viewDate (ref)
+					-- upvalues: p1 (ref), viewDate (ref)
 					local var10 = tonumber(p2)
 					
 					if var10 then
-						p2.onViewDateChanged({ month = var10, year = viewDate.year })
+						p1.onViewDateChanged({ month = var10, year = viewDate.year })
 					end
 				end, { p1.onViewDateChanged, viewDate.year }),
 				scrollingFrameRef = useScrollToSelectedRefModule(var8, viewDate.month),
@@ -97,11 +97,11 @@ return function(p1)
 				items = var9,
 				maxHeight = var5,
 				onItemChanged = reactModule.useCallback(function(p2)
-					-- upvalues: p2 (ref), viewDate (ref)
+					-- upvalues: p1 (ref), viewDate (ref)
 					local var10 = tonumber(p2)
 					
 					if var10 then
-						p2.onViewDateChanged({ month = viewDate.month, year = var10 })
+						p1.onViewDateChanged({ month = viewDate.month, year = var10 })
 					end
 				end, { p1.onViewDateChanged, viewDate.month }),
 				scrollingFrameRef = useScrollToSelectedRefModule(var9, viewDate.year),

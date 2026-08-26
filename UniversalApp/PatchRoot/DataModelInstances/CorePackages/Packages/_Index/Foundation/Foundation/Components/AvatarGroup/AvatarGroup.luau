@@ -1,5 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
+local parent = foundation.Parent
+local reactModule = require(parent.React)
+local icon = require(parent.BuilderIcons).Icon
 local avatarModule = require(foundation.Components.Avatar)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
@@ -27,7 +29,7 @@ local t = {
 }
 
 local function AvatarOverflow(p1)
-	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), iconSizeModule (ref), textModule (ref)
+	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconSizeModule (ref), textModule (ref)
 	local var1 = usePresentationContext()
 	local emphasis = useTokensModule()[var1.colorNamespace or colorNamespaceModule.Color].Content.Emphasis
 	
@@ -36,7 +38,7 @@ local function AvatarOverflow(p1)
 		Size = p1.Size,
 		backgroundStyle = useCumulativeBackgroundModule(p1.backplateStyle, p1.backgroundStyle)
 	}), if var1.isIconSize and (if p1.size ~= inputSizeModule.XSmall then p1.size == inputSizeModule.Small else true) then reactModule.createElement(iconModule, {
-		name = "three-dots-horizontal",
+		name = icon.ThreeDotsHorizontal,
 		size = iconSizeModule.XSmall,
 		style = emphasis
 	}) else reactModule.createElement(textModule, {

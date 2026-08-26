@@ -72,7 +72,7 @@ return function(p1)
 		local timeSlotIndex = dateTimeCalendarViewUtilitiesModule.getTimeSlotIndex(var7, var9)
 		
 		if timeSlotIndex then
-			current.CanvasPosition = Vector2.new(0, math.max(0, (timeSlotIndex - 1) * size900 - var10.height / 2 + size900 / 2))
+			current.CanvasPosition = Vector2.new(0, math.max(0, (timeSlotIndex - 1) * size900 - var1.height / 2 + size900 / 2))
 			
 			return
 		end

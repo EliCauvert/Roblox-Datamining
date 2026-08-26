@@ -41,11 +41,19 @@ local function createStyleSheet(p1, p2, p3, p4, p5)
 end
 
 local function createStyleRule(p1, p2)
+	-- upvalues: flagsModule (ref)
 	local text = "." .. p6
 	local var2 = if p1.modifier ~= nil then "" else ":" .. p5.modifier
 	local text_1 = text .. var24 .. (if p1.pseudo ~= nil then "" else " ::" .. p5.pseudo)
 	
-	if p1.pseudo ~= nil then
+	if flagsModule.FoundationStyleRulePseudoName then
+		if p1.pseudoName ~= nil then
+			text_1 ..= " #" .. p5.pseudoName
+		end
+		if p1.pseudo ~= nil and p1.pseudoName == nil then
+			text_1 ..= ", " .. text .. var24 .. " > " .. p5.pseudo
+		end
+	elseif p1.pseudo ~= nil then
 		text_1 ..= ", " .. text .. var24 .. " > " .. p5.pseudo
 	end
 	local styleRule = Instance.new("StyleRule")
@@ -72,12 +80,12 @@ local function applyAttributes(p1, p2)
 end
 
 local function addRegisteredStyleSheetTags(p3, p4)
-	-- upvalues: createStyleRule (ref), applyAttributes (ref)
+	-- upvalues: flagsModule (ref), createStyleRule (ref), applyAttributes (ref)
 	for i, v in p4 do
 		if not p3.tags[v] then
 			local var4 = p3.rules[v]
 			
-			if var4 then
+			if var4 and (flagsModule.FoundationStyleRulePseudoName or var4.pseudoName == nil) then
 				createStyleRule(var4, v).Parent = p3.instance
 				applyAttributes(p3, var4.attributes)
 				
@@ -135,8 +143,8 @@ local function _(p10)
 end
 
 local function flushPendingCleanup()
-	-- upvalues: var5 (write), t_1 (ref), t (ref)
-	var5 = false
+	-- upvalues: var1 (write), t_1 (ref), t (ref)
+	var1 = false
 	
 	for i in t_1 do
 		t_1[i] = nil
@@ -150,13 +158,13 @@ local function flushPendingCleanup()
 end
 
 local _ = function(p10)
-	-- upvalues: t_1 (ref), var6 (write), flushPendingCleanup (ref)
+	-- upvalues: t_1 (ref), var1 (write), flushPendingCleanup (ref)
 	t_1[p10] = true
 	
-	if var6 then
+	if var1 then
 		return
 	end
-	var6 = true
+	var1 = true
 	task.delay(5, flushPendingCleanup)
 end
 
@@ -192,7 +200,7 @@ return {
 		t_1[p10] = nil
 	end,
 	releaseStyleSheet = function(p10)
-		-- upvalues: flagsModule (ref), t (ref), t_1 (ref), var6 (write), flushPendingCleanup (ref)
+		-- upvalues: flagsModule (ref), t (ref), t_1 (ref), var1 (write), flushPendingCleanup (ref)
 		if not flagsModule.FoundationStyleSheetRefCounting then return end
 		local var7 = t[p10]
 		
@@ -202,8 +210,8 @@ return {
 		if var7.refCount == 0 then
 			t_1[p10] = true
 			
-			if var7 then return end
-			var7 = true
+			if var1 then return end
+			var1 = true
 			task.delay(5, flushPendingCleanup)
 		end
 	end,

@@ -35,7 +35,7 @@ return function(p1)
 			var3:destroy()
 		end
 	end, { var3 })
-	local var4 = reactModule.useCallback(function(p2, p3, p4, p5, p6)
+	local var4 = reactModule.useCallback(function(p2, p3, p4, p5, p6, p7)
 		-- upvalues: flagsModule (copy), var2 (ref), var3 (ref)
 		if flagsModule.FoundationPopoverPluginAnchorRefresh then
 			var2.refreshAsync(p2)
@@ -45,7 +45,7 @@ return function(p1)
 			targetAnchorPoint = p3.targetAnchorPoint,
 			subjectAnchorPoint = p3.subjectAnchorPoint,
 			offset = p3.offset
-		}, p4, p5, p6)
+		}, p4, p5, p6, if flagsModule.FoundationPopoverPluginFocusable then p7 else nil)
 		
 		return var5, function()
 			-- upvalues: var5 (ref)

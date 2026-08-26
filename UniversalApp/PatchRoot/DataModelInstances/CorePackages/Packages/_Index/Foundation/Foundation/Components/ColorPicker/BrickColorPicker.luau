@@ -104,9 +104,9 @@ return function(p3)
 		
 		for i_1 = 0, var9 - 1 do
 			for i = 0, 2 * var9 - 1 - 1 do
-				if math.abs(math.floor(var9 / 2) - i_1) + math.abs(math.floor((2 * var9 - 1) / 2) - i) < var9 and i_1 % 2 == i % 2 and var12 <= #var13 then
+				if math.abs(math.floor(var9 / 2) - i_1) + math.abs(math.floor((2 * var9 - 1) / 2) - i) < var9 and i_1 % 2 == i % 2 and var12 <= #var7 then
 					table.insert(t, {
-						brickColor = var13[var12],
+						brickColor = var7[var12],
 						x = size200 * i,
 						y = if rounded then rounded * i_1 else math.round(var13 * 1.5 * i_1)
 					})
@@ -131,11 +131,11 @@ return function(p3)
 			offset = Vector2.new(var14, var16)
 		}
 	end, {
-		var15, size200, var13, var14, var12.Size.Size_100, var12.Size.Size_50
+		var9, size200, var7, var8, var6.Size.Size_100, var6.Size.Size_50
 	})
 	local var18 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: var17 (ref), reactModule (copy), imageModule (copy), size350 (ref), size200_1 (ref), size400 (ref), var12 (ref)
-		local uDim2 = UDim2.fromOffset(p4.x - var17.offset.X, p4.y - var17.offset.Y)
+		-- upvalues: var11 (ref), reactModule (copy), imageModule (copy), size350 (ref), size200_1 (ref), size400 (ref), var6 (ref)
+		local uDim2 = UDim2.fromOffset(p4.x - var11.offset.X, p4.y - var11.offset.Y)
 		local t = {}
 		
 		if p5 then
@@ -145,7 +145,7 @@ return function(p3)
 				Size = UDim2.fromOffset(size350 + size200_1, size400 + size200_1),
 				Position = uDim2,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				imageStyle = var12.Color.ActionEmphasis.Background
+				imageStyle = var6.Color.ActionEmphasis.Background
 			})
 		end
 		t.hexagon = reactModule.createElement(imageModule, {
@@ -158,21 +158,21 @@ return function(p3)
 		})
 		
 		return t
-	end, { var17.offset.X, var17.offset.Y, size350, size400 })
+	end, { var11.offset.X, var11.offset.Y, size350, size400 })
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(p3, { tag = "col align-x-center gap-small size-full-0 auto-y" }), {
 		ColorGrid = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
-			Size = UDim2.fromOffset(var17.width, var17.height),
+			Size = UDim2.fromOffset(var11.width, var11.height),
 			onActivated = reactModule.useCallback(function(p4, p5)
-				-- upvalues: var17 (ref), var16 (ref), size200 (ref), p4 (ref)
+				-- upvalues: var11 (ref), var10 (ref), size200 (ref), p3 (ref)
 				if p5.UserInputType == Enum.UserInputType.MouseButton1 then
 					local var19 = nil
 					local var20 = 1e999
-					local var21 = p5.Position.X - p4.AbsolutePosition.X + var17.offset.X
-					local var22 = p5.Position.Y - p4.AbsolutePosition.Y + var17.offset.Y
+					local var21 = p5.Position.X - p4.AbsolutePosition.X + var11.offset.X
+					local var22 = p5.Position.Y - p4.AbsolutePosition.Y + var11.offset.Y
 					
-					for i, v in var16 do
+					for i, v in var10 do
 						local var23 = (var21 - v.x) ^ 2 + (var22 - v.y) ^ 2
 						
 						if var23 < var20 then
@@ -181,61 +181,61 @@ return function(p3)
 						end
 					end
 					if var19 and var20 < size200 * size200 then
-						p4.onBrickColorChanged(var19.brickColor)
+						p3.onBrickColorChanged(var19.brickColor)
 						
-						if p4.onColorChanged then
-							p4.onColorChanged(var19.brickColor.Color)
+						if p3.onColorChanged then
+							p3.onColorChanged(var19.brickColor.Color)
 						end
 					end
 				end
 			end, {
-				var23,
-				var17,
+				var10,
+				var11,
 				size200,
-				p4.onBrickColorChanged,
-				p4.onColorChanged
+				p3.onBrickColorChanged,
+				p3.onColorChanged
 			}),
 			stateLayer = { affordance = stateLayerAffordanceModule.None }
 		}, reactModule.useCallback(function()
-			-- upvalues: p4 (ref), var23 (ref), var18 (ref)
+			-- upvalues: p3 (ref), var10 (ref), var18 (ref)
 			local t = {}
-			local var24 = p4.selectedColor and p4.selectedColor:getValue() or nil
+			local var24 = p3.selectedColor and p3.selectedColor:getValue() or nil
 			
-			for i, v in var23 do
+			for i, v in var10 do
 				for i_1, v_1 in var18(v, var24 ~= nil and var24 == v.brickColor.Color) do
 					t[`{i_1}_{i}`] = v_1
 				end
 			end
 			return t
-		end, { p4.selectedColor })()),
+		end, { p3.selectedColor })()),
 		BottomRow = reactModule.createElement(viewModule, {
 			tag = "stroke-standard stroke-muted radius-circle bg-surface-100",
 			LayoutOrder = 2,
-			Size = UDim2.new(1, -var24.Size.Size_400, 0, var24.Size.Size_500),
+			Size = UDim2.new(1, -var6.Size.Size_400, 0, var6.Size.Size_500),
 			onActivated = reactModule.useCallback(function(p6, p7)
-				-- upvalues: size100 (ref), var21 (ref), p6 (ref)
+				-- upvalues: size100 (ref), var8 (ref), p3 (ref)
 				if p7.UserInputType == Enum.UserInputType.MouseButton1 then
 					local var25 = p6.AbsoluteSize.X - 2 * size100
 					local var26 = p7.Position.X - p6.AbsolutePosition.X - size100
 					
 					if var26 >= 0 and var26 <= var25 then
-						local var27 = var27[math.clamp(math.floor(var26 / var25 * #var27) + 1, 1, #var27)]
-						p6.onBrickColorChanged(var27)
+						local var27 = var8[math.clamp(math.floor(var26 / var25 * #var8) + 1, 1, #var8)]
+						p3.onBrickColorChanged(var27)
 						
-						if p6.onColorChanged then
-							p6.onColorChanged(var27.Color)
+						if p3.onColorChanged then
+							p3.onColorChanged(var27.Color)
 						end
 					end
 				end
-			end, { var21, p4.onBrickColorChanged, p4.onColorChanged }),
+			end, { var8, p3.onBrickColorChanged, p3.onColorChanged }),
 			stateLayer = { affordance = stateLayerAffordanceModule.None }
 		}, {
 			Swatches = reactModule.createElement(BottomRowSwatches, {
-				colors = var21,
+				colors = var8,
 				paddingHorizontal = size100,
 				swatchWidth = size350_1,
 				swatchHeight = size400_1,
-				swatchCenterY = var24.Size.Size_250
+				swatchCenterY = var6.Size.Size_250
 			})
 		})
 	})

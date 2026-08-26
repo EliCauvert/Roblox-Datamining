@@ -34,11 +34,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		return t
 	end, { breakpoint_1, breakpoint, grid })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var3 (ref), var8 (ref)
+		-- upvalues: var3 (ref), var2 (ref)
 		if var3 then
-			var3:SetDerives({ var8 })
+			var3:SetDerives({ var2 })
 		end
-	end, { var3, var8 })
+	end, { var3, var2 })
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		GridDebugStyleSheet = reactModule.createElement("StyleSheet", { ref = var5 }, var6),

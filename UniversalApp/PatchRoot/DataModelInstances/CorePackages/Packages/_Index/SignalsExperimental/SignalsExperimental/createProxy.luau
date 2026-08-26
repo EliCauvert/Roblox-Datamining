@@ -65,12 +65,12 @@ return function(p1)
 		__call = function(_, p4)
 			-- upvalues: var5 (ref), var3 (ref), t (ref), createSignal (copy)
 			local function nextSignal(value, p5)
-				-- upvalues: p5 (ref)
+				-- upvalues: p4 (ref)
 				while true do
 					local var9, var10 = next(value, p5)
 					if var9 ~= nil then
 						if var10 == nil then continue end
-						local ter = var10.getter(p5)
+						local ter = var10.getter(p4)
 						
 						if ter ~= nil then
 							return var9, ter
@@ -83,21 +83,21 @@ return function(p1)
 			return setmetatable({}, table.freeze({
 				__metatable = false,
 				__len = function()
-					-- upvalues: var5 (copy), p5 (ref)
-					return var5(p5)
+					-- upvalues: var5 (copy), p4 (ref)
+					return var5(p4)
 				end,
 				__iter = function()
-					-- upvalues: var3 (copy), p5 (ref), nextSignal (ref), t (copy)
-					var3(p5)
+					-- upvalues: var3 (copy), p4 (ref), nextSignal (ref), t (copy)
+					var3(p4)
 					
 					return nextSignal, t
 				end,
 				__index = function(_, p6)
-					-- upvalues: t (copy), p6 (ref), createSignal (copy)
+					-- upvalues: t (copy), p4 (ref), createSignal (copy)
 					local var11 = t[p6]
 					
 					if var11 == nil then
-						if p6 == nil then
+						if p4 == nil then
 							return nil
 						end
 						local var12 = nil
@@ -108,7 +108,7 @@ return function(p1)
 						var11 = { getter = var13, setter = var14 }
 						t[p6] = var11
 					end
-					return var11.getter(p6)
+					return var11.getter(p4)
 				end,
 				__newindex = function(_, p6, p7)
 					error(`attempt to update read-only store at {p6} with {p7}`, 2)

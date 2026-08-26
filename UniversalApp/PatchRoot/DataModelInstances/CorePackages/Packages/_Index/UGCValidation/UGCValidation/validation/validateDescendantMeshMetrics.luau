@@ -99,21 +99,21 @@ local function validateTotalAssetTriangles(vectorA, vectorB, p5)
 		return true, nil, var5
 	end)()
 	
-	if var6 then
-		if var5 + var5 * (getFIntUGCValidateTriangleLimitToleranceModule() / 100) < var8 then
+	if var2 then
+		if var1 + var1 * (getFIntUGCValidateTriangleLimitToleranceModule() / 100) < var4 then
 			analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_TooManyTriangles, nil, p5)
 			
 			return false, {
-				string.format("Mesh resolution of '%d' for '%s' is higher than max supported number of triangles '%d'. You need to retopologize your model to reduce the triangle count.", var8, vectorB.Name, var5)
+				string.format("Mesh resolution of '%d' for '%s' is higher than max supported number of triangles '%d'. You need to retopologize your model to reduce the triangle count.", var4, vectorB.Name, var1)
 			}
 		end
 		return true
 	elseif isServer then
-		error(var7)
+		error(var3)
 	end
 	analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_FailedToCalculateTriangles, nil, p5)
 	
-	return false, { var7 }
+	return false, { var3 }
 end
 
 local function validateMeshIsAtOrigin(p6, p7, p8, p9)

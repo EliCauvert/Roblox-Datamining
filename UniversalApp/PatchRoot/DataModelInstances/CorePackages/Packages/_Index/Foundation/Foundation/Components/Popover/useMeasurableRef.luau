@@ -12,7 +12,7 @@ local function createSignal()
 		signal = {
 			Connect = function(_, p1)
 				-- upvalues: var1 (ref)
-				local var3 = var3:subscribe(p1)
+				local var3 = var1:subscribe(p1)
 				
 				return {
 					Disconnect = function()

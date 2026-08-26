@@ -109,7 +109,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		-- upvalues: var6 (ref), medium (ref)
 		return UDim2.new(1, if var6 then -p3 else -(p3 + medium), 0, if var6 then 0 else medium)
 	end)
-	local var1 = reactModule.useMemo(function()
+	local var29 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var13 (ref), var14 (ref), var22 (ref), var23 (ref), var15 (ref), var16 (ref), var17 (write), var20 (write), var21 (write), var27 (ref), var6 (ref), sheetTypeModule (copy), var1 (ref), var24 (ref), var25 (ref), var26 (ref)
 		return {
 			actionsHeight = 0,
@@ -139,11 +139,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	end, {
 		var1.testId, var27, var25, var24, var17, var6
 	})
-	local var2 = var2
+	local var30 = var2
 	
-	if var2 then
-		var2 = reactRobloxModule.createPortal
-		var2 = var2(reactModule.createElement(viewModule, {
+	if var30 then
+		var30 = reactRobloxModule.createPortal
+		var30 = var30(reactModule.createElement(viewModule, {
 			tag = "size-full",
 			ZIndex = var4.zIndex,
 			testId = `{var1.testId}--surface`
@@ -165,7 +165,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				},
 				testId = var1.testId
 			}, {
-				Content = reactModule.createElement(viewModule, { tag = "col items-center size-full-full clip" }, reactModule.createElement(sheetContextModule.Provider, { value = var1 }, reactModule.createElement(elevationOwnerScope, { owner = var4 }, var1.children))),
+				Content = reactModule.createElement(viewModule, { tag = "col items-center size-full-full clip" }, reactModule.createElement(sheetContextModule.Provider, { value = var29 }, reactModule.createElement(elevationOwnerScope, { owner = var4 }, var1.children))),
 				CloseAffordance = reactModule.createElement(closeAffordanceModule, {
 					onActivated = var27,
 					ref = var24,
@@ -210,5 +210,5 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			})
 		}), var2)
 	end
-	return var2
+	return var30
 end))

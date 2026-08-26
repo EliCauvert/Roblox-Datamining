@@ -44,6 +44,10 @@ function t:setReportingInstance(p1)
 	self._currentInstance = p1
 end
 
+function t:setReportingRoot(p1)
+	self._rootInstance = p1
+end
+
 function t:fail(p1, p2, p3)
 	-- upvalues: validationEnumsModule (ref), getRelativePath (ref)
 	self._status = validationEnumsModule.Status.FAIL

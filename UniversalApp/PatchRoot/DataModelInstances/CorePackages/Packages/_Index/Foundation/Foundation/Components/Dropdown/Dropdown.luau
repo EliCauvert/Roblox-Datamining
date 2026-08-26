@@ -3,7 +3,6 @@ local reactModule = require(foundation.Parent.React)
 local baseMenuModule = require(foundation.Components.BaseMenu)
 local popoverModule = require(foundation.Components.Popover)
 local _ = require(foundation.Components.Types)
-local flagsModule = require(foundation.Utility.Flags)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local inputSizeModule = require(foundation.Enums.InputSize)
@@ -22,7 +21,7 @@ local t = {
 local t_1 = { offset = 5, position = popoverSideModule.Bottom }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), markSelectedItemModule (ref), popoverModule (ref), dropdownControlModule (ref), withCommonPropsModule (ref), popoverAlignModule (ref), t_1 (ref), radiusModule (ref), baseMenuModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), markSelectedItemModule (ref), popoverModule (ref), dropdownControlModule (ref), withCommonPropsModule (ref), popoverAlignModule (ref), t_1 (ref), radiusModule (ref), baseMenuModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2, var3 = reactModule.useState(false)
 	local var4 = reactModule.useRef(nil)
@@ -32,13 +31,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var4.current = p3
 		var6(p3)
 	end, {})
-	
-	if flagsModule.FoundationDropdownSelectionProps then
-		reactModule.useImperativeHandle(p2, function()
-			-- upvalues: var5 (ref)
-			return var5
-		end, { var5 })
-	end
+	reactModule.useImperativeHandle(p2, function()
+		-- upvalues: var5 (ref)
+		return var5
+	end, { var5 })
 	local var8, var9 = reactModule.useBinding(var1.width)
 	local var10, var11 = markSelectedItemModule(var1.items, var1.value)
 	local var12 = reactModule.useCallback(function()
@@ -57,17 +53,14 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var1.onItemChanged(p3)
 	end, { var1.onItemChanged })
 	var1.onAbsoluteSizeChanged = reactModule.useCallback(function(p3)
-		-- upvalues: p3 (ref), var9 (ref)
-		if p3.onAbsoluteSizeChanged then
-			p3.onAbsoluteSizeChanged(p3)
+		-- upvalues: p1 (ref), var9 (ref)
+		if p1.onAbsoluteSizeChanged then
+			p1.onAbsoluteSizeChanged(p3)
 		end
 		var9(UDim.new(0, p3.AbsoluteSize.X))
 	end, { var9, p1.onAbsoluteSizeChanged })
 	
-	return reactModule.createElement(popoverModule.Root, {
-		isOpen = var2,
-		ref = if flagsModule.FoundationDropdownSelectionProps then nil else p2
-	}, {
+	return reactModule.createElement(popoverModule.Root, { isOpen = var2 }, {
 		DropdownControl = reactModule.createElement(dropdownControlModule, withCommonPropsModule(var1, {
 			variant = var1.variant,
 			onActivated = var12,
@@ -80,12 +73,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			size = var1.size,
 			label = var1.label,
 			hint = var1.hint,
-			inputRef = if flagsModule.FoundationDropdownSelectionProps then var7 else var4,
-			Selectable = if flagsModule.FoundationDropdownSelectionProps then var1.Selectable else nil,
-			NextSelectionUp = if flagsModule.FoundationDropdownSelectionProps then var1.NextSelectionUp else nil,
-			NextSelectionDown = if flagsModule.FoundationDropdownSelectionProps then var1.NextSelectionDown else nil,
-			NextSelectionLeft = if flagsModule.FoundationDropdownSelectionProps then var1.NextSelectionLeft else nil,
-			NextSelectionRight = if flagsModule.FoundationDropdownSelectionProps then var1.NextSelectionRight else nil
+			inputRef = var7,
+			Selectable = var1.Selectable,
+			NextSelectionUp = var1.NextSelectionUp,
+			NextSelectionDown = var1.NextSelectionDown,
+			NextSelectionLeft = var1.NextSelectionLeft,
+			NextSelectionRight = var1.NextSelectionRight
 		})),
 		Anchor = reactModule.createElement(popoverModule.Anchor, { anchorRef = var4 }),
 		Menu = reactModule.createElement(popoverModule.Content, {

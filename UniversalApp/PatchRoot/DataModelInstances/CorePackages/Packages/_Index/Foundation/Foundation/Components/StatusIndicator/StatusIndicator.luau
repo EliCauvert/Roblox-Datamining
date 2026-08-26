@@ -29,7 +29,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var2 = withDefaultsModule(p1, t)
 	local var3 = if var2.value then statusIndicatorShapeModule.Circle else var2.shape
 	
-	if var2 and var2.value ~= nil then
+	if var1 and var2.value ~= nil then
 		assert(validNumericVariantsModule[var2.variant], `{var2.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(dashModule.filter(dashModule.keys(validNumericVariantsModule), function(p3, _)
 			-- upvalues: validNumericVariantsModule (copy)
 			return validNumericVariantsModule[p3] == true
@@ -44,7 +44,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		return if var2.max and var2.max < p3 then `{var2.max}+` else tostring(p3)
 	end, { var2.max })
 	local createElement = reactModule.createElement
-	local var2 = withCommonPropsModule(var2, {
+	local var9 = withCommonPropsModule(var2, {
 		tag = var7.container.tag,
 		backgroundStyle = if var7.container.backgroundStyle then var7.container.backgroundStyle else nil,
 		ref = p2,
@@ -76,5 +76,5 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		testId = `{var2.testId}--ring`
 	}) else nil
 	
-	return createElement(viewModule, var2, t_1)
+	return createElement(viewModule, var9, t_1)
 end))

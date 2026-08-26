@@ -16,10 +16,11 @@ local _ = require(parent_1.Components.Types)
 local widgetsProviderModule = require(parent.StudioWidgets.WidgetsProvider)
 local elevationProvider = require(parent.Elevation.ElevationProvider).ElevationProvider
 local isPluginElevatedModule = require(parent.Plugin.isPluginElevated)
+local frozen = table.freeze({})
 
 return function(p1)
-	-- upvalues: reactModule (ref), pluginProviderModule (ref), elevationProvider (ref), preferencesProviderModule (ref), styleProviderModule (ref), flagsModule (ref), responsiveProviderModule (ref), overlayModule (ref), cursorModule (ref), isPluginElevatedModule (ref), widgetsProviderModule (ref), panelsProviderModule (ref), contextStack (ref)
-	local var1 = if p1.preferences then p1.preferences else {}
+	-- upvalues: flagsModule (ref), frozen (ref), reactModule (ref), pluginProviderModule (ref), elevationProvider (ref), preferencesProviderModule (ref), styleProviderModule (ref), responsiveProviderModule (ref), overlayModule (ref), cursorModule (ref), isPluginElevatedModule (ref), widgetsProviderModule (ref), panelsProviderModule (ref), contextStack (ref)
+	local var1 = if p1.preferences then p1.preferences elseif flagsModule.FoundationProviderStableEmptyTable then frozen else {}
 	local list = {
 		reactModule.createElement(pluginProviderModule, { plugin = p1.plugin }),
 		reactModule.createElement(elevationProvider, nil),
@@ -34,7 +35,7 @@ return function(p1)
 			tokenOverrides = p1.tokenOverrides
 		}),
 		reactModule.createElement(responsiveProviderModule, {
-			config = if p1.responsiveConfig then p1.responsiveConfig else {}
+			config = if p1.responsiveConfig then p1.responsiveConfig elseif flagsModule.FoundationProviderStableEmptyTable then frozen else {}
 		}),
 		reactModule.createElement(overlayModule, if typeof(p1.overlayGui) == "table" then { DisplayOrder = p1.overlayGui.DisplayOrder } else { gui = p1.overlayGui }),
 		reactModule.createElement(cursorModule)

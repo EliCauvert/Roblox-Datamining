@@ -41,48 +41,48 @@ return reactModule.memo(function(p1)
 		
 		return if defaultDates then if typeof(defaultDates) == "table" then defaultDates else { defaultDates } else nil
 	end, { var1.defaultDates })
-	local var1, var2 = reactModule.useState(if var6 then if var1.variant == dateTimePickerVariantModule.Dual then `{dateTimeUtilitiesModule.formatLocalTime(var6[1])} - {if var6[2] then dateTimeUtilitiesModule.formatLocalTime(var6[2]) else ""}` else dateTimeUtilitiesModule.formatLocalTime(var6[1], var1.variant == dateTimePickerVariantModule.SingleWithTime) else "")
-	local var3, var4 = reactModule.useState(var6)
-	local var5 = reactModule.useCallback(function()
+	local var7, var8 = reactModule.useState(if var6 then if var1.variant == dateTimePickerVariantModule.Dual then `{dateTimeUtilitiesModule.formatLocalTime(var6[1])} - {if var6[2] then dateTimeUtilitiesModule.formatLocalTime(var6[2]) else ""}` else dateTimeUtilitiesModule.formatLocalTime(var6[1], var1.variant == dateTimePickerVariantModule.SingleWithTime) else "")
+	local var9, var10 = reactModule.useState(var6)
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref)
 		var4(false)
 	end, {})
-	local var6 = reactModule.useCallback(function()
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref)
 		var4(true)
 	end, {})
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: guiService (copy), var6 (ref)
+	local var13 = reactModule.useCallback(function()
+		-- upvalues: guiService (copy), var12 (ref)
 		if guiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
-			var6()
+			var12()
 		end
-	end, { var6, guiService.ViewportDisplaySize })
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var1 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), dateTimeParsingUtilitiesModule (copy)
-		var2(p2)
+	end, { var12, guiService.ViewportDisplaySize })
+	local var14 = reactModule.useCallback(function(p2)
+		-- upvalues: var8 (ref), var1 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), dateTimeParsingUtilitiesModule (copy)
+		var8(p2)
 		
 		if p2:match("^%s*$") then return end
 		if var1.variant == dateTimePickerVariantModule.Dual then
-			local var9 = p2:split("-")
-			var9.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(var9[1]), dateTimeUtilitiesModule.getDateTimeFromText(var9[2]))
+			local var15 = p2:split("-")
+			var1.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(var15[1]), dateTimeUtilitiesModule.getDateTimeFromText(var15[2]))
 			
 			return
 		end
-		var9.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(dateTimeParsingUtilitiesModule.trimInputText(p2)))
+		var1.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(dateTimeParsingUtilitiesModule.trimInputText(p2)))
 	end, { var1.onChanged, var1.variant })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), var3 (ref), var2 (ref), var5 (ref)
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), var9 (ref), var8 (ref), var11 (ref)
 		if var1.variant == dateTimePickerVariantModule.Dual then
-			var2(dateTimeUtilitiesModule.formatLocalTime(var3[1]) .. " - " .. (if var3[2] then dateTimeUtilitiesModule.formatLocalTime(var3[2]) else ""))
+			var8(dateTimeUtilitiesModule.formatLocalTime(var9[1]) .. " - " .. (if var9[2] then dateTimeUtilitiesModule.formatLocalTime(var9[2]) else ""))
 		else
-			var2(dateTimeUtilitiesModule.formatLocalTime(var3[1], var1.variant == dateTimePickerVariantModule.SingleWithTime))
+			var8(dateTimeUtilitiesModule.formatLocalTime(var9[1], var1.variant == dateTimePickerVariantModule.SingleWithTime))
 		end
-		var5()
-	end, { var3, var5, var1.variant })
+		var11()
+	end, { var9, var11, var1.variant })
 	
 	local _ = function()
-		-- upvalues: var3 (ref), var1 (ref), dateTimePickerVariantModule (copy)
-		return if var3 then if var1.variant == dateTimePickerVariantModule.Single or var1.variant == dateTimePickerVariantModule.SingleWithTime then var3[1] == nil else var1.variant == dateTimePickerVariantModule.Dual and (if var3[1] ~= nil then if var3[2] ~= nil then var3[2].UnixTimestamp < var3[1].UnixTimestamp else true else true) else false
+		-- upvalues: var9 (ref), var1 (ref), dateTimePickerVariantModule (copy)
+		return if var9 then if var1.variant == dateTimePickerVariantModule.Single or var1.variant == dateTimePickerVariantModule.SingleWithTime then var9[1] == nil else var1.variant == dateTimePickerVariantModule.Dual and (if var9[1] ~= nil then if var9[2] ~= nil then var9[2].UnixTimestamp < var9[1].UnixTimestamp else true else true) else false
 	end
 	
 	local createElement = reactModule.createElement
@@ -93,17 +93,17 @@ return reactModule.memo(function(p1)
 			key = "date-input",
 			hasError = var1.hasError,
 			hint = var1.hint,
-			iconTrailing = { name = icon.Calendar, onActivated = var6 },
+			iconTrailing = { name = icon.Calendar, onActivated = var12 },
 			isDisabled = var1.isDisabled,
 			isRequired = var1.isRequired,
 			label = var1.label,
-			onChanged = var8,
-			onFocusGained = var7,
+			onChanged = var14,
+			onFocusGained = var13,
 			placeholder = translatorModule:FormatByKey("CommonUI.Controls.Label.SelectDate"),
 			ref = var5,
 			selectableDateRange = var1.selectableDateRange,
 			size = inputSizeModule.Medium,
-			text = var1,
+			text = var7,
 			testId = `{var1.testId}--text-input`,
 			width = var1.width
 		})),
@@ -113,7 +113,7 @@ return reactModule.memo(function(p1)
 	local content = popoverModule.Content
 	local t_3 = {
 		hasArrow = false,
-		onPressedOutside = var5,
+		onPressedOutside = var11,
 		side = {
 			position = popoverSideModule.Bottom,
 			offset = var2.Stroke.Standard + var2.Padding.Small
@@ -121,12 +121,12 @@ return reactModule.memo(function(p1)
 		selection = var1.selection,
 		selectionGroup = var1.selectionGroup
 	}
-	local var1 = var3
+	local var16 = var3
 	
-	if var1 then
-		local var2
-		var1 = reactModule.createElement
-		local var3 = viewModule
+	if var16 then
+		local var17
+		var16 = reactModule.createElement
+		local var18 = viewModule
 		local t_4 = {
 			tag = "col auto-xy padding-large stroke-default radius-medium"
 		}
@@ -134,8 +134,8 @@ return reactModule.memo(function(p1)
 			Calendar = reactModule.createElement(calendarModule, {
 				LayoutOrder = 1,
 				testId = "--foundation-calendar",
-				defaultDates = var3,
-				onSelectedDateChanged = var4,
+				defaultDates = var9,
+				onSelectedDateChanged = var10,
 				selectableDateRange = var1.selectableDateRange,
 				showStartDateTimeCalendarInput = var1.variant ~= dateTimePickerVariantModule.SingleWithTime,
 				showEndDateTimeCalendarInput = var1.variant == dateTimePickerVariantModule.Dual,
@@ -143,7 +143,7 @@ return reactModule.memo(function(p1)
 			})
 		}
 		local createElement_2 = reactModule.createElement
-		local var4 = viewModule
+		local var19 = viewModule
 		local t_6 = {
 			LayoutOrder = 2,
 			tag = "row flex-fill gap-small size-full-0 auto-y padding-top-large"
@@ -152,39 +152,39 @@ return reactModule.memo(function(p1)
 		local createElement_3 = reactModule.createElement
 		local t_8 = {}
 		
-		if not var3 then
-			var2 = false
+		if not var9 then
+			var17 = false
 		elseif var1.variant == dateTimePickerVariantModule.Single or var1.variant == dateTimePickerVariantModule.SingleWithTime then
-			local _ = var3[1] == nil
+			local _ = var9[1] == nil
 		elseif var1.variant == dateTimePickerVariantModule.Dual then
-			var2 = true
+			var17 = true
 			
-			if var3[1] ~= nil then
-				var2 = true
+			if var9[1] ~= nil then
+				var17 = true
 				
-				if var3[2] ~= nil then
-					local _ = var3[2].UnixTimestamp < var3[1].UnixTimestamp
+				if var9[2] ~= nil then
+					local _ = var9[2].UnixTimestamp < var9[1].UnixTimestamp
 				end
 			end
 		else
-			var2 = false
+			var17 = false
 		end
-		t_8.isDisabled = var2
-		t_8.onActivated = var9
+		t_8.isDisabled = var17
+		t_8.onActivated = var15
 		t_8.text = translatorModule:FormatByKey("CommonUI.Controls.Action.Apply")
 		t_8.variant = buttonVariantModule.Emphasis
 		t_8.testId = `{var1.testId}--apply-button`
 		t_7.ApplyButton = createElement_3(buttonModule, t_8)
 		t_7.CancelButton = reactModule.createElement(buttonModule, {
-			onActivated = var5,
+			onActivated = var11,
 			text = translatorModule:FormatByKey("CommonUI.Controls.Action.Cancel"),
 			variant = buttonVariantModule.Standard,
 			testId = `{var1.testId}--cancel-button`
 		})
-		t_5.BottomBar = createElement_2(var4, t_6, t_7)
-		var1 = var1(var3, t_4, t_5)
+		t_5.BottomBar = createElement_2(var19, t_6, t_7)
+		var16 = var16(var18, t_4, t_5)
 	end
-	t_2.Calendar = createElement_1(content, t_3, var1)
+	t_2.Calendar = createElement_1(content, t_3, var16)
 	
 	return createElement(root, t_1, t_2)
 end)

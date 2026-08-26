@@ -34,8 +34,8 @@ return function(p1)
 			}))
 		end)) else nil
 	end, { var1.actions })
-	local var1 = var3.responsiveSize == dialogSizeModule.Small
-	local var2 = var1.orientation == orientationModule.Vertical and var1
+	local var5 = var3.responsiveSize == dialogSizeModule.Small
+	local var6 = var1.orientation == orientationModule.Vertical and var5
 	
 	return reactModule.createElement(viewModule, {
 		tag = "col size-full-0 auto-y",
@@ -45,15 +45,15 @@ return function(p1)
 		ActionsContainer = if flagsModule.FoundationDialogBetaUpdate then reactModule.createElement(buttonGroupModule, {
 			LayoutOrder = 1,
 			buttons = var1.actions or {},
-			orientation = if var2 then orientationModule.Vertical else orientationModule.Horizontal,
+			orientation = if var6 then orientationModule.Vertical else orientationModule.Horizontal,
 			fillBehavior = fillBehaviorModule.Fill,
 			testId = `{var3.testId}--actions-container`
 		}) else reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
 			tag = {
 				["gap-small size-full-0 auto-y"] = true,
-				["row wrap"] = if var1.orientation ~= orientationModule.Horizontal then not var1 else true,
-				["col flex-x-fill"] = var2
+				["row wrap"] = if var1.orientation ~= orientationModule.Horizontal then not var5 else true,
+				["col flex-x-fill"] = var6
 			},
 			testId = `{var3.testId}--actions-container`
 		}, { Actions = var4 }),

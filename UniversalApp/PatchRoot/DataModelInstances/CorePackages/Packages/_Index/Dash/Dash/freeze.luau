@@ -10,17 +10,17 @@ return function(p1, p2, p3)
 	assert(type(p2) == "table", `Attempted to call Dash.freeze with argument #2 of type {type(p2)}, but it should be table `)
 	setmetatable(t, {
 		__index = function(_, p4)
-			-- upvalues: p2 (ref), p3 (ref), missingKey (copy), p4 (ref)
+			-- upvalues: p2 (ref), p3 (ref), missingKey (copy), p1 (ref)
 			local var1 = p2[p4]
 			
 			if var1 == nil and p3 then
-				missingKey:throw({ key = p4, objectName = p4 })
+				missingKey:throw({ key = p4, objectName = p1 })
 			end
 			return var1
 		end,
 		__newindex = function(_, p4)
-			-- upvalues: readonlyKey (copy), p4 (ref)
-			readonlyKey:throw({ key = p4, objectName = p4 })
+			-- upvalues: readonlyKey (copy), p1 (ref)
+			readonlyKey:throw({ key = p4, objectName = p1 })
 		end,
 		__len = function()
 			-- upvalues: p2 (ref)

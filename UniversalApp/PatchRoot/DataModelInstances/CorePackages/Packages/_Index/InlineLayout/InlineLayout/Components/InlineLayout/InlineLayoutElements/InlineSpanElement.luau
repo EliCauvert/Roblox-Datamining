@@ -135,8 +135,8 @@ end
 function t:render(p7, p8)
 	-- upvalues: dashModule (ref), reactModule (ref)
 	return reactModule.createElement(self.WrapperElement, dashModule.join(self.wrapperElementProps, { id = p7, LayoutOrder = p8 }), dashModule.map(self.Elements, function(p9, p10)
-		-- upvalues: p9 (ref), self (ref)
-		return p9:render(`{p9}-{self.startingIndex + p10 - 1}`, p10)
+		-- upvalues: p7 (ref), self (ref)
+		return p9:render(`{p7}-{self.startingIndex + p10 - 1}`, p10)
 	end))
 end
 

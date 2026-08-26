@@ -106,10 +106,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		elseif var3.hoverReset then
 			var3.hoverReset()
 		end
-		local var19 = if var19.onActivated then var19.onActivated else var3.onActivated
+		local var19 = if var2.onActivated then var2.onActivated else var3.onActivated
 		
 		if var19 then
-			var19(var19.id)
+			var19(var2.id)
 		else
 			loggerModule:warning("Menu should have either onActivated on itself or on all of its children")
 		end
@@ -121,13 +121,13 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var3.onActivated, var3.onNestedLeafActivated, var3.hoverOpenAtDepth,
 		var3.hoverReset
 	})
-	local var3 = reactModule.useCallback(function()
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var3 (ref)
 		if var3.hoverReset then
 			var3.hoverReset()
 		end
 	end, { var3.hoverReset })
-	local var4 = useBindableModule(var3.maxHeight)
+	local var20 = useBindableModule(var3.maxHeight)
 	local _ = reactModule.useMemo(function()
 		-- upvalues: var6 (ref)
 		return {
@@ -158,10 +158,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{var2.testId}--checkmark`
 		}) else nil
 	}) else nil
-	local var5 = nil
+	local var21 = nil
 	
 	if var9 ~= nil then
-		var5 = reactModule.createElement(baseMenuItemAccessoryModule, {
+		var21 = reactModule.createElement(baseMenuItemAccessoryModule, {
 			LayoutOrder = 1,
 			accessory = var9,
 			iconVariant = var12.icon,
@@ -170,16 +170,16 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{var2.testId}--leading`
 		})
 	elseif var4 then
-		var5 = reactModule.createElement(viewModule, {
+		var21 = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
 			tag = `{var12.slotAlign.tag} {var12.icon.tag}`
 		})
 	end
 	local _ = reactModule.createElement(textModule, { LayoutOrder = 2, Text = var2.text, tag = var12.text.tag })
-	local var6 = nil
+	local var22 = nil
 	
 	if var7 then
-		var6 = reactModule.createElement(iconModule, {
+		var22 = reactModule.createElement(iconModule, {
 			LayoutOrder = 3,
 			name = builderIconsModule.Icon.ChevronSmallRight,
 			style = var12.check.style,
@@ -187,7 +187,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{var2.testId}--chevron`
 		})
 	elseif var10 ~= nil then
-		var6 = reactModule.createElement(baseMenuItemAccessoryModule, {
+		var22 = reactModule.createElement(baseMenuItemAccessoryModule, {
 			LayoutOrder = 3,
 			accessory = var10,
 			iconVariant = var12.icon,
@@ -196,7 +196,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{var2.testId}--trailing`
 		})
 	end
-	local var7 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+	local var23 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 		-- upvalues: var3 (ref), size (ref), var15 (ref), var17 (ref), depth (ref)
 		return {
 			onActivated = var3.onActivated,
@@ -220,8 +220,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	if var7 then
 		local standard = var6.Stroke.Standard
 		local size_1 = var12.groupPadding.size
-		local var8 = reactModule.createElement(baseMenuContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then var7 else {
+		local var24 = reactModule.createElement(baseMenuContextModule.Provider, {
+			value = if flagsModule.FoundationStableContextValues then var23 else {
 				onActivated = var3.onActivated,
 				onNestedLeafActivated = var3.onNestedLeafActivated,
 				size = size,
@@ -237,7 +237,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}, var2.children)
 		
 		return reactModule.createElement(reactModule.Fragment, nil, {
-			Item = u666,
+			Item = u655,
 			Submenu = reactModule.createElement(popoverModule.Root, { isOpen = var8, testId = `{var2.testId}--submenu` }, {
 				Anchor = reactModule.createElement(popoverModule.Anchor, { anchorRef = var13 }),
 				Content = reactModule.createElement(popoverModule.Content, {
@@ -247,15 +247,15 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 						offset = size_1 / 2 + standard
 					},
 					align = { position = popoverAlignModule.Start, offset = -size_1 },
-					onPressedOutside = var3,
+					onPressedOutside = var19,
 					backgroundStyle = var6.Color.Surface.Surface_200,
 					radius = radiusModule.Medium
 				}, if var11 then reactModule.createElement(baseMenuScrollContainerModule, {
-					maxHeight = var4,
-					scrollViewProps = { tag = var12.submenuContent.tag, InputSink = var2 }
-				}, var8) else reactModule.createElement(viewModule, { tag = var12.submenuContent.tag, InputSink = var2 }, var8))
+					maxHeight = var20,
+					scrollViewProps = { tag = var12.submenuContent.tag, InputSink = var1 }
+				}, var24) else reactModule.createElement(viewModule, { tag = var12.submenuContent.tag, InputSink = var1 }, var24))
 			})
 		})
 	end
-	return u666
+	return u655
 end))

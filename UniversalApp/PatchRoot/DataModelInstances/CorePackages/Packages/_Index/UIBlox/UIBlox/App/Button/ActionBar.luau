@@ -27,25 +27,25 @@ function actionBar.init(p1)
 	p1.frameRef = p1.props.frameRef or roactModule.createRef()
 	
 	function p0.updateFrameSize(p2)
-		-- upvalues: p2 (ref)
+		-- upvalues: p1 (ref)
 		local x = p2.AbsoluteSize.X
 		
-		if x ~= p2.state.frameWidth then
-			p2:setState({ frameWidth = x })
+		if x ~= p1.state.frameWidth then
+			p1:setState({ frameWidth = x })
 		end
-		if p2.props.onAbsoluteSizeChanged then
-			p2.props.onAbsoluteSizeChanged(p2.AbsoluteSize)
+		if p1.props.onAbsoluteSizeChanged then
+			p1.props.onAbsoluteSizeChanged(p2.AbsoluteSize)
 		end
 	end
 	
 	function p0.getGamepadNextSelectionLeft(p2, _)
-		-- upvalues: p2 (ref)
-		return if p2 > 1 then p2.buttonRefs[p2 - 1] else nil
+		-- upvalues: p1 (ref)
+		return if p2 > 1 then p1.buttonRefs[p2 - 1] else nil
 	end
 	
 	function p0.getGamepadNextSelectionRight(p2, p3)
-		-- upvalues: p2 (ref)
-		return if p2 < p3 then p2.buttonRefs[p2 + 1] else nil
+		-- upvalues: p1 (ref)
+		return if p2 < p3 then p1.buttonRefs[p2 + 1] else nil
 	end
 end
 

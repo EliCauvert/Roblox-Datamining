@@ -6,15 +6,17 @@ local _ = require(parent.StyleTypes)
 
 return function(p1, p2)
 	-- upvalues: fontLoaderModule (ref), constantsModule (ref), validateFontModule (ref)
+	local var1 = fontLoaderModule.new(p2)
 	local t = {
-		[constantsModule.FontName.Gotham:lower()] = fontLoaderModule.new(p2):loadFont()
+		[constantsModule.FontName.Gotham:lower()] = var1:loadFont(),
+		[constantsModule.FontName.Classic:lower()] = var1:loadFont(Enum.Font.Cartoon)
 	}
-	local var1 = if not (p1 == nil or #p1 <= 0) then t[p1:lower()] else nil
+	local var2 = if not (p1 == nil or #p1 <= 0) then t[p1:lower()] else nil
 	
-	if var1 == nil then
-		var1 = t[constantsModule.DefaultFontName:lower()]
+	if var2 == nil then
+		var2 = t[constantsModule.DefaultFontName:lower()]
 	end
-	assert(validateFontModule(var1))
+	assert(validateFontModule(var2))
 	
-	return var1
+	return var2
 end

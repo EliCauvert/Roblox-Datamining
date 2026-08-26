@@ -42,8 +42,8 @@ end
 
 local function _(p1, p2)
 	return p2:map(function(p3)
-		-- upvalues: p3 (ref)
-		return if p3 == nil then p3 else p3 + (1 - p3) * p3
+		-- upvalues: p1 (ref)
+		return if p1 == nil then p3 else p1 + (1 - p1) * p3
 	end)
 end
 

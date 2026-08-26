@@ -95,7 +95,7 @@ return function(p1)
 		-- upvalues: var23 (ref)
 		var23(p2.Color, p2)
 	end, { var23 })
-	local var26 = var25.onAlphaChanged ~= nil
+	local var26 = var4.onAlphaChanged ~= nil
 	local var27 = reactModule.useCallback(function(p2)
 		-- upvalues: var23 (ref)
 		var23(p2, nil)
@@ -105,7 +105,7 @@ return function(p1)
 		var11,
 		var13,
 		var15,
-		var27
+		var6
 	})
 	local var29 = reactModule.useCallback(colorUtilsModule.createColorInputChangeHandler(var27, var21, var11, var13, var15), {
 		var27,
@@ -122,23 +122,23 @@ return function(p1)
 		var15(var32)
 	end, {})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var25, { tag = "col gap-small size-full-0 auto-y padding-small" }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var4, { tag = "col gap-small size-full-0 auto-y padding-small" }), {
 		ColorInputs = reactModule.createElement(colorInputsModule, {
 			LayoutOrder = 1,
-			color = var26,
+			color = var5,
 			alpha = var16,
 			onColorChanged = var29,
 			onAlphaChanged = if var26 then var24 else nil,
 			mode = var18,
 			onModeChanged = var19,
 			availableModes = availableModes,
-			testId = `{var25.testId}--input`
+			testId = `{var4.testId}--input`
 		}),
 		BrickPicker = if var18 == colorInputModeModule.Brick then reactModule.createElement(brickColorPickerModule, {
 			LayoutOrder = 2,
 			selectedColor = toColor3,
 			onBrickColorChanged = var25,
-			testId = `{var25.testId}--brick-picker`
+			testId = `{var4.testId}--brick-picker`
 		}) else nil,
 		SVPickerContainer = if var18 ~= colorInputModeModule.Brick then nil else reactModule.createElement(viewModule, { LayoutOrder = 2, Size = UDim2.new(1, 0, 0, 156) }, {
 			SVPicker = reactModule.createElement(SVPickerModule, {
@@ -149,10 +149,10 @@ return function(p1)
 					-- upvalues: var28 (ref), var10 (ref)
 					var28(var10:getValue(), p2, p3)
 				end,
-				onDragStarted = var25.onDragStarted,
-				onDragEnded = var25.onDragEnded,
+				onDragStarted = var4.onDragStarted,
+				onDragEnded = var4.onDragEnded,
 				showSelectionKnob = var20:getValue(),
-				testId = `{var25.testId}--sv-picker`
+				testId = `{var4.testId}--sv-picker`
 			})
 		}),
 		HueSlider = if var18 ~= colorInputModeModule.Brick then nil else reactModule.createElement(colorSliderModule, {
@@ -163,9 +163,9 @@ return function(p1)
 				-- upvalues: var28 (ref), var12 (ref), var14 (ref)
 				var28(p2, var12:getValue(), var14:getValue())
 			end,
-			onDragStarted = var25.onDragStarted,
-			onDragEnded = var25.onDragEnded,
-			testId = `{var25.testId}--hue-slider`
+			onDragStarted = var4.onDragStarted,
+			onDragEnded = var4.onDragEnded,
+			testId = `{var4.testId}--hue-slider`
 		}),
 		AlphaSlider = if var26 then reactModule.createElement(colorSliderModule, {
 			LayoutOrder = 4,
@@ -173,9 +173,9 @@ return function(p1)
 			value = var16,
 			baseColor = toColor3,
 			onValueChanged = var24,
-			onDragStarted = var25.onDragStarted,
-			onDragEnded = var25.onDragEnded,
-			testId = `{var25.testId}--alpha-slider`
+			onDragStarted = var4.onDragStarted,
+			onDragEnded = var4.onDragEnded,
+			testId = `{var4.testId}--alpha-slider`
 		}) else nil
 	})
 end

@@ -49,7 +49,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		-- upvalues: var8 (ref), var1 (ref)
 		return if var8 then var1.onActivated.onActivated elseif var1.onActivated == nil then nil else var1.onActivated
 	end, { var1.onActivated, var8 })
-	local var1 = reactModule.useMemo(function()
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: flagsModule (copy), var1 (ref), var8 (ref), listItemInputTypeModule (copy)
 		if not flagsModule.FoundationListItemDecoupledInput then
 			return nil
@@ -74,49 +74,49 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 		return { type = var1.input }
 	end, { var1.onActivated, var1.input, var8 })
-	local var1 = reactModule.useMemo(function()
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), var1 (ref)
 		return if var8 then var1.onActivated.inputType else nil
 	end, { var1.onActivated, var8 })
-	local var1 = reactModule.useMemo(function()
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), var1 (ref)
 		return if var8 then var1.onActivated.isChecked else nil
 	end, { var1.onActivated, var8 })
-	local var1 = reactModule.useMemo(function()
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var1 (ref)
 		return if typeof(var1.title) == "string" then var1.title elseif typeof(var1.title) == "table" then var1.title.title else nil
 	end, { var1.title })
-	local var1 = reactModule.useMemo(function()
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: var1 (ref)
 		return if typeof(var1.title) == "table" then if var1.title.title == nil then nil else var1.title.metadata else nil
 	end, { var1.title })
 	var1.testId = if var1.testId then var1.testId else `{var3.testId}--item-{reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		return var1 and string.gsub(var1, "%s+", "-") or ""
-	end, { var1 })}`
+		-- upvalues: var13 (ref)
+		return var13 and string.gsub(var13, "%s+", "-") or ""
+	end, { var35 })}`
 	
 	if flagsModule.FoundationListItemDecoupledInput then
-		var2 = false
+		var37 = false
 		
-		if var1 ~= nil then
-			local _ = var1.type ~= listItemInputTypeModule.None
+		if var32 ~= nil then
+			local _ = var32.type ~= listItemInputTypeModule.None
 		end
 	else
-		var2 = var1.onActivated ~= nil
+		var37 = var23.onActivated ~= nil
 	end
 	local var1
-	local var2 = if flagsModule.FoundationListItemDecoupledInput then if var1 then var1.type else nil else var1
-	local var3 = if flagsModule.FoundationListItemDecoupledInput then if var1 then var1.isChecked else nil else var1
+	local var2 = if flagsModule.FoundationListItemDecoupledInput then if var32 then var32.type else nil else var33
+	local var3 = if flagsModule.FoundationListItemDecoupledInput then if var32 then var32.isChecked else nil else var34
 	local var4 = reactModule.useCallback(function(p1)
-		-- upvalues: flagsModule (copy), var1 (ref), var9 (ref)
-		if flagsModule.FoundationListItemDecoupledInput and var1 and var1.onActivated then
-			var1.onActivated(p1)
+		-- upvalues: flagsModule (copy), var32 (ref), var31 (ref)
+		if flagsModule.FoundationListItemDecoupledInput and var32 and var32.onActivated then
+			var32.onActivated(p1)
 			
 			return
-		elseif var9 then
-			var9()
+		elseif var31 then
+			var31()
 		end
-	end, { var1, var9 })
+	end, { var32, var31 })
 	local var5 = reactModule.useCallback(function(p1)
 		-- upvalues: var4 (ref)
 		var4(p1 == "radio")
@@ -124,28 +124,28 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local createElement = reactModule.createElement
 	local t_2 = {
 		tag = "col size-full-0 auto-y",
-		LayoutOrder = var1.LayoutOrder,
-		ref = p2
+		LayoutOrder = var23.LayoutOrder,
+		ref = p1
 	}
 	local t_3 = {}
 	local createElement_1 = reactModule.createElement
 	local t_4 = {
 		tag = "size-full-0 auto-y padding-y-xsmall",
 		LayoutOrder = 1,
-		padding = if var3.isContained then var4.Padding.Small else {
-			left = UDim.new(0, if var3.hasMargin then var4.Padding.Small else -var4.Padding.Small),
-			right = UDim.new(0, if var3.hasMargin then var4.Padding.Small else -var4.Padding.Small)
+		padding = if var24.isContained then var26.Padding.Small else {
+			left = UDim.new(0, if var24.hasMargin then var26.Padding.Small else -var26.Padding.Small),
+			right = UDim.new(0, if var24.hasMargin then var26.Padding.Small else -var26.Padding.Small)
 		}
 	}
 	local t_5 = {}
 	local createElement_2 = reactModule.createElement
 	local var6 = viewModule
 	local t_6 = {
-		onActivated = var9,
+		onActivated = var31,
 		tag = {
 			["size-full-0 auto-y radius-medium"] = true,
-			["margin-x-small"] = var3.hasMargin,
-			["padding-x-small"] = not var3.hasMargin
+			["margin-x-small"] = var24.hasMargin,
+			["padding-x-small"] = not var24.hasMargin
 		}
 	}
 	local t_7 = {}
@@ -153,14 +153,14 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var7 = viewModule
 	local t_8 = {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small radius-medium",
-		testId = var1.testId
+		testId = var23.testId
 	}
 	local t_9 = {
-		LeadingContainer = if var1.leading then reactModule.createElement(listAccessoryModule, {
+		LeadingContainer = if var23.leading then reactModule.createElement(listAccessoryModule, {
 			LayoutOrder = 0,
-			config = var1.leading,
+			config = var23.leading,
 			size = size,
-			testId = `{var1.testId}--leading-accessory`
+			testId = `{var23.testId}--leading-accessory`
 		}) else nil
 	}
 	local createElement_4 = reactModule.createElement
@@ -173,43 +173,43 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			LayoutOrder = 1,
 			tag = {
 				["col fill auto-y padding-y-xsmall"] = true,
-				[var7] = true
+				[var29] = true
 			}
 		}, {
-			TitleContainer = if var1 then reactModule.createElement(viewModule, {
+			TitleContainer = if var35 then reactModule.createElement(viewModule, {
 				LayoutOrder = 0,
 				tag = {
 					["col auto-xy"] = true,
 					["gap-xsmall"] = not flagsModule.FoundationListItemTypographySpacing
 				}
 			}, {
-				Title = if var1 then reactModule.createElement(textModule, {
+				Title = if var35 then reactModule.createElement(textModule, {
 					RichText = true,
 					LayoutOrder = 0,
-					Text = escapeRichTextModule(var1),
-					tag = var5.title.tag
+					Text = escapeRichTextModule(var35),
+					tag = var27.title.tag
 				}) else nil,
-				Metadata = if var1 then reactModule.createElement(textModule, {
+				Metadata = if var36 then reactModule.createElement(textModule, {
 					RichText = true,
 					LayoutOrder = 1,
-					Text = var1,
-					tag = var5.metadata.tag
+					Text = var36,
+					tag = var27.metadata.tag
 				}) else nil
 			}) else nil,
-			Description = var1.description and reactModule.createElement(textModule, {
+			Description = var23.description and reactModule.createElement(textModule, {
 				RichText = true,
 				LayoutOrder = 1,
-				Text = var1.description,
-				tag = var5.description.tag
+				Text = var23.description,
+				tag = var27.description.tag
 			})
 		}),
-		TrailingContainer = if var1.trailing then reactModule.createElement(viewModule, {
+		TrailingContainer = if var23.trailing then reactModule.createElement(viewModule, {
 			tag = "align-x-center align-y-center auto-xy",
 			LayoutOrder = 2
-		}, var1.trailing) else nil
+		}, var23.trailing) else nil
 	}
 	
-	if var2 then
+	if var37 then
 		var1 = reactModule.createElement
 		var1 = var1(viewModule, {
 			tag = "align-x-center align-y-center auto-xy",
@@ -217,8 +217,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}, {
 			ActivatedIcon = if var2 == nil or flagsModule.FoundationListItemDecoupledInput and var2 == listItemInputTypeModule.Chevron then reactModule.createElement(iconModule, {
 				name = builderIconsModule.Icon.ChevronLargeRight,
-				size = var5.icon.size,
-				testId = `{var1.testId}--activated-icon`
+				size = var27.icon.size,
+				testId = `{var23.testId}--activated-icon`
 			}) elseif var2 == listItemInputTypeModule.Radio then reactModule.createElement(radioGroupModule.Root, {
 				Selectable = false,
 				value = if var3 then "radio" else "",
@@ -239,10 +239,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	t_7.ListItem = createElement_3(var7, t_8, t_9)
 	t_5.ListItemContainer = createElement_2(var6, t_6, t_7)
 	t_3.HoverWrapper = createElement_1(viewModule, t_4, t_5)
-	t_3.Divider = if var3.hasDivider and var1.LayoutOrder ~= var3.lastLayoutOrder then if var3.isInset then reactModule.createElement(viewModule, { tag = "row size-full-0 auto-y", LayoutOrder = 2 }, {
+	t_3.Divider = if var24.hasDivider and var23.LayoutOrder ~= var24.lastLayoutOrder then if var24.isInset then reactModule.createElement(viewModule, { tag = "row size-full-0 auto-y", LayoutOrder = 2 }, {
 		LeadingSpacer = reactModule.createElement(viewModule, {
 			LayoutOrder = 0,
-			Size = UDim2.fromOffset((if var3.hasMargin then var4.Padding.Small + var4.Margin.Small else 0) + (if var1.leading then var6.container.Size.X.Offset + var4.Gap.Medium else 0), 0)
+			Size = UDim2.fromOffset((if var24.hasMargin then var26.Padding.Small + var26.Margin.Small else 0) + (if var23.leading then var28.container.Size.X.Offset + var26.Gap.Medium else 0), 0)
 		}),
 		DividerLine = reactModule.createElement(viewModule, { tag = "fill auto-y", LayoutOrder = 1 }, reactModule.createElement(dividerModule))
 	}) else reactModule.createElement(dividerModule, { LayoutOrder = 2 }) else nil

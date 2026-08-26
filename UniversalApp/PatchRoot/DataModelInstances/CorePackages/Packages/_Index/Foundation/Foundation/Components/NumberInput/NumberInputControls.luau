@@ -145,7 +145,7 @@ local function StackedControls(p1)
 		Size = UDim2.new(0, var3.button.width, 1, 0),
 		LayoutOrder = p1.LayoutOrder
 	}, {
-		ControlIncrement = reactModule.createElement(var2, {
+		ControlIncrement = reactModule.createElement(var1, {
 			onActivated = p1.increment.onClick,
 			isDisabled = if reactIsModule.isBinding(p1.increment.isDisabled) then false else p1.increment.isDisabled,
 			padding = var3.button.padding,
@@ -168,7 +168,7 @@ local function StackedControls(p1)
 				testId = `{p1.testId}--increment-icon`
 			})
 		}),
-		ControlDecrement = reactModule.createElement(var2, {
+		ControlDecrement = reactModule.createElement(var1, {
 			tag = var3.downButton.tag,
 			onActivated = p1.decrement.onClick,
 			isDisabled = if reactIsModule.isBinding(p1.decrement.isDisabled) then false else p1.decrement.isDisabled,

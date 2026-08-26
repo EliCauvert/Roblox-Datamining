@@ -66,10 +66,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	return var8.createLayout(reactModule.createElement(viewModule, {
 		LayoutOrder = 2,
 		tag = "auto-xy",
-		testId = `{var11.testId}--pages`,
+		testId = `{var1.testId}--pages`,
 		ref = var9
 	}, {
-		ActivePageHighlight = if not paginationUtilsModule.needsWidePageSlot(var11.page) then reactModule.createElement(viewModule, {
+		ActivePageHighlight = if not paginationUtilsModule.needsWidePageSlot(var1.page) then reactModule.createElement(viewModule, {
 			Active = false,
 			tag = "radius-circle clip",
 			ZIndex = 1,
@@ -82,7 +82,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			end),
 			Visible = var11.isVisible,
 			selection = { Selectable = false },
-			testId = `{var11.testId}--active-page-highlight`
+			testId = `{var1.testId}--active-page-highlight`
 		}) else nil,
 		PagesRow = reactModule.createElement(viewModule, {
 			tag = "row gap-xsmall auto-xy",
@@ -93,11 +93,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				local var12 = var10[pageSlotId]
 				
 				if var12 and var12.current and var9.current then
-					var12.updateHighlight(var12, true)
+					var11.updateHighlight(var12, true)
 				end
 			end, { pageSlotId, var10, var11.updateHighlight })
 		}, reactModule.useMemo(function()
-			-- upvalues: var5 (ref), reactModule (copy), ellipsisModule (copy), size (ref), var11 (ref), paginationSlotsUtilsModule (copy), var8 (ref), pageNumberSlotModule (copy)
+			-- upvalues: var5 (ref), reactModule (copy), ellipsisModule (copy), size (ref), var1 (ref), paginationSlotsUtilsModule (copy), var8 (ref), pageNumberSlotModule (copy)
 			local t = {}
 			
 			for i, v in var5 do
@@ -105,18 +105,18 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					t[if i == 2 then "ellipsis-leading" else "ellipsis-trailing"] = reactModule.createElement(ellipsisModule, {
 						slotSize = size,
 						LayoutOrder = i,
-						testId = `{var11.testId}--ellipsis-{i}`
+						testId = `{var1.testId}--ellipsis-{i}`
 					})
 				else
 					local pageSlotId = paginationSlotsUtilsModule.getPageSlotId(v)
 					local slotBindings = var8.selection.getSlotBindings(pageSlotId)
 					t[`Page-{v}`] = reactModule.createElement(pageNumberSlotModule, {
 						slotSize = size,
-						isChecked = v == var11.page,
+						isChecked = v == var1.page,
 						LayoutOrder = i,
-						onPageActivated = var11.onActivated,
+						onPageActivated = var1.onActivated,
 						page = v,
-						testId = `{var11.testId}--page-{v}`,
+						testId = `{var1.testId}--page-{v}`,
 						ref = var8.selection.getSlotRef(pageSlotId),
 						Selectable = slotBindings.Selectable,
 						NextSelectionLeft = slotBindings.NextSelectionLeft,
@@ -128,7 +128,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			end
 			return t
 		end, {
-			var5, var11.page, size, var11.testId, var11.onActivated, var8.selection
+			var5, var1.page, size, var1.testId, var1.onActivated, var8.selection
 		}))
 	}), nil)
 end))

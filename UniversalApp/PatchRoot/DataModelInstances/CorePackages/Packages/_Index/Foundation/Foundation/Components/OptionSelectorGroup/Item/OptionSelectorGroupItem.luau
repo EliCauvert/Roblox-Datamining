@@ -1,6 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
 local reactModule = require(parent.React)
+local icon = require(parent.BuilderIcons).Icon
 local useMotion = require(parent.Motion).useMotion
 local components = foundation.Components
 local iconModule = require(components.Icon)
@@ -28,8 +29,8 @@ local useOptionSelectorGroupModule = require(script.Parent.Parent.useOptionSelec
 
 local function _(p1, p2)
 	return p2:map(function(p3)
-		-- upvalues: p3 (ref)
-		return if p3 == nil then p3 else p3 + (1 - p3) * p3
+		-- upvalues: p1 (ref)
+		return if p1 == nil then p3 else p1 + (1 - p1) * p3
 	end)
 end
 
@@ -52,8 +53,8 @@ local function renderIcon(p1)
 			Image = p1.icon,
 			Size = UDim2.fromOffset(iconExtent, iconExtent),
 			imageStyle = p1.transparency:map(function(p2)
-				-- upvalues: p2 (ref)
-				return { Color3 = p2.contentColor, Transparency = p2 }
+				-- upvalues: p1 (ref)
+				return { Color3 = p1.contentColor, Transparency = p2 }
 			end),
 			LayoutOrder = p1.layoutOrder,
 			testId = `{p1.testId}--icon`
@@ -64,8 +65,8 @@ local function renderIcon(p1)
 		name = var1.name,
 		size = p1.iconSize,
 		style = p1.transparency:map(function(p2)
-			-- upvalues: p2 (ref)
-			return { Color3 = p2.contentColor, Transparency = p2 }
+			-- upvalues: p1 (ref)
+			return { Color3 = p1.contentColor, Transparency = p2 }
 		end),
 		LayoutOrder = p1.layoutOrder,
 		testId = `{p1.testId}--icon`
@@ -84,7 +85,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useOptionSelectorGroupModule (ref), flagsModule (ref), inputSizeModule (ref), optionSelectorGroupSizeModule (ref), orientationModule (ref), fillBehaviorModule (ref), useTokensModule (ref), useOptionSelectorGroupItemVariantsModule (ref), useOptionSelectorGroupItemMotionStatesModule (ref), constantsModule (ref), useMotion (ref), reactModule (ref), renderIcon (ref), viewModule (ref), textModule (ref), escapeRichTextModule (ref), getTextStyle (ref), withCommonPropsModule (ref), iconModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useOptionSelectorGroupModule (ref), flagsModule (ref), inputSizeModule (ref), optionSelectorGroupSizeModule (ref), orientationModule (ref), fillBehaviorModule (ref), useTokensModule (ref), useOptionSelectorGroupItemVariantsModule (ref), useOptionSelectorGroupItemMotionStatesModule (ref), constantsModule (ref), useMotion (ref), reactModule (ref), renderIcon (ref), viewModule (ref), textModule (ref), escapeRichTextModule (ref), getTextStyle (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useOptionSelectorGroupModule()
 	local var3 = var2.value == var1.value
@@ -122,7 +123,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var2.value
 	})
 	var1.testId = `{var2.testId}--item-{var25.value}`
-	local var1 = reactModule.useMemo(function()
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: var11 (ref), var10 (ref)
 		return {
 			radius = UDim.new(0, var11.container.radius),
@@ -181,7 +182,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			})
 		}
 		local createElement = reactModule.createElement
-		local var2 = viewModule
+		local var20 = viewModule
 		local t_2 = {}
 		local t_3 = { Color = var13.Color3 }
 		local transparency = var13.Transparency
@@ -195,13 +196,13 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		t_2.selection = {
 			Selectable = if var1.isDisabled then false else var2.Selectable
 		}
-		t_2.cursor = var1
+		t_2.cursor = var19
 		t_2.onActivated = var18
 		t_2.isDisabled = var1.isDisabled
 		t_2.tag = var11.container.tag
 		t_2.ref = p2
 		
-		return createElement(var2, withCommonPropsModule(var1, t_2), {
+		return createElement(var20, withCommonPropsModule(var1, t_2), {
 			ItemInner = reactModule.createElement(viewModule, {
 				tag = var11.itemInner.tag,
 				Size = var9,
@@ -209,7 +210,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			}, t_1)
 		})
 	end
-	local var1 = reactModule.createElement(textModule, {
+	local var21 = reactModule.createElement(textModule, {
 		TextWrapped = true,
 		RichText = true,
 		LayoutOrder = 2,
@@ -232,7 +233,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	t_1.selection = {
 		Selectable = if var1.isDisabled then false else var2.Selectable
 	}
-	t_1.cursor = var1
+	t_1.cursor = var19
 	t_1.onActivated = var18
 	t_1.isDisabled = var1.isDisabled
 	t_1.tag = if flagsModule.FoundationOptionSelectorGroupFixes then var11.container.tag else {
@@ -258,11 +259,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					end),
 					testId = `{var1.testId}--icon`
 				}) else nil,
-				Label = if var5 == orientationModule.Horizontal then var1 elseif flagsModule.FoundationOptionSelectorGroupFixes and var8 then nil else reactModule.createElement(viewModule, { tag = "grow" }),
+				Label = if var5 == orientationModule.Horizontal then var21 elseif flagsModule.FoundationOptionSelectorGroupFixes and var8 then nil else reactModule.createElement(viewModule, { tag = "grow" }),
 				LeadingSpacer = if flagsModule.FoundationOptionSelectorGroupFixes and var8 and not var1.icon then reactModule.createElement(viewModule, { LayoutOrder = 0, Size = UDim2.fromOffset(0, 0) }) else nil,
 				Checkmark = reactModule.createElement(iconModule, {
-					name = "check-large",
 					LayoutOrder = 3,
+					name = icon.CheckLarge,
 					size = var11.icon.size,
 					style = var15.transparency:map(function(p3)
 						-- upvalues: color3 (ref), var3 (ref)
@@ -272,7 +273,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				})
 			}),
 			TextContainer = if flagsModule.FoundationOptionSelectorGroupFixes and var8 then reactModule.createElement(viewModule, { LayoutOrder = 2, tag = var11.textContainer.tag }, {
-				Label = if var5 == orientationModule.Vertical then var1 else nil,
+				Label = if var5 == orientationModule.Vertical then var21 else nil,
 				Metadata = if var1.metadata then reactModule.createElement(textModule, {
 					RichText = true,
 					LayoutOrder = 3,
@@ -294,7 +295,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					testId = `{var1.testId}--description`
 				}) else nil
 			}) else nil,
-			Label = if flagsModule.FoundationOptionSelectorGroupFixes and var8 then nil elseif var5 == orientationModule.Vertical then var1 else nil,
+			Label = if flagsModule.FoundationOptionSelectorGroupFixes and var8 then nil elseif var5 == orientationModule.Vertical then var21 else nil,
 			Metadata = if flagsModule.FoundationOptionSelectorGroupFixes and var8 then nil elseif var1.metadata then reactModule.createElement(textModule, {
 				RichText = true,
 				LayoutOrder = 3,

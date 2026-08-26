@@ -86,7 +86,7 @@ local function areChildrenAcceptable(p1, p2)
 		return false
 	end
 	
-	for i, v in p3:GetChildren() do
+	for i, v in p1:GetChildren() do
 		if not findAndRemoveMatching(v) then
 			return false
 		end
@@ -198,10 +198,10 @@ local _ = function(p6, p7)
 			for i, v in p8:GetChildren() do
 				if v:IsA("Folder") then
 					if v.Name ~= "HumanoidRootPart" then
-						if not var2 then
-							var2 = assetCalculatorModule.getBodyPartsToParents()
+						if not var1 then
+							var1 = assetCalculatorModule.getBodyPartsToParents()
 						end
-						var2 = var2[v.Name]
+						var2 = var1[v.Name]
 						
 						if var2 then
 							return var2 == p8.Name and validateBodyPartFolderInternal(v)
@@ -214,20 +214,20 @@ local _ = function(p6, p7)
 		end
 	end
 	
-	local name = p8.Name
+	local name = p6.Name
 	local isHumanoidRootPart = true
 	
-	if not var2 then
-		var2 = assetCalculatorModule.getBodyPartsToParents()
+	if not var1 then
+		var1 = assetCalculatorModule.getBodyPartsToParents()
 	end
-	if var2[name] == nil then
+	if var1[name] == nil then
 		isHumanoidRootPart = name == "HumanoidRootPart"
 	end
-	return if isHumanoidRootPart then validateBodyPartFolderInternal(p8) else true
+	return if isHumanoidRootPart then validateBodyPartFolderInternal(p6) else true
 end
 
 local function validateSingleBodyRoot(p9, p10)
-	-- upvalues: var2 (write), assetCalculatorModule (ref), reportFailure (ref), analyticsModule (ref), getFFlagUGCValidateDuplicatesInAnimationModule (ref)
+	-- upvalues: var1 (write), assetCalculatorModule (ref), reportFailure (ref), analyticsModule (ref), getFFlagUGCValidateDuplicatesInAnimationModule (ref)
 	local var3 = 0
 	
 	for i, v in p9:GetChildren() do
@@ -235,10 +235,10 @@ local function validateSingleBodyRoot(p9, p10)
 			local name = v.Name
 			local isHumanoidRootPart = true
 			
-			if not var3 then
-				var3 = assetCalculatorModule.getBodyPartsToParents()
+			if not var1 then
+				var1 = assetCalculatorModule.getBodyPartsToParents()
 			end
-			if var3[name] == nil then
+			if var1[name] == nil then
 				isHumanoidRootPart = name == "HumanoidRootPart"
 			end
 			if isHumanoidRootPart then
@@ -359,7 +359,7 @@ function t.validateScriptsUnitTest(p21, p22)
 end
 
 local function validateAnimationHierarchy(p21, p22)
-	-- upvalues: analyticsModule (ref), getFFlagUGCValidateMaxTotalInstancesModule (ref), reportFailure (ref), validateSingleBodyRoot (ref), t (ref), getFFlagUGCValidateRestrictNumMarkerCurvesModule (ref), getFFlagUGCValidateDuplicatesInAnimationModule (ref), var7 (write), assetCalculatorModule (ref), validateBodyPartFolderChildren (ref), failureReasonsAccumulatorModule (ref), validateScripts (ref), validateExtraInstances (ref)
+	-- upvalues: analyticsModule (ref), getFFlagUGCValidateMaxTotalInstancesModule (ref), reportFailure (ref), validateSingleBodyRoot (ref), t (ref), getFFlagUGCValidateRestrictNumMarkerCurvesModule (ref), getFFlagUGCValidateDuplicatesInAnimationModule (ref), var1 (write), assetCalculatorModule (ref), validateBodyPartFolderChildren (ref), failureReasonsAccumulatorModule (ref), validateScripts (ref), validateExtraInstances (ref)
 	if not p21:IsA("CurveAnimation") then
 		analyticsModule.reportFailure(analyticsModule.ErrorType.validateCurveAnimation_AnimationHierarchyIsIncorrect, nil, p22)
 		
@@ -419,7 +419,7 @@ local function validateAnimationHierarchy(p21, p22)
 				local validateBodyPartFolderInternal = nil
 				
 				local function name(p23)
-					-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), validateBodyPartFolderChildren (copy), reportFailure (copy), analyticsModule (copy), validateBodyPartFolderInternal (ref), name (ref), var8 (copy), assetCalculatorModule (copy)
+					-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), validateBodyPartFolderChildren (copy), reportFailure (copy), analyticsModule (copy), validateBodyPartFolderInternal (ref), name (ref), var1 (copy), assetCalculatorModule (copy)
 					local var22
 					if getFFlagUGCValidateDuplicatesInAnimationModule() then
 						if not validateBodyPartFolderChildren(p23) then
@@ -439,10 +439,10 @@ local function validateAnimationHierarchy(p21, p22)
 						for i, v in p23:GetChildren() do
 							if v:IsA("Folder") then
 								if v.Name ~= "HumanoidRootPart" then
-									if not var22 then
-										var22 = assetCalculatorModule.getBodyPartsToParents()
+									if not var1 then
+										var1 = assetCalculatorModule.getBodyPartsToParents()
 									end
-									var22 = var22[v.Name]
+									var22 = var1[v.Name]
 									
 									if var22 then
 										return var22 == p23.Name and name(v)
@@ -458,10 +458,10 @@ local function validateAnimationHierarchy(p21, p22)
 				local name_1 = v.Name
 				local validateBodyPartFolderInternal = true
 				
-				if not var22 then
-					var22 = assetCalculatorModule.getBodyPartsToParents()
+				if not var1 then
+					var1 = assetCalculatorModule.getBodyPartsToParents()
 				end
-				if var22[name_1] == nil then
+				if var1[name_1] == nil then
 					local validateBodyPartFolderInternal = name_1 == "HumanoidRootPart"
 				end
 				if not (not validateBodyPartFolderInternal or name(v)) then
@@ -471,15 +471,15 @@ local function validateAnimationHierarchy(p21, p22)
 			local name = v.Name
 			local var23 = true
 			
-			if not var22 then
-				var22 = assetCalculatorModule.getBodyPartsToParents()
+			if not var1 then
+				var1 = assetCalculatorModule.getBodyPartsToParents()
 			end
-			if var22[name] == nil then
+			if var1[name] == nil then
 				var23 = name == "HumanoidRootPart"
 			end
 			if var23 then
 				local function validateBodyPartFolderInternal(p24)
-					-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), validateBodyPartFolderChildren (copy), reportFailure (copy), analyticsModule (copy), p22 (ref), validateBodyPartFolderInternal (ref), var22 (copy), assetCalculatorModule (copy)
+					-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), validateBodyPartFolderChildren (copy), reportFailure (copy), analyticsModule (copy), p22 (ref), validateBodyPartFolderInternal (ref), var1 (copy), assetCalculatorModule (copy)
 					local var24
 					if getFFlagUGCValidateDuplicatesInAnimationModule() then
 						if not validateBodyPartFolderChildren(p24) then
@@ -499,10 +499,10 @@ local function validateAnimationHierarchy(p21, p22)
 						for i, v in p24:GetChildren() do
 							if v:IsA("Folder") then
 								if v.Name ~= "HumanoidRootPart" then
-									if not var24 then
-										var24 = assetCalculatorModule.getBodyPartsToParents()
+									if not var1 then
+										var1 = assetCalculatorModule.getBodyPartsToParents()
 									end
-									var24 = var24[v.Name]
+									var24 = var1[v.Name]
 									
 									if var24 then
 										return var24 == p24.Name and validateBodyPartFolderInternal(v)
@@ -518,23 +518,23 @@ local function validateAnimationHierarchy(p21, p22)
 				local name_1 = v.Name
 				local var25 = true
 				
-				if not var24 then
-					var24 = assetCalculatorModule.getBodyPartsToParents()
+				if not var1 then
+					var1 = assetCalculatorModule.getBodyPartsToParents()
 				end
-				if var24[name_1] == nil then
+				if var1[name_1] == nil then
 					var25 = name_1 == "HumanoidRootPart"
 				end
 				if var25 then
 					var25, var94 = validateBodyPartFolderInternal(v)
-					var25 = var25
+					var23 = var25
 					name = var94
 				else
-					var25 = true
+					var23 = true
 					name = nil
 				end
 				var21 = name
 				
-				if not var25 then
+				if not var23 then
 					return false, var21
 				end
 			end
@@ -543,8 +543,8 @@ local function validateAnimationHierarchy(p21, p22)
 		return reportFailure("CurveAnimation contains unexpected child: " .. v.Name, analyticsModule.ErrorType.validateCurveAnimation_AnimationHierarchyIsIncorrect, p22)
 	end
 	local var24 = failureReasonsAccumulatorModule.new()
-	var24:updateReasons(validateScripts(p23, p22))
-	var24:updateReasons(validateExtraInstances(p23, p22))
+	var24:updateReasons(validateScripts(p21, p22))
+	var24:updateReasons(validateExtraInstances(p21, p22))
 	
 	return var24:getFinalResults()
 end
@@ -569,16 +569,16 @@ end
 local var23 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
 
 local function getBodyPartFolderRoot(p24)
-	-- upvalues: var22 (write), assetCalculatorModule (ref)
+	-- upvalues: var1 (write), assetCalculatorModule (ref)
 	for i, v in p24:GetChildren() do
 		if v:IsA("Folder") then
 			local name = v.Name
 			local isHumanoidRootPart = true
 			
-			if not var22 then
-				var22 = assetCalculatorModule.getBodyPartsToParents()
+			if not var1 then
+				var1 = assetCalculatorModule.getBodyPartsToParents()
 			end
-			if var22[name] == nil then
+			if var1[name] == nil then
 				isHumanoidRootPart = name == "HumanoidRootPart"
 			end
 			if isHumanoidRootPart then
@@ -638,9 +638,9 @@ local _ = function(p25)
 end
 
 local function calculateAnimFramesAtOriginManual(p25)
-	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), getBodyPartFolderRoot (ref), var22 (write), assetCalculatorModule (ref), hasFloatCurveKeys (ref), constantsModule (ref), createDefaultCharacter (ref), getFFlagUGCValidateCurveAnimFinalFrameBugModule (ref), var23 (ref)
+	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), getBodyPartFolderRoot (ref), var1 (write), assetCalculatorModule (ref), hasFloatCurveKeys (ref), constantsModule (ref), createDefaultCharacter (ref), getFFlagUGCValidateCurveAnimFinalFrameBugModule (ref), var23 (ref)
 	local function getCurveTracks()
-		-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), getBodyPartFolderRoot (copy), p25 (ref), var22 (copy), assetCalculatorModule (copy), hasFloatCurveKeys (copy), constantsModule (copy)
+		-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), getBodyPartFolderRoot (copy), p25 (ref), var1 (copy), assetCalculatorModule (copy), hasFloatCurveKeys (copy), constantsModule (copy)
 		local descendants
 		local t = {}
 		local _ = nil
@@ -655,10 +655,10 @@ local function calculateAnimFramesAtOriginManual(p25)
 		end
 		for i, v in descendants do
 			if v:IsA("Folder") then
-				if not var24 then
-					var24 = assetCalculatorModule.getBodyPartsToParents()
+				if not var1 then
+					var1 = assetCalculatorModule.getBodyPartsToParents()
 				end
-				if var24[v.Name] then
+				if var1[v.Name] then
 					local position = v:FindFirstChild("Position")
 					local rotation = v:FindFirstChild("Rotation")
 					t[v.Name] = {
@@ -722,10 +722,10 @@ local function calculateAnimFramesAtOriginManual(p25)
 		local name = v.Name
 		local isHumanoidRootPart = true
 		
-		if not var26 then
-			var26 = assetCalculatorModule.getBodyPartsToParents()
+		if not var1 then
+			var1 = assetCalculatorModule.getBodyPartsToParents()
 		end
-		if var26[name] == nil then
+		if var1[name] == nil then
 			isHumanoidRootPart = name == "HumanoidRootPart"
 		end
 		if isHumanoidRootPart then
@@ -753,7 +753,7 @@ local function calculateAnimFramesAtOriginManual(p25)
 			table.insert(t_1, assetCalculatorModule.calculateAllTransformsForFullBody(t, calculateTransformsAtTime(var29, var27)))
 			table.insert(t_2, calculatePositionMagnitudeResultsAtTime(var29, var27))
 		end
-		var29 += var27
+		var29 += var23
 	end
 	if getFFlagUGCValidateCurveAnimFinalFrameBugModule() and var28 >= 0 then
 		table.insert(t_1, assetCalculatorModule.calculateAllTransformsForFullBody(t, calculateTransformsAtTime(var28, var27)))
@@ -772,7 +772,7 @@ function t.validateAnimationLength(p31, p32)
 end
 
 function t.validateBounds(p31, p32, p33)
-	-- upvalues: getFFlagUGCValidateCurveAnimTimeErrorMessageFixModule (ref), getFStringUGCValidateAnimationHeightTolModule (ref), getFStringUGCValidationMaxAnimationBoundsModule (ref), var27 (ref), reportFailure (ref), analyticsModule (ref), failureReasonsAccumulatorModule (ref)
+	-- upvalues: getFFlagUGCValidateCurveAnimTimeErrorMessageFixModule (ref), getFStringUGCValidateAnimationHeightTolModule (ref), getFStringUGCValidationMaxAnimationBoundsModule (ref), var23 (ref), reportFailure (ref), analyticsModule (ref), failureReasonsAccumulatorModule (ref)
 	local var31 = 1e999
 	local var32 = 0
 	local var33 = nil
@@ -787,10 +787,10 @@ function t.validateBounds(p31, p32, p33)
 			if getFFlagUGCValidateCurveAnimTimeErrorMessageFixModule() then
 				if v_1.Position.Y >= var33 then
 					if var34 < v_1.Position.Magnitude then
-						return reportFailure(string.format("In CurveAnimation at time %.2f seconds, body part %s is %.2f studs from the HumanoidRootPart. Body parts cannot be more than %s studs from the HumanoidRootPart. Please fix the animation.", math.min(p33, (i - 1) * var32), i_1, v_1.Position.Magnitude, getFStringUGCValidationMaxAnimationBoundsModule.asString()), analyticsModule.ErrorType.validateCurveAnimation_UnacceptableSizeBounds, p32)
+						return reportFailure(string.format("In CurveAnimation at time %.2f seconds, body part %s is %.2f studs from the HumanoidRootPart. Body parts cannot be more than %s studs from the HumanoidRootPart. Please fix the animation.", math.min(p33, (i - 1) * var23), i_1, v_1.Position.Magnitude, getFStringUGCValidationMaxAnimationBoundsModule.asString()), analyticsModule.ErrorType.validateCurveAnimation_UnacceptableSizeBounds, p32)
 					end
 				end
-				return reportFailure(string.format("In CurveAnimation at time %.2f seconds, body part %s is at height %.2f studs from the HumanoidRootPart. Body parts cannot be lower than %s studs from the HumanoidRootPart. Please fix the animation.", math.min(p33, (i - 1) * var32), i_1, v_1.Position.Y, getFStringUGCValidateAnimationHeightTolModule.asString()), analyticsModule.ErrorType.validateCurveAnimation_UnacceptableSizeBounds, p32)
+				return reportFailure(string.format("In CurveAnimation at time %.2f seconds, body part %s is at height %.2f studs from the HumanoidRootPart. Body parts cannot be lower than %s studs from the HumanoidRootPart. Please fix the animation.", math.min(p33, (i - 1) * var23), i_1, v_1.Position.Y, getFStringUGCValidateAnimationHeightTolModule.asString()), analyticsModule.ErrorType.validateCurveAnimation_UnacceptableSizeBounds, p32)
 			else
 				var32 = math.max(var32, v_1.Position.Magnitude)
 				var31 = math.min(var31, v_1.Position.Y)
@@ -815,9 +815,9 @@ function t.validateBounds(p31, p32, p33)
 end
 
 function t.validateFrameDeltas(p34, p35)
-	-- upvalues: var32 (ref), getFStringUGCValidationMaxAnimationDeltasModule (ref), getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule (ref), reportFailure (ref), analyticsModule (ref)
+	-- upvalues: var23 (ref), getFStringUGCValidationMaxAnimationDeltasModule (ref), getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule (ref), reportFailure (ref), analyticsModule (ref)
 	local magnitude
-	local var36 = var32 / 0.033333333333
+	local var36 = var23 / 0.033333333333
 	local var37 = getFStringUGCValidationMaxAnimationDeltasModule.asNumber() * var36
 	local var38 = if getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule() then getFStringUGCValidationMaxAnimationDeltasModule.asNumber() * 30 else nil
 	local t = {}
@@ -830,7 +830,7 @@ function t.validateFrameDeltas(p34, p35)
 				magnitude = (v_1.Position - var39.Position).Magnitude
 				
 				if var37 < magnitude then
-					return if getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule() then reportFailure(string.format("In CurveAnimation at time %.2f seconds, body part %s is moving at a speed of %.2f studs/second. %.2f is the maximum studs/second speed. Please fix the animation.", (i - 1) * var37, i_1, magnitude / var36 * 30, var38), analyticsModule.ErrorType.validateCurveAnimation_UnacceptableFrameDelta, p35) else reportFailure(`Body part {i_1} in CurveAnimation moves more than {getFStringUGCValidationMaxAnimationDeltasModule.asString()} studs between frames. Please fix the animation.`, analyticsModule.ErrorType.validateCurveAnimation_UnacceptableFrameDelta, p35)
+					return if getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule() then reportFailure(string.format("In CurveAnimation at time %.2f seconds, body part %s is moving at a speed of %.2f studs/second. %.2f is the maximum studs/second speed. Please fix the animation.", (i - 1) * var23, i_1, magnitude / var36 * 30, var38), analyticsModule.ErrorType.validateCurveAnimation_UnacceptableFrameDelta, p35) else reportFailure(`Body part {i_1} in CurveAnimation moves more than {getFStringUGCValidationMaxAnimationDeltasModule.asString()} studs between frames. Please fix the animation.`, analyticsModule.ErrorType.validateCurveAnimation_UnacceptableFrameDelta, p35)
 				end
 			end
 		end
@@ -840,8 +840,8 @@ function t.validateFrameDeltas(p34, p35)
 end
 
 function t.validateFrameRotationDeltas(p36, p37)
-	-- upvalues: var37 (ref), getFIntUGCValidateMaxAnimationFPSModule (ref), getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule (ref), reportFailure (ref), analyticsModule (ref)
-	assert(math.abs(1 / var37 - getFIntUGCValidateMaxAnimationFPSModule()) < 0.00001, "frameDelta should be calculated as 1 / getFIntUGCValidateMaxAnimationFPS()")
+	-- upvalues: var23 (ref), getFIntUGCValidateMaxAnimationFPSModule (ref), getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule (ref), reportFailure (ref), analyticsModule (ref)
+	assert(math.abs(1 / var23 - getFIntUGCValidateMaxAnimationFPSModule()) < 0.00001, "frameDelta should be calculated as 1 / getFIntUGCValidateMaxAnimationFPS()")
 	local var40 = getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule()
 	local var41 = var40 / getFIntUGCValidateMaxAnimationFPSModule()
 	local t = {}
@@ -854,7 +854,7 @@ function t.validateFrameRotationDeltas(p36, p37)
 				local degrees = math.deg(math.abs(v_1:AngleBetween(var42)))
 				
 				if var41 < degrees then
-					return reportFailure(string.format("In CurveAnimation at time %.2f seconds, body part %s is moving at a rotation speed of %.2f degrees/second. %.2f is the maximum degrees/second speed. Please fix the animation.", (i - 1) * var41, i_1, degrees * getFIntUGCValidateMaxAnimationFPSModule(), var40), analyticsModule.ErrorType.validateCurveAnimation_UnacceptableFrameRotationDelta, p37)
+					return reportFailure(string.format("In CurveAnimation at time %.2f seconds, body part %s is moving at a rotation speed of %.2f degrees/second. %.2f is the maximum degrees/second speed. Please fix the animation.", (i - 1) * var23, i_1, degrees * getFIntUGCValidateMaxAnimationFPSModule(), var40), analyticsModule.ErrorType.validateCurveAnimation_UnacceptableFrameRotationDelta, p37)
 				end
 			end
 		end
@@ -874,7 +874,7 @@ function t.validateMinimumTransformations(a, b)
 end
 
 function t.validateContainsJointManipulation(p38, p39)
-	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), getBodyPartFolderRoot (ref), var40 (write), assetCalculatorModule (ref), reportFailure (ref), analyticsModule (ref)
+	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), getBodyPartFolderRoot (ref), var1 (write), assetCalculatorModule (ref), reportFailure (ref), analyticsModule (ref)
 	local descendants
 	local _ = nil
 	
@@ -888,10 +888,10 @@ function t.validateContainsJointManipulation(p38, p39)
 	end
 	for i, v in descendants do
 		if v:IsA("Folder") then
-			if not var43 then
-				var43 = assetCalculatorModule.getBodyPartsToParents()
+			if not var1 then
+				var1 = assetCalculatorModule.getBodyPartsToParents()
 			end
-			if var43[v.Name] then
+			if var1[v.Name] then
 				local position = v:FindFirstChild("Position")
 				local rotation = v:FindFirstChild("Rotation")
 				
@@ -955,9 +955,9 @@ local function areNumbersGood(...)
 end
 
 function t.validateData(p42, p43)
-	-- upvalues: var45 (ref), getFStringUGCValidateFrameDeltaKeyTimeTolModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), getFFlagUGCValidateRestrictNumMarkersInsideMarkerCurvesModule (ref), getFIntUGCValidateMaxTotalInternalMarkersModule (ref), reportFailure (ref), analyticsModule (ref), areNumbersGood (ref), getFIntUGCValidateMaxMarkerCurveValueLengthModule (ref), getFIntUGCValidateMaxAnimationFPSModule (ref)
+	-- upvalues: var23 (ref), getFStringUGCValidateFrameDeltaKeyTimeTolModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), getFFlagUGCValidateRestrictNumMarkersInsideMarkerCurvesModule (ref), getFIntUGCValidateMaxTotalInternalMarkersModule (ref), reportFailure (ref), analyticsModule (ref), areNumbersGood (ref), getFIntUGCValidateMaxMarkerCurveValueLengthModule (ref), getFIntUGCValidateMaxAnimationFPSModule (ref)
 	local markers, minValue
-	local var48 = var45 * getFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()
+	local var48 = var23 * getFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()
 	local ceiled = math.ceil(1 / var48 * getFStringUGCValidationMaxAnimationLengthModule.asNumber())
 	
 	for i, v in p42:GetDescendants() do

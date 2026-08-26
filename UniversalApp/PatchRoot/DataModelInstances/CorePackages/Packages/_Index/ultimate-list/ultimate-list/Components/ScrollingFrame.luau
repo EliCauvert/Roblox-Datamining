@@ -34,24 +34,24 @@ return function(p1)
 		end)
 	end, {})
 	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref), var2 (ref), p2 (ref)
+		-- upvalues: var6 (ref), var2 (ref), p1 (ref)
 		var6(p2.AbsoluteWindowSize)
 		var2.setWindowSize(p2.AbsoluteWindowSize)
 		
-		if p2.onAbsoluteWindowSizeChanged ~= nil then
-			p2.onAbsoluteWindowSizeChanged(p2.AbsoluteWindowSize)
+		if p1.onAbsoluteWindowSizeChanged ~= nil then
+			p1.onAbsoluteWindowSizeChanged(p2.AbsoluteWindowSize)
 		end
 	end, { p1.direction, p1.onAbsoluteWindowSizeChanged })
 	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: p2 (ref), exhaustiveMatchModule (copy), runService (copy), var2 (ref), var8 (ref)
-		local var11 = if p2.direction == "x" then p2.CanvasPosition.X elseif p2.direction == "y" then p2.CanvasPosition.Y else exhaustiveMatchModule(p2.direction)
+		-- upvalues: p1 (ref), exhaustiveMatchModule (copy), runService (copy), var2 (ref), var8 (ref)
+		local var11 = if p1.direction == "x" then p2.CanvasPosition.X elseif p1.direction == "y" then p2.CanvasPosition.Y else exhaustiveMatchModule(p1.direction)
 		runService.Heartbeat:Once(function()
-			-- upvalues: var11 (copy), var11 (ref), var8 (copy), p2 (copy)
-			var11.setScrollAxis(var11)
+			-- upvalues: var2 (copy), var11 (ref), var8 (copy), p1 (copy)
+			var2.setScrollAxis(var11)
 			var8(var11)
 			
-			if p2.onScrollAxisChanged ~= nil then
-				p2.onScrollAxisChanged(var11)
+			if p1.onScrollAxisChanged ~= nil then
+				p1.onScrollAxisChanged(var11)
 			end
 		end)
 	end, { p1.direction, p1.onScrollAxisChanged })

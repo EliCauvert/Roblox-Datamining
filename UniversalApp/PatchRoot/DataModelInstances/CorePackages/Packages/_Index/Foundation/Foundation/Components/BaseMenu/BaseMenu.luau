@@ -50,35 +50,35 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			return if p3 then p3.Offset elseif flagsModule.FoundationBaseMenuContentSizing then 0 else var6
 		end)
 	end, { var4, var6 })
-	local var1 = reactModule.useMemo(function()
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), flagsModule (copy), var3 (ref), var7 (ref)
 		return var4:map(function(p3)
 			-- upvalues: flagsModule (copy), var3 (copy), var7 (copy)
 			return if flagsModule.FoundationBaseMenuContentSizing then not p3 or var3.couldGrow == true else not p3 or (var3.couldGrow == true and p3.Offset < var7)
 		end)
 	end, { var4, var7, var3.couldGrow })
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var1 (ref), var12 (ref), flagsModule (copy), var7 (ref)
+	local var14 = reactModule.useMemo(function()
+		-- upvalues: reactModule (copy), var13 (ref), var12 (ref), flagsModule (copy), var7 (ref)
 		return {
-			MinSize = reactModule.joinBindings({ var1, var12 }):map(function(p3)
+			MinSize = reactModule.joinBindings({ var13, var12 }):map(function(p3)
 				-- upvalues: flagsModule (copy)
-				local var13 = p3[2]
+				local var15 = p3[2]
 				
-				return if p3[1] then if flagsModule.FoundationBaseMenuContentSizing and var13 == 0 then nil else Vector2.new(var13, 0) else nil
+				return if p3[1] then if flagsModule.FoundationBaseMenuContentSizing and var15 == 0 then nil else Vector2.new(var15, 0) else nil
 			end),
-			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var1:map(function(p3)
+			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var13:map(function(p3)
 				-- upvalues: var7 (copy)
 				return if p3 then Vector2.new(var7, 1e999) else nil
 			end)
 		}
-	end, { var1, var12, var7 })
+	end, { var13, var12, var7 })
 	local children = var3.children
 	
 	if not children and var3.items then
 		children = reactModule.createElement(declarativeBaseMenuContentModule, { items = var3.items, size = var3.size })
 	end
-	local var2 = if var3.radius ~= nil then "" else t_1[var3.radius]
-	local var3 = reactModule.createElement(baseMenuContextModule.Provider, {
+	local var15 = if var3.radius ~= nil then "" else t_1[var3.radius]
+	local var16 = reactModule.createElement(baseMenuContextModule.Provider, {
 		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 			-- upvalues: var3 (ref), var8 (ref), var11 (ref), var10 (ref)
 			return {
@@ -115,23 +115,23 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	
 	return if var3.maxHeight then reactModule.createElement(baseMenuScrollContainerModule, {
 		maxHeight = var5,
-		autoSize = var1,
+		autoSize = var13,
 		width = var4,
 		scrollViewProps = withCommonPropsModule(var3, {
 			ref = p2,
-			sizeConstraint = var1,
+			sizeConstraint = var14,
 			scrollingFrameRef = var3.scrollingFrameRef,
-			tag = `stroke-standard stroke-default {var2}`
+			tag = `stroke-standard stroke-default {var15}`
 		})
-	}, var3) else reactModule.createElement(viewModule, withCommonPropsModule(var3, {
-		tag = `col stroke-standard stroke-default {var2}`,
-		AutomaticSize = var1:map(function(p3)
+	}, var16) else reactModule.createElement(viewModule, withCommonPropsModule(var3, {
+		tag = `col stroke-standard stroke-default {var15}`,
+		AutomaticSize = var13:map(function(p3)
 			return if p3 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
 		end),
-		Size = reactModule.joinBindings({ var1, var4 }):map(function(p3)
+		Size = reactModule.joinBindings({ var13, var4 }):map(function(p3)
 			return if p3[1] then nil else UDim2.new(p3[2], UDim.new())
 		end),
 		ref = p2,
-		sizeConstraint = var1
-	}), var3)
+		sizeConstraint = var14
+	}), var16)
 end))

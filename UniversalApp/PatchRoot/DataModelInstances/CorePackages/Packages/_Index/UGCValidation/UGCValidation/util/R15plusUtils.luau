@@ -91,43 +91,43 @@ function t.checkFlagEnabledForAllowHrd()
 	return if getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() then if getFFlagUGCValidationAllowHRDUploadModule() then true else getFFlagDebugAllowHRDUploadOnBundleBackendModule() and var5 else false
 end
 
-local var2 = nil
-local var3 = nil
+local var6 = nil
+local var7 = nil
 
 function t.getHrdJointLabels()
-	-- upvalues: var2 (write)
-	if var2 == nil then
-		var2 = Instance.new("HumanoidRigDescription"):GetJointLabels()
+	-- upvalues: var6 (write)
+	if var6 == nil then
+		var6 = Instance.new("HumanoidRigDescription"):GetJointLabels()
 	end
-	return var2
+	return var6
 end
 
 function t.getDrdJointLabels()
-	-- upvalues: var3 (write)
-	if var3 == nil then
-		var3 = Instance.new("DigitsRigDescription"):GetJointLabels()
+	-- upvalues: var7 (write)
+	if var7 == nil then
+		var7 = Instance.new("DigitsRigDescription"):GetJointLabels()
 	end
-	return var3
+	return var7
 end
 
 function t.getJointNameWhitelist()
-	-- upvalues: var2 (write), constantsModule (ref), t (ref)
-	if var2 ~= nil then
-		return var2
+	-- upvalues: var1 (write), constantsModule (ref), t (ref)
+	if var1 ~= nil then
+		return var1
 	end
-	var2 = {}
+	var1 = {}
 	
 	for i, v in constantsModule.R15_STANDARD_JOINT_NAMES do
-		var2[i] = true
+		var1[i] = true
 	end
 	for i_1, v_1 in t.getHrdJointLabels() do
-		var2[v_1.Name] = true
+		var1[v_1.Name] = true
 	end
 	for i_2, v_2 in t.getDrdJointLabels() do
-		var2[`LeftHand{v_2.Name}`] = true
-		var2[`RightHand{v_2.Name}`] = true
+		var1[`LeftHand{v_2.Name}`] = true
+		var1[`RightHand{v_2.Name}`] = true
 	end
-	return var2
+	return var1
 end
 
 function t.getNameWhitelistOfClassInSchema(p2, p3)

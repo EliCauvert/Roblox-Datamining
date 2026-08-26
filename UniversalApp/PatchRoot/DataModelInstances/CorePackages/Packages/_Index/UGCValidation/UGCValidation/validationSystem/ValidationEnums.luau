@@ -4,7 +4,7 @@ local function createEnumMetatable(p1)
 	return {
 		__metatable = "This metatable is protected",
 		__index = function(_, p2)
-			-- upvalues: p2 (ref)
+			-- upvalues: p1 (ref)
 			error("Invalid ValidationEnums." .. p0 .. " enum value: " .. tostring(p2))
 		end,
 		__newindex = function(_, _, _)
@@ -31,10 +31,12 @@ end
 t.ValidationModule = {
 	ExpectedRootSchema = "ExpectedRootSchema",
 	SingleInstanceSelected = "SingleInstanceSelected",
+	SerializedAssetSizeBounded = "SerializedAssetSizeBounded",
 	NoExtraTags = "NoExtraTags",
 	AttributesAllowed = "AttributesAllowed",
 	MaterialsAllowed = "MaterialsAllowed",
 	PropertyRequirementsValid = "PropertyRequirementsValid",
+	ArchivableRequired = "ArchivableRequired",
 	PropertiesSensible = "PropertiesSensible",
 	InstanceTreeMatchesSchema = "InstanceTreeMatchesSchema",
 	DescendantIdsAllowed = "DescendantIdsAllowed",
@@ -46,6 +48,7 @@ t.ValidationModule = {
 	HSRMeshIdsMatch = "HSRMeshIdsMatch",
 	ThumbnailConfigValid = "ThumbnailConfigValid",
 	DescendantIdsNotMissing = "DescendantIdsNotMissing",
+	ContentNotEditable = "ContentNotEditable",
 	NoFACSOverrideData = "NoFACSOverrideData",
 	FacsHeadConsistency = "FacsHeadConsistency",
 	DynamicHeadFacsPresent = "DynamicHeadFacsPresent",
@@ -104,6 +107,7 @@ t.ValidationModule = {
 	CurveAnimAllowedTypes = "CurveAnimAllowedTypes",
 	CurveAnimNumericalDataValid = "CurveAnimNumericalDataValid",
 	CurveAnimTagsValid = "CurveAnimTagsValid",
+	CurveAnimTranslationTagAccurate = "CurveAnimTranslationTagAccurate",
 	CurveAnimJointsManipulated = "CurveAnimJointsManipulated",
 	CurveAnimFrameDataSensible = "CurveAnimFrameDataSensible",
 	CurveAnimJointsAnimated = "CurveAnimJointsAnimated",
@@ -131,6 +135,7 @@ t.SharedDataMember = {
 	uploadEnum = "uploadEnum",
 	consumerConfig = "consumerConfig",
 	aqsFetchMetrics = "aqsFetchMetrics",
+	r15LegacyDuplicateRoot = "r15LegacyDuplicateRoot",
 	aqsSummaryData = "aqsSummaryData",
 	renderMeshesData = "renderMeshesData",
 	innerCagesData = "innerCagesData",

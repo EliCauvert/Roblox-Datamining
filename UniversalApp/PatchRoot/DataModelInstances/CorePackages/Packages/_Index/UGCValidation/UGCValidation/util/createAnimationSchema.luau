@@ -1,6 +1,7 @@
 ﻿local parent = script.Parent.Parent
 local constantsModule = require(parent.Constants)
 local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackFolderStructure)
+local getFFlagUGCValidationAnimationAssetDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationAssetDisableModelStructure)
 
 local function createAnimationEntry(p1, p2)
 	local t = { ClassName = "Animation" }
@@ -32,7 +33,7 @@ local function createStringValueWithAnimations(p1, p2, p3)
 end
 
 return function(p1, p2)
-	-- upvalues: constantsModule (ref), createStringValueWithAnimations (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref)
+	-- upvalues: constantsModule (ref), createStringValueWithAnimations (ref), getFFlagUGCValidationAnimationAssetDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref)
 	local var1 = constantsModule.ANIMATION_ASSET_INFO[p1]
 	assert(var1, `No ANIMATION_ASSET_INFO for {p1}`)
 	local t = {}
@@ -48,7 +49,7 @@ return function(p1, p2)
 	end
 	local t_1 = { Name = "R15Anim", ClassName = "Folder", _children = t }
 	
-	return if getFFlagUGCValidationAnimationPackFolderStructureModule() and p2 and p2.Name == "R15Anim" then t_1 else {
+	return if getFFlagUGCValidationAnimationAssetDisableModelStructureModule() or getFFlagUGCValidationAnimationPackFolderStructureModule() and p2 and p2.Name == "R15Anim" then t_1 else {
 		ClassName = "Model",
 		Name = var1.modelName,
 		_children = { t_1 }

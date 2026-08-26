@@ -49,22 +49,22 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 		return t
 	end, { actions })
-	local var5 = var5.icon and var5.icon ~= ""
-	local var6 = var5.title and var5.title ~= ""
-	local var7 = var5.text and var5.text ~= ""
+	local var5 = var1.icon and var1.icon ~= ""
+	local var6 = var1.title and var1.title ~= ""
+	local var7 = var1.text and var1.text ~= ""
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var5, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
 		tag = "row gap-small auto-y padding-medium radius-medium bg-over-media-0",
-		Size = UDim2.new(var5.width or UDim.new(0, useScaledValueModule(400)), UDim.new()),
+		Size = UDim2.new(var1.width or UDim.new(0, useScaledValueModule(400)), UDim.new()),
 		Position = UDim2.fromScale(0.5, 0.1),
-		selection = { Selectable = false, SelectionImageObject = var7 },
+		selection = { Selectable = false, SelectionImageObject = var3 },
 		ref = p2
 	}), {
 		Media = if var5 then reactModule.createElement(imageModule, {
 			LayoutOrder = 1,
 			tag = "size-1200-1200",
-			Image = var5.icon,
-			testId = `{var5.testId}--media`
+			Image = var1.icon,
+			testId = `{var1.testId}--media`
 		}) else nil,
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
@@ -72,19 +72,19 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				["fill self-center auto-y"] = true,
 				["col gap-xxsmall"] = var6 or var7
 			},
-			testId = `{var5.testId}--content`
+			testId = `{var1.testId}--content`
 		}, {
 			Header = if var6 then reactModule.createElement(textModule, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-small text-align-x-left text-truncate-end content-emphasis",
-				Text = var5.title,
-				testId = `{var5.testId}--header`
+				Text = var1.title,
+				testId = `{var1.testId}--header`
 			}) else nil,
 			Body = if var7 then reactModule.createElement(textModule, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default",
-				Text = var5.text,
-				testId = `{var5.testId}--body`
+				Text = var1.text,
+				testId = `{var1.testId}--body`
 			}) else nil,
 			Actions = if actions and #actions > 0 then reactModule.createElement(viewModule, {
 				LayoutOrder = 3,
@@ -92,7 +92,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					["row gap-small size-full-0 auto-y"] = true,
 					["padding-top-small"] = var6 or var7
 				},
-				testId = `{var5.testId}--actions`
+				testId = `{var1.testId}--actions`
 			}, var4) else nil
 		})
 	})

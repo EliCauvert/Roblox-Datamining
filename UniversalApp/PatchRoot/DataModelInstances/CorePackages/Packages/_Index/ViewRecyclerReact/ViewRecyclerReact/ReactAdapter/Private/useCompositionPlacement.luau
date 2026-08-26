@@ -1,0 +1,37 @@
+﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local compositionPlacementManagerModule = require(viewRecyclerReact.ReactAdapter.Private.CompositionPlacementManager)
+local _ = require(viewRecyclerReact.Parent.ViewRecycler)
+local reactModule = require(viewRecyclerReact.Parent.React)
+local _ = require(script.Parent.RecyclingRuntime)
+
+return function(p1, p2, p3)
+	-- upvalues: reactModule (ref), compositionPlacementManagerModule (ref)
+	local var1, var2 = reactModule.useState(0)
+	local var3 = reactModule.useState(function()
+		-- upvalues: p1 (ref), p2 (ref), p3 (ref), compositionPlacementManagerModule (copy), var2 (ref)
+		return compositionPlacementManagerModule.new(p1.getRecyclingScope({ maxPoolSize = p2, diagnostics = p3 }), function()
+			-- upvalues: var2 (copy)
+			var2(function(p4)
+				return p4 + 1
+			end)
+		end)
+	end)
+	local recyclingScope = p1.getRecyclingScope({ maxPoolSize = p2, diagnostics = p3 })
+	reactModule.useEffect(function()
+		-- upvalues: recyclingScope (ref), p2 (ref)
+		recyclingScope.setMaxPoolSize(p2)
+	end, { p2, recyclingScope })
+	reactModule.useLayoutEffect(function()
+		-- upvalues: var3 (ref)
+		var3.flush()
+	end, { var3, var1 })
+	reactModule.useLayoutEffect(function()
+		-- upvalues: var3 (ref)
+		return function()
+			-- upvalues: var3 (copy)
+			var3.destroy()
+		end
+	end, { var3 })
+	
+	return { manager = var3 }
+end

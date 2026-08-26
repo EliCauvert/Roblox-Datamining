@@ -43,25 +43,25 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			variant = builderIconsModule.IconVariant.Regular
 		} else p1.icon
 	end, { p1.icon })
-	local var1 = nil
+	local var7 = nil
 	
 	if var6 then
 		if isBuilderOrMigratedIcon(var6.name) then
-			var1 = reactModule.createElement(iconModule, {
+			var7 = reactModule.createElement(iconModule, {
 				name = if isMigrated(var6.name) then uiblox[var6.name].name else var6.name,
 				variant = if isMigrated(var6.name) then uiblox[var6.name].variant else var6.variant,
 				size = var4.icon.size,
 				style = var2
 			})
 		else
-			local var2, var3 = getIconScaleModule(var6.name, var4.icon.size)
+			local var8, var9 = getIconScaleModule(var6.name, var4.icon.size)
 			
-			if var2 then
-				var1 = reactModule.createElement(imageModule, {
+			if var8 then
+				var7 = reactModule.createElement(imageModule, {
 					Image = var6.name,
-					Size = UDim2.fromOffset(var2.X, var2.Y),
+					Size = UDim2.fromOffset(var8.X, var8.Y),
 					imageStyle = var2,
-					scale = var3
+					scale = var9
 				})
 			end
 		end
@@ -101,7 +101,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			tag = var4.content.tag,
 			Size = var4.content.Size
 		}, {
-			Icon = if p1.icon then var1 else nil,
+			Icon = if p1.icon then var7 else nil,
 			Text = reactModule.createElement(textModule, {
 				LayoutOrder = 2,
 				Text = p1.text,

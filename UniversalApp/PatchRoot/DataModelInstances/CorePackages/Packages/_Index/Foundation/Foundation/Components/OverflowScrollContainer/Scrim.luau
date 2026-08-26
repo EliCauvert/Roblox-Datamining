@@ -42,25 +42,25 @@ return function(p1)
 		-- upvalues: var7 (ref), reactOtterModule (copy), p1 (ref), t (copy)
 		var7(reactOtterModule.ease(if p1.isHovered then 1 else 0, t))
 	end, { p1.isHovered })
-	local var2 = var6:map(function(p2)
+	local var8 = var6:map(function(p2)
 		-- upvalues: var5 (ref), var4 (ref)
 		return if var5 then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if var4 then 1 else -1) * (1 - p2), 0.5)
 	end)
-	local var2 = p1.rowHeight:map(function(p2)
+	local var9 = p1.rowHeight:map(function(p2)
 		-- upvalues: var3 (ref)
 		return UDim2.new(0, p2 + var3.fade, 1, 0)
 	end)
-	local var3 = var6:map(function(p2)
+	local var10 = var6:map(function(p2)
 		-- upvalues: var5 (ref), var3 (ref), lerpNumberSequence (copy)
 		return if var5 then var3.hoverGradient else lerpNumberSequence(var3.gradient, var3.hoverGradient, p2)
 	end)
-	local var2, var3 = reactOtterModule.useAnimatedBinding(if p1.isVisible then 0 else 1)
+	local var11, var12 = reactOtterModule.useAnimatedBinding(if p1.isVisible then 0 else 1)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), reactOtterModule (copy), p1 (ref), t (copy)
-		var3(reactOtterModule.ease(if p1.isVisible then 0 else 1, t))
+		-- upvalues: var12 (ref), reactOtterModule (copy), p1 (ref), t (copy)
+		var12(reactOtterModule.ease(if p1.isVisible then 0 else 1, t))
 	end, { p1.isVisible })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { Size = var2, GroupTransparency = var2 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { Size = var9, GroupTransparency = var11 }), {
 		Scrim = reactModule.createElement(viewModule, {
 			tag = "size-full",
 			backgroundStyle = var2,
@@ -71,7 +71,7 @@ return function(p1)
 			selection = { Selectable = false },
 			testId = `{p1.testId}--button`
 		}, {
-			Gradient = reactModule.createElement("UIGradient", { Transparency = var3 }),
+			Gradient = reactModule.createElement("UIGradient", { Transparency = var10 }),
 			DirectionIcon = reactModule.createElement(viewModule, {
 				ZIndex = 2,
 				tag = var3.iconAlignmentTag,
@@ -84,7 +84,7 @@ return function(p1)
 			}, {
 				Icon = reactModule.createElement(iconModule, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = var2,
+					Position = var8,
 					size = p1.size,
 					name = var3.directionIcon,
 					testId = `{p1.testId}--direction-indicator`

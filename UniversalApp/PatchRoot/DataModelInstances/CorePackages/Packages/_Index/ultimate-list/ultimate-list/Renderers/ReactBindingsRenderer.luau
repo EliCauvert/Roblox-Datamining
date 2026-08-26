@@ -31,9 +31,9 @@ return reactModule.memo(function(p1)
 	end)
 	local getKey = p1.getKey or getKeyDefault
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), getKey (ref), var5 (ref), var6 (copy), reactModule (copy), var6 (ref)
+		-- upvalues: p1 (ref), getKey (ref), var3 (ref), var2 (copy), reactModule (copy), var4 (ref)
 		return p1.virtualizedListController.bindToUpdate(function()
-			-- upvalues: p1 (copy), getKey (copy), var5 (copy), var6 (copy), reactModule (copy), var6 (copy)
+			-- upvalues: p1 (copy), getKey (copy), var3 (copy), var2 (copy), reactModule (copy), var4 (copy)
 			local var8 = p1.virtualizedListController.get()
 			local range = p1.virtualizedListController.getRange()
 			local t = {}
@@ -45,7 +45,7 @@ return reactModule.memo(function(p1)
 			local t_2 = {}
 			local t_3 = {}
 			
-			for i_1, v_1 in var8 do
+			for i_1, v_1 in var3 do
 				local value = v_1.binding:getValue()
 				
 				if value.contents.type == "vacant" then
@@ -55,14 +55,14 @@ return reactModule.memo(function(p1)
 					local var9 = t[key]
 					
 					if var9 == nil then
-						var9("%s is now dead", key)
+						var2("%s is now dead", key)
 						table.insert(t_1, v_1.set)
 					else
 						t[key] = nil
 						local var10 = var8[var9]
 						
 						if value.contents.value ~= var10 then
-							var9("%s existed, but changed", key)
+							var2("%s existed, but changed", key)
 							v_1.set({
 								contents = {
 									type = "full",
@@ -75,7 +75,7 @@ return reactModule.memo(function(p1)
 					end
 				end
 			end
-			var9("%d total setters, %d dead setters, %d vacant setters", #var8, #t_1, #t_2)
+			var2("%d total setters, %d dead setters, %d vacant setters", #var3, #t_1, #t_2)
 			
 			for i_2, v_2 in t do
 				assert(v_2 ~= nil, "Luau")
@@ -96,17 +96,17 @@ return reactModule.memo(function(p1)
 						local var11, var12 = reactModule.createBinding(t_4)
 						table.insert(t_3, { binding = var11, set = var12 })
 					else
-						var9("%s is filling vacant spot", i_2)
+						var2("%s is filling vacant spot", i_2)
 						removed_1(t_4)
 					end
 				else
-					var9("%s is filling dead spot", i_2)
+					var2("%s is filling dead spot", i_2)
 					removed(t_4)
 				end
 			end
 			if #t_3 > 0 then
-				var9("Needed to create %d more bindings to fit, there will be %d setters", #t_3, #t_3 + #var8)
-				var9(function(p2)
+				var2("Needed to create %d more bindings to fit, there will be %d setters", #t_3, #t_3 + #var3)
+				var4(function(p2)
 					-- upvalues: t_3 (ref)
 					local cloned = table.clone(p2)
 					table.move(t_3, 1, #t_3, #cloned + 1, cloned)
@@ -118,20 +118,20 @@ return reactModule.memo(function(p1)
 				v_3({ contents = { type = "vacant" } })
 			end
 		end)
-	end, { p1.virtualizedListController, getKey, var8 })
+	end, { p1.virtualizedListController, getKey, var3 })
 	local t = {}
 	
-	for i, v in var8 do
+	for i, v in var3 do
 		local binding = v.binding
 		local var13 = binding:map(function(p2)
-			-- upvalues: dimensionsMethodsModule (copy), p2 (ref)
-			return if p2.contents.type == "vacant" then { size = UDim2.new(), position = UDim2.new() } else dimensionsMethodsModule.getUDimRect(p2.dimensions, p2.contents.value, p2.contents.index, p2.virtualizedListController.getWindowSize(), p2.direction)
+			-- upvalues: dimensionsMethodsModule (copy), p1 (ref)
+			return if p2.contents.type == "vacant" then { size = UDim2.new(), position = UDim2.new() } else dimensionsMethodsModule.getUDimRect(p1.dimensions, p2.contents.value, p2.contents.index, p1.virtualizedListController.getWindowSize(), p1.direction)
 		end)
 		t[`Item{i}`] = createElement("Frame", {
 			BackgroundTransparency = 1,
 			Position = joinAndMapBindingsModule(function(p2, p3)
-				-- upvalues: adjustPositionToScrollAxisModule (copy), p2 (ref)
-				return adjustPositionToScrollAxisModule(p2.position, p3, p2.direction)
+				-- upvalues: adjustPositionToScrollAxisModule (copy), p1 (ref)
+				return adjustPositionToScrollAxisModule(p2.position, p3, p1.direction)
 			end, var13, p1.scrollAxisBinding),
 			Size = var13:map(function(p2)
 				return p2.size
