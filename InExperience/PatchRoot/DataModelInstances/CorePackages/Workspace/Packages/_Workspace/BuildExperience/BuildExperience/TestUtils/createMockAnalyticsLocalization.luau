@@ -1,7 +1,8 @@
 ﻿local robloxAppLocalesModule = require(script:FindFirstAncestor("BuildExperience").Parent.RobloxAppLocales)
 local t = {
 	["Feature.Build.Analytics.Percent"] = "{number}%",
-	["Feature.Build.Analytics.DurationHours"] = "{number} hrs"
+	["Feature.Build.Analytics.DurationHours"] = "{number} hrs",
+	["Feature.Build.Label.DateRange"] = "{startDate} \226\128\147 {endDate}"
 }
 
 return function()

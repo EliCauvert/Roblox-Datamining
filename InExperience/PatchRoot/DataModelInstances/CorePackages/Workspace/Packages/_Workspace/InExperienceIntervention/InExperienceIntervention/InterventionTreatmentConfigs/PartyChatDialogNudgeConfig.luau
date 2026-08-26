@@ -1,8 +1,19 @@
 ﻿local inExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
 local parent = inExperienceIntervention.Parent
+local abuseVectorModule = require(parent.UniversalFeatureRestrictions.AbuseVector)
 local constants = require(parent.InterventionShared).Utils.Constants
-local _ = require(inExperienceIntervention.Utils.Types)
 local interventionAnalytics = require(parent.InterventionShared).InterventionAnalytics
+local interventionTreatmentShownSignal = require(parent.InterventionShared).Signals.interventionTreatmentShownSignal
+local showFeatureRestrictionFromRealtimeModule = require(parent.UniversalFeatureRestrictions.showFeatureRestrictionFromRealtime)
+local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
+local _ = require(inExperienceIntervention.Utils.Types)
+
+local function onPartyChatNudgeUFRAppeal() end
+
+local function onPartyChatNudgeUFRShown()
+	-- upvalues: interventionTreatmentShownSignal (ref), constants (ref)
+	interventionTreatmentShownSignal:fire(constants.TreatmentType.PartyChatNudgeDialog)
+end
 
 return {
 	configName = "PartyChatDialogNudge",
@@ -18,7 +29,15 @@ return {
 		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and p1.abuseVector == constants.AbuseVectorType.PartyChat)
 	end,
 	onTriggerVisualTreatment = function(p1, p2)
-		-- upvalues: constants (ref)
+		-- upvalues: fFlagAppChatUniversalFeatureRestriction (ref), showFeatureRestrictionFromRealtimeModule (ref), abuseVectorModule (ref), onPartyChatNudgeUFRAppeal (ref), onPartyChatNudgeUFRShown (ref), constants (ref)
+		if fFlagAppChatUniversalFeatureRestriction then
+			showFeatureRestrictionFromRealtimeModule(abuseVectorModule.PartyChat, p2, {
+				onAppeal = onPartyChatNudgeUFRAppeal,
+				onShown = onPartyChatNudgeUFRShown
+			})
+			
+			return
+		end
 		p1({
 			isShown = true,
 			type = constants.UIStateActions.ToggleNotificationDialog,

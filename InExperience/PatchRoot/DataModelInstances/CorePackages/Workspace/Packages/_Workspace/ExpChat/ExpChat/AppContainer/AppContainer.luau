@@ -184,6 +184,8 @@ function appContainer.render(p1)
 				chatWindowSettings = p1.props.chatWindowSettings,
 				clientSettings = p1.props.clientSettings,
 				selectedTabType = p1.props.selectedTabType,
+				renderingFriends = p1.props.renderingFriends,
+				isExperienceChatRendered = p1.props.isExperienceChatRendered,
 				showTranslationButton = p1.state.showTranslationButton,
 				isSpatialUIEnabled = p1.props.isSpatialUIEnabled,
 				targetTextChannel = if fFlagExpChatPresetChatEnabled or fFlagExpChatNewInputBarModule then p1.props.targetTextChannel else nil

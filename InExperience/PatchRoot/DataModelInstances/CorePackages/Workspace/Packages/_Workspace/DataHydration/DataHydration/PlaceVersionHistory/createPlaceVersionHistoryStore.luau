@@ -16,6 +16,12 @@ return function(p1)
 		-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref)
 		return fetchPlaceVersionHistoryModule.fetchHistory(p2, t)
 	end)
+	local var2 = createSingleEntityResolverModule(function(p2)
+		-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref)
+		return fetchPlaceVersionHistoryModule.fetchHistory(p2, t, { isPublished = true, pageSize = 1 }):andThen(function(p3)
+			return { placeVersion = p3.placeVersions[1] }
+		end)
+	end, { resolver = { replaceItems = true } })
 	
 	return {
 		getHistory = var1.get,
@@ -31,6 +37,9 @@ return function(p1)
 				return p4
 			end)
 		end,
+		getLiveVersion = var2.get,
+		fetchLiveVersion = var2.fetch,
+		getAndFetchLiveVersion = var2.getAndFetch,
 		revertVersion = function(p2, p3, p4)
 			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
 			return fetchPlaceVersionHistoryModule.revertVersion(p3, p4, t):andThen(function(_)
@@ -58,14 +67,14 @@ return function(p1)
 			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
 			return fetchPlaceVersionHistoryModule.addVersionNote(p2, p3, p4, t):andThen(function(p5)
 				-- upvalues: var1 (copy), p2 (ref), p3 (ref), p4 (ref)
-				local var2 = var1.get(p2).data(false)
+				local var3 = var1.get(p2).data(false)
 				
-				if var2 == nil or typeof(var2.placeVersions) ~= "table" then
+				if var3 == nil or typeof(var3.placeVersions) ~= "table" then
 					return p5
 				end
 				local t = {}
 				
-				for i, v in var2.placeVersions do
+				for i, v in var3.placeVersions do
 					if v.version ~= p3 then
 						t[i] = v
 						continue
@@ -80,15 +89,23 @@ return function(p1)
 					t[i] = t_1
 				end
 				var1.cache.replaceItem(tostring(p2), {
-					hasMore = var2.hasMore,
-					nextCursor = var2.nextCursor,
+					hasMore = var3.hasMore,
+					nextCursor = var3.nextCursor,
 					placeVersions = t
 				})
 				
 				return p5
 			end)
 		end,
-		clear = var1.clear,
-		dispose = var1.dispose
+		clear = function()
+			-- upvalues: var1 (ref), var2 (ref)
+			var1.clear()
+			var2.clear()
+		end,
+		dispose = function()
+			-- upvalues: var1 (ref), var2 (ref)
+			var1.dispose()
+			var2.dispose()
+		end
 	}
 end

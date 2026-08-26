@@ -13,8 +13,10 @@ local chatMessageListModule = require(buildExperience.Components.Chat.ChatMessag
 local _ = require(buildExperience.Chat.chatTypes)
 local _ = require(buildExperience.Chat.useChatSessionCore)
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
+local fFlagBuildExperienceUseFoundationSheetModule = require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(buildExperience.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
-local var1 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
+local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
+local var1 = if fFlagBuildExperienceUseFoundationSheetModule then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
 local var2 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
 local dialogSize = foundationModule.Enums.DialogSize
 local view = foundationModule.View
@@ -37,7 +39,7 @@ local function ChatSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), reactModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), view (ref), var1 (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), buildPillMenuPortalModule (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), reactModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), view (ref), var1 (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), buildPillMenuPortalModule (ref)
 	local var3 = if fFlagBuildLocalization then useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
 	}) else nil
@@ -84,6 +86,10 @@ return function(p1)
 				composerText = p1.composerText,
 				composerErrorText = p1.composerErrorText,
 				onComposerChanged = p1.onComposerChanged,
+				images = if fFlagBuildExperienceChatImageAttachmentsModule then p1.composerImages else nil,
+				onImagesChanged = if fFlagBuildExperienceChatImageAttachmentsModule then p1.onComposerImagesChanged else nil,
+				onRetryImage = if fFlagBuildExperienceChatImageAttachmentsModule then p1.onRetryComposerImage else nil,
+				isImageSendBlocked = if fFlagBuildExperienceChatImageAttachmentsModule then p1.isComposerSendBlocked else nil,
 				placeholder = if fFlagBuildLocalization then var3.composerPlaceholder else localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
 				textBoxRef = p1.textBoxRef,
 				isAssistantResponding = p1.isAssistantResponding,

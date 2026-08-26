@@ -947,6 +947,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,Eu concordo que esta experiência enviará meu item de avatar para moderação e fará o upload para minhas Criações.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,Eu concordo que essa experiência enviará meu emote à moderação e fará o upload para minhas Criações.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,Eu concordo que essa experiência enviará minha imagem à moderação e fará o upload para minhas Criações.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Itens criados serão revisados e você não poderá receber um reembolso por itens rejeitados que não estejam de acordo com as Regras da Comunidade.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Descrição inválida
 CoreScripts.PublishAssetPrompt.InvalidName,Nome inválido
@@ -961,6 +962,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,Enviar roupa
 CoreScripts.PublishAssetPrompt.TitleTextEmote,Enviar emote
+CoreScripts.PublishAssetPrompt.TitleTextImage,Enviar imagem
 CoreScripts.PublishAssetPrompt.TitleTextModel,Enviar pacote
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,Algo deu errado. Tente novamente. Código de erro: {RESULT_TYPE}
@@ -2087,6 +2089,10 @@ Feature.Build.Message.WhatToCreate,O que você quer criar hoje?
 Feature.Build.Message.WorkedMinutesSeconds,Trabalhou por {MINUTES} min e {REM_SECONDS} segundos
 Feature.Build.Message.WorkedSeconds, Trabalhou por {SECONDS} segundos
 Feature.Build.Message.WorkingOnTasks,Executando suas tarefas
+Feature.Build.Notification.Message.Continue,Retome o chat de criação para continuar.
+Feature.Build.Notification.Message.Review,Retome o chat de criação para revisar o resultado.
+Feature.Build.Notification.Title.Finished,Criação concluída
+Feature.Build.Notification.Title.NeedInput,A criação precisa da sua contribuição
 Feature.Build.Title.AdCampaignActive,A campanha de anúncios está ativa
 Feature.Build.Title.AddFriendsToPlaytest,Adicione amizades para ajudar você a testar o jogo
 Feature.Build.Title.ArchiveThisGame,Arquivar este jogo?

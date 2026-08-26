@@ -947,6 +947,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,"Tôi đồng ý rằng trải nghiệm này sẽ gửi bộ phận của avatar để kiểm duyệt, rồi tải lên mục Sản Phẩm sáng tạo của tôi."
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,Tôi đồng ý rằng trải nghiệm này sẽ gửi biểu cảm của tôi đi kiểm duyệt và tải lên Sản phẩm sáng tạo của tôi.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,Tôi đồng ý rằng trải nghiệm này sẽ gửi hình ảnh của tôi đến bộ phận kiểm duyệt rồi lưu vào mục Sản phẩm sáng tạo của tôi.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Các vật phẩm đã tạo sẽ được xem xét và bạn có thể không được hoàn tiền cho các vật phẩm bị từ chối do không tuân thủ Tiêu Chuẩn Cộng Đồng.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Mô tả Không Hợp Lệ
 CoreScripts.PublishAssetPrompt.InvalidName,Tên Không Hợp Lệ
@@ -961,6 +962,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,Gửi Trang Phục
 CoreScripts.PublishAssetPrompt.TitleTextEmote,Gửi Biểu Cảm
+CoreScripts.PublishAssetPrompt.TitleTextImage,Gửi hình ảnh
 CoreScripts.PublishAssetPrompt.TitleTextModel,Gửi Gói
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,Đã xảy ra lỗi. Vui lòng thử lại. Mã Lỗi: {RESULT_TYPE}
@@ -1837,6 +1839,7 @@ Feature.Build.Action.NotNow,Để sau
 Feature.Build.Action.NotifyMe,Thông báo cho tôi
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Mở phần cài đặt
+Feature.Build.Action.Play,Chơi
 Feature.Build.Action.Playtest,Chơi thử
 Feature.Build.Action.Preview,Xem trước
 Feature.Build.Action.Publish,
@@ -1887,7 +1890,10 @@ Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
 Feature.Build.Header.CustomAnswer,Câu trả lời tùy chỉnh
 Feature.Build.Header.GameDetails,Chi tiết về trò chơi
 Feature.Build.Header.Overview,Tổng quan
+Feature.Build.Header.PastCampaigns,Các chiến dịch trước
 Feature.Build.Label.Access,Quyền truy cập
+Feature.Build.Label.AdClicks,Lượt nhấp vào quảng cáo
+Feature.Build.Label.AdViews,Lượt xem quảng cáo
 Feature.Build.Label.AdditionalUsage,Lượt sử dụng Build bổ sung
 Feature.Build.Label.AdditionalUsed,Đã dùng {USED}/{LIMIT}
 Feature.Build.Label.All,
@@ -1901,6 +1907,7 @@ Feature.Build.Label.ContentRating,Mức phân loại nội dung
 Feature.Build.Label.Created,Thời gian tạo
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
 Feature.Build.Label.Description,
@@ -1909,6 +1916,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Chỉ bạn bè
+Feature.Build.Label.GamePlays,Lượt chơi
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
 Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
@@ -1923,6 +1931,7 @@ Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
 Feature.Build.Label.Pending,Đang chờ xử lý
 Feature.Build.Label.PercentUsed,Đã dùng {PERCENT}%
+Feature.Build.Label.PlayTime,Thời gian chơi
 Feature.Build.Label.PreviouslyPublished,Đã đăng trước đây
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Công khai
@@ -2020,6 +2029,7 @@ Feature.Build.Label.VersionTitleDesc,Tiêu đề và mô tả phiên bản
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp ứng các yêu cầu để sử dụng Build.
 Feature.Build.Message.AccountTooNew,Tài khoản của bạn còn quá mới nên chưa thể đăng. Hãy thử lại khi bạn đã tạo tài khoản được 2 ngày.
+Feature.Build.Message.AdPerformanceLoadFailed,Không tải được hiệu suất quảng cáo
 Feature.Build.Message.AllFriendsAdded,Bạn đã thêm tất cả bạn bè làm người chơi thử.
 Feature.Build.Message.AnswerBuildQuestion,Trả lời câu hỏi của Build ở bên dưới.
 Feature.Build.Message.AssetDetailsUnavailable,Không có chi tiết về tài sản.
@@ -2087,6 +2097,10 @@ Feature.Build.Message.WhatToCreate,Hôm nay bạn muốn tạo nội dung gì?
 Feature.Build.Message.WorkedMinutesSeconds,Đã xử lý trong {MINUTES} phút {REM_SECONDS} giây
 Feature.Build.Message.WorkedSeconds,Đã xử lý trong {SECONDS} giây
 Feature.Build.Message.WorkingOnTasks,Đang thực hiện nhiệm vụ bạn giao
+Feature.Build.Notification.Message.Continue,Hãy quay lại đoạn trò trong tính năng Tạo dựng để tiếp tục.
+Feature.Build.Notification.Message.Review,Hãy quay lại đoạn trò chuyện trong tính năng Tạo dựng để xem lại kết quả.
+Feature.Build.Notification.Title.Finished,Đã tạo dựng xong
+Feature.Build.Notification.Title.NeedInput,Tính năng Tạo dựng cần bạn cung cấp thông tin
 Feature.Build.Title.AdCampaignActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
@@ -2106,6 +2120,7 @@ Feature.Build.Title.FriendsOnlyPlay,Chỉ bạn bè mới có thể chơi
 Feature.Build.Title.GameCreationDone,Đã tạo xong trò chơi
 Feature.Build.Title.GamePrivate,Trò chơi này ở chế độ riêng tư
 Feature.Build.Title.GenericError,Đã xảy ra lỗi
+Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.Playtesters,Người chơi thử
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
@@ -2796,7 +2811,7 @@ Feature.ExperienceDetails.Label.NotPlayable,Không Thể Chơi
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Tôi đồng ý với các ghi chú khi tham gia trải nghiệm này
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,Chơi
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Chơi bản demo
 Feature.ExperienceDetails.PlayButtonText.Unavailable,Không Khả Dụng
 Feature.ExperienceDetails.PlayButtonText.Unlock,Mở khóa

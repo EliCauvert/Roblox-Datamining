@@ -178,7 +178,7 @@ local function SideSheetContent(p1)
 					return Enum.ContextActionResult.Sink
 				end
 				return Enum.ContextActionResult.Pass
-			end, false, Enum.KeyCode.ButtonB)
+			end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonStart)
 			
 			return function()
 				-- upvalues: contextActionService (copy)

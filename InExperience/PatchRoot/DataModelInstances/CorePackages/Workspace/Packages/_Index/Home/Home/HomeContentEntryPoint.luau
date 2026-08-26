@@ -10,6 +10,7 @@ local sduiPageEntryPoint = sduiSharedUtilitiesModule.SduiPageEntryPoint
 local videoUtilsModule = require(parent.VideoUtils)
 local refreshHomePageModule = require(home.refreshHomePage)
 local fetchHomePageModule = require(home.fetchHomePage)
+local useHomeCollectionLayoutSyncModule = require(home.useHomeCollectionLayoutSync)
 local homeConstantsModule = require(home.HomeConstants)
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
@@ -19,7 +20,7 @@ local function _(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: homeConstantsModule (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), responsiveModule (ref), videoUtilsModule (ref), sduiPageEntryPoint (ref), refreshHomePageModule (ref), compositionTags (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
+	-- upvalues: homeConstantsModule (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), responsiveModule (ref), videoUtilsModule (ref), sduiPageEntryPoint (ref), refreshHomePageModule (ref), compositionTags (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local pageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	local var1 = reactModule.useMemo(function()
@@ -30,6 +31,7 @@ return reactModule.memo(function(p1)
 		-- upvalues: fetchHomePageModule (copy), var1 (ref)
 		fetchHomePageModule(var1)
 	end, { configKey, var1 })
+	useHomeCollectionLayoutSyncModule()
 	local var2 = nil
 	
 	if fFlagLuaAppSduiVideoThumbnail then

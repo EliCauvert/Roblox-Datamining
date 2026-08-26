@@ -947,6 +947,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,Wyrażam zgodę na przesłanie przez ten projekt przedmiotu mojego awatara do celów moderacji i przesłanie go do moich dzieł.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,Wyrażam zgodę na przesłanie przez ten projekt mojej emotki do celów moderacji i przesłanie jej do moich dzieł.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,Wyrażam zgodę na przesłanie przez ten projekt mojego obrazu do celów moderacji i przesłanie go do moich dzieł.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,"Utworzone przedmioty zostaną sprawdzone i możesz nie otrzymać zwrotu za odrzucone przedmioty, które nie są zgodne ze Standardami Społeczności."
 CoreScripts.PublishAssetPrompt.InvalidDescription,Nieprawidłowy opis
 CoreScripts.PublishAssetPrompt.InvalidName,Nieprawidłowa nazwa
@@ -961,6 +962,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,Prześlij ubranie
 CoreScripts.PublishAssetPrompt.TitleTextEmote,Prześlij emotkę
+CoreScripts.PublishAssetPrompt.TitleTextImage,Prześlij obraz
 CoreScripts.PublishAssetPrompt.TitleTextModel,Prześlij pakiet
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,Coś poszło nie tak. Spróbuj ponownie. Kod błędu: {RESULT_TYPE}
@@ -1837,6 +1839,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,Powiadom mnie
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Otwórz ustawienia
+Feature.Build.Action.Play,Zagraj
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
@@ -1887,7 +1890,10 @@ Feature.Build.Header.ContentMaturity,Poziom treści dla dorosłych
 Feature.Build.Header.CustomAnswer,Odpowiedź niestandardowa
 Feature.Build.Header.GameDetails,Szczegóły gry
 Feature.Build.Header.Overview,Przegląd
+Feature.Build.Header.PastCampaigns,Poprzednie kampanie
 Feature.Build.Label.Access,Dostęp
+Feature.Build.Label.AdClicks,Kliknięcia reklam
+Feature.Build.Label.AdViews,Wyświetlenia reklam
 Feature.Build.Label.AdditionalUsage,Dodatkowe użycia funkcji Buduj
 Feature.Build.Label.AdditionalUsed,Wykorzystano {USED} z {LIMIT}
 Feature.Build.Label.All,
@@ -1901,6 +1907,7 @@ Feature.Build.Label.ContentRating,Ocena zawartości
 Feature.Build.Label.Created,Utworzono
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Centrum dla twórców
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,Usunięty
 Feature.Build.Label.DescribeIdea,Opisz pomysł
 Feature.Build.Label.Description,
@@ -1909,6 +1916,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Bezpłatne użycia funkcji Buduj
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
+Feature.Build.Label.GamePlays,Rozegrane gry
 Feature.Build.Label.GetMoreBuildUsage,Zdobądź więcej użyć funkcji Buduj
 Feature.Build.Label.Hi,Cześć
 Feature.Build.Label.IconThumbnails,Ikona i miniatury
@@ -1923,6 +1931,7 @@ Feature.Build.Label.NoLimit,Brak limitu
 Feature.Build.Label.NotStarted,Nie rozpoczęto
 Feature.Build.Label.Pending,Oczekujące
 Feature.Build.Label.PercentUsed,Wykorzystano {PERCENT}%
+Feature.Build.Label.PlayTime,Czas gry
 Feature.Build.Label.PreviouslyPublished,Wcześniej opublikowane
 Feature.Build.Label.Private,Prywatny
 Feature.Build.Label.Public,Publiczny
@@ -2020,6 +2029,7 @@ Feature.Build.Label.VersionTitleDesc,Tytuł i opis wersji
 Feature.Build.Label.Video,Film
 Feature.Build.Message.AccountRequirements,Twoje konto nie spełnia wymagań dotyczących korzystania z funkcji Buduj.
 Feature.Build.Message.AccountTooNew,"Twoje konto jest zbyt nowe, aby publikować. Spróbuj ponownie za 2 dni."
+Feature.Build.Message.AdPerformanceLoadFailed,Nie udało się wczytać danych dotyczących skuteczności reklam
 Feature.Build.Message.AllFriendsAdded,Dodano wszystkich znajomych jako testerów gry.
 Feature.Build.Message.AnswerBuildQuestion,Odpowiedz na poniższe pytanie od funkcji Buduj.
 Feature.Build.Message.AssetDetailsUnavailable,Szczegóły zasobu są niedostępne.
@@ -2087,6 +2097,10 @@ Feature.Build.Message.WhatToCreate,Co chcesz dziś stworzyć?
 Feature.Build.Message.WorkedMinutesSeconds,Działanie trwało {MINUTES} min {REM_SECONDS} s
 Feature.Build.Message.WorkedSeconds,Działanie trwało {SECONDS} s
 Feature.Build.Message.WorkingOnTasks,Praca nad Twoimi zadaniami
+Feature.Build.Notification.Message.Continue,"Aby kontynuować, wznów czat dotyczący kompilacji."
+Feature.Build.Notification.Message.Review,"Aby przejrzeć wynik, wznów czat dotyczący kompilacji."
+Feature.Build.Notification.Title.Finished,Kompilacja ukończona
+Feature.Build.Notification.Title.NeedInput,Funkcja Buduj wymaga Twojego wkładu
 Feature.Build.Title.AdCampaignActive,Kampania reklamowa jest aktywna
 Feature.Build.Title.AddFriendsToPlaytest,"Dodaj znajomych, którzy pomogą Ci przetestować grę"
 Feature.Build.Title.ArchiveThisGame,Zarchiwizować tę grę?
@@ -2106,6 +2120,7 @@ Feature.Build.Title.FriendsOnlyPlay,Tylko znajomi mogą grać
 Feature.Build.Title.GameCreationDone,Ukończono tworzenie gry
 Feature.Build.Title.GamePrivate,Ta gra jest prywatna
 Feature.Build.Title.GenericError,
+Feature.Build.Title.GetUsers,Pozyskaj użytkowników
 Feature.Build.Title.NoRobuxForUsage,Nie masz już Robuxów na użycia funkcji Buduj
 Feature.Build.Title.Playtesters,Testerzy
 Feature.Build.Title.PlaytestersOnlyPlay,Tylko testerzy mogą grać

@@ -5,7 +5,7 @@ function make_assets_1x()
 	var1 = {
 		["chat_bubble/chat-bubble"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(490, 246),
+			ImageRectOffset = Vector2.new(490, 269),
 			ImageRectSize = Vector2.new(21, 21)
 		},
 		["chat_bubble/chat-bubble-bottom"] = {
@@ -20,7 +20,7 @@ function make_assets_1x()
 		},
 		["chat_bubble/chat-bubble-self"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(490, 296),
+			ImageRectOffset = Vector2.new(490, 319),
 			ImageRectSize = Vector2.new(21, 21)
 		},
 		["chat_bubble/chat-bubble-self-bottom"] = {
@@ -39,18 +39,18 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(6, 6)
 		},
 		["chat_bubble/chat-bubble-self-top"] = {
-			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(434, 439),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(43, 340),
 			ImageRectSize = Vector2.new(41, 41)
 		},
 		["chat_bubble/chat-bubble-self2"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(490, 269),
+			ImageRectOffset = Vector2.new(490, 296),
 			ImageRectSize = Vector2.new(21, 21)
 		},
 		["chat_bubble/chat-bubble-single"] = {
-			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(434, 396),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(43, 383),
 			ImageRectSize = Vector2.new(41, 41)
 		},
 		["chat_bubble/chat-bubble-tip"] = {
@@ -59,13 +59,13 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(6, 6)
 		},
 		["chat_bubble/chat-bubble-top"] = {
-			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(390, 440),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(43, 426),
 			ImageRectSize = Vector2.new(41, 41)
 		},
 		["chat_bubble/chat-bubble2"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(490, 219),
+			ImageRectOffset = Vector2.new(490, 246),
 			ImageRectSize = Vector2.new(21, 21)
 		},
 		["component_assets/avatarBG_dark"] = {
@@ -120,7 +120,7 @@ function make_assets_1x()
 		},
 		["component_assets/circle_15_stroke_3"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(182, 496),
+			ImageRectOffset = Vector2.new(338, 496),
 			ImageRectSize = Vector2.new(15, 15)
 		},
 		["component_assets/circle_16"] = {
@@ -150,27 +150,27 @@ function make_assets_1x()
 		},
 		["component_assets/circle_21"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(490, 196),
+			ImageRectOffset = Vector2.new(490, 219),
 			ImageRectSize = Vector2.new(21, 21)
 		},
 		["component_assets/circle_21_stroke_1"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(490, 71),
+			ImageRectOffset = Vector2.new(490, 196),
 			ImageRectSize = Vector2.new(21, 21)
 		},
 		["component_assets/circle_22_stroke_3"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(486, 346),
+			ImageRectOffset = Vector2.new(484, 442),
 			ImageRectSize = Vector2.new(22, 22)
 		},
 		["component_assets/circle_24_stroke_1"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(464, 71),
+			ImageRectOffset = Vector2.new(440, 486),
 			ImageRectSize = Vector2.new(24, 24)
 		},
 		["component_assets/circle_25"] = {
-			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(217, 486),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(465, 71),
 			ImageRectSize = Vector2.new(25, 25)
 		},
 		["component_assets/circle_26_stroke_3"] = {
@@ -180,17 +180,17 @@ function make_assets_1x()
 		},
 		["component_assets/circle_28_padding_10"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(182, 446),
+			ImageRectOffset = Vector2.new(338, 446),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["component_assets/circle_29"] = {
-			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(477, 439),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(76, 478),
 			ImageRectSize = Vector2.new(29, 29)
 		},
 		["component_assets/circle_29_mask"] = {
-			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(434, 482),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(38, 478),
 			ImageRectSize = Vector2.new(29, 29)
 		},
 		["component_assets/circle_29_stroke_1"] = {
@@ -205,37 +205,37 @@ function make_assets_1x()
 		},
 		["component_assets/circle_36"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(43, 340),
+			ImageRectOffset = Vector2.new(43, 469),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["component_assets/circle_36_stroke_1"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(43, 378),
+			ImageRectOffset = Vector2.new(86, 340),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["component_assets/circle_42_stroke_3"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(390, 396),
+			ImageRectOffset = Vector2.new(440, 442),
 			ImageRectSize = Vector2.new(42, 42)
 		},
 		["component_assets/circle_49"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(395, 172),
+			ImageRectOffset = Vector2.new(462, 172),
 			ImageRectSize = Vector2.new(49, 49)
 		},
 		["component_assets/circle_49_mask"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(446, 172),
+			ImageRectOffset = Vector2.new(236, 446),
 			ImageRectSize = Vector2.new(49, 49)
 		},
 		["component_assets/circle_49_stroke_1"] = {
-			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(311, 456),
+			ImageSet = "img_set_1x_2",
+			ImageRectOffset = Vector2.new(287, 446),
 			ImageRectSize = Vector2.new(49, 49)
 		},
 		["component_assets/circle_52_stroke_3"] = {
-			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(257, 456),
+			ImageSet = "img_set_1x_2",
+			ImageRectOffset = Vector2.new(182, 446),
 			ImageRectSize = Vector2.new(52, 52)
 		},
 		["component_assets/circle_60_stroke_2"] = {
@@ -299,18 +299,18 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(73, 73)
 		},
 		["component_assets/dropshadow_17_4"] = {
-			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(190, 486),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(438, 71),
 			ImageRectSize = Vector2.new(25, 25)
 		},
 		["component_assets/dropshadow_17_8"] = {
-			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(477, 396),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(0, 478),
 			ImageRectSize = Vector2.new(33, 33)
 		},
 		["component_assets/dropshadow_24_6"] = {
 			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(365, 456),
+			ImageRectOffset = Vector2.new(366, 456),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/dropshadow_25"] = {
@@ -319,8 +319,8 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(37, 37)
 		},
 		["component_assets/dropshadow_28"] = {
-			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(232, 446),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(390, 446),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["component_assets/dropshadow_56_8"] = {
@@ -330,17 +330,17 @@ function make_assets_1x()
 		},
 		["component_assets/dropshadow_chatOff"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(43, 416),
+			ImageRectOffset = Vector2.new(86, 378),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["component_assets/dropshadow_chatOn"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(43, 454),
+			ImageRectOffset = Vector2.new(86, 416),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["component_assets/dropshadow_more"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(81, 340),
+			ImageRectOffset = Vector2.new(86, 454),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["component_assets/dropshadow_square_4"] = {
@@ -349,8 +349,8 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(14, 14)
 		},
 		["component_assets/dropshadow_thumbnail_28"] = {
-			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(190, 456),
+			ImageSet = "img_set_1x_2",
+			ImageRectOffset = Vector2.new(395, 172),
 			ImageRectSize = Vector2.new(65, 28)
 		},
 		["component_assets/genreBG"] = {
@@ -360,7 +360,7 @@ function make_assets_1x()
 		},
 		["component_assets/halfcircleLeft_17"] = {
 			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(244, 486),
+			ImageRectOffset = Vector2.new(386, 492),
 			ImageRectSize = Vector2.new(8, 17)
 		},
 		["component_assets/halfcircleRight_17"] = {
@@ -405,12 +405,12 @@ function make_assets_1x()
 		},
 		["component_assets/triangleLeft_16"] = {
 			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(500, 102),
+			ImageRectOffset = Vector2.new(500, 120),
 			ImageRectSize = Vector2.new(8, 16)
 		},
 		["component_assets/triangleRight_16"] = {
 			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(385, 492),
+			ImageRectOffset = Vector2.new(500, 102),
 			ImageRectSize = Vector2.new(8, 16)
 		},
 		["component_assets/triangleUp_16"] = {
@@ -419,8 +419,8 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(16, 8)
 		},
 		["component_assets/userBG_dark"] = {
-			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(282, 446),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(390, 396),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["component_assets/user_60_mask"] = {
@@ -440,57 +440,57 @@ function make_assets_1x()
 		},
 		["gradient/gradient_0_100"] = {
 			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(362, 456),
+			ImageRectOffset = Vector2.new(363, 456),
 			ImageRectSize = Vector2.new(1, 40)
 		},
 		["icons/actions/accept"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(81, 378),
+			ImageRectOffset = Vector2.new(124, 340),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/actions/edit/redo"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(81, 416),
+			ImageRectOffset = Vector2.new(124, 378),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/actions/edit/undo"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(81, 454),
+			ImageRectOffset = Vector2.new(124, 416),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/actions/feedback_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(119, 340),
+			ImageRectOffset = Vector2.new(124, 454),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/brands/moments-fill"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(438, 71),
+			ImageRectOffset = Vector2.new(486, 396),
 			ImageRectSize = Vector2.new(24, 24)
 		},
 		["icons/brands/moments_large-fill"] = {
-			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(332, 446),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(440, 346),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/common/gender_female"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(119, 378),
+			ImageRectOffset = Vector2.new(162, 340),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/common/gender_female_selected"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(119, 416),
+			ImageRectOffset = Vector2.new(162, 378),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/common/gender_male"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(119, 454),
+			ImageRectOffset = Vector2.new(162, 416),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/common/gender_male_selected"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(157, 340),
+			ImageRectOffset = Vector2.new(162, 454),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/common/muteNotifications"] = {
@@ -500,12 +500,12 @@ function make_assets_1x()
 		},
 		["icons/controls/close-ingame"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(157, 378),
+			ImageRectOffset = Vector2.new(200, 340),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/apostrophe"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(157, 416),
+			ImageRectOffset = Vector2.new(238, 340),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/arrowDown"] = {
@@ -520,132 +520,132 @@ function make_assets_1x()
 		},
 		["icons/controls/keys/arrowRight"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(63, 492),
+			ImageRectOffset = Vector2.new(106, 492),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/keys/arrowUp"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(101, 492),
+			ImageRectOffset = Vector2.new(144, 492),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/keys/asterisk"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(157, 454),
+			ImageRectOffset = Vector2.new(276, 340),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/backspace"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(195, 340),
+			ImageRectOffset = Vector2.new(200, 378),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/capslock"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(233, 340),
+			ImageRectOffset = Vector2.new(200, 416),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/caret"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(271, 340),
+			ImageRectOffset = Vector2.new(200, 454),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/comma"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(195, 378),
+			ImageRectOffset = Vector2.new(238, 378),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/command"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(195, 416),
+			ImageRectOffset = Vector2.new(276, 378),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/control"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(195, 454),
+			ImageRectOffset = Vector2.new(238, 416),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/dpadDown"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(233, 378),
+			ImageRectOffset = Vector2.new(238, 454),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/dpadLeft"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(271, 378),
+			ImageRectOffset = Vector2.new(276, 416),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/dpadRight"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(233, 416),
+			ImageRectOffset = Vector2.new(276, 454),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/dpadUp"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(233, 454),
+			ImageRectOffset = Vector2.new(340, 0),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/graveaccent"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(271, 416),
+			ImageRectOffset = Vector2.new(378, 0),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(309, 340),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(322, 334),
 			ImageRectSize = Vector2.new(28, 28)
 		},
 		["icons/controls/keys/hold_button_assets/hold_Pressed_RadialFill"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(309, 378),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(474, 152),
 			ImageRectSize = Vector2.new(28, 28)
 		},
 		["icons/controls/keys/hold_button_assets/hold_Pressed_XboxA"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(309, 416),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(436, 152),
 			ImageRectSize = Vector2.new(28, 28)
 		},
 		["icons/controls/keys/hold_button_assets/hold_Unpressed_Arrow"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(309, 454),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(398, 152),
 			ImageRectSize = Vector2.new(28, 28)
 		},
 		["icons/controls/keys/hold_button_assets/hold_Unpressed_RadialFill"] = {
-			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(477, 470),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(360, 152),
 			ImageRectSize = Vector2.new(28, 28)
 		},
 		["icons/controls/keys/hold_button_assets/hold_Unpressed_XboxA"] = {
-			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(390, 483),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(322, 152),
 			ImageRectSize = Vector2.new(28, 28)
 		},
 		["icons/controls/keys/key_alt"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(271, 454),
+			ImageRectOffset = Vector2.new(416, 0),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/key_esc"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 0),
+			ImageRectOffset = Vector2.new(454, 0),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/key_l"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 0),
+			ImageRectOffset = Vector2.new(340, 38),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/key_r"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 0),
+			ImageRectOffset = Vector2.new(378, 38),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/key_shift"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 0),
+			ImageRectOffset = Vector2.new(416, 38),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/key_single"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 38),
+			ImageRectOffset = Vector2.new(454, 38),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/key_wide"] = {
@@ -660,382 +660,382 @@ function make_assets_1x()
 		},
 		["icons/controls/keys/period"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 38),
+			ImageRectOffset = Vector2.new(340, 76),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/return"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 38),
+			ImageRectOffset = Vector2.new(378, 76),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/shift"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 38),
+			ImageRectOffset = Vector2.new(416, 76),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/spacebar"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 76),
+			ImageRectOffset = Vector2.new(454, 76),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/tab"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 76),
+			ImageRectOffset = Vector2.new(340, 114),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxA"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 76),
+			ImageRectOffset = Vector2.new(378, 114),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxB"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 76),
+			ImageRectOffset = Vector2.new(416, 114),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxLB"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 114),
+			ImageRectOffset = Vector2.new(454, 114),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxLS"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 114),
+			ImageRectOffset = Vector2.new(340, 152),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxLSDirectional"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 114),
+			ImageRectOffset = Vector2.new(378, 152),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxLSHorizontal"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 114),
+			ImageRectOffset = Vector2.new(416, 152),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxLSVertical"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 152),
+			ImageRectOffset = Vector2.new(454, 152),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxLT"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 152),
+			ImageRectOffset = Vector2.new(340, 190),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxRB"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 152),
+			ImageRectOffset = Vector2.new(378, 190),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxRS"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 152),
+			ImageRectOffset = Vector2.new(416, 190),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxRSDirectional"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 190),
+			ImageRectOffset = Vector2.new(454, 190),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxRSHorizontal"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 190),
+			ImageRectOffset = Vector2.new(340, 228),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxRSVertical"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 190),
+			ImageRectOffset = Vector2.new(378, 228),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxRT"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 190),
+			ImageRectOffset = Vector2.new(416, 228),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxView"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 228),
+			ImageRectOffset = Vector2.new(454, 228),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxX"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 228),
+			ImageRectOffset = Vector2.new(340, 266),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxY"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 228),
+			ImageRectOffset = Vector2.new(378, 266),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/keys/xboxmenu"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 228),
+			ImageRectOffset = Vector2.new(416, 266),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/mediaStop_small"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(139, 492),
+			ImageRectOffset = Vector2.new(182, 492),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/vehicle/driver"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 266),
+			ImageRectOffset = Vector2.new(454, 266),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/vehicle/flip"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 266),
+			ImageRectOffset = Vector2.new(340, 304),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/vehicle/passenger"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 266),
+			ImageRectOffset = Vector2.new(378, 304),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_0_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 266),
+			ImageRectOffset = Vector2.new(416, 304),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_0_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 304),
+			ImageRectOffset = Vector2.new(454, 304),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_0_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(177, 492),
+			ImageRectOffset = Vector2.new(314, 360),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_0_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(215, 492),
+			ImageRectOffset = Vector2.new(220, 492),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_100_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 304),
+			ImageRectOffset = Vector2.new(340, 342),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_100_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 304),
+			ImageRectOffset = Vector2.new(340, 342),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_100_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(253, 492),
+			ImageRectOffset = Vector2.new(314, 398),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_100_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(253, 492),
+			ImageRectOffset = Vector2.new(314, 398),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_20_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 304),
+			ImageRectOffset = Vector2.new(340, 380),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_20_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 304),
+			ImageRectOffset = Vector2.new(340, 418),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_20_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(291, 492),
+			ImageRectOffset = Vector2.new(258, 492),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_20_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 20),
+			ImageRectOffset = Vector2.new(314, 436),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_40_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 342),
+			ImageRectOffset = Vector2.new(340, 456),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_40_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 380),
+			ImageRectOffset = Vector2.new(378, 342),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_40_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 58),
+			ImageRectOffset = Vector2.new(296, 492),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_40_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 96),
+			ImageRectOffset = Vector2.new(314, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_60_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 418),
+			ImageRectOffset = Vector2.new(416, 342),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_60_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 456),
+			ImageRectOffset = Vector2.new(454, 342),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_60_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 134),
+			ImageRectOffset = Vector2.new(492, 20),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_60_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 172),
+			ImageRectOffset = Vector2.new(492, 58),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_80_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 342),
+			ImageRectOffset = Vector2.new(378, 380),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_80_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 342),
+			ImageRectOffset = Vector2.new(378, 418),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_80_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 210),
+			ImageRectOffset = Vector2.new(492, 96),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_80_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 248),
+			ImageRectOffset = Vector2.new(492, 134),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_error_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 342),
+			ImageRectOffset = Vector2.new(378, 456),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_error_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 380),
+			ImageRectOffset = Vector2.new(416, 380),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_error_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 286),
+			ImageRectOffset = Vector2.new(492, 172),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_error_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 324),
+			ImageRectOffset = Vector2.new(492, 210),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_off_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 418),
+			ImageRectOffset = Vector2.new(454, 380),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_off_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 456),
+			ImageRectOffset = Vector2.new(416, 418),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_off_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 494),
+			ImageRectOffset = Vector2.new(492, 228),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_off_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(358, 494),
+			ImageRectOffset = Vector2.new(492, 246),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_on_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 266),
+			ImageRectOffset = Vector2.new(416, 304),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_on_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(340, 304),
+			ImageRectOffset = Vector2.new(454, 304),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/microphone_on_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(177, 492),
+			ImageRectOffset = Vector2.new(314, 360),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/microphone_on_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(215, 492),
+			ImageRectOffset = Vector2.new(220, 492),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_0_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 380),
+			ImageRectOffset = Vector2.new(416, 456),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/red_speaker_0_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 380),
+			ImageRectOffset = Vector2.new(454, 418),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/red_speaker_0_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 362),
+			ImageRectOffset = Vector2.new(492, 266),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_0_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(378, 494),
+			ImageRectOffset = Vector2.new(492, 284),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_100_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 418),
+			ImageRectOffset = Vector2.new(454, 456),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/red_speaker_100_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 418),
+			ImageRectOffset = Vector2.new(454, 456),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/red_speaker_100_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(396, 494),
+			ImageRectOffset = Vector2.new(492, 304),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_100_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(396, 494),
+			ImageRectOffset = Vector2.new(492, 304),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_20_dark"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 456),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(266, 402),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/red_speaker_20_light"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 418),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(266, 364),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/red_speaker_20_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 400),
+			ImageRectOffset = Vector2.new(492, 322),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_20_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(416, 494),
+			ImageRectOffset = Vector2.new(340, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_40_dark"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 456),
+			ImageSet = "img_set_1x_5",
+			ImageRectOffset = Vector2.new(228, 440),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/red_speaker_40_light"] = {
@@ -1045,12 +1045,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/red_speaker_40_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(434, 494),
+			ImageRectOffset = Vector2.new(358, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_40_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 438),
+			ImageRectOffset = Vector2.new(492, 342),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_60_dark"] = {
@@ -1065,12 +1065,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/red_speaker_60_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(454, 494),
+			ImageRectOffset = Vector2.new(492, 360),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_60_small_light"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(472, 494),
+			ImageRectOffset = Vector2.new(378, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_80_dark"] = {
@@ -1084,13 +1084,13 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/red_speaker_80_small_dark"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(228, 458),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(396, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/red_speaker_80_small_light"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(246, 440),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(492, 380),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_0_dark"] = {
@@ -1105,12 +1105,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/speaker_0_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 362),
+			ImageRectOffset = Vector2.new(492, 266),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_0_small_light"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(228, 440),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(492, 398),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_100_dark"] = {
@@ -1124,13 +1124,13 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/speaker_100_small_dark"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(208, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(416, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_100_small_light"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(208, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(416, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_20_dark"] = {
@@ -1144,13 +1144,13 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/speaker_20_small_dark"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(190, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(434, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_20_small_light"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(170, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(492, 418),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_40_dark"] = {
@@ -1164,13 +1164,13 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/speaker_40_small_dark"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(152, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(492, 436),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_40_small_light"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(132, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(454, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_60_dark"] = {
@@ -1184,13 +1184,13 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/speaker_60_small_dark"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(114, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(472, 494),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_60_small_light"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(94, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(492, 456),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_80_dark"] = {
@@ -1204,13 +1204,13 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/controls/voice/speaker_80_small_dark"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(76, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(492, 474),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_80_small_light"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(56, 478),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(492, 492),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_error_dark"] = {
@@ -1225,12 +1225,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/speaker_error_small_dark"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(38, 478),
+			ImageRectOffset = Vector2.new(284, 458),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_error_small_light"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(18, 478),
+			ImageRectOffset = Vector2.new(266, 458),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_off_dark"] = {
@@ -1245,12 +1245,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/speaker_off_small_dark"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(0, 478),
+			ImageRectOffset = Vector2.new(284, 440),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_off_small_light"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(492, 334),
+			ImageRectOffset = Vector2.new(266, 440),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_on_dark"] = {
@@ -1265,12 +1265,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/speaker_on_small_dark"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 362),
+			ImageRectOffset = Vector2.new(492, 266),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/speaker_on_small_light"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(228, 440),
+			ImageSet = "img_set_1x_4",
+			ImageRectOffset = Vector2.new(492, 398),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/video_error_dark"] = {
@@ -1285,12 +1285,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/video_error_small_dark"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(474, 334),
+			ImageRectOffset = Vector2.new(246, 478),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/video_error_small_light"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(454, 334),
+			ImageRectOffset = Vector2.new(228, 478),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/video_off_dark"] = {
@@ -1305,12 +1305,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/video_off_small_dark"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(436, 334),
+			ImageRectOffset = Vector2.new(208, 478),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/video_off_small_light"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(416, 334),
+			ImageRectOffset = Vector2.new(190, 478),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/video_on_dark"] = {
@@ -1325,12 +1325,12 @@ function make_assets_1x()
 		},
 		["icons/controls/voice/video_on_small_dark"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(398, 334),
+			ImageRectOffset = Vector2.new(170, 478),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/controls/voice/video_on_small_light"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(378, 334),
+			ImageRectOffset = Vector2.new(152, 478),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/graphic/blocktheft_2xl"] = {
@@ -1340,7 +1340,7 @@ function make_assets_1x()
 		},
 		["icons/graphic/camera_on_off"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(440, 346),
+			ImageRectOffset = Vector2.new(440, 396),
 			ImageRectSize = Vector2.new(44, 44)
 		},
 		["icons/graphic/clothes_category_art_dark"] = {
@@ -1473,6 +1473,11 @@ function make_assets_1x()
 			ImageRectOffset = Vector2.new(0, 456),
 			ImageRectSize = Vector2.new(188, 36)
 		},
+		["icons/logo/letterform_classic"] = {
+			ImageSet = "img_set_1x_1",
+			ImageRectOffset = Vector2.new(190, 456),
+			ImageRectSize = Vector2.new(171, 45)
+		},
 		["icons/logo/studiologo"] = {
 			ImageSet = "img_set_1x_5",
 			ImageRectOffset = Vector2.new(474, 220),
@@ -1480,7 +1485,7 @@ function make_assets_1x()
 		},
 		["icons/logo/studiologo_small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(360, 334),
+			ImageRectOffset = Vector2.new(132, 478),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/menu/2-person-with-bubble"] = {
@@ -1505,7 +1510,7 @@ function make_assets_1x()
 		},
 		["icons/menu/adjust/position_small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(340, 334),
+			ImageRectOffset = Vector2.new(114, 478),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/menu/adjust/rotationZ"] = {
@@ -1580,192 +1585,192 @@ function make_assets_1x()
 		},
 		["icons/menu/clothing/body_off"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(493, 223),
+			ImageRectOffset = Vector2.new(395, 202),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/body_on"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(493, 243),
+			ImageRectOffset = Vector2.new(415, 202),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/build_off"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(493, 263),
+			ImageRectOffset = Vector2.new(435, 202),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/build_on"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(493, 283),
+			ImageRectOffset = Vector2.new(493, 223),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/characters_on"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(493, 321),
+			ImageRectOffset = Vector2.new(493, 243),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/climb_off"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(493, 341),
+			ImageRectOffset = Vector2.new(493, 263),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/climb_on"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(493, 361),
+			ImageRectOffset = Vector2.new(493, 283),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/creations_off"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(493, 381),
+			ImageRectOffset = Vector2.new(493, 321),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/creations_on"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(395, 493),
+			ImageRectOffset = Vector2.new(493, 341),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/eyebrow_on"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(415, 493),
+			ImageRectOffset = Vector2.new(493, 361),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/eyelash_on"] = {
 			ImageSet = "img_set_1x_2",
-			ImageRectOffset = Vector2.new(435, 493),
+			ImageRectOffset = Vector2.new(493, 381),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/face_on"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(43, 492),
+			ImageSet = "img_set_1x_2",
+			ImageRectOffset = Vector2.new(395, 493),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/faces_off"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(81, 492),
+			ImageSet = "img_set_1x_2",
+			ImageRectOffset = Vector2.new(415, 493),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/facialHair_off"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(119, 492),
+			ImageSet = "img_set_1x_2",
+			ImageRectOffset = Vector2.new(435, 493),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/facialHair_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(157, 492),
+			ImageRectOffset = Vector2.new(86, 492),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/fall_off"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(195, 492),
+			ImageRectOffset = Vector2.new(124, 492),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/fall_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(233, 492),
+			ImageRectOffset = Vector2.new(162, 492),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/hair_off"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(271, 492),
+			ImageRectOffset = Vector2.new(314, 340),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/hair_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(309, 484),
+			ImageRectOffset = Vector2.new(200, 492),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/idle_off"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 0),
+			ImageRectOffset = Vector2.new(314, 378),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/idle_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 38),
+			ImageRectOffset = Vector2.new(238, 492),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/jump_off"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 76),
+			ImageRectOffset = Vector2.new(314, 416),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/jump_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 114),
+			ImageRectOffset = Vector2.new(276, 492),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/limited_off"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 152),
+			ImageRectOffset = Vector2.new(314, 454),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/limited_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 190),
+			ImageRectOffset = Vector2.new(314, 474),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/nose_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 228),
+			ImageRectOffset = Vector2.new(492, 0),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/shorts_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 266),
+			ImageRectOffset = Vector2.new(492, 38),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/shoulder_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 304),
+			ImageRectOffset = Vector2.new(492, 76),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/skin_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 342),
+			ImageRectOffset = Vector2.new(492, 114),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/sweaters_on"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 380),
+			ImageRectOffset = Vector2.new(492, 152),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/swim_off"] = {
 			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 418),
+			ImageRectOffset = Vector2.new(492, 190),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/swim_on"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 456),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(484, 486),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/torsos_on"] = {
-			ImageSet = "img_set_1x_4",
-			ImageRectOffset = Vector2.new(492, 476),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(484, 466),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/type_off"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(360, 152),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(486, 422),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/type_on"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(322, 152),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(490, 366),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/waist_on"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(486, 370),
+			ImageRectOffset = Vector2.new(490, 346),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/walk_off"] = {
 			ImageSet = "img_set_1x_3",
-			ImageRectOffset = Vector2.new(490, 319),
+			ImageRectOffset = Vector2.new(492, 71),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/clothing/walk_on"] = {
 			ImageSet = "img_set_1x_1",
-			ImageRectOffset = Vector2.new(365, 492),
+			ImageRectOffset = Vector2.new(366, 492),
 			ImageRectSize = Vector2.new(18, 18)
 		},
 		["icons/menu/customize"] = {
@@ -1785,7 +1790,7 @@ function make_assets_1x()
 		},
 		["icons/menu/gem_small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(322, 334),
+			ImageRectOffset = Vector2.new(492, 334),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/menu/protection_off"] = {
@@ -1805,7 +1810,7 @@ function make_assets_1x()
 		},
 		["icons/menu/publicChatOff_small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(492, 152),
+			ImageRectOffset = Vector2.new(474, 334),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/menu/publicChatOn"] = {
@@ -1815,7 +1820,7 @@ function make_assets_1x()
 		},
 		["icons/menu/publicChatOn_small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(474, 152),
+			ImageRectOffset = Vector2.new(454, 334),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/menu/rocketShipOn_medium"] = {
@@ -1830,7 +1835,7 @@ function make_assets_1x()
 		},
 		["icons/menu/rocketShip_small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(454, 152),
+			ImageRectOffset = Vector2.new(436, 334),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/menu/securityKey"] = {
@@ -1845,7 +1850,7 @@ function make_assets_1x()
 		},
 		["icons/menu/transform-small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(436, 152),
+			ImageRectOffset = Vector2.new(416, 334),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/navigation/close"] = {
@@ -1855,7 +1860,7 @@ function make_assets_1x()
 		},
 		["icons/navigation/externallink"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(416, 152),
+			ImageRectOffset = Vector2.new(398, 334),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/navigation/externallink_medium"] = {
@@ -1865,7 +1870,7 @@ function make_assets_1x()
 		},
 		["icons/navigation/seeAllArrow_small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(398, 152),
+			ImageRectOffset = Vector2.new(378, 334),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/navigation/swipe"] = {
@@ -1895,7 +1900,7 @@ function make_assets_1x()
 		},
 		["icons/status/collectibles_small"] = {
 			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(380, 152),
+			ImageRectOffset = Vector2.new(360, 334),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/status/games/sessions_large"] = {
@@ -1904,8 +1909,8 @@ function make_assets_1x()
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/status/games/sessions_small"] = {
-			ImageSet = "img_set_1x_5",
-			ImageRectOffset = Vector2.new(342, 152),
+			ImageSet = "img_set_1x_3",
+			ImageRectOffset = Vector2.new(466, 486),
 			ImageRectSize = Vector2.new(16, 16)
 		},
 		["icons/status/item/limited"] = {
@@ -2022,8 +2027,8 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(82, 82)
 		},
 		["chat_bubble/chat-bubble-middle"] = {
-			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(392, 386),
+			ImageSet = "img_set_2x_7",
+			ImageRectOffset = Vector2.new(336, 386),
 			ImageRectSize = Vector2.new(82, 82)
 		},
 		["chat_bubble/chat-bubble-self"] = {
@@ -2033,12 +2038,12 @@ function make_assets_2x()
 		},
 		["chat_bubble/chat-bubble-self-bottom"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(0, 386),
+			ImageRectOffset = Vector2.new(252, 386),
 			ImageRectSize = Vector2.new(82, 82)
 		},
 		["chat_bubble/chat-bubble-self-middle"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(387, 252),
+			ImageRectOffset = Vector2.new(168, 386),
 			ImageRectSize = Vector2.new(82, 82)
 		},
 		["chat_bubble/chat-bubble-self-tip"] = {
@@ -2048,7 +2053,7 @@ function make_assets_2x()
 		},
 		["chat_bubble/chat-bubble-self-top"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(387, 168),
+			ImageRectOffset = Vector2.new(84, 386),
 			ImageRectSize = Vector2.new(82, 82)
 		},
 		["chat_bubble/chat-bubble-self2"] = {
@@ -2058,7 +2063,7 @@ function make_assets_2x()
 		},
 		["chat_bubble/chat-bubble-single"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(387, 84),
+			ImageRectOffset = Vector2.new(0, 386),
 			ImageRectSize = Vector2.new(82, 82)
 		},
 		["chat_bubble/chat-bubble-tip"] = {
@@ -2068,7 +2073,7 @@ function make_assets_2x()
 		},
 		["chat_bubble/chat-bubble-top"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(387, 0),
+			ImageRectOffset = Vector2.new(387, 294),
 			ImageRectSize = Vector2.new(82, 82)
 		},
 		["chat_bubble/chat-bubble2"] = {
@@ -2087,38 +2092,38 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(338, 338)
 		},
 		["component_assets/bulletDown_17_stroke_3"] = {
-			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(476, 386),
-			ImageRectSize = Vector2.new(34, 34)
-		},
-		["component_assets/bulletLeft_17"] = {
-			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(476, 422),
-			ImageRectSize = Vector2.new(34, 34)
-		},
-		["component_assets/bulletLeft_17_stroke_3"] = {
 			ImageSet = "img_set_2x_8",
 			ImageRectOffset = Vector2.new(38, 460),
 			ImageRectSize = Vector2.new(34, 34)
 		},
+		["component_assets/bulletLeft_17"] = {
+			ImageSet = "img_set_2x_8",
+			ImageRectOffset = Vector2.new(113, 460),
+			ImageRectSize = Vector2.new(34, 34)
+		},
+		["component_assets/bulletLeft_17_stroke_3"] = {
+			ImageSet = "img_set_2x_8",
+			ImageRectOffset = Vector2.new(187, 460),
+			ImageRectSize = Vector2.new(34, 34)
+		},
 		["component_assets/bulletRight_17"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(112, 460),
+			ImageRectOffset = Vector2.new(261, 460),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/bulletRight_17_stroke_3"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(186, 460),
+			ImageRectOffset = Vector2.new(460, 112),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/bulletUp_17_stroke_3"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(260, 460),
+			ImageRectOffset = Vector2.new(460, 186),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/bullet_17"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(460, 38),
+			ImageRectOffset = Vector2.new(460, 260),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/checkerboard_12"] = {
@@ -2132,28 +2137,28 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(30, 30)
 		},
 		["component_assets/circle_16"] = {
-			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(460, 370),
+			ImageSet = "img_set_2x_6",
+			ImageRectOffset = Vector2.new(152, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["component_assets/circle_17"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(421, 460),
+			ImageSet = "img_set_2x_8",
+			ImageRectOffset = Vector2.new(460, 334),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/circle_17_mask"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(347, 460),
+			ImageSet = "img_set_2x_8",
+			ImageRectOffset = Vector2.new(460, 408),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/circle_17_stroke_1"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(273, 460),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(112, 460),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/circle_17_stroke_3"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(198, 460),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(38, 460),
 			ImageRectSize = Vector2.new(34, 34)
 		},
 		["component_assets/circle_21"] = {
@@ -2213,12 +2218,12 @@ function make_assets_2x()
 		},
 		["component_assets/circle_36"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(0, 386),
+			ImageRectOffset = Vector2.new(75, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["component_assets/circle_36_stroke_1"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(74, 386),
+			ImageRectOffset = Vector2.new(149, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["component_assets/circle_42_stroke_3"] = {
@@ -2317,13 +2322,13 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(66, 66)
 		},
 		["component_assets/dropshadow_24_6"] = {
-			ImageSet = "img_set_2x_12",
-			ImageRectOffset = Vector2.new(340, 440),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(442, 386),
 			ImageRectSize = Vector2.new(68, 68)
 		},
 		["component_assets/dropshadow_25"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(84, 386),
+			ImageRectOffset = Vector2.new(420, 386),
 			ImageRectSize = Vector2.new(74, 74)
 		},
 		["component_assets/dropshadow_28"] = {
@@ -2338,17 +2343,17 @@ function make_assets_2x()
 		},
 		["component_assets/dropshadow_chatOff"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(148, 386),
+			ImageRectOffset = Vector2.new(223, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["component_assets/dropshadow_chatOn"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(222, 386),
+			ImageRectOffset = Vector2.new(297, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["component_assets/dropshadow_more"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(296, 386),
+			ImageRectOffset = Vector2.new(386, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["component_assets/dropshadow_square_4"] = {
@@ -2382,8 +2387,8 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(24, 28)
 		},
 		["component_assets/hexagon_24"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(457, 386),
+			ImageSet = "img_set_2x_8",
+			ImageRectOffset = Vector2.new(460, 0),
 			ImageRectSize = Vector2.new(48, 56)
 		},
 		["component_assets/itemBG_dark"] = {
@@ -2453,22 +2458,22 @@ function make_assets_2x()
 		},
 		["icons/actions/accept"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(386, 0),
+			ImageRectOffset = Vector2.new(386, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/actions/edit/redo"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(386, 74),
+			ImageRectOffset = Vector2.new(386, 148),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/actions/edit/undo"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(386, 148),
+			ImageRectOffset = Vector2.new(386, 222),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/actions/feedback_on"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(386, 222),
+			ImageRectOffset = Vector2.new(386, 296),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/brands/moments-fill"] = {
@@ -2483,117 +2488,117 @@ function make_assets_2x()
 		},
 		["icons/common/gender_female"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(386, 296),
-			ImageRectSize = Vector2.new(72, 72)
-		},
-		["icons/common/gender_female_selected"] = {
-			ImageSet = "img_set_2x_8",
 			ImageRectOffset = Vector2.new(386, 370),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/common/gender_male"] = {
+		["icons/common/gender_female_selected"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(0, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/common/gender_male_selected"] = {
+		["icons/common/gender_male"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(74, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/common/muteNotifications"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(160, 386),
-			ImageRectSize = Vector2.new(73, 72)
-		},
-		["icons/controls/close-ingame"] = {
+		["icons/common/gender_male_selected"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(148, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/apostrophe"] = {
+		["icons/common/muteNotifications"] = {
+			ImageSet = "img_set_2x_8",
+			ImageRectOffset = Vector2.new(0, 386),
+			ImageRectSize = Vector2.new(73, 72)
+		},
+		["icons/controls/close-ingame"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(222, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/arrowDown"] = {
-			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(460, 404),
-			ImageRectSize = Vector2.new(32, 32)
-		},
-		["icons/controls/keys/arrowLeft"] = {
-			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(0, 460),
-			ImageRectSize = Vector2.new(32, 32)
-		},
-		["icons/controls/keys/arrowRight"] = {
-			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(34, 460),
-			ImageRectSize = Vector2.new(32, 32)
-		},
-		["icons/controls/keys/arrowUp"] = {
-			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(74, 460),
-			ImageRectSize = Vector2.new(32, 32)
-		},
-		["icons/controls/keys/asterisk"] = {
+		["icons/controls/keys/apostrophe"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(296, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/backspace"] = {
+		["icons/controls/keys/arrowDown"] = {
+			ImageSet = "img_set_2x_10",
+			ImageRectOffset = Vector2.new(0, 460),
+			ImageRectSize = Vector2.new(32, 32)
+		},
+		["icons/controls/keys/arrowLeft"] = {
+			ImageSet = "img_set_2x_10",
+			ImageRectOffset = Vector2.new(34, 460),
+			ImageRectSize = Vector2.new(32, 32)
+		},
+		["icons/controls/keys/arrowRight"] = {
+			ImageSet = "img_set_2x_10",
+			ImageRectOffset = Vector2.new(74, 460),
+			ImageRectSize = Vector2.new(32, 32)
+		},
+		["icons/controls/keys/arrowUp"] = {
+			ImageSet = "img_set_2x_10",
+			ImageRectOffset = Vector2.new(108, 460),
+			ImageRectSize = Vector2.new(32, 32)
+		},
+		["icons/controls/keys/asterisk"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(386, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/capslock"] = {
+		["icons/controls/keys/backspace"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(386, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/caret"] = {
+		["icons/controls/keys/capslock"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(386, 148),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/comma"] = {
+		["icons/controls/keys/caret"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(386, 222),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/command"] = {
+		["icons/controls/keys/comma"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(386, 296),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/control"] = {
+		["icons/controls/keys/command"] = {
 			ImageSet = "img_set_2x_10",
 			ImageRectOffset = Vector2.new(386, 370),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/dpadDown"] = {
+		["icons/controls/keys/control"] = {
 			ImageSet = "img_set_2x_12",
 			ImageRectOffset = Vector2.new(222, 340),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/dpadLeft"] = {
+		["icons/controls/keys/dpadDown"] = {
 			ImageSet = "img_set_2x_12",
 			ImageRectOffset = Vector2.new(222, 414),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/dpadRight"] = {
+		["icons/controls/keys/dpadLeft"] = {
 			ImageSet = "img_set_2x_14",
 			ImageRectOffset = Vector2.new(322, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/dpadUp"] = {
+		["icons/controls/keys/dpadRight"] = {
 			ImageSet = "img_set_2x_14",
 			ImageRectOffset = Vector2.new(396, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/keys/graveaccent"] = {
+		["icons/controls/keys/dpadUp"] = {
 			ImageSet = "img_set_2x_14",
 			ImageRectOffset = Vector2.new(322, 74),
+			ImageRectSize = Vector2.new(72, 72)
+		},
+		["icons/controls/keys/graveaccent"] = {
+			ImageSet = "img_set_2x_14",
+			ImageRectOffset = Vector2.new(396, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] = {
@@ -2628,32 +2633,32 @@ function make_assets_2x()
 		},
 		["icons/controls/keys/key_alt"] = {
 			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(396, 74),
+			ImageRectOffset = Vector2.new(322, 148),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/key_esc"] = {
 			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(322, 148),
+			ImageRectOffset = Vector2.new(396, 148),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/key_l"] = {
 			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(396, 148),
+			ImageRectOffset = Vector2.new(322, 222),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/key_r"] = {
 			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(322, 222),
+			ImageRectOffset = Vector2.new(396, 222),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/key_shift"] = {
 			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(396, 222),
+			ImageRectOffset = Vector2.new(322, 296),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/key_single"] = {
 			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(322, 296),
+			ImageRectOffset = Vector2.new(396, 296),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/key_wide"] = {
@@ -2662,683 +2667,683 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(128, 72)
 		},
 		["icons/controls/keys/key_xwide"] = {
-			ImageSet = "img_set_2x_5",
+			ImageSet = "img_set_2x_6",
 			ImageRectOffset = Vector2.new(0, 386),
 			ImageRectSize = Vector2.new(184, 72)
 		},
 		["icons/controls/keys/period"] = {
 			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(396, 296),
+			ImageRectOffset = Vector2.new(322, 370),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/return"] = {
 			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(322, 370),
+			ImageRectOffset = Vector2.new(396, 370),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/shift"] = {
-			ImageSet = "img_set_2x_14",
-			ImageRectOffset = Vector2.new(396, 370),
+			ImageSet = "img_set_2x_16",
+			ImageRectOffset = Vector2.new(322, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/spacebar"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(322, 0),
+			ImageRectOffset = Vector2.new(322, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/tab"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(322, 74),
+			ImageRectOffset = Vector2.new(396, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxA"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(396, 0),
+			ImageRectOffset = Vector2.new(396, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxB"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(396, 74),
+			ImageRectOffset = Vector2.new(322, 182),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxLB"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(322, 182),
+			ImageRectOffset = Vector2.new(322, 256),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxLS"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(322, 256),
+			ImageRectOffset = Vector2.new(396, 182),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxLSDirectional"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(396, 182),
+			ImageRectOffset = Vector2.new(396, 256),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxLSHorizontal"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(396, 256),
+			ImageRectOffset = Vector2.new(0, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxLSVertical"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(0, 364),
+			ImageRectOffset = Vector2.new(0, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxLT"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(0, 438),
+			ImageRectOffset = Vector2.new(74, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxRB"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(74, 364),
+			ImageRectOffset = Vector2.new(74, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxRS"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(74, 438),
+			ImageRectOffset = Vector2.new(148, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxRSDirectional"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(148, 364),
+			ImageRectOffset = Vector2.new(148, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxRSHorizontal"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(148, 438),
+			ImageRectOffset = Vector2.new(222, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxRSVertical"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(222, 364),
+			ImageRectOffset = Vector2.new(222, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxRT"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(222, 438),
+			ImageRectOffset = Vector2.new(296, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxView"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(296, 364),
+			ImageRectOffset = Vector2.new(296, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxX"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(296, 438),
+			ImageRectOffset = Vector2.new(370, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/keys/xboxY"] = {
 			ImageSet = "img_set_2x_16",
-			ImageRectOffset = Vector2.new(370, 364),
-			ImageRectSize = Vector2.new(72, 72)
-		},
-		["icons/controls/keys/xboxmenu"] = {
-			ImageSet = "img_set_2x_16",
 			ImageRectOffset = Vector2.new(370, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/mediaStop_small"] = {
-			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(108, 460),
-			ImageRectSize = Vector2.new(32, 32)
-		},
-		["icons/controls/vehicle/driver"] = {
+		["icons/controls/keys/xboxmenu"] = {
 			ImageSet = "img_set_2x_18",
 			ImageRectOffset = Vector2.new(302, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/vehicle/flip"] = {
+		["icons/controls/mediaStop_small"] = {
+			ImageSet = "img_set_2x_10",
+			ImageRectOffset = Vector2.new(148, 460),
+			ImageRectSize = Vector2.new(32, 32)
+		},
+		["icons/controls/vehicle/driver"] = {
 			ImageSet = "img_set_2x_18",
 			ImageRectOffset = Vector2.new(376, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
-		["icons/controls/vehicle/passenger"] = {
+		["icons/controls/vehicle/flip"] = {
 			ImageSet = "img_set_2x_20",
 			ImageRectOffset = Vector2.new(0, 388),
+			ImageRectSize = Vector2.new(72, 72)
+		},
+		["icons/controls/vehicle/passenger"] = {
+			ImageSet = "img_set_2x_20",
+			ImageRectOffset = Vector2.new(74, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_0_dark"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(74, 388),
+			ImageRectOffset = Vector2.new(388, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_0_light"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(388, 0),
+			ImageRectOffset = Vector2.new(388, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_0_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(148, 460),
+			ImageRectOffset = Vector2.new(182, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_0_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(182, 460),
+			ImageRectOffset = Vector2.new(222, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_100_dark"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(388, 74),
+			ImageRectOffset = Vector2.new(194, 194),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_100_light"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(388, 74),
+			ImageRectOffset = Vector2.new(194, 194),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_100_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(222, 460),
+			ImageRectOffset = Vector2.new(256, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_100_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(222, 460),
+			ImageRectOffset = Vector2.new(256, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_20_dark"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(194, 194),
+			ImageRectOffset = Vector2.new(194, 268),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_20_light"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(194, 268),
+			ImageRectOffset = Vector2.new(194, 342),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_20_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(256, 460),
+			ImageRectOffset = Vector2.new(296, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_20_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(296, 460),
+			ImageRectOffset = Vector2.new(330, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_40_dark"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(194, 342),
+			ImageRectOffset = Vector2.new(194, 416),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_40_light"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(194, 416),
+			ImageRectOffset = Vector2.new(268, 194),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_40_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(330, 460),
+			ImageRectOffset = Vector2.new(460, 0),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_40_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 0),
+			ImageRectOffset = Vector2.new(460, 34),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_60_dark"] = {
-			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(388, 416),
+			ImageSet = "img_set_2x_20",
+			ImageRectOffset = Vector2.new(342, 194),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_60_light"] = {
-			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(388, 342),
+			ImageSet = "img_set_2x_20",
+			ImageRectOffset = Vector2.new(416, 194),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_60_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 34),
+			ImageRectOffset = Vector2.new(460, 74),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_60_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 74),
+			ImageRectOffset = Vector2.new(460, 108),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_80_dark"] = {
-			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(388, 268),
+			ImageSet = "img_set_2x_20",
+			ImageRectOffset = Vector2.new(268, 268),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_80_light"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(388, 194),
+			ImageRectOffset = Vector2.new(388, 416),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_80_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 108),
+			ImageRectOffset = Vector2.new(460, 148),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_80_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 148),
+			ImageRectOffset = Vector2.new(460, 182),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_error_dark"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(268, 388),
+			ImageRectOffset = Vector2.new(388, 342),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_error_light"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(194, 388),
+			ImageRectOffset = Vector2.new(388, 268),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_error_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 182),
+			ImageRectOffset = Vector2.new(460, 222),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_error_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 222),
+			ImageRectOffset = Vector2.new(460, 256),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_off_dark"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(388, 74),
+			ImageRectOffset = Vector2.new(388, 194),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_off_light"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(388, 0),
+			ImageRectOffset = Vector2.new(268, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_off_small_dark"] = {
-			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(460, 112),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(105, 478),
 			ImageRectSize = Vector2.new(33, 32)
 		},
 		["icons/controls/voice/microphone_off_small_light"] = {
-			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(460, 186),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(70, 478),
 			ImageRectSize = Vector2.new(33, 32)
 		},
 		["icons/controls/voice/microphone_on_dark"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(74, 388),
+			ImageRectOffset = Vector2.new(388, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_on_light"] = {
 			ImageSet = "img_set_2x_20",
-			ImageRectOffset = Vector2.new(388, 0),
+			ImageRectOffset = Vector2.new(388, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/microphone_on_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(148, 460),
+			ImageRectOffset = Vector2.new(182, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/microphone_on_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(182, 460),
+			ImageRectOffset = Vector2.new(222, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_0_dark"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(74, 388),
+			ImageRectOffset = Vector2.new(194, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_0_light"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(0, 388),
+			ImageRectOffset = Vector2.new(388, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_0_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 256),
+			ImageRectOffset = Vector2.new(460, 296),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_0_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 296),
+			ImageRectOffset = Vector2.new(460, 330),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_100_dark"] = {
-			ImageSet = "img_set_2x_17",
-			ImageRectOffset = Vector2.new(376, 384),
+			ImageSet = "img_set_2x_19",
+			ImageRectOffset = Vector2.new(388, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_100_light"] = {
-			ImageSet = "img_set_2x_17",
-			ImageRectOffset = Vector2.new(376, 384),
+			ImageSet = "img_set_2x_19",
+			ImageRectOffset = Vector2.new(388, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_100_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 330),
+			ImageRectOffset = Vector2.new(460, 370),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_100_small_light"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 330),
+			ImageRectOffset = Vector2.new(460, 370),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_20_dark"] = {
-			ImageSet = "img_set_2x_17",
-			ImageRectOffset = Vector2.new(302, 384),
+			ImageSet = "img_set_2x_19",
+			ImageRectOffset = Vector2.new(74, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_20_light"] = {
-			ImageSet = "img_set_2x_17",
-			ImageRectOffset = Vector2.new(396, 74),
+			ImageSet = "img_set_2x_19",
+			ImageRectOffset = Vector2.new(0, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_20_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 370),
+			ImageRectOffset = Vector2.new(460, 404),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_20_small_light"] = {
-			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 404),
+			ImageSet = "img_set_2x_12",
+			ImageRectOffset = Vector2.new(296, 340),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_40_dark"] = {
 			ImageSet = "img_set_2x_17",
-			ImageRectOffset = Vector2.new(396, 0),
+			ImageRectOffset = Vector2.new(376, 384),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_40_light"] = {
 			ImageSet = "img_set_2x_17",
-			ImageRectOffset = Vector2.new(322, 74),
+			ImageRectOffset = Vector2.new(302, 384),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_40_small_dark"] = {
-			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(330, 456),
+			ImageSet = "img_set_2x_12",
+			ImageRectOffset = Vector2.new(296, 374),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_40_small_light"] = {
-			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(296, 456),
+			ImageSet = "img_set_2x_12",
+			ImageRectOffset = Vector2.new(296, 414),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_60_dark"] = {
 			ImageSet = "img_set_2x_17",
-			ImageRectOffset = Vector2.new(322, 0),
+			ImageRectOffset = Vector2.new(396, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_60_light"] = {
-			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(370, 438),
+			ImageSet = "img_set_2x_17",
+			ImageRectOffset = Vector2.new(396, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_60_small_dark"] = {
-			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(256, 456),
+			ImageSet = "img_set_2x_12",
+			ImageRectOffset = Vector2.new(296, 448),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_60_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(222, 456),
+			ImageRectOffset = Vector2.new(404, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_80_dark"] = {
-			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(370, 364),
+			ImageSet = "img_set_2x_17",
+			ImageRectOffset = Vector2.new(322, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_80_light"] = {
-			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(296, 438),
+			ImageSet = "img_set_2x_17",
+			ImageRectOffset = Vector2.new(322, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/red_speaker_80_small_dark"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(182, 456),
+			ImageRectOffset = Vector2.new(370, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/red_speaker_80_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(148, 456),
+			ImageRectOffset = Vector2.new(330, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_0_dark"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(74, 388),
+			ImageRectOffset = Vector2.new(194, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_0_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(296, 364),
+			ImageRectOffset = Vector2.new(370, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_0_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 256),
+			ImageRectOffset = Vector2.new(460, 296),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_0_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 330),
+			ImageRectOffset = Vector2.new(296, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_100_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(222, 438),
+			ImageRectOffset = Vector2.new(370, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_100_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(222, 438),
+			ImageRectOffset = Vector2.new(370, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_100_small_dark"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 296),
+			ImageRectOffset = Vector2.new(256, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_100_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 296),
+			ImageRectOffset = Vector2.new(256, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_20_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(222, 364),
+			ImageRectOffset = Vector2.new(296, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_20_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(148, 438),
+			ImageRectOffset = Vector2.new(296, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_20_small_dark"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 256),
+			ImageRectOffset = Vector2.new(222, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_20_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 222),
+			ImageRectOffset = Vector2.new(182, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_40_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(148, 364),
+			ImageRectOffset = Vector2.new(222, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_40_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(74, 438),
+			ImageRectOffset = Vector2.new(222, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_40_small_dark"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 182),
+			ImageRectOffset = Vector2.new(148, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_40_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 148),
+			ImageRectOffset = Vector2.new(460, 330),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_60_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(74, 364),
+			ImageRectOffset = Vector2.new(148, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_60_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(0, 438),
+			ImageRectOffset = Vector2.new(148, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_60_small_dark"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 108),
+			ImageRectOffset = Vector2.new(460, 296),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_60_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 74),
+			ImageRectOffset = Vector2.new(460, 256),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_80_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(0, 364),
+			ImageRectOffset = Vector2.new(74, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_80_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(396, 256),
+			ImageRectOffset = Vector2.new(74, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_80_small_dark"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 34),
+			ImageRectOffset = Vector2.new(460, 222),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_80_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 0),
+			ImageRectOffset = Vector2.new(460, 182),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_error_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(396, 182),
+			ImageRectOffset = Vector2.new(0, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_error_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(322, 256),
+			ImageRectOffset = Vector2.new(0, 364),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_error_small_dark"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 404),
+			ImageSet = "img_set_2x_11",
+			ImageRectOffset = Vector2.new(460, 148),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_error_small_light"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 370),
+			ImageSet = "img_set_2x_11",
+			ImageRectOffset = Vector2.new(460, 108),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_off_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(322, 182),
+			ImageRectOffset = Vector2.new(396, 256),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_off_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(396, 74),
+			ImageRectOffset = Vector2.new(396, 182),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_off_small_dark"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 330),
+			ImageSet = "img_set_2x_11",
+			ImageRectOffset = Vector2.new(460, 74),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_off_small_light"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 296),
+			ImageSet = "img_set_2x_11",
+			ImageRectOffset = Vector2.new(460, 34),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_on_dark"] = {
 			ImageSet = "img_set_2x_19",
-			ImageRectOffset = Vector2.new(74, 388),
+			ImageRectOffset = Vector2.new(194, 388),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_on_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(296, 364),
+			ImageRectOffset = Vector2.new(370, 438),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/speaker_on_small_dark"] = {
 			ImageSet = "img_set_2x_10",
-			ImageRectOffset = Vector2.new(460, 256),
+			ImageRectOffset = Vector2.new(460, 296),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/speaker_on_small_light"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(460, 330),
+			ImageRectOffset = Vector2.new(296, 456),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/video_error_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(396, 0),
+			ImageRectOffset = Vector2.new(322, 256),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/video_error_light"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(322, 74),
+			ImageRectOffset = Vector2.new(322, 182),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/video_error_small_dark"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 256),
+			ImageSet = "img_set_2x_11",
+			ImageRectOffset = Vector2.new(460, 0),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/video_error_small_light"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 222),
+			ImageRectOffset = Vector2.new(460, 404),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/video_off_dark"] = {
 			ImageSet = "img_set_2x_15",
-			ImageRectOffset = Vector2.new(322, 0),
+			ImageRectOffset = Vector2.new(396, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/video_off_light"] = {
-			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(414, 370),
+			ImageSet = "img_set_2x_15",
+			ImageRectOffset = Vector2.new(396, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/video_off_small_dark"] = {
-			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(460, 260),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(35, 478),
 			ImageRectSize = Vector2.new(33, 32)
 		},
 		["icons/controls/voice/video_off_small_light"] = {
-			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(460, 334),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(0, 478),
 			ImageRectSize = Vector2.new(33, 32)
 		},
 		["icons/controls/voice/video_on_dark"] = {
-			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(340, 370),
+			ImageSet = "img_set_2x_15",
+			ImageRectOffset = Vector2.new(322, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/video_on_light"] = {
-			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(414, 296),
+			ImageSet = "img_set_2x_15",
+			ImageRectOffset = Vector2.new(322, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/controls/voice/video_on_small_dark"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 182),
+			ImageRectOffset = Vector2.new(460, 370),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/controls/voice/video_on_small_light"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 148),
+			ImageRectOffset = Vector2.new(460, 330),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/graphic/blocktheft_2xl"] = {
@@ -3403,7 +3408,7 @@ function make_assets_2x()
 		},
 		["icons/graphic/loadingspinner"] = {
 			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(0, 386),
+			ImageRectOffset = Vector2.new(186, 386),
 			ImageRectSize = Vector2.new(96, 96)
 		},
 		["icons/graphic/newclothing_3xl"] = {
@@ -3473,7 +3478,7 @@ function make_assets_2x()
 		},
 		["icons/graphic/voicechat_large"] = {
 			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(98, 386),
+			ImageRectOffset = Vector2.new(284, 386),
 			ImageRectSize = Vector2.new(96, 96)
 		},
 		["icons/logo/letterform"] = {
@@ -3481,89 +3486,94 @@ function make_assets_2x()
 			ImageRectOffset = Vector2.new(0, 386),
 			ImageRectSize = Vector2.new(376, 72)
 		},
+		["icons/logo/letterform_classic"] = {
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(0, 386),
+			ImageRectSize = Vector2.new(342, 90)
+		},
 		["icons/logo/studiologo"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(340, 296),
+			ImageRectOffset = Vector2.new(414, 370),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/logo/studiologo_small"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 108),
+			ImageRectOffset = Vector2.new(460, 296),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/menu/2-person-with-bubble"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(340, 222),
+			ImageRectOffset = Vector2.new(414, 296),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/2-person-with-bubble-on"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(414, 222),
+			ImageRectOffset = Vector2.new(340, 370),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/AR_cube"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(414, 148),
+			ImageRectOffset = Vector2.new(340, 296),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/AR_frame"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(340, 148),
+			ImageRectOffset = Vector2.new(414, 222),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/adjust/position_small"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 74),
+			ImageRectOffset = Vector2.new(460, 256),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/menu/adjust/rotationZ"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(414, 74),
+			ImageRectOffset = Vector2.new(340, 222),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/avatar_off"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(340, 74),
+			ImageRectOffset = Vector2.new(414, 148),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/avatar_on"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(414, 0),
+			ImageRectOffset = Vector2.new(340, 148),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/body_female"] = {
 			ImageSet = "img_set_2x_13",
-			ImageRectOffset = Vector2.new(340, 0),
+			ImageRectOffset = Vector2.new(414, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/body_heavy"] = {
-			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(370, 382),
+			ImageSet = "img_set_2x_13",
+			ImageRectOffset = Vector2.new(340, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/body_male"] = {
-			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(296, 382),
+			ImageSet = "img_set_2x_13",
+			ImageRectOffset = Vector2.new(414, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/body_neutral"] = {
-			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(222, 382),
+			ImageSet = "img_set_2x_13",
+			ImageRectOffset = Vector2.new(340, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/body_short"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(148, 382),
+			ImageRectOffset = Vector2.new(370, 382),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/body_tall"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(74, 382),
+			ImageRectOffset = Vector2.new(296, 382),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/body_thin"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(0, 382),
+			ImageRectOffset = Vector2.new(222, 382),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/clothing/accessories_on"] = {
@@ -3583,52 +3593,52 @@ function make_assets_2x()
 		},
 		["icons/menu/clothing/back_on"] = {
 			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(392, 470),
+			ImageRectOffset = Vector2.new(0, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/body_off"] = {
 			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(430, 470),
+			ImageRectOffset = Vector2.new(38, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/body_on"] = {
 			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(468, 470),
+			ImageRectOffset = Vector2.new(76, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/build_off"] = {
-			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(0, 460),
+			ImageSet = "img_set_2x_6",
+			ImageRectOffset = Vector2.new(114, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/build_on"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(74, 460),
+			ImageRectOffset = Vector2.new(0, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/characters_on"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(148, 460),
+			ImageRectOffset = Vector2.new(75, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/climb_off"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(222, 460),
+			ImageRectOffset = Vector2.new(149, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/climb_on"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(296, 460),
+			ImageRectOffset = Vector2.new(223, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/creations_off"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(334, 460),
+			ImageRectOffset = Vector2.new(297, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/creations_on"] = {
 			ImageSet = "img_set_2x_8",
-			ImageRectOffset = Vector2.new(460, 0),
+			ImageRectOffset = Vector2.new(335, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/eyebrow_on"] = {
@@ -3652,118 +3662,118 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/facialHair_off"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(383, 460),
+			ImageSet = "img_set_2x_8",
+			ImageRectOffset = Vector2.new(460, 370),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/facialHair_on"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(309, 460),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(460, 74),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/fall_off"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(235, 460),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(460, 0),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/fall_on"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(160, 460),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(334, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/hair_off"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(122, 462),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(296, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/hair_on"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(84, 462),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(222, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/idle_off"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(38, 470),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(148, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/idle_on"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(0, 470),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(74, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/jump_off"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(463, 336),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(0, 460),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/jump_on"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(425, 336),
+			ImageRectOffset = Vector2.new(458, 462),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/limited_off"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(387, 336),
+			ImageRectOffset = Vector2.new(420, 462),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/limited_on"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(471, 290),
+			ImageRectOffset = Vector2.new(374, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/nose_on"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(471, 252),
+			ImageRectOffset = Vector2.new(336, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/shorts_on"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(471, 206),
+			ImageRectOffset = Vector2.new(290, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/shoulder_on"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(471, 168),
+			ImageRectOffset = Vector2.new(252, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/skin_on"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(471, 122),
+			ImageRectOffset = Vector2.new(206, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/sweaters_on"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(471, 84),
+			ImageRectOffset = Vector2.new(168, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/swim_off"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(471, 38),
+			ImageRectOffset = Vector2.new(122, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/swim_on"] = {
 			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(471, 0),
+			ImageRectOffset = Vector2.new(84, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/torsos_on"] = {
-			ImageSet = "img_set_2x_5",
-			ImageRectOffset = Vector2.new(114, 460),
+			ImageSet = "img_set_2x_7",
+			ImageRectOffset = Vector2.new(38, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/type_off"] = {
-			ImageSet = "img_set_2x_5",
-			ImageRectOffset = Vector2.new(76, 460),
+			ImageSet = "img_set_2x_7",
+			ImageRectOffset = Vector2.new(0, 470),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/type_on"] = {
-			ImageSet = "img_set_2x_5",
-			ImageRectOffset = Vector2.new(38, 460),
+			ImageSet = "img_set_2x_7",
+			ImageRectOffset = Vector2.new(471, 332),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/waist_on"] = {
-			ImageSet = "img_set_2x_5",
-			ImageRectOffset = Vector2.new(0, 460),
+			ImageSet = "img_set_2x_7",
+			ImageRectOffset = Vector2.new(471, 294),
 			ImageRectSize = Vector2.new(36, 36)
 		},
 		["icons/menu/clothing/walk_off"] = {
@@ -3778,162 +3788,162 @@ function make_assets_2x()
 		},
 		["icons/menu/customize"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(386, 296),
+			ImageRectOffset = Vector2.new(148, 382),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/customize_large"] = {
 			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(196, 386),
+			ImageRectOffset = Vector2.new(382, 386),
 			ImageRectSize = Vector2.new(96, 96)
 		},
 		["icons/menu/gem_medium"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(386, 222),
+			ImageRectOffset = Vector2.new(74, 382),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/gem_small"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 34),
+			ImageRectOffset = Vector2.new(460, 222),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/menu/protection_off"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(386, 148),
+			ImageRectOffset = Vector2.new(0, 382),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/protection_on"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(386, 74),
+			ImageRectOffset = Vector2.new(386, 296),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/publicChatOff"] = {
 			ImageSet = "img_set_2x_11",
-			ImageRectOffset = Vector2.new(386, 0),
+			ImageRectOffset = Vector2.new(386, 222),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/publicChatOff_small"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(460, 0),
+			ImageRectOffset = Vector2.new(460, 182),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/menu/publicChatOn"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(386, 370),
+			ImageSet = "img_set_2x_11",
+			ImageRectOffset = Vector2.new(386, 148),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/publicChatOn_small"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(330, 460),
+			ImageRectOffset = Vector2.new(460, 148),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/menu/rocketShipOn_medium"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(386, 296),
+			ImageSet = "img_set_2x_11",
+			ImageRectOffset = Vector2.new(386, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/rocketShip_medium"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(386, 222),
+			ImageSet = "img_set_2x_11",
+			ImageRectOffset = Vector2.new(386, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/rocketShip_small"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(296, 460),
+			ImageRectOffset = Vector2.new(460, 112),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/menu/securityKey"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(386, 148),
+			ImageRectOffset = Vector2.new(386, 370),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/transform"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(386, 74),
+			ImageRectOffset = Vector2.new(386, 296),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/menu/transform-small"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(256, 460),
+			ImageRectOffset = Vector2.new(460, 38),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/navigation/close"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(386, 0),
+			ImageRectOffset = Vector2.new(386, 222),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/navigation/externallink"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(222, 460),
+			ImageRectOffset = Vector2.new(260, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/navigation/externallink_medium"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(296, 386),
+			ImageRectOffset = Vector2.new(386, 148),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/navigation/seeAllArrow_small"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(182, 460),
+			ImageRectOffset = Vector2.new(186, 460),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/navigation/swipe"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(222, 386),
+			ImageRectOffset = Vector2.new(386, 74),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/navigation/swipeDown"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(148, 386),
+			ImageRectOffset = Vector2.new(386, 0),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/navigation/swipeUp"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(74, 386),
+			ImageRectOffset = Vector2.new(296, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/status/collectibles"] = {
 			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(0, 386),
+			ImageRectOffset = Vector2.new(222, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/status/collectibles_large"] = {
-			ImageSet = "img_set_2x_6",
-			ImageRectOffset = Vector2.new(294, 386),
+			ImageSet = "img_set_2x_7",
+			ImageRectOffset = Vector2.new(387, 196),
 			ImageRectSize = Vector2.new(96, 96)
 		},
 		["icons/status/collectibles_small"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(148, 460),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(310, 478),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/status/games/sessions_large"] = {
-			ImageSet = "img_set_2x_5",
-			ImageRectOffset = Vector2.new(382, 386),
+			ImageSet = "img_set_2x_7",
+			ImageRectOffset = Vector2.new(387, 98),
 			ImageRectSize = Vector2.new(96, 96)
 		},
 		["icons/status/games/sessions_small"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(108, 460),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(276, 478),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/status/item/limited"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(74, 460),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(242, 478),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/status/loading_large"] = {
-			ImageSet = "img_set_2x_5",
-			ImageRectOffset = Vector2.new(284, 386),
+			ImageSet = "img_set_2x_7",
+			ImageRectOffset = Vector2.new(387, 0),
 			ImageRectSize = Vector2.new(96, 96)
 		},
 		["icons/status/loading_medium"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(383, 386),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(148, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/status/loading_small"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(34, 460),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(208, 478),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/status/oof_xlarge"] = {
@@ -3942,18 +3952,18 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(192, 192)
 		},
 		["icons/status/player/videostar"] = {
-			ImageSet = "img_set_2x_9",
-			ImageRectOffset = Vector2.new(0, 460),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(174, 478),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["icons/status/trending_small"] = {
 			ImageSet = "img_set_2x_5",
-			ImageRectOffset = Vector2.new(152, 460),
+			ImageRectOffset = Vector2.new(140, 478),
 			ImageRectSize = Vector2.new(32, 32)
 		},
 		["reactions/crying"] = {
 			ImageSet = "img_set_2x_5",
-			ImageRectOffset = Vector2.new(186, 386),
+			ImageRectOffset = Vector2.new(344, 386),
 			ImageRectSize = Vector2.new(96, 96)
 		},
 		["reactions/fire"] = {
@@ -3992,8 +4002,8 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(52, 52)
 		},
 		["squircles/hollow"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(457, 444),
+			ImageSet = "img_set_2x_5",
+			ImageRectOffset = Vector2.new(442, 456),
 			ImageRectSize = Vector2.new(52, 52)
 		},
 		["squircles/hollowBold"] = {
@@ -4002,13 +4012,13 @@ function make_assets_2x()
 			ImageRectSize = Vector2.new(60, 60)
 		},
 		["truncate_arrows/actions_truncationCollapse"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(309, 386),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(74, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["truncate_arrows/actions_truncationExpand"] = {
-			ImageSet = "img_set_2x_7",
-			ImageRectOffset = Vector2.new(235, 386),
+			ImageSet = "img_set_2x_9",
+			ImageRectOffset = Vector2.new(0, 386),
 			ImageRectSize = Vector2.new(72, 72)
 		}
 	}
@@ -4021,7 +4031,7 @@ function make_assets_3x()
 	var3 = {
 		["chat_bubble/chat-bubble"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(436, 957),
+			ImageRectOffset = Vector2.new(146, 957),
 			ImageRectSize = Vector2.new(63, 63)
 		},
 		["chat_bubble/chat-bubble-bottom"] = {
@@ -4036,7 +4046,7 @@ function make_assets_3x()
 		},
 		["chat_bubble/chat-bubble-self"] = {
 			ImageSet = "img_set_3x_4",
-			ImageRectOffset = Vector2.new(960, 960),
+			ImageRectOffset = Vector2.new(955, 897),
 			ImageRectSize = Vector2.new(63, 63)
 		},
 		["chat_bubble/chat-bubble-self-bottom"] = {
@@ -4045,8 +4055,8 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(123, 123)
 		},
 		["chat_bubble/chat-bubble-self-middle"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(580, 832),
+			ImageSet = "img_set_3x_11",
+			ImageRectOffset = Vector2.new(0, 886),
 			ImageRectSize = Vector2.new(123, 123)
 		},
 		["chat_bubble/chat-bubble-self-tip"] = {
@@ -4061,7 +4071,7 @@ function make_assets_3x()
 		},
 		["chat_bubble/chat-bubble-self2"] = {
 			ImageSet = "img_set_3x_4",
-			ImageRectOffset = Vector2.new(895, 960),
+			ImageRectOffset = Vector2.new(955, 832),
 			ImageRectSize = Vector2.new(63, 63)
 		},
 		["chat_bubble/chat-bubble-single"] = {
@@ -4081,7 +4091,7 @@ function make_assets_3x()
 		},
 		["chat_bubble/chat-bubble2"] = {
 			ImageSet = "img_set_3x_4",
-			ImageRectOffset = Vector2.new(895, 960),
+			ImageRectOffset = Vector2.new(955, 832),
 			ImageRectSize = Vector2.new(63, 63)
 		},
 		["component_assets/avatarBG_dark"] = {
@@ -4095,38 +4105,38 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(1014, 1014)
 		},
 		["component_assets/bulletDown_17_stroke_3"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 0),
+			ImageSet = "img_set_3x_6",
+			ImageRectOffset = Vector2.new(640, 972),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/bulletLeft_17"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 53),
+			ImageSet = "img_set_3x_6",
+			ImageRectOffset = Vector2.new(693, 972),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/bulletLeft_17_stroke_3"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 106),
+			ImageRectOffset = Vector2.new(962, 0),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/bulletRight_17"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 159),
+			ImageRectOffset = Vector2.new(962, 53),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/bulletRight_17_stroke_3"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(501, 957),
+			ImageRectOffset = Vector2.new(489, 957),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/bulletUp_17_stroke_3"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 489),
+			ImageRectOffset = Vector2.new(436, 957),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/bullet_17"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 436),
+			ImageRectOffset = Vector2.new(211, 957),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/checkerboard_12"] = {
@@ -4141,37 +4151,37 @@ function make_assets_3x()
 		},
 		["component_assets/circle_16"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 416),
+			ImageRectOffset = Vector2.new(962, 310),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["component_assets/circle_17"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 383),
+			ImageRectOffset = Vector2.new(962, 439),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/circle_17_mask"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 330),
+			ImageRectOffset = Vector2.new(962, 386),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/circle_17_stroke_1"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 277),
+			ImageRectOffset = Vector2.new(962, 333),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/circle_17_stroke_3"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 224),
+			ImageRectOffset = Vector2.new(962, 280),
 			ImageRectSize = Vector2.new(51, 51)
 		},
 		["component_assets/circle_21"] = {
-			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(211, 957),
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(441, 947),
 			ImageRectSize = Vector2.new(63, 63)
 		},
 		["component_assets/circle_21_stroke_1"] = {
-			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(146, 957),
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(376, 947),
 			ImageRectSize = Vector2.new(63, 63)
 		},
 		["component_assets/circle_22_stroke_3"] = {
@@ -4180,58 +4190,58 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(66, 66)
 		},
 		["component_assets/circle_24_stroke_1"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(602, 950),
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(228, 947),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["component_assets/circle_25"] = {
-			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(660, 927),
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(77, 947),
 			ImageRectSize = Vector2.new(75, 75)
 		},
 		["component_assets/circle_26_stroke_3"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(705, 942),
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(932, 926),
 			ImageRectSize = Vector2.new(78, 78)
 		},
 		["component_assets/circle_28_padding_10"] = {
-			ImageSet = "img_set_3x_4",
-			ImageRectOffset = Vector2.new(749, 832),
+			ImageSet = "img_set_3x_8",
+			ImageRectOffset = Vector2.new(0, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["component_assets/circle_29"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(926, 832),
+			ImageSet = "img_set_3x_5",
+			ImageRectOffset = Vector2.new(904, 930),
 			ImageRectSize = Vector2.new(87, 87)
 		},
 		["component_assets/circle_29_mask"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(926, 921),
+			ImageSet = "img_set_3x_5",
+			ImageRectOffset = Vector2.new(815, 930),
 			ImageRectSize = Vector2.new(87, 87)
 		},
 		["component_assets/circle_29_stroke_1"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(510, 892),
+			ImageSet = "img_set_3x_5",
+			ImageRectOffset = Vector2.new(923, 643),
 			ImageRectSize = Vector2.new(87, 87)
 		},
 		["component_assets/circle_30_stroke_3"] = {
-			ImageSet = "img_set_3x_5",
-			ImageRectOffset = Vector2.new(928, 906),
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(930, 902),
 			ImageRectSize = Vector2.new(90, 90)
 		},
 		["component_assets/circle_36"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(816, 832),
-			ImageRectSize = Vector2.new(108, 108)
-		},
-		["component_assets/circle_36_stroke_1"] = {
 			ImageSet = "img_set_3x_10",
 			ImageRectOffset = Vector2.new(0, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
+		["component_assets/circle_36_stroke_1"] = {
+			ImageSet = "img_set_3x_10",
+			ImageRectOffset = Vector2.new(110, 902),
+			ImageRectSize = Vector2.new(108, 108)
+		},
 		["component_assets/circle_42_stroke_3"] = {
-			ImageSet = "img_set_3x_4",
-			ImageRectOffset = Vector2.new(895, 832),
+			ImageSet = "img_set_3x_6",
+			ImageRectOffset = Vector2.new(640, 844),
 			ImageRectSize = Vector2.new(126, 126)
 		},
 		["component_assets/circle_49"] = {
@@ -4250,23 +4260,23 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(147, 147)
 		},
 		["component_assets/circle_52_stroke_3"] = {
-			ImageSet = "img_set_3x_4",
-			ImageRectOffset = Vector2.new(591, 832),
+			ImageSet = "img_set_3x_6",
+			ImageRectOffset = Vector2.new(482, 844),
 			ImageRectSize = Vector2.new(156, 156)
 		},
 		["component_assets/circle_60_stroke_2"] = {
-			ImageSet = "img_set_3x_3",
-			ImageRectOffset = Vector2.new(597, 810),
+			ImageSet = "img_set_3x_4",
+			ImageRectOffset = Vector2.new(591, 832),
 			ImageRectSize = Vector2.new(180, 180)
 		},
 		["component_assets/circle_68_stroke_2"] = {
 			ImageSet = "img_set_3x_3",
-			ImageRectOffset = Vector2.new(209, 810),
+			ImageRectOffset = Vector2.new(724, 810),
 			ImageRectSize = Vector2.new(204, 204)
 		},
 		["component_assets/circle_69_stroke_3"] = {
 			ImageSet = "img_set_3x_3",
-			ImageRectOffset = Vector2.new(0, 810),
+			ImageRectOffset = Vector2.new(515, 810),
 			ImageRectSize = Vector2.new(207, 207)
 		},
 		["component_assets/circle_72_stroke_3"] = {
@@ -4301,12 +4311,12 @@ function make_assets_3x()
 		},
 		["component_assets/dragger_small"] = {
 			ImageSet = "img_set_3x_3",
-			ImageRectOffset = Vector2.new(949, 970),
+			ImageRectOffset = Vector2.new(302, 947),
 			ImageRectSize = Vector2.new(72, 48)
 		},
 		["component_assets/dropshadow_16_20"] = {
-			ImageSet = "img_set_3x_3",
-			ImageRectOffset = Vector2.new(779, 810),
+			ImageSet = "img_set_3x_5",
+			ImageRectOffset = Vector2.new(815, 760),
 			ImageRectSize = Vector2.new(168, 168)
 		},
 		["component_assets/dropshadow_17_16"] = {
@@ -4315,8 +4325,8 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(219, 219)
 		},
 		["component_assets/dropshadow_17_4"] = {
-			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(660, 850),
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(0, 947),
 			ImageRectSize = Vector2.new(75, 75)
 		},
 		["component_assets/dropshadow_17_8"] = {
@@ -4326,17 +4336,17 @@ function make_assets_3x()
 		},
 		["component_assets/dropshadow_24_6"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(770, 688),
+			ImageRectOffset = Vector2.new(880, 908),
 			ImageRectSize = Vector2.new(102, 102)
 		},
 		["component_assets/dropshadow_25"] = {
-			ImageSet = "img_set_3x_5",
-			ImageRectOffset = Vector2.new(815, 906),
+			ImageSet = "img_set_3x_9",
+			ImageRectOffset = Vector2.new(0, 902),
 			ImageRectSize = Vector2.new(111, 111)
 		},
 		["component_assets/dropshadow_28"] = {
-			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(482, 844),
+			ImageSet = "img_set_3x_8",
+			ImageRectOffset = Vector2.new(290, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["component_assets/dropshadow_56_8"] = {
@@ -4346,17 +4356,17 @@ function make_assets_3x()
 		},
 		["component_assets/dropshadow_chatOff"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(110, 902),
+			ImageRectOffset = Vector2.new(220, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["component_assets/dropshadow_chatOn"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(220, 902),
+			ImageRectOffset = Vector2.new(330, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["component_assets/dropshadow_more"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(330, 902),
+			ImageRectOffset = Vector2.new(440, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["component_assets/dropshadow_square_4"] = {
@@ -4375,13 +4385,13 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(720, 156)
 		},
 		["component_assets/halfcircleLeft_17"] = {
-			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(995, 688),
+			ImageSet = "img_set_3x_5",
+			ImageRectOffset = Vector2.new(985, 813),
 			ImageRectSize = Vector2.new(24, 51)
 		},
 		["component_assets/halfcircleRight_17"] = {
-			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(554, 957),
+			ImageSet = "img_set_3x_5",
+			ImageRectOffset = Vector2.new(985, 760),
 			ImageRectSize = Vector2.new(24, 51)
 		},
 		["component_assets/hexagon_12"] = {
@@ -4390,8 +4400,8 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(36, 42)
 		},
 		["component_assets/hexagon_24"] = {
-			ImageSet = "img_set_3x_3",
-			ImageRectOffset = Vector2.new(949, 810),
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(932, 840),
 			ImageRectSize = Vector2.new(72, 84)
 		},
 		["component_assets/itemBG_dark"] = {
@@ -4420,13 +4430,13 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(48, 24)
 		},
 		["component_assets/triangleLeft_16"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(246, 957),
+			ImageSet = "img_set_3x_5",
+			ImageRectOffset = Vector2.new(993, 930),
 			ImageRectSize = Vector2.new(24, 48)
 		},
 		["component_assets/triangleRight_16"] = {
-			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(995, 741),
+			ImageSet = "img_set_3x_5",
+			ImageRectOffset = Vector2.new(985, 866),
 			ImageRectSize = Vector2.new(24, 48)
 		},
 		["component_assets/triangleUp_16"] = {
@@ -4435,13 +4445,13 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(48, 24)
 		},
 		["component_assets/userBG_dark"] = {
-			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(628, 844),
+			ImageSet = "img_set_3x_8",
+			ImageRectOffset = Vector2.new(870, 542),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["component_assets/user_60_mask"] = {
-			ImageSet = "img_set_3x_3",
-			ImageRectOffset = Vector2.new(415, 810),
+			ImageSet = "img_set_3x_4",
+			ImageRectOffset = Vector2.new(773, 832),
 			ImageRectSize = Vector2.new(180, 180)
 		},
 		["component_assets/user_glow"] = {
@@ -4461,207 +4471,207 @@ function make_assets_3x()
 		},
 		["icons/actions/accept"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(440, 902),
+			ImageRectOffset = Vector2.new(550, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/actions/edit/redo"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(550, 902),
+			ImageRectOffset = Vector2.new(660, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/actions/edit/undo"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(660, 902),
+			ImageRectOffset = Vector2.new(770, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/actions/feedback_on"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(770, 902),
+			ImageRectOffset = Vector2.new(902, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/brands/moments-fill"] = {
 			ImageSet = "img_set_3x_3",
-			ImageRectOffset = Vector2.new(949, 896),
+			ImageRectOffset = Vector2.new(154, 947),
 			ImageRectSize = Vector2.new(72, 72)
 		},
 		["icons/brands/moments_large-fill"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(0, 832),
+			ImageRectOffset = Vector2.new(580, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["icons/common/gender_female"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(902, 0),
+			ImageRectOffset = Vector2.new(902, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/common/gender_female_selected"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(902, 110),
+			ImageRectOffset = Vector2.new(902, 220),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/common/gender_male"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(902, 220),
+			ImageRectOffset = Vector2.new(902, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/common/gender_male_selected"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(902, 330),
+			ImageRectOffset = Vector2.new(902, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/common/muteNotifications"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(705, 832),
+			ImageSet = "img_set_3x_9",
+			ImageRectOffset = Vector2.new(113, 902),
 			ImageRectSize = Vector2.new(109, 108)
 		},
 		["icons/controls/close-ingame"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(902, 440),
+			ImageRectOffset = Vector2.new(902, 550),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/apostrophe"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(902, 550),
+			ImageRectOffset = Vector2.new(902, 660),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/arrowDown"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 466),
+			ImageRectOffset = Vector2.new(962, 360),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/keys/arrowLeft"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(146, 957),
+			ImageRectOffset = Vector2.new(962, 410),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/keys/arrowRight"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(196, 957),
+			ImageRectOffset = Vector2.new(962, 460),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/keys/arrowUp"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(436, 957),
+			ImageRectOffset = Vector2.new(146, 957),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/keys/asterisk"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(902, 660),
+			ImageRectOffset = Vector2.new(902, 770),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/backspace"] = {
 			ImageSet = "img_set_3x_10",
-			ImageRectOffset = Vector2.new(902, 770),
-			ImageRectSize = Vector2.new(108, 108)
-		},
-		["icons/controls/keys/capslock"] = {
-			ImageSet = "img_set_3x_10",
 			ImageRectOffset = Vector2.new(902, 880),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/caret"] = {
+		["icons/controls/keys/capslock"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(0, 892),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/comma"] = {
+		["icons/controls/keys/caret"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(110, 892),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/command"] = {
+		["icons/controls/keys/comma"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(290, 892),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/control"] = {
+		["icons/controls/keys/command"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(400, 892),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/dpadDown"] = {
+		["icons/controls/keys/control"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(892, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/dpadLeft"] = {
+		["icons/controls/keys/dpadDown"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(892, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/dpadRight"] = {
+		["icons/controls/keys/dpadLeft"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(602, 290),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/dpadUp"] = {
+		["icons/controls/keys/dpadRight"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(712, 290),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/graveaccent"] = {
+		["icons/controls/keys/dpadUp"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(822, 290),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(932, 290),
-			ImageRectSize = Vector2.new(84, 84)
-		},
-		["icons/controls/keys/hold_button_assets/hold_Pressed_RadialFill"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(932, 400),
-			ImageRectSize = Vector2.new(84, 84)
-		},
-		["icons/controls/keys/hold_button_assets/hold_Pressed_XboxA"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(932, 510),
-			ImageRectSize = Vector2.new(84, 84)
-		},
-		["icons/controls/keys/hold_button_assets/hold_Unpressed_Arrow"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(932, 620),
-			ImageRectSize = Vector2.new(84, 84)
-		},
-		["icons/controls/keys/hold_button_assets/hold_Unpressed_RadialFill"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(932, 730),
-			ImageRectSize = Vector2.new(84, 84)
-		},
-		["icons/controls/keys/hold_button_assets/hold_Unpressed_XboxA"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(932, 840),
-			ImageRectSize = Vector2.new(84, 84)
-		},
-		["icons/controls/keys/key_alt"] = {
+		["icons/controls/keys/graveaccent"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(602, 400),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/key_esc"] = {
+		["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] = {
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(510, 892),
+			ImageRectSize = Vector2.new(84, 84)
+		},
+		["icons/controls/keys/hold_button_assets/hold_Pressed_RadialFill"] = {
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(932, 290),
+			ImageRectSize = Vector2.new(84, 84)
+		},
+		["icons/controls/keys/hold_button_assets/hold_Pressed_XboxA"] = {
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(932, 400),
+			ImageRectSize = Vector2.new(84, 84)
+		},
+		["icons/controls/keys/hold_button_assets/hold_Unpressed_Arrow"] = {
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(932, 510),
+			ImageRectSize = Vector2.new(84, 84)
+		},
+		["icons/controls/keys/hold_button_assets/hold_Unpressed_RadialFill"] = {
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(932, 620),
+			ImageRectSize = Vector2.new(84, 84)
+		},
+		["icons/controls/keys/hold_button_assets/hold_Unpressed_XboxA"] = {
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(932, 730),
+			ImageRectSize = Vector2.new(84, 84)
+		},
+		["icons/controls/keys/key_alt"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(712, 400),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/key_l"] = {
+		["icons/controls/keys/key_esc"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(822, 400),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/key_r"] = {
+		["icons/controls/keys/key_l"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(602, 510),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/key_shift"] = {
+		["icons/controls/keys/key_r"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(712, 510),
 			ImageRectSize = Vector2.new(108, 108)
 		},
-		["icons/controls/keys/key_single"] = {
+		["icons/controls/keys/key_shift"] = {
 			ImageSet = "img_set_3x_12",
 			ImageRectOffset = Vector2.new(822, 510),
+			ImageRectSize = Vector2.new(108, 108)
+		},
+		["icons/controls/keys/key_single"] = {
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(602, 620),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/key_wide"] = {
@@ -4676,167 +4686,167 @@ function make_assets_3x()
 		},
 		["icons/controls/keys/period"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(602, 620),
+			ImageRectOffset = Vector2.new(602, 730),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/return"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(602, 730),
+			ImageRectOffset = Vector2.new(602, 840),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/shift"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(602, 840),
+			ImageRectOffset = Vector2.new(712, 620),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/spacebar"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(712, 620),
+			ImageRectOffset = Vector2.new(822, 620),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/tab"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(822, 620),
+			ImageRectOffset = Vector2.new(712, 730),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxA"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(712, 730),
+			ImageRectOffset = Vector2.new(712, 840),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxB"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(712, 840),
+			ImageRectOffset = Vector2.new(822, 730),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxLB"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(822, 730),
+			ImageRectOffset = Vector2.new(822, 840),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxLS"] = {
-			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(822, 840),
+			ImageSet = "img_set_3x_13",
+			ImageRectOffset = Vector2.new(880, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxLSDirectional"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(660, 908),
+			ImageRectOffset = Vector2.new(770, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxLSHorizontal"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(660, 798),
+			ImageRectOffset = Vector2.new(770, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxLSVertical"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(660, 688),
+			ImageRectOffset = Vector2.new(880, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxLT"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(880, 578),
+			ImageRectOffset = Vector2.new(770, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxRB"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(770, 578),
+			ImageRectOffset = Vector2.new(660, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxRS"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(660, 578),
+			ImageRectOffset = Vector2.new(660, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxRSDirectional"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(550, 908),
+			ImageRectOffset = Vector2.new(660, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxRSHorizontal"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(550, 798),
+			ImageRectOffset = Vector2.new(880, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxRSVertical"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(550, 688),
+			ImageRectOffset = Vector2.new(770, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxRT"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(550, 578),
+			ImageRectOffset = Vector2.new(660, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxView"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(440, 908),
+			ImageRectOffset = Vector2.new(550, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxX"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(440, 798),
+			ImageRectOffset = Vector2.new(550, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxY"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(440, 688),
+			ImageRectOffset = Vector2.new(550, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/keys/xboxmenu"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(440, 578),
+			ImageRectOffset = Vector2.new(550, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/mediaStop_small"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(486, 957),
+			ImageRectOffset = Vector2.new(196, 957),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/vehicle/driver"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(330, 908),
+			ImageRectOffset = Vector2.new(440, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/vehicle/flip"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(330, 798),
+			ImageRectOffset = Vector2.new(440, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/vehicle/passenger"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(330, 688),
+			ImageRectOffset = Vector2.new(440, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_0_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(330, 578),
+			ImageRectOffset = Vector2.new(440, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_0_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(220, 908),
+			ImageRectOffset = Vector2.new(330, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_0_small_dark"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(580, 957),
+			ImageRectOffset = Vector2.new(436, 957),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_0_small_light"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(630, 957),
+			ImageRectOffset = Vector2.new(486, 957),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_100_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(220, 798),
+			ImageRectOffset = Vector2.new(330, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_100_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(220, 798),
+			ImageRectOffset = Vector2.new(330, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_100_small_dark"] = {
@@ -4851,12 +4861,12 @@ function make_assets_3x()
 		},
 		["icons/controls/voice/microphone_20_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(220, 688),
+			ImageRectOffset = Vector2.new(330, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_20_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(220, 578),
+			ImageRectOffset = Vector2.new(330, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_20_small_dark"] = {
@@ -4871,12 +4881,12 @@ function make_assets_3x()
 		},
 		["icons/controls/voice/microphone_40_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(110, 908),
+			ImageRectOffset = Vector2.new(220, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_40_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(110, 798),
+			ImageRectOffset = Vector2.new(220, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_40_small_dark"] = {
@@ -4886,282 +4896,282 @@ function make_assets_3x()
 		},
 		["icons/controls/voice/microphone_40_small_light"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(712, 950),
+			ImageRectOffset = Vector2.new(602, 950),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_60_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(110, 688),
+			ImageRectOffset = Vector2.new(220, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_60_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(110, 578),
+			ImageRectOffset = Vector2.new(220, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_60_small_dark"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(762, 950),
+			ImageRectOffset = Vector2.new(652, 950),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_60_small_light"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(822, 950),
+			ImageRectOffset = Vector2.new(712, 950),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_80_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(0, 908),
+			ImageRectOffset = Vector2.new(110, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_80_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(0, 798),
+			ImageRectOffset = Vector2.new(110, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_80_small_dark"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(872, 950),
+			ImageRectOffset = Vector2.new(762, 950),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_80_small_light"] = {
 			ImageSet = "img_set_3x_12",
-			ImageRectOffset = Vector2.new(932, 926),
+			ImageRectOffset = Vector2.new(822, 950),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_error_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(0, 688),
+			ImageRectOffset = Vector2.new(110, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_error_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(0, 578),
+			ImageRectOffset = Vector2.new(110, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_error_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(820, 942),
+			ImageSet = "img_set_3x_12",
+			ImageRectOffset = Vector2.new(872, 950),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_error_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(820, 892),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(739, 0),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_off_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(909, 440),
+			ImageRectOffset = Vector2.new(0, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_off_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(799, 440),
+			ImageRectOffset = Vector2.new(0, 798),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_off_small_dark"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 212),
+			ImageRectOffset = Vector2.new(962, 106),
 			ImageRectSize = Vector2.new(49, 49)
 		},
 		["icons/controls/voice/microphone_off_small_light"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 263),
+			ImageRectOffset = Vector2.new(962, 157),
 			ImageRectSize = Vector2.new(49, 49)
 		},
 		["icons/controls/voice/microphone_on_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(330, 578),
+			ImageRectOffset = Vector2.new(440, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_on_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(220, 908),
+			ImageRectOffset = Vector2.new(330, 908),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/microphone_on_small_dark"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(580, 957),
+			ImageRectOffset = Vector2.new(436, 957),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/microphone_on_small_light"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(630, 957),
+			ImageRectOffset = Vector2.new(486, 957),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_0_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(909, 330),
+			ImageRectOffset = Vector2.new(0, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_0_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(799, 330),
+			ImageRectOffset = Vector2.new(0, 578),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_0_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(820, 842),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(789, 0),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_0_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(970, 792),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(839, 0),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_100_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(689, 440),
+			ImageRectOffset = Vector2.new(909, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_100_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(689, 440),
+			ImageRectOffset = Vector2.new(909, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_100_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(920, 792),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(889, 0),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_100_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(920, 792),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(889, 0),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_20_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(689, 330),
+			ImageRectOffset = Vector2.new(799, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_20_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(909, 220),
+			ImageRectOffset = Vector2.new(909, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_20_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(870, 792),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(939, 0),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_20_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(820, 792),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(579, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_40_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(799, 220),
+			ImageRectOffset = Vector2.new(799, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_40_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(689, 220),
+			ImageRectOffset = Vector2.new(689, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_40_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(770, 942),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(629, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_40_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(770, 892),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(679, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_60_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(579, 440),
+			ImageRectOffset = Vector2.new(689, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_60_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(579, 330),
+			ImageRectOffset = Vector2.new(909, 220),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_60_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(770, 842),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(729, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_60_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(770, 792),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(779, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_80_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(579, 220),
+			ImageRectOffset = Vector2.new(799, 220),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_80_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(909, 110),
+			ImageRectOffset = Vector2.new(689, 220),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/red_speaker_80_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(974, 738),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(829, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/red_speaker_80_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(924, 738),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(879, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_0_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(909, 330),
+			ImageRectOffset = Vector2.new(0, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_0_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(799, 110),
+			ImageRectOffset = Vector2.new(579, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_0_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(974, 688),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(929, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_0_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(924, 688),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(579, 130),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_100_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(689, 110),
+			ImageRectOffset = Vector2.new(579, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_100_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(689, 110),
+			ImageRectOffset = Vector2.new(579, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_100_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(874, 738),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(629, 130),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_100_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(874, 738),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(629, 130),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_20_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(579, 110),
+			ImageRectOffset = Vector2.new(579, 220),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_20_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(909, 0),
+			ImageRectOffset = Vector2.new(909, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_20_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(874, 688),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(679, 130),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_20_small_light"] = {
@@ -5171,12 +5181,12 @@ function make_assets_3x()
 		},
 		["icons/controls/voice/speaker_40_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(799, 0),
+			ImageRectOffset = Vector2.new(799, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_40_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(689, 0),
+			ImageRectOffset = Vector2.new(689, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_40_small_dark"] = {
@@ -5191,12 +5201,12 @@ function make_assets_3x()
 		},
 		["icons/controls/voice/speaker_60_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(579, 0),
+			ImageRectOffset = Vector2.new(579, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_60_light"] = {
-			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 880),
+			ImageSet = "img_set_3x_13",
+			ImageRectOffset = Vector2.new(909, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_60_small_dark"] = {
@@ -5210,13 +5220,13 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_80_dark"] = {
-			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 770),
+			ImageSet = "img_set_3x_13",
+			ImageRectOffset = Vector2.new(799, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_80_light"] = {
-			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 880),
+			ImageSet = "img_set_3x_13",
+			ImageRectOffset = Vector2.new(689, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_80_small_dark"] = {
@@ -5230,13 +5240,13 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_error_dark"] = {
-			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 770),
+			ImageSet = "img_set_3x_13",
+			ImageRectOffset = Vector2.new(579, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_error_light"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 660),
+			ImageRectOffset = Vector2.new(850, 880),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_error_small_dark"] = {
@@ -5251,12 +5261,12 @@ function make_assets_3x()
 		},
 		["icons/controls/voice/speaker_off_dark"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 660),
+			ImageRectOffset = Vector2.new(850, 770),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_off_light"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 550),
+			ImageRectOffset = Vector2.new(740, 880),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_off_small_dark"] = {
@@ -5271,32 +5281,32 @@ function make_assets_3x()
 		},
 		["icons/controls/voice/speaker_on_dark"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(909, 330),
+			ImageRectOffset = Vector2.new(0, 688),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_on_light"] = {
 			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(799, 110),
+			ImageRectOffset = Vector2.new(579, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/speaker_on_small_dark"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(974, 688),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(929, 80),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/speaker_on_small_light"] = {
-			ImageSet = "img_set_3x_13",
-			ImageRectOffset = Vector2.new(924, 688),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(579, 130),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/controls/voice/video_error_dark"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 550),
+			ImageRectOffset = Vector2.new(740, 770),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/video_error_light"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 440),
+			ImageRectOffset = Vector2.new(850, 660),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/video_error_small_dark"] = {
@@ -5311,32 +5321,32 @@ function make_assets_3x()
 		},
 		["icons/controls/voice/video_off_dark"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 440),
+			ImageRectOffset = Vector2.new(740, 660),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/video_off_light"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 330),
+			ImageRectOffset = Vector2.new(850, 550),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/video_off_small_dark"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 314),
+			ImageRectOffset = Vector2.new(962, 208),
 			ImageRectSize = Vector2.new(49, 49)
 		},
 		["icons/controls/voice/video_off_small_light"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(962, 365),
+			ImageRectOffset = Vector2.new(962, 259),
 			ImageRectSize = Vector2.new(49, 49)
 		},
 		["icons/controls/voice/video_on_dark"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 330),
+			ImageRectOffset = Vector2.new(740, 550),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/video_on_light"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 220),
+			ImageRectOffset = Vector2.new(850, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/controls/voice/video_on_small_dark"] = {
@@ -5411,7 +5421,7 @@ function make_assets_3x()
 		},
 		["icons/graphic/loadingspinner"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(290, 832),
+			ImageRectOffset = Vector2.new(726, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["icons/graphic/newclothing_3xl"] = {
@@ -5481,7 +5491,7 @@ function make_assets_3x()
 		},
 		["icons/graphic/voicechat_large"] = {
 			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(870, 542),
+			ImageRectOffset = Vector2.new(872, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["icons/logo/letterform"] = {
@@ -5489,9 +5499,14 @@ function make_assets_3x()
 			ImageRectOffset = Vector2.new(0, 700),
 			ImageRectSize = Vector2.new(564, 108)
 		},
+		["icons/logo/letterform_classic"] = {
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(0, 810),
+			ImageRectSize = Vector2.new(513, 135)
+		},
 		["icons/logo/studiologo"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 220),
+			ImageRectOffset = Vector2.new(740, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/logo/studiologo_small"] = {
@@ -5501,22 +5516,22 @@ function make_assets_3x()
 		},
 		["icons/menu/2-person-with-bubble"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 110),
+			ImageRectOffset = Vector2.new(740, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/2-person-with-bubble-on"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 110),
+			ImageRectOffset = Vector2.new(850, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/AR_cube"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(850, 0),
+			ImageRectOffset = Vector2.new(850, 220),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/AR_frame"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(740, 0),
+			ImageRectOffset = Vector2.new(740, 220),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/adjust/position_small"] = {
@@ -5526,52 +5541,52 @@ function make_assets_3x()
 		},
 		["icons/menu/adjust/rotationZ"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(550, 850),
+			ImageRectOffset = Vector2.new(850, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/avatar_off"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(550, 740),
+			ImageRectOffset = Vector2.new(740, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/avatar_on"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(440, 850),
+			ImageRectOffset = Vector2.new(850, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/body_female"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(440, 740),
+			ImageRectOffset = Vector2.new(740, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/body_heavy"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(330, 850),
+			ImageRectOffset = Vector2.new(586, 850),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/body_male"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(330, 740),
+			ImageRectOffset = Vector2.new(476, 850),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/body_neutral"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(220, 850),
+			ImageRectOffset = Vector2.new(586, 740),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/body_short"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(220, 740),
+			ImageRectOffset = Vector2.new(476, 740),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/body_tall"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(110, 850),
+			ImageRectOffset = Vector2.new(366, 850),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/body_thin"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(110, 740),
+			ImageRectOffset = Vector2.new(366, 740),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/clothing/accessories_on"] = {
@@ -5620,78 +5635,78 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/climb_off"] = {
-			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 0),
+			ImageSet = "img_set_3x_4",
+			ImageRectOffset = Vector2.new(955, 962),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/climb_on"] = {
 			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 56),
+			ImageRectOffset = Vector2.new(962, 0),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/creations_off"] = {
 			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 112),
+			ImageRectOffset = Vector2.new(962, 56),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/creations_on"] = {
 			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 168),
+			ImageRectOffset = Vector2.new(962, 112),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/eyebrow_on"] = {
 			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 224),
+			ImageRectOffset = Vector2.new(962, 168),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/eyelash_on"] = {
 			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 280),
+			ImageRectOffset = Vector2.new(962, 224),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/face_on"] = {
 			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 336),
+			ImageRectOffset = Vector2.new(962, 280),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/faces_off"] = {
 			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 392),
+			ImageRectOffset = Vector2.new(962, 336),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/facialHair_off"] = {
 			ImageSet = "img_set_3x_6",
-			ImageRectOffset = Vector2.new(962, 448),
+			ImageRectOffset = Vector2.new(962, 392),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/facialHair_on"] = {
-			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 168),
+			ImageSet = "img_set_3x_6",
+			ImageRectOffset = Vector2.new(962, 448),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/fall_off"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 112),
+			ImageRectOffset = Vector2.new(962, 224),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/fall_on"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 56),
+			ImageRectOffset = Vector2.new(962, 168),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/hair_off"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(962, 0),
+			ImageRectOffset = Vector2.new(962, 112),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/hair_on"] = {
-			ImageSet = "img_set_3x_5",
-			ImageRectOffset = Vector2.new(961, 816),
+			ImageSet = "img_set_3x_7",
+			ImageRectOffset = Vector2.new(962, 56),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/idle_off"] = {
-			ImageSet = "img_set_3x_5",
-			ImageRectOffset = Vector2.new(961, 760),
+			ImageSet = "img_set_3x_7",
+			ImageRectOffset = Vector2.new(962, 0),
 			ImageRectSize = Vector2.new(54, 54)
 		},
 		["icons/menu/clothing/idle_on"] = {
@@ -5786,17 +5801,17 @@ function make_assets_3x()
 		},
 		["icons/menu/customize"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(0, 850),
+			ImageRectOffset = Vector2.new(256, 850),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/customize_large"] = {
-			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(872, 832),
+			ImageSet = "img_set_3x_11",
+			ImageRectOffset = Vector2.new(0, 740),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["icons/menu/gem_medium"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(0, 740),
+			ImageRectOffset = Vector2.new(256, 740),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/gem_small"] = {
@@ -5805,143 +5820,143 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/menu/protection_off"] = {
-			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 880),
+			ImageSet = "img_set_3x_11",
+			ImageRectOffset = Vector2.new(146, 850),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/protection_on"] = {
-			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 770),
+			ImageSet = "img_set_3x_11",
+			ImageRectOffset = Vector2.new(146, 740),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/publicChatOff"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 660),
+			ImageRectOffset = Vector2.new(902, 880),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/publicChatOff_small"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(600, 960),
+			ImageRectOffset = Vector2.new(686, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/menu/publicChatOn"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 550),
+			ImageRectOffset = Vector2.new(902, 770),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/publicChatOn_small"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(550, 960),
+			ImageRectOffset = Vector2.new(636, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/menu/rocketShipOn_medium"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 440),
+			ImageRectOffset = Vector2.new(902, 660),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/rocketShip_medium"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 330),
+			ImageRectOffset = Vector2.new(902, 550),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/rocketShip_small"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(490, 960),
+			ImageRectOffset = Vector2.new(586, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/menu/securityKey"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 220),
+			ImageRectOffset = Vector2.new(902, 440),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/transform"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 110),
+			ImageRectOffset = Vector2.new(902, 330),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/menu/transform-small"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(440, 960),
+			ImageRectOffset = Vector2.new(526, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/navigation/close"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(902, 0),
+			ImageRectOffset = Vector2.new(902, 220),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/navigation/externallink"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(380, 960),
+			ImageRectOffset = Vector2.new(476, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/navigation/externallink_medium"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(770, 902),
+			ImageRectOffset = Vector2.new(902, 110),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/navigation/seeAllArrow_small"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(330, 960),
+			ImageRectOffset = Vector2.new(416, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/navigation/swipe"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(660, 902),
+			ImageRectOffset = Vector2.new(902, 0),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/navigation/swipeDown"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(550, 902),
+			ImageRectOffset = Vector2.new(774, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/navigation/swipeUp"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(440, 902),
+			ImageRectOffset = Vector2.new(664, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/status/collectibles"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(330, 902),
+			ImageRectOffset = Vector2.new(554, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/status/collectibles_large"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(726, 832),
+			ImageRectOffset = Vector2.new(872, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["icons/status/collectibles_small"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(270, 960),
+			ImageRectOffset = Vector2.new(366, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/status/games/sessions_large"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(580, 832),
+			ImageRectOffset = Vector2.new(726, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["icons/status/games/sessions_small"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(220, 960),
+			ImageRectOffset = Vector2.new(306, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/status/item/limited"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(160, 960),
+			ImageRectOffset = Vector2.new(256, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/status/loading_large"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(870, 542),
+			ImageRectOffset = Vector2.new(580, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["icons/status/loading_medium"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(220, 902),
+			ImageRectOffset = Vector2.new(444, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["icons/status/loading_small"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(110, 960),
+			ImageRectOffset = Vector2.new(196, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/status/oof_xlarge"] = {
@@ -5951,27 +5966,27 @@ function make_assets_3x()
 		},
 		["icons/status/player/videostar"] = {
 			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(50, 960),
+			ImageRectOffset = Vector2.new(146, 960),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["icons/status/trending_small"] = {
-			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(0, 960),
+			ImageSet = "img_set_3x_7",
+			ImageRectOffset = Vector2.new(962, 492),
 			ImageRectSize = Vector2.new(48, 48)
 		},
 		["reactions/crying"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(290, 832),
+			ImageRectOffset = Vector2.new(870, 542),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["reactions/fire"] = {
 			ImageSet = "img_set_3x_7",
-			ImageRectOffset = Vector2.new(0, 832),
+			ImageRectOffset = Vector2.new(290, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["reactions/heart"] = {
-			ImageSet = "img_set_3x_5",
-			ImageRectOffset = Vector2.new(815, 760),
+			ImageSet = "img_set_3x_7",
+			ImageRectOffset = Vector2.new(0, 832),
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["reactions/laughJoy"] = {
@@ -5995,28 +6010,28 @@ function make_assets_3x()
 			ImageRectSize = Vector2.new(144, 144)
 		},
 		["squircles/fill"] = {
-			ImageSet = "img_set_3x_8",
-			ImageRectOffset = Vector2.new(816, 942),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(579, 0),
 			ImageRectSize = Vector2.new(78, 78)
 		},
 		["squircles/hollow"] = {
-			ImageSet = "img_set_3x_11",
-			ImageRectOffset = Vector2.new(660, 740),
+			ImageSet = "img_set_3x_14",
+			ImageRectOffset = Vector2.new(659, 0),
 			ImageRectSize = Vector2.new(78, 78)
 		},
 		["squircles/hollowBold"] = {
-			ImageSet = "img_set_3x_5",
-			ImageRectOffset = Vector2.new(923, 643),
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(930, 810),
 			ImageRectSize = Vector2.new(90, 90)
 		},
 		["truncate_arrows/actions_truncationCollapse"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(110, 902),
+			ImageRectOffset = Vector2.new(334, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		},
 		["truncate_arrows/actions_truncationExpand"] = {
 			ImageSet = "img_set_3x_9",
-			ImageRectOffset = Vector2.new(0, 902),
+			ImageRectOffset = Vector2.new(224, 902),
 			ImageRectSize = Vector2.new(108, 108)
 		}
 	}

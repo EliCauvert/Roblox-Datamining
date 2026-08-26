@@ -10,13 +10,20 @@ local _ = require(parent.getOverrideAttributes)
 local scaleValueModule = require(foundation.Utility.scaleValue)
 
 local function insertRule(p1, p2, p3)
-	-- upvalues: reactModule (ref), styleRuleModule (ref)
+	-- upvalues: flagsModule (ref), reactModule (ref), styleRuleModule (ref)
 	local properties = p2.properties
 	local text = "." .. p2
 	local var1 = if p2.modifier ~= nil then "" else ":" .. p1.modifier
 	local text_1 = text .. var8 .. (if p2.pseudo ~= nil then "" else " ::" .. p1.pseudo)
 	
-	if p2.pseudo ~= nil then
+	if flagsModule.FoundationStyleRulePseudoName then
+		if p2.pseudoName ~= nil then
+			text_1 ..= " #" .. p1.pseudoName
+		end
+		if p2.pseudo ~= nil and p2.pseudoName == nil then
+			text_1 ..= ", " .. text .. var8 .. " > " .. p1.pseudo
+		end
+	elseif p2.pseudo ~= nil then
 		text_1 ..= ", " .. text .. var8 .. " > " .. p1.pseudo
 	end
 	table.insert(p1, reactModule.createElement(styleRuleModule, {
@@ -43,13 +50,13 @@ local function updateRuleAttributes(p1, p2, p3, p4, p5)
 end
 
 return function(p6, p7, p8, p9, p10, p11)
-	-- upvalues: updateRuleAttributes (ref), insertRule (ref)
+	-- upvalues: flagsModule (ref), updateRuleAttributes (ref), insertRule (ref)
 	local t = {}
 	
 	for i, v in p7 do
 		local var3 = p6[i]
 		
-		if var3 ~= nil then
+		if var3 ~= nil and (flagsModule.FoundationStyleRulePseudoName or var3.pseudoName == nil) then
 			if p8 and p9 then
 				updateRuleAttributes(p8, var3.attributes, p9, p10, p11)
 			end

@@ -947,6 +947,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,"Bu deneyimin, avatar öğemi denetlemeye göndereceğini ve Yaratımlarım sayfasına yükleyeceğini kabul ediyorum."
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,"Bu deneyimin, ifademi denetlemeye göndereceğini ve Yaratımlarım sayfasına yükleyeceğini kabul ediyorum."
+CoreScripts.PublishAssetPrompt.DisclaimerImage,"Bu deneyimin, görselimi denetime göndereceğini ve Yaratımlarım sayfasına yükleyeceğini kabul ediyorum."
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Oluşturulan öğeler incelenecek ve Topluluk Standartlarına uymayan reddedilmiş öğeler için iade alamayabilirsin.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Geçersiz Açıklama
 CoreScripts.PublishAssetPrompt.InvalidName,Geçersiz Ad
@@ -961,6 +962,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,Kıyafeti Gönder
 CoreScripts.PublishAssetPrompt.TitleTextEmote,İfadeyi Gönder
+CoreScripts.PublishAssetPrompt.TitleTextImage,Görseli Gönder
 CoreScripts.PublishAssetPrompt.TitleTextModel,Paketi Gönder
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,Bir şeyler yanlış gitti. Lütfen tekrar dene. Hata Kodu: {RESULT_TYPE}
@@ -2087,6 +2089,10 @@ Feature.Build.Message.WhatToCreate,Bugün ne yaratmak istiyorsun?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} dk. {REM_SECONDS} sn. çalışıldı
 Feature.Build.Message.WorkedSeconds,{SECONDS} sn. çalışıldı
 Feature.Build.Message.WorkingOnTasks,Görevlerin üzerinde çalışıyor
+Feature.Build.Notification.Message.Continue,Devam etmek için İnşa Et sohbetine geri dön.
+Feature.Build.Notification.Message.Review,Sonucu incelemek için İnşa Et sohbetine geri dön.
+Feature.Build.Notification.Title.Finished,İnşa Et tamamlandı
+Feature.Build.Notification.Title.NeedInput,İnşa Et için girdin gerekiyor
 Feature.Build.Title.AdCampaignActive,Reklam kampanyası aktif
 Feature.Build.Title.AddFriendsToPlaytest,Oynanış testinde sana yardımcı olacak arkadaşları ekle
 Feature.Build.Title.ArchiveThisGame,Bu oyun arşivlensin mi?

@@ -1,17 +1,22 @@
 ﻿local interventionShared = script:FindFirstAncestor("InterventionShared")
-local reactModule = require(interventionShared.Parent.React)
+local parent = interventionShared.Parent
+local IXPService = game:GetService("IXPService")
+local reactModule = require(parent.React)
 local useCallback = reactModule.useCallback
 local useEffect = reactModule.useEffect
+local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
+local constantsModule = require(interventionShared.Utils.Constants)
 local determineAppealsStateModule = require(interventionShared.Utils.determineAppealsState)
 local determineUFRInterventionTypeModule = require(interventionShared.Utils.determineUFRInterventionType)
 local genericInterventionDialogModule = require(interventionShared.Components.genericComponents.GenericInterventionDialog)
 local _ = require(interventionShared.Utils.Types)
 local useParsedBadUtterancesModule = require(interventionShared.Hooks.useParsedBadUtterances)
 local useRestrictionEndDateInfoModule = require(interventionShared.Hooks.useRestrictionEndDateInfo)
+local fFlagUFRFriendsChatIXPExposureModule = require(interventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
 local fFlagUFRImprovementsModule = require(interventionShared.Flags.FFlagUFRImprovements)
 
 return reactModule.memo(function(p1)
-	-- upvalues: determineUFRInterventionTypeModule (ref), useParsedBadUtterancesModule (ref), useRestrictionEndDateInfoModule (ref), determineAppealsStateModule (ref), useEffect (ref), fFlagUFRImprovementsModule (ref), useCallback (ref), reactModule (ref), genericInterventionDialogModule (ref)
+	-- upvalues: determineUFRInterventionTypeModule (ref), useParsedBadUtterancesModule (ref), useRestrictionEndDateInfoModule (ref), determineAppealsStateModule (ref), useEffect (ref), fFlagUFRFriendsChatIXPExposureModule (ref), constantsModule (ref), IXPService (ref), appUserLayers (ref), fFlagUFRImprovementsModule (ref), useCallback (ref), reactModule (ref), genericInterventionDialogModule (ref)
 	local moderationDetail = p1.moderationDetail
 	local consequenceTransparencyMessage = moderationDetail.consequenceTransparencyMessage
 	local interventionId = moderationDetail.interventionId
@@ -31,7 +36,10 @@ return reactModule.memo(function(p1)
 		acknowledgeable = acknowledgeable
 	})
 	useEffect(function()
-		-- upvalues: fFlagUFRImprovementsModule (copy), p1 (ref)
+		-- upvalues: fFlagUFRFriendsChatIXPExposureModule (copy), p1 (ref), constantsModule (copy), IXPService (copy), appUserLayers (copy), fFlagUFRImprovementsModule (copy)
+		if fFlagUFRFriendsChatIXPExposureModule and p1.abuseVector == constantsModule.AbuseVectorType.PartyChat and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
+			IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.FriendsChatRestrictionUserIDLayer)
+		end
 		if fFlagUFRImprovementsModule and p1.onShownCallback then
 			p1.onShownCallback()
 		end
@@ -39,7 +47,7 @@ return reactModule.memo(function(p1)
 	
 	return reactModule.createElement(genericInterventionDialogModule, {
 		useDetailedLayout = true,
-		titleText = p1.titleOverride or (if fFlagUFRImprovementsModule then moderationDetail.header or "" else "Chat suspended for 2 days"),
+		titleText = p1.titleOverride or (if fFlagUFRImprovementsModule then moderationDetail.title or "" else "Chat suspended for 2 days"),
 		bodyText = p1.bodyOverride or (if fFlagUFRImprovementsModule then moderationDetail.body or "" else "You can't use chat because one or more of your messages broke the rules. If you break the rules again, you could be banned."),
 		userNote = messageToUser,
 		isAppealable = var4.isAppealable,
@@ -56,7 +64,7 @@ return reactModule.memo(function(p1)
 		dsaMessage = consequenceTransparencyMessage,
 		interventionId = interventionId,
 		acknowledgeable = acknowledgeable,
-		eventId = interventionId,
+		eventId = p1.analyticsEventId or interventionId,
 		interventionTypeForAnalytics = var1,
 		abuseVectorForAnalytics = p1.abuseVector,
 		formattedEndDate = var3.formattedEndDate,

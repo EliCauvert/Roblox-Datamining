@@ -830,6 +830,12 @@ CoreScripts.InGameMenu.GameSettings.SwitchToAdvancedSettings,
 CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,自定义设置
 CoreScripts.InGameMenu.GameSettings.UINavToggle,界面导航切换
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,使用“\”键进入和退出界面导航模式
+CoreScripts.InGameMenu.GameSettings.UIScale,
+CoreScripts.InGameMenu.GameSettings.UIScaleLargest,
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,
+CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,
 CoreScripts.InGameMenu.GameSettings.VREnabled,VR 模式
 CoreScripts.InGameMenu.GameSettings.VRSmoothRotationEnabled,已启用 VR 平顺旋转
 CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled,已启用 VR 跨步旋转
@@ -939,6 +945,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,我同意，此体验将提交我的虚拟形象道具至审核团队，并上传至我的作品。
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,我同意，此体验将提交我的表情动作至审核团队，并上传至我的作品。
+CoreScripts.PublishAssetPrompt.DisclaimerImage,我同意此体验将我的图片提交审核，并上传至“我的作品”。
 CoreScripts.PublishAssetPrompt.DisclaimerModel,创作的道具需通过审阅，如果道具因不符合社区准则而被拒，你可能无法获得退款。
 CoreScripts.PublishAssetPrompt.InvalidDescription,无效描述
 CoreScripts.PublishAssetPrompt.InvalidName,无效名称
@@ -953,6 +960,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,提交服饰
 CoreScripts.PublishAssetPrompt.TitleTextEmote,提交表情动作
+CoreScripts.PublishAssetPrompt.TitleTextImage,提交图片
 CoreScripts.PublishAssetPrompt.TitleTextModel,提交包
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,出错了，请重试。错误代码： {RESULT_TYPE}
@@ -1295,11 +1303,14 @@ Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,探索风格
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
 Feature.Avatar.BackgroundGeneration.Action.Upload,上传
 Feature.Avatar.BackgroundGeneration.Action.View,查看
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,订阅 Plus，创建背景。
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,你的作品已可供使用。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景由 AI 生成。发布即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。在出现在你的道具栏中之前，需要先经过审核，且已发布的道具无法编辑。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,此背景由 AI 生成。上传即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。此背景需要先经过审核，然后才会出现在你的道具库中。已发布的道具无法编辑。
@@ -1320,6 +1331,7 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
 Feature.Avatar.BackgroundGeneration.Title,创建背景
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,发布到道具栏
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
@@ -1808,6 +1820,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,屏蔽“{DisplayName}”？
 Feature.BlockingModal.Message.BlockConfirmation,屏蔽此用户将会把他们从你的好友或关注者中移除。他们将无法向你发送消息、请求或邀请。<br /><br />他们不会收到你已屏蔽他们的通知。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,屏蔽此用户会将其从你的好友或粉丝列表中移除。此用户将无法向你发送消息、请求或邀请。<br /><br />对方不会收到你已屏蔽他们的通知。
+Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,添加测试玩家
 Feature.Build.Action.AddPlaytesters,
@@ -1821,6 +1834,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,复制文本
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,不再询问
 Feature.Build.Action.HideAutosaved,隐藏自动保存版本
 Feature.Build.Action.ManageLimit,管理限额
@@ -1829,22 +1843,33 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知我
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,打开设置
+Feature.Build.Action.Play,游玩
 Feature.Build.Action.Playtest,游戏测试
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,发布最新版本
 Feature.Build.Action.Restore,恢复
+Feature.Build.Action.Resume,
 Feature.Build.Action.Revert,
 Feature.Build.Action.SetDailyLimit,设置每日限额
 Feature.Build.Action.SetLimit,设置限额
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,分享链接
+Feature.Build.Action.ShowMore,
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,更新评级
 Feature.Build.Action.UpdateWithChanges,应用更改
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用额度
+Feature.Build.Analytics.DurationHours,
+Feature.Build.Analytics.Percent,
+Feature.Build.Analytics.Title.Arppu,
+Feature.Build.Analytics.Title.D1Retention,
+Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.PayerConversion,
+Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Content.NewGame,新游戏
 Feature.Build.Description.ArchiveRemoval,如果你将此游戏存档，它将从 Build 中移除。你仍可在创作者中心或 Roblox Studio 中访问和恢复此游戏。
 Feature.Build.Description.AutoBuyUsage,在创建过程中使用你的 Robux 自动购买额外的 Build 使用额度。你可以随时设置每日消费限额。
@@ -1879,7 +1904,10 @@ Feature.Build.Header.ContentMaturity,内容成熟度
 Feature.Build.Header.CustomAnswer,自定义回答
 Feature.Build.Header.GameDetails,游戏详情
 Feature.Build.Header.Overview,概览
+Feature.Build.Header.PastCampaigns,过去的广告活动
 Feature.Build.Label.Access,访问权限
+Feature.Build.Label.AdClicks,广告点击次数
+Feature.Build.Label.AdViews,广告观看次数
 Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
 Feature.Build.Label.All,
@@ -1889,10 +1917,12 @@ Feature.Build.Label.Available,可用
 Feature.Build.Label.BackToBuild,返回构建
 Feature.Build.Label.Building,正在构建…
 Feature.Build.Label.CaptureLibrary,截图库
+Feature.Build.Label.CaptureSelectionCount,
 Feature.Build.Label.ContentRating,内容评级
 Feature.Build.Label.Created,创建时间
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
 Feature.Build.Label.Description,
@@ -1901,6 +1931,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,免费 Build 使用额度
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,仅限好友
+Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
@@ -1915,6 +1946,7 @@ Feature.Build.Label.NoLimit,无限额
 Feature.Build.Label.NotStarted,未开始
 Feature.Build.Label.Pending,待定
 Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
+Feature.Build.Label.PlayTime,游玩时间
 Feature.Build.Label.PreviouslyPublished,此前已发布版本
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公开
@@ -2012,6 +2044,7 @@ Feature.Build.Label.VersionTitleDesc,版本标题和描述
 Feature.Build.Label.Video,视频
 Feature.Build.Message.AccountRequirements,你的帐户不符合使用 Build 的要求。
 Feature.Build.Message.AccountTooNew,你的帐户刚刚创建，暂时无法发布。请在帐户创建 2 天后重试。
+Feature.Build.Message.AdPerformanceLoadFailed,无法加载广告效果
 Feature.Build.Message.AllFriendsAdded,你已将所有好友添加为测试玩家。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答 Build 的问题。
 Feature.Build.Message.AssetDetailsUnavailable,无法显示素材详情。
@@ -2041,12 +2074,14 @@ Feature.Build.Message.GamePublishFailed,你的游戏无法发布。请重试。
 Feature.Build.Message.GameShared,游戏已分享
 Feature.Build.Message.GameSharedWith,游戏已分享给{DISPLAY_NAME}
 Feature.Build.Message.HiDisplayName,{DISPLAY_NAME}，你好！
+Feature.Build.Message.ImageUploadFailed,
 Feature.Build.Message.InvalidMessage,信息出错了。请编辑并重试。
 Feature.Build.Message.InvitesLoadFailed,无法加载邀请
 Feature.Build.Message.LimitBelowSpend,限额不能低于今日已支出的 {ALREADY_SPENT} Robux。
 Feature.Build.Message.LinkCopied,链接已复制到剪贴板。
 Feature.Build.Message.LoadingVersions,正在加载版本历史记录…
 Feature.Build.Message.NoAssetsFound,未找到素材。
+Feature.Build.Message.NoCapturesAvailable,
 Feature.Build.Message.NoDescriptionProvided,没有提供描述。
 Feature.Build.Message.NoFriendsToAdd,你还没有任何可添加的好友。请先在 Roblox 上找到要建立联系的人。
 Feature.Build.Message.NoResults,
@@ -2079,8 +2114,13 @@ Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
 Feature.Build.Message.WorkedSeconds,已完成（{SECONDS} 秒）
 Feature.Build.Message.WorkingOnTasks,正在处理你的任务
+Feature.Build.Notification.Message.Continue,恢复构建聊天以继续。
+Feature.Build.Notification.Message.Review,恢复构建聊天以查看结果。
+Feature.Build.Notification.Title.Finished,构建已完成
+Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Title.AdCampaignActive,广告活动已启动
 Feature.Build.Title.AddFriendsToPlaytest,添加好友来帮助你进行游戏测试
+Feature.Build.Title.AddImages,
 Feature.Build.Title.ArchiveThisGame,要将此游戏存档吗？
 Feature.Build.Title.AssetLibrary,库
 Feature.Build.Title.Audience,受众
@@ -2098,6 +2138,7 @@ Feature.Build.Title.FriendsOnlyPlay,只有好友可以游玩
 Feature.Build.Title.GameCreationDone,游戏创建已完成
 Feature.Build.Title.GamePrivate,此游戏为私密游戏
 Feature.Build.Title.GenericError,出错了
+Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.Playtesters,测试玩家
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩
@@ -3240,6 +3281,14 @@ Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩余 {time}
 Feature.InExperienceShop.Label.BonusItem,奖励道具
 Feature.InExperienceShop.Label.NoDescription,无描述
 Feature.InExperienceShop.Label.PreviewBanner,这是 Roblox Studio 中你的商店的预览效果。玩家不会看到此预览。
+Feature.InExperienceShop.Label.Timer.Day.Plural,
+Feature.InExperienceShop.Label.Timer.Day.Singular,
+Feature.InExperienceShop.Label.Timer.Hour.Plural,
+Feature.InExperienceShop.Label.Timer.Hour.Singular,
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
+Feature.InExperienceShop.Label.Timer.Minute.Singular,
+Feature.InExperienceShop.Label.Timer.Second.Plural,
+Feature.InExperienceShop.Label.Timer.Second.Singular,
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,确定要从你的道具栏中永久删除此道具吗？如果你改变主意，需要通过体验再次获得该道具。
 Feature.Item.Label.DeleteItemUndercase,删除道具
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

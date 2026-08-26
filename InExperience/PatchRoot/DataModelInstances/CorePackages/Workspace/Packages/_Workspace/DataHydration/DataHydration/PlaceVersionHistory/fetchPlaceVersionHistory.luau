@@ -41,7 +41,11 @@ local function historyUrl(p3, p4, p5)
 	-- upvalues: appendQuery (ref)
 	local var2 = ("%s/place-version-history-api/v1/%d/history"):format(p3, p4)
 	
-	return if p5 == nil then appendQuery(var2, { pageSize = 100 }) else appendQuery(var2, { cursor = p5.cursor, pageSize = p5.pageSize or p5.limit })
+	return if p5 == nil then appendQuery(var2, { pageSize = 100 }) else appendQuery(var2, {
+		cursor = p5.cursor,
+		pageSize = p5.pageSize or p5.limit,
+		isPublished = p5.isPublished
+	})
 end
 
 local _ = function(p3, p4, p5)

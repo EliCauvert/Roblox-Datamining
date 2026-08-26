@@ -2,7 +2,9 @@
 local colorModeModule = require(foundation.Enums.ColorMode)
 local deviceModule = require(foundation.Enums.Device)
 local flagsModule = require(foundation.Utility.Flags)
+local fontNameModule = require(foundation.Enums.FontName)
 local themeNameModule = require(foundation.Enums.ThemeName)
+local typographyVariantsModule = require(foundation.Generated.StyleRules.TypographyVariants)
 local t = {
 	Common = function()
 		-- upvalues: foundation (ref)
@@ -34,6 +36,16 @@ local t_1 = {
 		Light = function()
 			-- upvalues: foundation (ref)
 			return require(foundation.Generated.StyleRules.CircuitRush.LightAttribute)
+		end
+	},
+	[themeNameModule.Classic] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Classic.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Classic.LightAttribute)
 		end
 	},
 	[themeNameModule.CosmicDust] = {
@@ -187,9 +199,32 @@ local t_1 = {
 		end
 	}
 }
+local builderSans = fontNameModule.BuilderSans
+local t_2 = {
+	[fontNameModule.BuilderSans] = {
+		Desktop = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Typography.BuilderSans.DesktopAttribute)
+		end,
+		Console = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Typography.BuilderSans.ConsoleAttribute)
+		end
+	},
+	[fontNameModule.Cartoon] = {
+		Desktop = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Typography.Cartoon.DesktopAttribute)
+		end,
+		Console = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Typography.Cartoon.ConsoleAttribute)
+		end
+	}
+}
 
 return function(p1, p2, p3)
-	-- upvalues: themeNameModule (ref), t (ref), flagsModule (ref), t_1 (ref), colorModeModule (ref), deviceModule (ref)
+	-- upvalues: themeNameModule (ref), t (ref), flagsModule (ref), t_1 (ref), colorModeModule (ref), deviceModule (ref), typographyVariantsModule (ref), builderSans (ref), t_2 (ref)
 	p1 = p1 or themeNameModule.Default
 	local var1 = nil
 	local _ = nil
@@ -215,6 +250,19 @@ return function(p1, p2, p3)
 	end
 	for i_1, v_1 in var1 do
 		cloned[i_1] = v_1
+	end
+	if flagsModule.FoundationThemedTypography then
+		local var4 = (t_2[typographyVariantsModule[p1] or builderSans] or t_2[builderSans])[if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then deviceModule.Console else deviceModule.Desktop]
+		
+		if var4 then
+			local var5 = var4()
+			
+			if var5 then
+				for i_2, v_2 in var5 do
+					cloned[i_2] = v_2
+				end
+			end
+		end
 	end
 	return cloned
 end

@@ -930,6 +930,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,"أوافق على أن هذه التجربة سوف ترسل أفاتاري إلى قسم الإشراف ثم تحميله إلى ""تصاميمي""."
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,
+CoreScripts.PublishAssetPrompt.DisclaimerImage,"أوافق على أن هذه التجربة سترسل صورتي إلى قسم الإشراف وسترفعها إلى ""منتجاتي""."
 CoreScripts.PublishAssetPrompt.DisclaimerModel,ستتم مراجعة العناصر التي تم إنشاؤها وقد لا نعيد لك المبلغ المدفوع مقابل العناصر التي يتم رفضها بسبب عدم توافقها مع معايير المجتمع.
 CoreScripts.PublishAssetPrompt.InvalidDescription,وصف غير صالح
 CoreScripts.PublishAssetPrompt.InvalidName,اسم غير صالح
@@ -944,6 +945,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,إرسال الملابس
 CoreScripts.PublishAssetPrompt.TitleTextEmote,ارسال Emote
+CoreScripts.PublishAssetPrompt.TitleTextImage,إرسال الصورة
 CoreScripts.PublishAssetPrompt.TitleTextModel,إرسال الحزمة
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,حدث خطأ ما. الرجاء المحاولة مجددًا. كود الخطأ: {RESULT_TYPE}
@@ -1817,6 +1819,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,قم بإشعاري
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,فتح الإعدادات
+Feature.Build.Action.Play,تشغيل
 Feature.Build.Action.Playtest,اختبار اللعب
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
@@ -1867,7 +1870,10 @@ Feature.Build.Header.ContentMaturity,حساسية المحتوى
 Feature.Build.Header.CustomAnswer,إجابة مخصصة
 Feature.Build.Header.GameDetails,تفاصيل اللعبة
 Feature.Build.Header.Overview,نظرة عامة
+Feature.Build.Header.PastCampaigns,الحملات السابقة
 Feature.Build.Label.Access,الوصول
+Feature.Build.Label.AdClicks,عدد مرات الضغط على الإعلان
+Feature.Build.Label.AdViews,عدد مرات عرض الإعلان
 Feature.Build.Label.AdditionalUsage,استخدام إضافي لميزة Build
 Feature.Build.Label.AdditionalUsed,تم استخدام {USED} من {LIMIT}
 Feature.Build.Label.All,
@@ -1881,6 +1887,7 @@ Feature.Build.Label.ContentRating,تصنيف المحتوى
 Feature.Build.Label.Created,تم الإنشاء
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}، {YEAR}
 Feature.Build.Label.CreatorHub,مركز المصمم
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,تم الحذف
 Feature.Build.Label.DescribeIdea,صِف فكرتك
 Feature.Build.Label.Description,
@@ -1889,6 +1896,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,استخدام ميزة Build المجاني
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
+Feature.Build.Label.GamePlays,عدد مرات تشغيل اللعبة
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
 Feature.Build.Label.Hi,مرحبًا
 Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
@@ -1903,6 +1911,7 @@ Feature.Build.Label.NoLimit,لا يوجد حدّ
 Feature.Build.Label.NotStarted,لم يتم البدء
 Feature.Build.Label.Pending,معلّق
 Feature.Build.Label.PercentUsed,تم استخدام {PERCENT}%
+Feature.Build.Label.PlayTime,وقت اللعب
 Feature.Build.Label.PreviouslyPublished,تم النشر سابقًا
 Feature.Build.Label.Private,خاص
 Feature.Build.Label.Public,عامّ
@@ -2000,6 +2009,7 @@ Feature.Build.Label.VersionTitleDesc,عنوان الإصدار ووصفه
 Feature.Build.Label.Video,فيديو
 Feature.Build.Message.AccountRequirements,لا يفي حسابك بمتطلبات استخدام ميزة Build.
 Feature.Build.Message.AccountTooNew,حسابك جديد جدًا بحيث لا يمكن النشر. حاول مرة أخرى بعد يومين من إنشائه.
+Feature.Build.Message.AdPerformanceLoadFailed,تعذَّر تحميل أداء الإعلان
 Feature.Build.Message.AllFriendsAdded,لقد أضفت جميع أصدقائك كمختبري لعب.
 Feature.Build.Message.AnswerBuildQuestion,أجب عن سؤال ميزة Build أدناه.
 Feature.Build.Message.AssetDetailsUnavailable,تفاصيل الأصل غير متاحة.
@@ -2067,6 +2077,10 @@ Feature.Build.Message.WhatToCreate,ما الذي تريد إنشاؤه اليو�
 Feature.Build.Message.WorkedMinutesSeconds,استغرق العمل {MINUTES} من الدقائق و{REM_SECONDS} من الثواني
 Feature.Build.Message.WorkedSeconds,استغرق العمل {SECONDS} من الثواني
 Feature.Build.Message.WorkingOnTasks,جارٍ العمل على مهامك
+Feature.Build.Notification.Message.Continue,استأنف الدردشة مع ميزة Build للمتابعة.
+Feature.Build.Notification.Message.Review,استأنف الدردشة مع ميزة Build لمراجعة النتيجة.
+Feature.Build.Notification.Title.Finished,اكتملت ميزة Build
+Feature.Build.Notification.Title.NeedInput,ميزة Build بحاجة إلى إدخالك
 Feature.Build.Title.AdCampaignActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AddFriendsToPlaytest,أضف الأصدقاء لمساعدتك في اختبار اللعب
 Feature.Build.Title.ArchiveThisGame,هل تريد أرشفة هذه اللعبة؟
@@ -2086,6 +2100,7 @@ Feature.Build.Title.FriendsOnlyPlay,يمكن للأصدقاء فقط اللعب
 Feature.Build.Title.GameCreationDone,اكتمل إنشاء اللعبة
 Feature.Build.Title.GamePrivate,هذه اللعبة خاصة
 Feature.Build.Title.GenericError,
+Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.Playtesters,مختبرو اللعب
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
@@ -2117,7 +2132,7 @@ Feature.Captures.Body.AllowAccessToCaptures,ترغب هذه التجربة في 
 Feature.Captures.Body.SaveCapturesPrompt,هل تريد حفظ لقطاتك؟
 Feature.Captures.Body.ShareCapturePrompt,هل ترغب في مشاركة لقطتك؟
 Feature.Captures.Control.Off,تعطيل
-Feature.Captures.Control.On,تشغيل
+Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,إيقاف التسجيل
 Feature.Captures.Description.AllowPhotoAccessInfo,يحتاج Roblox إلى الوصول إلى معرض الكاميرا بجهازك لحفظ اللقطات التي تصورها.

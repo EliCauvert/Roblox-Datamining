@@ -33,11 +33,13 @@ local overflowMenuPageShellModule = require(script.Parent.Components.BuildPillMe
 local privateInvitesPickerHostModule = require(script.Parent.Components.PrivateInvitesPicker.PrivateInvitesPickerHost)
 local creatorCreditPageContainerModule = require(script.Parent.Components.CreatorCreditSheet.CreatorCreditPageContainer)
 local creatorCreditBalanceChipContainerModule = require(script.Parent.Components.CreatorCreditSheet.CreatorCreditBalanceChip.CreatorCreditBalanceChipContainer)
+local adsStatsContainerModule = require(script.Parent.Components.Ads.AdsStatsContainer)
 local _ = require(script.Parent.Chat.chatTypes)
 local useSessionSummaryModule = require(script.Parent.Chat.useSessionSummary)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(script.Parent.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
 local var8 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(script.Parent.Telemetry.useScrollPerformanceTracker) else nil
 local fFlagBuildBackButtonChevronModule = require(script.Parent.Flags.FFlagBuildBackButtonChevron)
+local fFlagEnableBuildAdPromotionModule = require(script.Parent.Flags.FFlagEnableBuildAdPromotion)
 local _ = require(script.Parent.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local getBuildExperienceRefreshStoreModule = require(script.Parent.Stores.GetBuildExperienceRefreshStore)
 local var9 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then require(script.Parent.Stores.GetSearchQueryStore) else nil
@@ -56,7 +58,8 @@ local _ = {
 	BuildSearch = "BuildSearch",
 	BuildAgents = "BuildAgents",
 	BuildAgentDetails = "BuildAgentDetails",
-	BuildCreatorCredit = "BuildCreatorCredit"
+	BuildCreatorCredit = "BuildCreatorCredit",
+	BuildGetUsers = "BuildGetUsers"
 }
 
 local function _(p1, p2)
@@ -286,12 +289,42 @@ local function BuildSearchScreen(p3)
 	})
 end
 
+local function BuildGetUsersScreen(p3)
+	-- upvalues: useBuildPageLayoutModule (ref), buildNavigationParamsModule (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), adsStatsContainerModule (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref)
+	local navigation = p3.navigation
+	local var11 = useBuildPageLayoutModule()
+	local target = buildNavigationParamsModule.getTarget(navigation)
+	
+	return reactModule.createElement(fullscreenPageWithSafeArea, {
+		includeStatusBar = true,
+		BackgroundColor3 = var11.tokens.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = var11.tokens.Color.Surface.Surface_0.Transparency,
+		includeBottomBar = var11.shouldIncludeBottomBar
+	}, {
+		Page = reactModule.createElement(overflowMenuPageShellModule, {
+			testId = "BuildPage.GetUsersPage",
+			title = useLocalization({
+				pageTitle = localizationStringsModule.ADS_STATS_PAGE_TITLE
+			}).pageTitle,
+			onClose = reactModule.useCallback(function()
+				-- upvalues: navigation (ref)
+				navigation.goBack()
+			end, { navigation }),
+			content = reactModule.createElement(adsStatsContainerModule, {
+				universeId = if target ~= nil then nil else target.universeId
+			}),
+			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
+			scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_GetUsers_Scroll" else nil
+		})
+	})
+end
+
 local list = {
 	{ BuildHome = { screen = BuildHomeScreen } },
 	{
 		BuildChat = {
 			screen = function(p3)
-				-- upvalues: buildNavigationParamsModule (ref), getBuildExperienceRefreshStoreModule (ref), useBuildPageLayoutModule (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), buildOverflowMenuScreensModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), var4 (ref), buildChatPageModule (ref), fullscreenPageWithSafeArea (ref), privateInvitesPickerHostModule (ref)
+				-- upvalues: buildNavigationParamsModule (ref), getBuildExperienceRefreshStoreModule (ref), useBuildPageLayoutModule (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), buildOverflowMenuScreensModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), var4 (ref), fFlagEnableBuildAdPromotionModule (ref), buildChatPageModule (ref), fullscreenPageWithSafeArea (ref), privateInvitesPickerHostModule (ref)
 				local navigation = p3.navigation
 				local target = buildNavigationParamsModule.getTarget(navigation)
 				local var11 = getBuildExperienceRefreshStoreModule()
@@ -325,6 +358,10 @@ local list = {
 								-- upvalues: navigation (ref), target (ref)
 								navigation.navigate("BuildCreatorCredit", { target = target })
 							end, { navigation, target }),
+							onOpenGetUsersPage = if fFlagEnableBuildAdPromotionModule then reactModule.useCallback(function()
+								-- upvalues: navigation (ref), target (ref)
+								navigation.navigate("BuildGetUsers", { target = target })
+							end, { navigation, target }) else nil,
 							onOpenConfigurationPage = reactModule.useCallback(function(p4)
 								-- upvalues: navigation (ref), buildOverflowMenuScreensModule (copy), target (ref)
 								navigation.navigate(buildOverflowMenuScreensModule.SCREEN_BY_PAGE[p4], { target = target })
@@ -508,6 +545,9 @@ local list = {
 	}
 }
 
+if fFlagEnableBuildAdPromotionModule then
+	table.insert(list, { BuildGetUsers = { screen = BuildGetUsersScreen } })
+end
 if fFlagBuildAddSearchIconAndMoveSearchbarModule then
 	table.insert(list, { BuildSearch = { screen = BuildSearchScreen } })
 end

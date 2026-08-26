@@ -18,6 +18,7 @@ local getCreatorAgentResumeStoreModule = require(buildExperience.Stores.GetCreat
 local _ = require(script.Parent.BuildChatPageView)
 local useCreatorCreditChatUpsellViewModelModule = require(script.Parent.useCreatorCreditChatUpsellViewModel)
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
+local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
 local fFlagBuildExperienceFocusNewGameComposerModule = require(buildExperience.Flags.FFlagBuildExperienceFocusNewGameComposer)
 local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
 local fFlagBuildExperienceDontAskAgainPushUpsellModule = require(buildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
@@ -55,7 +56,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), useUniverseSummary (ref), getBuildOverflowMenuStoreModule (ref), getCreatorAgentResumeStoreModule (ref), reactModule (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref), buildAppStorageKeyEngineFeature (ref), var1 (ref), userInputService (ref), guiService (ref), permissionsProtocol (ref), messageBusService (ref), realtimeMessageId (ref), default (ref), creatorAgentChatModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceFocusNewGameComposerModule (ref), useChatPlaytestFooterModule (ref), universeConfigurationModule (ref), useCreatorCreditChatUpsellViewModelModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), t (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconName (ref)
+	-- upvalues: useTokens (ref), useUniverseSummary (ref), getBuildOverflowMenuStoreModule (ref), getCreatorAgentResumeStoreModule (ref), reactModule (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref), buildAppStorageKeyEngineFeature (ref), var1 (ref), userInputService (ref), guiService (ref), permissionsProtocol (ref), messageBusService (ref), realtimeMessageId (ref), default (ref), creatorAgentChatModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceFocusNewGameComposerModule (ref), useChatPlaytestFooterModule (ref), universeConfigurationModule (ref), fFlagEnableBuildAdPromotionModule (ref), useCreatorCreditChatUpsellViewModelModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), t (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconName (ref)
 	local v
 	local var2 = useTokens()
 	local var3 = useUniverseSummary(p1.target.universeId)
@@ -374,6 +375,14 @@ return function(p1)
 		agentDetailIcon = if fFlagBuildExperienceAssetLibraryModule then iconName.SquaresGridPlus else nil,
 		isAgentDetailDisabled = fFlagBuildExperienceAssetLibraryModule and p1.target.universeId == nil,
 		onOpenCreatorCreditPage = v,
+		onOpenGetUsersPage = if p1.onOpenGetUsersPage ~= nil then nil elseif fFlagEnableBuildAdPromotionModule then reactModule.useCallback(function()
+			-- upvalues: var47 (ref), p1 (ref)
+			var47()
+			
+			if p1.onOpenGetUsersPage ~= nil then
+				p1.onOpenGetUsersPage()
+			end
+		end, { var47, p1.onOpenGetUsersPage }) else nil,
 		buildOverflowMenuStore = var4,
 		messages = var40.messages,
 		localToolActions = var40.localToolActions,
@@ -406,6 +415,10 @@ return function(p1)
 		composerText = var40.composerText,
 		composerErrorText = var40.composerErrorText,
 		onComposerChanged = var40.setComposerText,
+		composerImages = var40.composerImages,
+		onComposerImagesChanged = var40.setComposerImages,
+		onRetryComposerImage = var40.retryComposerImage,
+		isComposerSendBlocked = var40.isComposerSendBlocked,
 		textBoxRef = var40.textBoxRef,
 		isAssistantResponding = var40.isAssistantResponding,
 		canStopAssistantResponse = var40.canStopAssistantResponse,

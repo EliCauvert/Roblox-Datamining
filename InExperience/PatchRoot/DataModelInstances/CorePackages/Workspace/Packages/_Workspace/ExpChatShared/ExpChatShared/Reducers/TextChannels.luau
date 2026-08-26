@@ -6,7 +6,6 @@ local none = require(parent.llama).None
 local var1 = require(expChatShared.Logger):new("ExpChat/Reducers/" .. script.Name)
 local getFFlagTextChatEnableUniverseChatTabsModule = require(expChatShared.Flags.GetFFlagTextChatEnableUniverseChatTabs)
 local fFlagExpChatFixBackspaceNilTargetChannelModule = require(expChatShared.Flags.FFlagExpChatFixBackspaceNilTargetChannel)
-local fFlagExpChatFixTeamChangeOverwriteChannelModule = require(expChatShared.Flags.FFlagExpChatFixTeamChangeOverwriteChannel)
 local actions = expChatShared.Actions
 
 local function _(p1, p2)
@@ -75,7 +74,7 @@ return roduxModule.createReducer({
 		})
 	end,
 	[require(actions.LocalTeamChanged).name] = function(p3, p4)
-		-- upvalues: var1 (ref), dictionary (ref), fFlagExpChatFixTeamChangeOverwriteChannelModule (ref), none (ref)
+		-- upvalues: var1 (ref), dictionary (ref), none (ref)
 		if p4.team then
 			var1:trace("LocalTeamChanged dispatched with team: {}", p4.team.Name)
 			
@@ -98,13 +97,10 @@ return roduxModule.createReducer({
 		else
 			var1:trace("LocalTeamChanged dispatched with no team")
 			
-			return if fFlagExpChatFixTeamChangeOverwriteChannelModule then if p3.targetTextChannel and string.find(p3.targetTextChannel.Name, "^RBXTeam") then dictionary.join(p3, {
+			return if p3.targetTextChannel and string.find(p3.targetTextChannel.Name, "^RBXTeam") then dictionary.join(p3, {
 				currentTeam = none,
 				targetTextChannel = p3.allTextChannels.RBXGeneral or p3.targetTextChannel
-			}) else dictionary.join(p3, { currentTeam = none }) else dictionary.join(p3, {
-				currentTeam = none,
-				targetTextChannel = p3.allTextChannels.RBXGeneral or p3.targetTextChannel
-			})
+			}) else dictionary.join(p3, { currentTeam = none })
 		end
 	end,
 	[require(actions.ChatInputBarActivatedTeamMode).name] = function(p5, _)

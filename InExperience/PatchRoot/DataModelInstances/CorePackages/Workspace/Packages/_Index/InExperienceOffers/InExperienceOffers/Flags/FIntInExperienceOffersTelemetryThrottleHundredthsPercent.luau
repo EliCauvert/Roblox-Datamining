@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("InExperienceOffersTelemetryThrottleHundredthsPercent", 10000)

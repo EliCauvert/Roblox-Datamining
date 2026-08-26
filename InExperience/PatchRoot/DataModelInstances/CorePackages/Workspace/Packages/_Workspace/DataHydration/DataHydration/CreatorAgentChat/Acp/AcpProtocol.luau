@@ -20,7 +20,8 @@ return {
 		SessionDelete = "_roblox/session/delete",
 		SessionUpdateInfo = "_roblox/session/update_info",
 		SessionReadTasks = "_roblox/session/read_tasks",
-		SessionSaveAndPublish = "_roblox/session/save_and_publish"
+		SessionSaveAndPublish = "_roblox/session/save_and_publish",
+		AdCampaignEligibility = "_roblox/ad_campaign/eligibility"
 	},
 	Notifications = { SessionUpdate = "session/update" },
 	ErrorCodes = {

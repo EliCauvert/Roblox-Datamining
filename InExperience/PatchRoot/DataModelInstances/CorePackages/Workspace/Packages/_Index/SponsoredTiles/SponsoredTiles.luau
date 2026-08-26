@@ -4,5 +4,6 @@
 	TwoByOneGameTile = require(script.TwoByOneGameTile),
 	TwoByOneGameTileTelemetry = require(script.TwoByOneGameTileTelemetry),
 	renderOneByTwoTile = require(script.renderOneByTwoTile),
-	renderTwoByOneTile = require(script.renderTwoByOneTile)
+	renderTwoByOneTile = require(script.renderTwoByOneTile),
+	["jest.config"] = script["jest.config"]
 }

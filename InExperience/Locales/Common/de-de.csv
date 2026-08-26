@@ -889,6 +889,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,"Ich bin damit einverstanden, dass die Experience meiner Avatarartikel zur Moderation einreicht und zu meinen Kreationen hochlädt."
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,"Ich bin damit einverstanden, dass die Experience mein Emote zur Moderation einreicht und zu meinen Kreationen hochlädt."
+CoreScripts.PublishAssetPrompt.DisclaimerImage,"Ich bin damit einverstanden, dass die Experience mein Bild zur Moderation einreicht und zu meinen Kreationen hochlädt."
 CoreScripts.PublishAssetPrompt.DisclaimerModel,"Erstellte Artikel werden überprüft und du erhältst möglicherweise keine Rückerstattung für abgelehnte Artikel, die nicht den Community-Regeln entsprechen."
 CoreScripts.PublishAssetPrompt.InvalidDescription,Ungültige Beschreibung
 CoreScripts.PublishAssetPrompt.InvalidName,Ungültiger Name
@@ -903,6 +904,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,Kleidung einreichen
 CoreScripts.PublishAssetPrompt.TitleTextEmote,Emote einreichen
+CoreScripts.PublishAssetPrompt.TitleTextImage,Bild einreichen
 CoreScripts.PublishAssetPrompt.TitleTextModel,Paket einreichen
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,Etwas ist schiefgelaufen. Bitte versuche es erneut. Fehlercode: {RESULT_TYPE}
@@ -1779,6 +1781,7 @@ Feature.Build.Action.NotNow,Nicht jetzt
 Feature.Build.Action.NotifyMe,Benachrichtigen
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Einstellungen öffnen
+Feature.Build.Action.Play,Spielen
 Feature.Build.Action.Playtest,Spiel testen
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
@@ -1829,7 +1832,10 @@ Feature.Build.Header.ContentMaturity,Inhaltseinstufung
 Feature.Build.Header.CustomAnswer,Benutzerdefinierte Antwort
 Feature.Build.Header.GameDetails,Spielinfos
 Feature.Build.Header.Overview,Übersicht
+Feature.Build.Header.PastCampaigns,Frühere Kampagnen
 Feature.Build.Label.Access,Zugriff
+Feature.Build.Label.AdClicks,Anzeigenklicks
+Feature.Build.Label.AdViews,Anzeigenaufrufe
 Feature.Build.Label.AdditionalUsage,Zusätzliches Build-Kontingent
 Feature.Build.Label.AdditionalUsed,{USED} von {LIMIT} verwendet
 Feature.Build.Label.All,
@@ -1843,6 +1849,7 @@ Feature.Build.Label.ContentRating,Altersfreigabe
 Feature.Build.Label.Created,Erstellt
 Feature.Build.Label.CreatedDate,{DAY}. {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Creator Hub
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,Gelöscht
 Feature.Build.Label.DescribeIdea,Beschreibe eine Idee
 Feature.Build.Label.Description,
@@ -1851,6 +1858,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Kostenloses Build-Kontingent
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Nur Freunde
+Feature.Build.Label.GamePlays,Spielaufrufe
 Feature.Build.Label.GetMoreBuildUsage,Mehr Build-Kontingent holen
 Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
@@ -1865,6 +1873,7 @@ Feature.Build.Label.NoLimit,Kein Limit
 Feature.Build.Label.NotStarted,Nicht begonnen
 Feature.Build.Label.Pending,Ausstehend
 Feature.Build.Label.PercentUsed,{PERCENT} % verwendet
+Feature.Build.Label.PlayTime,Spielzeit
 Feature.Build.Label.PreviouslyPublished,Zuvor veröffentlicht
 Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Öffentlich
@@ -1962,6 +1971,7 @@ Feature.Build.Label.VersionTitleDesc,Versionstitel und Beschreibung
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Dein Konto erfüllt nicht die Anforderungen für die Nutzung von Build.
 Feature.Build.Message.AccountTooNew,"Dein Konto ist zu neu, um etwas zu veröffentlichen. Bitte versuche es erneut, wenn es 2 Tage alt ist."
+Feature.Build.Message.AdPerformanceLoadFailed,Anzeigenleistung konnte nicht geladen werden
 Feature.Build.Message.AllFriendsAdded,Du hast alle deine Freunde als Spieletester hinzugefügt.
 Feature.Build.Message.AnswerBuildQuestion,Beantworte unten die Frage von Build.
 Feature.Build.Message.AssetDetailsUnavailable,Objekt-Infos sind nicht verfügbar.
@@ -2029,6 +2039,10 @@ Feature.Build.Message.WhatToCreate,Was möchtest du heute erstellen?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} Min. {REM_SECONDS} Sek. funktioniert
 Feature.Build.Message.WorkedSeconds,{SECONDS} Sek. funktioniert
 Feature.Build.Message.WorkingOnTasks,Deine Aufgaben werden bearbeitet
+Feature.Build.Notification.Message.Continue,"Setze deinen Build-Chat fort, um fortzufahren."
+Feature.Build.Notification.Message.Review,"Setze deinen Build-Chat fort, um das Ergebnis anzusehen."
+Feature.Build.Notification.Title.Finished,Build abgeschlossen
+Feature.Build.Notification.Title.NeedInput,Build benötigt deine Eingabe
 Feature.Build.Title.AdCampaignActive,Werbekampagne ist aktiv
 Feature.Build.Title.AddFriendsToPlaytest,"Füge Freunde hinzu, die dir beim Spieltest helfen"
 Feature.Build.Title.ArchiveThisGame,Dieses Spiel archivieren?
@@ -2048,6 +2062,7 @@ Feature.Build.Title.FriendsOnlyPlay,Nur Freunde können spielen
 Feature.Build.Title.GameCreationDone,Spielerstellung abgeschlossen
 Feature.Build.Title.GamePrivate,Dieses Spiel ist privat
 Feature.Build.Title.GenericError,Etwas ist schiefgelaufen
+Feature.Build.Title.GetUsers,Benutzer gewinnen
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
 Feature.Build.Title.Playtesters,Spieletester
 Feature.Build.Title.PlaytestersOnlyPlay,Nur Spieletester können spielen
@@ -2738,7 +2753,7 @@ Feature.ExperienceDetails.Label.NotPlayable,Nicht spielbar
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,"Indem ich diese Experience spiele, stimme ich dem Hinweis zu"
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,Spielen
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Demo spielen
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Freischalten

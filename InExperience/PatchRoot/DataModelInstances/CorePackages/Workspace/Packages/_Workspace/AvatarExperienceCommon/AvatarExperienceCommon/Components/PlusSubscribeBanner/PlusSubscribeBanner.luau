@@ -13,7 +13,7 @@ return reactModule.memo(function(p1)
 	local testId = p1.testId or "PlusSubscribeBanner"
 	
 	return reactModule.createElement(view, {
-		tag = "size-full-0 auto-y padding-medium stroke-standard stroke-default radius-medium",
+		tag = "size-full-0 auto-y padding-medium stroke-standard stroke-position-inner stroke-default radius-medium",
 		LayoutOrder = p1.LayoutOrder,
 		testId = testId
 	}, {

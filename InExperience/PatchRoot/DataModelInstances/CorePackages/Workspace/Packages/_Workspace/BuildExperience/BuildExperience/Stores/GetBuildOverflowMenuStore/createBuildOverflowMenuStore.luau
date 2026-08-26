@@ -11,6 +11,7 @@ local launchPlaytestWithLoadingStateModule = require(buildExperience.utils.launc
 local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
+local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
 local fFlagBuildExperienceShareUseUniverseSummary = require(parent.SharedFlags).FFlagBuildExperienceShareUseUniverseSummary
 local privacyType = universeConfigurationModule.PrivacyType
 
@@ -80,8 +81,16 @@ local function onVersionHistoryActivated(p1)
 	return if p1.placeId == nil then nil else { type = "openVersionHistory" }
 end
 
+local t = {
+	id = "get-users",
+	text = localizationStringsModule.BUILD_MENU_GET_USERS,
+	onActivated = function()
+		return { type = "openGetUsers" }
+	end
+}
+
 return function()
-	-- upvalues: localizationStringsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperiencePrivateInvitesModule (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref)
+	-- upvalues: localizationStringsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperiencePrivateInvitesModule (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), fFlagEnableBuildAdPromotionModule (ref), t (ref)
 	local list = {
 		{
 			items = {
@@ -156,23 +165,33 @@ return function()
 	return {
 		getItems = var1,
 		useItems = function(p1)
-			-- upvalues: reactModule (copy), signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), getPrivatePlaytestersStore (copy), signalsReactModule (copy), var1 (ref)
+			-- upvalues: reactModule (copy), signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), getPrivatePlaytestersStore (copy), signalsReactModule (copy), var1 (ref), fFlagEnableBuildAdPromotionModule (copy), t (copy)
 			local var2 = if p1 ~= nil then nil else p1.universeId
-			local var3 = signalsReactModule.useSignalState(var1)
+			local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+				-- upvalues: signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var2 (ref), getPrivatePlaytestersStore (copy)
+				return signalsModule.createComputed(function(p2)
+					-- upvalues: fFlagBuildExperiencePrivateInvitesModule (copy), var2 (copy), getPrivatePlaytestersStore (copy)
+					return if fFlagBuildExperiencePrivateInvitesModule and var2 ~= nil then #getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(var2).players(p2) else 0
+				end)
+			end, { var2 }))
+			local var4 = signalsReactModule.useSignalState(var1)
+			local var5 = fFlagEnableBuildAdPromotionModule and (p1 ~= nil and p1.canOpenGetUsers == true)
 			
-			return if p1 == nil then {} elseif fFlagBuildExperiencePrivateInvitesModule then reactModule.useMemo(function()
-				-- upvalues: var3 (ref)
-				return table.clone(var3)
-			end, {
-				var3,
-				signalsReactModule.useSignalState(reactModule.useMemo(function()
-					-- upvalues: signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var2 (ref), getPrivatePlaytestersStore (copy)
-					return signalsModule.createComputed(function(p2)
-						-- upvalues: fFlagBuildExperiencePrivateInvitesModule (copy), var2 (copy), getPrivatePlaytestersStore (copy)
-						return if fFlagBuildExperiencePrivateInvitesModule and var2 ~= nil then #getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(var2).players(p2) else 0
-					end)
-				end, { var2 }))
-			}) else var3
+			return if p1 == nil then {} elseif fFlagBuildExperiencePrivateInvitesModule or var5 then reactModule.useMemo(function()
+				-- upvalues: var4 (ref), var5 (ref), t (copy)
+				local cloned = table.clone(var4)
+				
+				if var5 then
+					local var6 = cloned[1]
+					
+					if var6 ~= nil then
+						local cloned_1 = table.clone(var6.items)
+						table.insert(cloned_1, t)
+						cloned[1] = { items = cloned_1 }
+					end
+				end
+				return cloned
+			end, { var4, var3, var5 }) else var4
 		end
 	}
 end

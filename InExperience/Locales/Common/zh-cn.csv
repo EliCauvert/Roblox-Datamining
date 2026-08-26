@@ -930,6 +930,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,我同意，此体验将提交我的虚拟形象道具至审核团队，并上传至我的作品。
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,我同意，此体验将提交我的表情动作至审核团队，并上传至我的作品。
+CoreScripts.PublishAssetPrompt.DisclaimerImage,我同意此体验将我的图片提交审核，并上传至“我的作品”。
 CoreScripts.PublishAssetPrompt.DisclaimerModel,创作的道具需通过审阅，如果道具因不符合社区准则而被拒，你可能无法获得退款。
 CoreScripts.PublishAssetPrompt.InvalidDescription,无效描述
 CoreScripts.PublishAssetPrompt.InvalidName,无效名称
@@ -944,6 +945,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,提交服饰
 CoreScripts.PublishAssetPrompt.TitleTextEmote,提交表情动作
+CoreScripts.PublishAssetPrompt.TitleTextImage,提交图片
 CoreScripts.PublishAssetPrompt.TitleTextModel,提交包
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,出错了，请重试。错误代码： {RESULT_TYPE}
@@ -1818,6 +1820,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知我
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,打开设置
+Feature.Build.Action.Play,游玩
 Feature.Build.Action.Playtest,游戏测试
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
@@ -1868,7 +1871,10 @@ Feature.Build.Header.ContentMaturity,内容成熟度
 Feature.Build.Header.CustomAnswer,自定义回答
 Feature.Build.Header.GameDetails,游戏详情
 Feature.Build.Header.Overview,概览
+Feature.Build.Header.PastCampaigns,过去的广告活动
 Feature.Build.Label.Access,访问权限
+Feature.Build.Label.AdClicks,广告点击次数
+Feature.Build.Label.AdViews,广告观看次数
 Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
 Feature.Build.Label.All,
@@ -1882,6 +1888,7 @@ Feature.Build.Label.ContentRating,内容评级
 Feature.Build.Label.Created,创建时间
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
 Feature.Build.Label.Description,
@@ -1890,6 +1897,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,免费 Build 使用额度
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,仅限好友
+Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
@@ -1904,6 +1912,7 @@ Feature.Build.Label.NoLimit,无限额
 Feature.Build.Label.NotStarted,未开始
 Feature.Build.Label.Pending,待定
 Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
+Feature.Build.Label.PlayTime,游玩时间
 Feature.Build.Label.PreviouslyPublished,此前已发布版本
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公开
@@ -2001,6 +2010,7 @@ Feature.Build.Label.VersionTitleDesc,版本标题和描述
 Feature.Build.Label.Video,视频
 Feature.Build.Message.AccountRequirements,你的帐户不符合使用 Build 的要求。
 Feature.Build.Message.AccountTooNew,你的帐户刚刚创建，暂时无法发布。请在帐户创建 2 天后重试。
+Feature.Build.Message.AdPerformanceLoadFailed,无法加载广告效果
 Feature.Build.Message.AllFriendsAdded,你已将所有好友添加为测试玩家。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答 Build 的问题。
 Feature.Build.Message.AssetDetailsUnavailable,无法显示素材详情。
@@ -2068,6 +2078,10 @@ Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
 Feature.Build.Message.WorkedSeconds,已完成（{SECONDS} 秒）
 Feature.Build.Message.WorkingOnTasks,正在处理你的任务
+Feature.Build.Notification.Message.Continue,恢复构建聊天以继续。
+Feature.Build.Notification.Message.Review,恢复构建聊天以查看结果。
+Feature.Build.Notification.Title.Finished,构建已完成
+Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Title.AdCampaignActive,广告活动已启动
 Feature.Build.Title.AddFriendsToPlaytest,添加好友来帮助你进行游戏测试
 Feature.Build.Title.ArchiveThisGame,要将此游戏存档吗？
@@ -2087,6 +2101,7 @@ Feature.Build.Title.FriendsOnlyPlay,只有好友可以游玩
 Feature.Build.Title.GameCreationDone,游戏创建已完成
 Feature.Build.Title.GamePrivate,此游戏为私密游戏
 Feature.Build.Title.GenericError,出错了
+Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.Playtesters,测试玩家
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩

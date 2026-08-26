@@ -1,3 +1,1129 @@
+## 12642 - 2026-08-26 08:58
+
+### New files
+- `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/Flags/FFlagDebugDisableExperienceChatMain.luau`
+- `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/ImagePreview.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Accordion/AccordionPlayground.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/CarouselIndicator.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/CarouselIndicator/CarouselIndicator.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/CarouselIndicator/Dot.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/CarouselIndicator/getCarouselIndicatorDotsConfig.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Dialog/DialogStoryHelpers.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Enums/FontName.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Enums/ShadowPreset.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/Classic/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/Classic/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/Typography/BuilderSans/ConsoleAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/Typography/BuilderSans/DesktopAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/Typography/Cartoon/ConsoleAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/Typography/Cartoon/DesktopAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/TypographyVariants.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/StyleSheet/Rules/shadowRules.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/Stories/BaseComponents.storybook.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/Stories/PlannedSubPart.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/Stories/createPlannedSubPartStory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/CircuitRush.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/CircuitRush/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/CircuitRush/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Classic.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Classic/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Classic/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/CosmicDust.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/CosmicDust/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/CosmicDust/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Default.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Default/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Default/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/ElectricLime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/ElectricLime/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/ElectricLime/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/HyperPlum.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/HyperPlum/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/HyperPlum/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/InfernoBlast.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/InfernoBlast/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/InfernoBlast/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Kids.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Kids/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/Kids/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/KineticEnergy.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/KineticEnergy/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/KineticEnergy/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/LavaGlow.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/LavaGlow/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/LavaGlow/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/NebulaDrift.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/NebulaDrift/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/NebulaDrift/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/NitroFrost.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/NitroFrost/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/NitroFrost/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/PixelPop.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/PixelPop/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/PixelPop/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/PolarFreeze.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/PolarFreeze/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/PolarFreeze/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/QuantumPulse.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/QuantumPulse/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/QuantumPulse/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/StarBurst.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/StarBurst/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/StarBurst/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/SuperCharge.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/SuperCharge/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/SuperCharge/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/enums.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.5/RbxDesignFoundations/types.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/InExperienceIntervention/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/InterventionShared/FFlagUFRFriendsChatIXPExposure.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/UniversalFeatureRestrictions/showFeatureRestrictionFromRealtime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Badges/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Badges/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Badges/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Badges/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Badges/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ContactImporter/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ContactImporter/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ContactImporter/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ContactImporter/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ContactImporter/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/EditProfile/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/EditProfile/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/EditProfile/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/EditProfile/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/EditProfile/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FlyoutSidePanel/RobuxPill.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsCommon/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsCommon/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsCommon/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsCommon/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsCommon/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsHydrationReact/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsHydrationReact/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsHydrationReact/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsHydrationReact/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsHydrationReact/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsLanding/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsLanding/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsLanding/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsLanding/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsLanding/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameInfosRodux/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameInfosRodux/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameInfosRodux/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameInfosRodux/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameInfosRodux/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameJoinCard/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameJoinCard/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameJoinCard/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameJoinCard/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameJoinCard/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/CollectionViews.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Display.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Home/measureHomeCollectionLayout.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Home/startHomeCollectionLayoutSync.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Home/useHomeCollectionLayoutSync.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Home/writeHomePageSduiCollectionLayout.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Home/writeHomePageSduiPrefetchDescriptor.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/PrefetchProtocol.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/IdentityVerification/UniversalFeatureRestrictions/showFeatureRestrictionFromRealtime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/AvatarExperienceUIKit.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/Http.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Api/Errors.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Api/getAllUserOffers.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Enums/FeatureKey.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Events/GetAllUserOffersFailedCounter.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Flags/FFlagEnableOffersDebugLogging.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Flags/FFlagUseMockUserOffers.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Flags/FIntInExperienceOffersTelemetryThrottleHundredthsPercent.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Hooks/useOffersForKey.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Hooks/useRemainingTimeText.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Internal/OffersDebugLogger.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Internal/logCounter.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Mocks/MockGetAllUserOffers.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Stores/GetOffersStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Stores/GetOffersStore/createOffersStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Types.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Utils/getOffersForKey.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Utils/getRemainingTimeText.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/Utils/selectActiveOffer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/InExperienceOffers/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/Localization.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/LoggingProtocol.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/Promise.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/SharedFlags.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/Signals.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/SignalsReact.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InExperienceOffers/SignalsUtils.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InlineRichText/InlineRichText/Utils/unescapeRichFormatting.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Moments/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Moments/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Moments/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Moments/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Moments/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PlayerContextualMenu/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PlayerContextualMenu/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PlayerContextualMenu/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PlayerContextualMenu/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PlayerContextualMenu/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PrefetchProtocol/MessageBus.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PrefetchProtocol/PrefetchProtocol.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PrefetchProtocol/PrefetchProtocol/PrefetchProtocol.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PrefetchProtocol/PrefetchProtocol/PrefetchProtocolTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PrefetchProtocol/t.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileCtaService/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileCtaService/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileCtaService/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileCtaService/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileCtaService/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileQRCode/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileQRCode/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileQRCode/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileQRCode/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileQRCode/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProgressLoading/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProgressLoading/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProgressLoading/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProgressLoading/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProgressLoading/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/RobuxPill/Foundation.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/RobuxPill/React.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/RobuxPill/RobuxPill.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/RobuxPill/RobuxPill/Components/RobuxPill.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/RobuxPill/RobuxPill/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedUtilities/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedUtilities/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedUtilities/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedUtilities/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedUtilities/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialCarousel/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialCarousel/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialCarousel/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialCarousel/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialCarousel/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialExperienceJoin/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialExperienceJoin/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialExperienceJoin/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialExperienceJoin/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialExperienceJoin/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialTabsPage/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialTabsPage/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialTabsPage/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialTabsPage/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialTabsPage/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SponsoredTiles/SponsoredTiles/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Squads/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Squads/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Squads/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Squads/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Squads/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/TrustedContacts/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/TrustedContacts/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/TrustedContacts/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/TrustedContacts/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/TrustedContacts/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserList/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserList/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserList/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserList/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserList/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserTile/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserTile/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserTile/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserTile/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserTile/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/TopBar/ChatSearchField/ChatSearchFieldContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/TopBar/ChatSearchField/ChatSearchFieldView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/TopBar/ChatSearchField/useChatSearchFieldViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/InterventionShared/FFlagUFRFriendsChatIXPExposure.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/UniversalFeatureRestrictions.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/UniversalFeatureRestrictions/AbuseVector.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/UniversalFeatureRestrictions/featureRestrictionDisplayDirectSignal.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/UniversalFeatureRestrictions/featureRestrictionDisplaySignal.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/UniversalFeatureRestrictions/showFeatureRestriction.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/UniversalFeatureRestrictions/showFeatureRestrictionDirect.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/UniversalFeatureRestrictions/showFeatureRestrictionFromRealtime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FFlagAXMakeupIECGrantFix.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/AdsStatsContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/AdsStatsView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/PastCampaignRow.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/PastCampaignsList.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/useAdsStatsPageViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/useGetAdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/useGetCampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatCaptureGallery/ChatCaptureGalleryContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatCaptureGallery/ChatCaptureGalleryView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatCaptureGallery/ChatCaptureGrid.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatCaptureGallery/useChatCaptureGalleryViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatImagePreviewList.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/VersionHistory/LiveVersionCard/LiveVersionCardContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/VersionHistory/LiveVersionCard/LiveVersionCardView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/VersionHistory/LiveVersionCard/useLiveVersionCardViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagBuildExperienceChatImageAttachments.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagEnableBuildAdPromotion.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/CoreScriptsRoactCommon/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/CoreScriptsRoactCommon/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/CoreScriptsRoactCommon/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/CoreScriptsRoactCommon/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/CoreScriptsRoactCommon/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaignEligibility/AdCampaignEligibilityStoreTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaignEligibility/createAdCampaignEligibilityStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaignEligibility/fetchAdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaignEligibility/getAdCampaignEligibilityStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaigns/AdCampaignsTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaigns/createAdCampaignsStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaigns/fetchAdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/AdCampaigns/getAdCampaignsStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CampaignStats/CampaignStatsConstants.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CampaignStats/CampaignStatsTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CampaignStats/createCampaignStatsStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CampaignStats/fetchCampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CampaignStats/getCampaignStatsStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorAgentChat/FFlagBuildResumeToastLocalization.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorAgentChat/decodeAdCampaignEligibilityResult.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/FriendsRequestsStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/FriendsRequestsStoreTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/Requests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/Requests/ClearNewFriendRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/Requests/DeclineAllFriendRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/Requests/GetFriendRequestsCount.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/Requests/GetFriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/Requests/GetNewFriendRequestsCount.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/FriendsRequests/createFriendsRequestsStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/pollAnalyticsOperation.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/RobloxAppLocales.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/ExpChat/Flags/FFlagExpChatFixInputBarOrphanBorder.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExperienceLoadingScript/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExperienceLoadingScript/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExperienceLoadingScript/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExperienceLoadingScript/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExperienceLoadingScript/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/InterventionShared/FFlagUFRFriendsChatIXPExposure.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/UniversalFeatureRestrictions.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/UniversalFeatureRestrictions/AbuseVector.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/UniversalFeatureRestrictions/featureRestrictionDisplayDirectSignal.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/UniversalFeatureRestrictions/featureRestrictionDisplaySignal.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/UniversalFeatureRestrictions/showFeatureRestriction.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/UniversalFeatureRestrictions/showFeatureRestrictionDirect.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/UniversalFeatureRestrictions/showFeatureRestrictionFromRealtime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GameDetailRodux/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GameDetailRodux/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GameDetailRodux/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GameDetailRodux/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GameDetailRodux/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericAbuseReporting/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericAbuseReporting/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericAbuseReporting/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericAbuseReporting/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericAbuseReporting/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceDetailsPrompt/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceDetailsPrompt/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceDetailsPrompt/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceDetailsPrompt/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceDetailsPrompt/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceIntervention/InExperienceIntervention/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceIntervention/InterventionShared/FFlagUFRFriendsChatIXPExposure.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceIntervention/UniversalFeatureRestrictions/showFeatureRestrictionFromRealtime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceShop/InExperienceOffers.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceSideSheet/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceSideSheet/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceSideSheet/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceSideSheet/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceSideSheet/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InterventionShared/ExperimentLayers.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InterventionShared/InterventionShared/Flags/FFlagUFRFriendsChatIXPExposure.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InterventionShared/UniversalFeatureRestrictions/showFeatureRestrictionFromRealtime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/ProfilePlatform/Flags/FFlagProfileInspectAvatarBackground.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagEnableUserOffers.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagExpChatFriendsTabRequireDefaultChannels.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagFriendsRequestsMergeListsWithoutDuplicates.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagInlineRichTextSkipPlaintextEscape.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SquadsCore/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SquadsCore/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SquadsCore/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SquadsCore/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SquadsCore/DataHydration/GameGetVotesStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/UniversalFeatureRestrictions/UniversalFeatureRestrictions/Utils/showFeatureRestrictionFromRealtime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/UserRelationshipModals/DataHydration/AdCampaignEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/UserRelationshipModals/DataHydration/AdCampaigns.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/UserRelationshipModals/DataHydration/CampaignStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/UserRelationshipModals/DataHydration/FriendsRequests.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/UserRelationshipModals/DataHydration/GameGetVotesStore.luau`
+
+### Removed files
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/Stories/EngineeringOnlyComponents.storybook.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CircuitRush.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CircuitRush/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CircuitRush/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CosmicDust.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CosmicDust/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CosmicDust/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Default.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Default/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Default/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/ElectricLime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/ElectricLime/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/ElectricLime/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/HyperPlum.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/HyperPlum/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/HyperPlum/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/InfernoBlast.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/InfernoBlast/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/InfernoBlast/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Kids.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Kids/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Kids/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/KineticEnergy.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/KineticEnergy/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/KineticEnergy/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/LavaGlow.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/LavaGlow/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/LavaGlow/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NebulaDrift.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NebulaDrift/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NebulaDrift/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NitroFrost.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NitroFrost/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NitroFrost/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PixelPop.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PixelPop/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PixelPop/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PolarFreeze.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PolarFreeze/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PolarFreeze/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/QuantumPulse.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/QuantumPulse/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/QuantumPulse/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/StarBurst.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/StarBurst/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/StarBurst/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/SuperCharge.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/SuperCharge/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/SuperCharge/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/enums.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/types.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChatShared/ExpChatShared/Flags/FFlagExpChatFixTeamChangeOverwriteChannel.luau`
+
+### `InExperience/PatchRoot/CoreScripts/StarterScript.luau`
+- New variable: `fFlagDebugDisableExperienceChatMainModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/PublishAssetPromptSingleStep.luau`
+- New upvalue captured by `renderMiddle`: `enableImagePublishEngineFeature`
+- New upvalue captured by `renderMiddle`: `imagePreviewModule`
+- New variable: `imagePreviewModule`
+- New variable: `enableImagePublishEngineFeature`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/Settings/Pages/GameSettings.luau`
+- New function: `createUIScaleOptionsImpl`
+- New parameter added to `_` (0 -> 1 params)
+- Upvalue no longer captured by `_`: `gameSettings`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- Upvalue no longer captured by `_`: `userInputService`
+- New parameter added to `_` (0 -> 1 params)
+- New upvalue captured by `_`: `rounded`
+- Upvalue no longer captured by `_`: `createWebServerInformationRow`
+- Upvalue no longer captured by `_`: `gameSettings`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `createUIScaleOptionsImpl`
+- Upvalue no longer captured by `_`: `gameSettings`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `userInputService`
+- Upvalue no longer captured by `_`: `isInExperienceUIVREnabled`
+- Upvalue no longer captured by `_`: `isSpatial`
+- Parameter removed from `_` (1 -> 0 params)
+- New upvalue captured by `_`: `createWebServerInformationRow`
+- New upvalue captured by `_`: `gameSettings`
+- Upvalue no longer captured by `_`: `localPlayer`
+- New upvalue captured by `_`: `gameSettings`
+- Upvalue no longer captured by `_`: `localPlayer`
+- New upvalue captured by `_`: `gameSettings`
+- New upvalue captured by `_`: `isInExperienceUIVREnabled`
+- New upvalue captured by `_`: `isSpatial`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- Upvalue no longer captured by `_`: `localPlayer`
+- Upvalue no longer captured by `_`: `userInputService`
+- New upvalue captured by `_`: `localPlayer`
+- Upvalue no longer captured by `_`: `t_8 (write)`
+- Parameter removed from `_` (1 -> 0 params)
+- New upvalue captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `localPlayer`
+- Upvalue no longer captured by `_`: `constantsModule`
+- Upvalue no longer captured by `_`: `robloxTranslatorModule`
+- Upvalue no longer captured by `_`: `userInputService`
+- Parameter removed from `_` (2 -> 0 params)
+- New upvalue captured by `_`: `localPlayer`
+- New upvalue captured by `_`: `userInputService`
+- Upvalue no longer captured by `_`: `httpService`
+- Upvalue no longer captured by `_`: `name`
+- Upvalue no longer captured by `_`: `robloxTranslatorModule`
+- Upvalue no longer captured by `_`: `SETTINGS_MENU_LAYOUT_ORDER`
+- Upvalue no longer captured by `_`: `text_3`
+- Upvalue no longer captured by `_`: `userExperienceLanguageSettingsCallback`
+- Upvalue no longer captured by `_`: `utilityModule`
+- Upvalue no longer captured by `_`: `var68 (write)`
+- Upvalue no longer captured by `_`: `var70 (write)`
+- Upvalue no longer captured by `_`: `var71 (write)`
+- New upvalue captured by `t`: `var56 (write)`
+- Upvalue no longer captured by `t`: `var54 (write)`
+- New function: `var57`
+- Parameter removed from `_` (2 -> 1 params)
+- New upvalue captured by `_`: `t_8 (write)`
+- Upvalue no longer captured by `_`: `httpService`
+- Upvalue no longer captured by `_`: `name`
+- Upvalue no longer captured by `_`: `robloxTranslatorModule`
+- Upvalue no longer captured by `_`: `SETTINGS_MENU_LAYOUT_ORDER`
+- Upvalue no longer captured by `_`: `text_2`
+- Upvalue no longer captured by `_`: `text_3`
+- Upvalue no longer captured by `_`: `userExperienceLanguageSettingsCallback`
+- Upvalue no longer captured by `_`: `utilityModule`
+- Upvalue no longer captured by `_`: `var68 (write)`
+- Upvalue no longer captured by `_`: `var70 (write)`
+- Upvalue no longer captured by `_`: `var71 (write)`
+- Parameter removed from `_` (2 -> 1 params)
+- New upvalue captured by `_`: `constantsModule`
+- New upvalue captured by `_`: `userInputService`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- Upvalue no longer captured by `_`: `httpService`
+- Upvalue no longer captured by `_`: `name`
+- Upvalue no longer captured by `_`: `SETTINGS_MENU_LAYOUT_ORDER`
+- Upvalue no longer captured by `_`: `text_1`
+- Upvalue no longer captured by `_`: `text_2`
+- Upvalue no longer captured by `_`: `text_3`
+- Upvalue no longer captured by `_`: `userExperienceLanguageSettingsCallback`
+- Upvalue no longer captured by `_`: `utilityModule`
+- Upvalue no longer captured by `_`: `var68 (write)`
+- Upvalue no longer captured by `_`: `var69 (write)`
+- Upvalue no longer captured by `_`: `var70 (write)`
+- Upvalue no longer captured by `_`: `var71 (write)`
+- New function: `var57`
+- New upvalue captured by `updateMovementModes`: `var57 (write)`
+- Upvalue no longer captured by `updateMovementModes`: `var55 (write)`
+- New upvalue captured by `updateUserSettingsMenu`: `var57 (write)`
+- Upvalue no longer captured by `updateUserSettingsMenu`: `var55 (write)`
+- New upvalue captured by `userExperienceLanguageSettingsCallback`: `var70 (write)`
+- New upvalue captured by `userExperienceLanguageSettingsCallback`: `var73 (write)`
+- Upvalue no longer captured by `userExperienceLanguageSettingsCallback`: `var65 (write)`
+- Upvalue no longer captured by `userExperienceLanguageSettingsCallback`: `var66 (write)`
+- New parameter added to `_` (1 -> 2 params)
+- New upvalue captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `httpService`
+- New upvalue captured by `_`: `name`
+- New upvalue captured by `_`: `robloxTranslatorModule`
+- New upvalue captured by `_`: `SETTINGS_MENU_LAYOUT_ORDER`
+- New upvalue captured by `_`: `text_3`
+- New upvalue captured by `_`: `userExperienceLanguageSettingsCallback`
+- New upvalue captured by `_`: `utilityModule`
+- New upvalue captured by `_`: `var70 (write)`
+- New upvalue captured by `_`: `var72 (write)`
+- New upvalue captured by `_`: `var73 (write)`
+- New parameter added to `_` (1 -> 2 params)
+- New upvalue captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `httpService`
+- New upvalue captured by `_`: `name`
+- New upvalue captured by `_`: `robloxTranslatorModule`
+- New upvalue captured by `_`: `SETTINGS_MENU_LAYOUT_ORDER`
+- New upvalue captured by `_`: `text_2`
+- New upvalue captured by `_`: `text_3`
+- New upvalue captured by `_`: `userExperienceLanguageSettingsCallback`
+- New upvalue captured by `_`: `utilityModule`
+- New upvalue captured by `_`: `var70 (write)`
+- New upvalue captured by `_`: `var72 (write)`
+- New upvalue captured by `_`: `var73 (write)`
+- New parameter added to `_` (1 -> 2 params)
+- New upvalue captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `httpService`
+- New upvalue captured by `_`: `name`
+- New upvalue captured by `_`: `robloxTranslatorModule`
+- New upvalue captured by `_`: `SETTINGS_MENU_LAYOUT_ORDER`
+- New upvalue captured by `_`: `text_1`
+- New upvalue captured by `_`: `text_2`
+- New upvalue captured by `_`: `text_3`
+- New upvalue captured by `_`: `userExperienceLanguageSettingsCallback`
+- New upvalue captured by `_`: `utilityModule`
+- New upvalue captured by `_`: `var70 (write)`
+- New upvalue captured by `_`: `var71 (write)`
+- New upvalue captured by `_`: `var72 (write)`
+- New upvalue captured by `_`: `var73 (write)`
+- Parameter removed from `_` (3 -> 1 params)
+- New upvalue captured by `setMouseSensitivity`: `var89 (write)`
+- Upvalue no longer captured by `setMouseSensitivity`: `var87 (write)`
+- Parameter removed from `_` (2 -> 1 params)
+- Upvalue no longer captured by `_`: `name`
+- Upvalue no longer captured by `_`: `soundService`
+- New parameter added to `_` (0 -> 1 params)
+- Upvalue no longer captured by `_`: `gameSettings`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- Upvalue no longer captured by `_`: `localPlayer`
+- Upvalue no longer captured by `_`: `playerPermissionsModule`
+- Upvalue no longer captured by `_`: `robloxTranslatorModule`
+- Upvalue no longer captured by `_`: `SETTINGS_MENU_LAYOUT_ORDER`
+- Upvalue no longer captured by `_`: `updateVisibilitySettingsCopy`
+- Upvalue no longer captured by `_`: `utilityModule`
+- New upvalue captured by `onUnmount`: `var89 (write)`
+- Upvalue no longer captured by `onUnmount`: `var87 (write)`
+- New parameter added to `_` (0 -> 3 params)
+- Upvalue no longer captured by `_`: `default`
+- Upvalue no longer captured by `_`: `notificationTypeEnum`
+- New parameter added to `_` (0 -> 2 params)
+- New upvalue captured by `_`: `name`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- Upvalue no longer captured by `_`: `updateAudioOptions`
+- Upvalue no longer captured by `_`: `var101 (write)`
+- New upvalue captured by `_`: `gameSettings`
+- New upvalue captured by `_`: `localPlayer`
+- New upvalue captured by `_`: `playerPermissionsModule`
+- New upvalue captured by `_`: `robloxTranslatorModule`
+- New upvalue captured by `_`: `SETTINGS_MENU_LAYOUT_ORDER`
+- New upvalue captured by `_`: `updateVisibilitySettingsCopy`
+- New upvalue captured by `_`: `utilityModule`
+- Upvalue no longer captured by `_`: `updateCameraDevices`
+- Upvalue no longer captured by `_`: `var102 (write)`
+- Upvalue no longer captured by `_`: `videoCaptureService`
+- New function: `var108`
+- New function: `var108`
+- New upvalue captured by `_`: `default`
+- New upvalue captured by `_`: `notificationTypeEnum`
+- Upvalue no longer captured by `_`: `soundService`
+- Upvalue no longer captured by `_`: `var101 (write)`
+- New upvalue captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `soundService`
+- New upvalue captured by `_`: `updateAudioOptions`
+- New upvalue captured by `_`: `var103 (write)`
+- Upvalue no longer captured by `_`: `var102 (write)`
+- Upvalue no longer captured by `_`: `videoCaptureService`
+- New upvalue captured by `_`: `updateCameraDevices`
+- New upvalue captured by `_`: `var104 (write)`
+- New upvalue captured by `_`: `videoCaptureService`
+- Upvalue no longer captured by `_`: `default_2`
+- New upvalue captured by `_`: `soundService`
+- New upvalue captured by `_`: `var103 (write)`
+- Upvalue no longer captured by `_`: `default_3`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- Upvalue no longer captured by `_`: `getFFlagEnableCrossExpVoice`
+- Parameter removed from `_` (1 -> 0 params)
+- New upvalue captured by `_`: `var104 (write)`
+- New upvalue captured by `_`: `videoCaptureService`
+- Upvalue no longer captured by `_`: `default_2`
+- Upvalue no longer captured by `_`: `gameSettingsTab`
+- Upvalue no longer captured by `_`: `getFFlagEnableCrossExpVoice`
+- Upvalue no longer captured by `_`: `getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice`
+- Upvalue no longer captured by `_`: `isVoiceFocused`
+- Upvalue no longer captured by `_`: `name`
+- Upvalue no longer captured by `_`: `voiceVolumeControlsEligibility`
+- Upvalue no longer captured by `_`: `voiceVolumeControlsFixSliderVisibilityOnEligibleGames`
+- Upvalue no longer captured by `_`: `voiceVolumeControlsSuppressInExperienceUiForPartyVoice`
+- New upvalue captured by `_`: `createUIScaleOptionsImpl`
+- New upvalue captured by `_`: `gameSettingsTab`
+- New upvalue captured by `_`: `RUUserScalePreferenceAPIEngineFeature`
+- New upvalue captured by `_`: `var105 (write)`
+- New upvalue captured by `_`: `var106 (write)`
+- Upvalue no longer captured by `_`: `var119 (write)`
+- New function: `rebindToCurrentCamera`
+- New upvalue captured by `_`: `var105 (write)`
+- New upvalue captured by `_`: `var106 (write)`
+- New upvalue captured by `_`: `var32 (write)`
+- New upvalue captured by `_`: `var33 (write)`
+- Upvalue no longer captured by `_`: `createGamepadOptions`
+- Upvalue no longer captured by `_`: `gameSettings`
+- New upvalue captured by `_`: `default_2`
+- New upvalue captured by `_`: `gameSettingsTab`
+- Upvalue no longer captured by `_`: `enableTFFeedbackModeEntryCheck`
+- Upvalue no longer captured by `_`: `runService`
+- New function: `_`
+- New upvalue captured by `createVoiceChatSelector`: `var107 (write)`
+- New upvalue captured by `createVoiceChatSelector`: `var108 (write)`
+- Upvalue no longer captured by `createVoiceChatSelector`: `var103 (write)`
+- Upvalue no longer captured by `createVoiceChatSelector`: `var104 (write)`
+- New function: `var119`
+- New function: `var114`
+- Parameter removed from `var115` (1 -> 0 params)
+- Upvalue no longer captured by `var115`: `differentiateVoiceSelectorSystemAndUser`
+- Upvalue no longer captured by `var115`: `fFlagVoiceRewarmTelemetry`
+- Upvalue no longer captured by `var115`: `gameSettingsTab`
+- Upvalue no longer captured by `var115`: `var113 (write)`
+- Upvalue no longer captured by `var115`: `voiceSelectorIgnoreFailedStateDisconnect`
+- New function: `var121`
+- New function: `_`
+- New function: `var122`
+- New function: `_`
+- New function: `var124`
+- New function: `_`
+- New function: `_`
+- New upvalue captured by `OpenSettingsPage`: `createUIScaleOptionsImpl`
+- New upvalue captured by `OpenSettingsPage`: `RUUserScalePreferenceAPIEngineFeature`
+- New upvalue captured by `OpenSettingsPage`: `var103 (write)`
+- New upvalue captured by `OpenSettingsPage`: `var104 (write)`
+- New upvalue captured by `OpenSettingsPage`: `var105 (write)`
+- New upvalue captured by `OpenSettingsPage`: `var106 (write)`
+- Upvalue no longer captured by `OpenSettingsPage`: `var101 (write)`
+- Upvalue no longer captured by `OpenSettingsPage`: `var102 (write)`
+- New function: `rebindToCurrentCamera`
+- New function: `V1MenuLanguageSelectionFeaturePerMillageRollout`
+- Removed function: `var55`
+- Removed function: `var55`
+- Removed function: `var106`
+- Removed function: `var106`
+- Removed function: `var110`
+- Removed function: `var111`
+- Removed function: `var117`
+- Removed function: `var118`
+- Removed function: `var120`
+- Removed function: `CloseSettingsPage`
+- New variable: `RUUserScalePreferenceAPIEngineFeature`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/Settings/Resources/GameSettingsConstants.luau`
+- New variable: `RUUserScalePreferenceAPIEngineFeature`
+- Removed variable: `UiNavigationKeyBindEnabledFrame`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation.luau`
+- New variable: `fontNameModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Slider/Slider.luau`
+- New variable: `blendTransparenciesModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Slider/useSliderVariants.luau`
+- New upvalue captured by `variantsFactory`: `flagsModule`
+- New variable: `flagsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Providers/Foundation/FoundationProvider.luau`
+- New variable: `frozen`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/StyleSheet/Rules/attributeRules.luau`
+- Parameter removed from `_` (2 -> 1 params)
+- New upvalue captured by `_`: `shadowRulesModule`
+- New function: `DefaultFontRules`
+- New function: `_`
+- New upvalue captured by `rulesGenerator`: `DefaultFontRules`
+- New upvalue captured by `rulesGenerator`: `shadowRulesModule`
+- New variable: `shadowRulesModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/StyleSheet/StyleSheetRegistry.luau`
+- New upvalue captured by `createStyleRule`: `flagsModule`
+- New upvalue captured by `addRegisteredStyleSheetTags`: `flagsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/StyleSheet/createStyleSheetRules.luau`
+- New upvalue captured by `insertRule`: `flagsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/Stories/Components.storybook.luau`
+- New variable: `getStoriesModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/Stories/GetStories.luau`
+- Parameter removed from `_` (2 -> 1 params)
+- New function: `_`
+- New function: `_`
+- New function: `getStorybookRoots`
+- New function: `getComponentFolderExcludeList`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/getGeneratedRules.luau`
+- New function: `Dark`
+- New function: `Light`
+- New function: `Desktop`
+- New function: `Console`
+- New function: `Desktop`
+- New function: `Console`
+- New variable: `fontNameModule`
+- New variable: `typographyVariantsModule`
+- New variable: `builderSans`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/CollectionViews/CollectionViews/CollectionLayoutStore/createMainCollectionLayoutStore.luau`
+- New variable: `fFlagEnableHomePageSduiPrefetch`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FlyoutSidePanel/FlyoutSidePanel/Components/RobuxPill.luau`
+- New variable: `sharedFlagsModule`
+- New variable: `fFlagEnableSharedFlyoutRobuxPill`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Home/HomeContentEntryPoint.luau`
+- New variable: `useHomeCollectionLayoutSyncModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Home/HomePageSession.luau`
+- New function: `Adopt`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Home/Home/fetchHomePage.luau`
+- New upvalue captured by `fetchHomePage`: `fFlagEnableHomePageSduiPrefetch`
+- New upvalue captured by `fetchHomePage`: `measureHomeCollectionLayoutModule`
+- New upvalue captured by `fetchHomePage`: `prefetchProtocol`
+- New upvalue captured by `fetchHomePage`: `writeHomePageSduiPrefetchDescriptorModule`
+- New function: `onSuccess`
+- New variable: `measureHomeCollectionLayoutModule`
+- New variable: `writeHomePageSduiPrefetchDescriptorModule`
+- New variable: `prefetchProtocol`
+- New variable: `sharedFlagsModule`
+- New variable: `fFlagEnableHomePageSduiPrefetch`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InlineRichText/InlineRichText/Parser/tokenize.luau`
+- New variable: `parent`
+- New variable: `unescapeRichFormattingModule`
+- New variable: `fFlagInlineRichTextSkipPlaintextEscape`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/InlineRichText/InlineRichText/Utils/prepareRichTextCopy.luau`
+- New variable: `fFlagInlineRichTextSkipPlaintextEscape`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/ServerDrivenUi/Content/SduiGameTile.luau`
+- New variable: `sduiGameTileDisableDefaultPlayButtonOnHover`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppBlox/AppBlox/Composer/ComposerTextInput.luau`
+- New variable: `parent_1`
+- New variable: `fFlagComposerControlAlignment`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatConversation/ChatConversationContainer.luau`
+- New upvalue captured by `ChatConversationContainer`: `fFlagAppChatUniversalFeatureRestriction`
+- New upvalue captured by `ChatConversationContainer`: `parent`
+- New function: `onAppeal`
+- New variable: `fFlagAppChatUniversalFeatureRestriction`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/EventReceivers/FriendsChatExperimentExposureEventReceiver.luau`
+- New variable: `fFlagExpChatFriendsTabRequireDefaultChannels`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/BuildPage.luau`
+- New function: `BuildGetUsersScreen`
+- New upvalue captured by `screen`: `fFlagEnableBuildAdPromotionModule`
+- New variable: `adsStatsContainerModule`
+- New variable: `fFlagEnableBuildAdPromotionModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/parseSessionStream.luau`
+- New upvalue captured by `_`: `fFlagBuildExperienceChatImageAttachmentsModule`
+- New function: `contentBlocksToImages`
+- Upvalue no longer captured by `_`: `turnStateReducer`
+- New upvalue captured by `_`: `turnStateReducer`
+- Parameter removed from `_` (2 -> 1 params)
+- New upvalue captured by `parseChatItems`: `contentBlocksToImages`
+- New upvalue captured by `parseChatItems`: `fFlagBuildExperienceChatImageAttachmentsModule`
+- New upvalue captured by `flushActiveTurn`: `var6 (write)`
+- Upvalue no longer captured by `flushActiveTurn`: `var2 (write)`
+- New parameter added to `appendUserMessage` (3 -> 4 params)
+- New function: `buildUserMessageItem`
+- New variable: `fFlagBuildExperienceChatImageAttachmentsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/useChatSessionCore.luau`
+- New upvalue captured by `tryFocus`: `var7 (write)`
+- Upvalue no longer captured by `tryFocus`: `var6 (write)`
+- New function: `var70`
+- New upvalue captured by `_`: `var73 (write)`
+- Upvalue no longer captured by `_`: `var27 (write)`
+- New upvalue captured by `isHydrateCancelled`: `var73 (write)`
+- Upvalue no longer captured by `isHydrateCancelled`: `var27 (write)`
+- New upvalue captured by `_`: `var73 (write)`
+- Upvalue no longer captured by `_`: `var27 (write)`
+- New upvalue captured by `hydrateKnownSession`: `var73 (write)`
+- Upvalue no longer captured by `hydrateKnownSession`: `var27 (write)`
+- New upvalue captured by `refreshKnownSession`: `var75 (write)`
+- Upvalue no longer captured by `refreshKnownSession`: `var29 (write)`
+- New function: `_`
+- New function: `_`
+- New function: `updateComposerImage`
+- New function: `beginComposerImageUpload`
+- New function: `setComposerImages`
+- New function: `retryComposerImage`
+- New function: `current`
+- New function: `var97`
+- New upvalue captured by `tryFocus`: `var98 (write)`
+- Upvalue no longer captured by `tryFocus`: `var35 (write)`
+- Removed function: `var27`
+- Removed function: `var34`
+- New variable: `fFlagBuildExperienceChatImageAttachmentsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/BuildChatPageView.luau`
+- New variable: `fFlagBuildExperienceChatImageAttachmentsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/useBuildChatPageViewModel.luau`
+- New variable: `fFlagEnableBuildAdPromotionModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildPillMenu/BuildOverflowMenuButton.luau`
+- New variable: `fFlagEnableBuildAdPromotionModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatActions.luau`
+- New function: `_`
+- New function: `setCapturedImages`
+- New function: `openCaptureGallery`
+- New function: `_`
+- New function: `confirmCaptureGallery`
+- New function: `handleCaptureGalleryClosed`
+- New function: `removeImage`
+- New variable: `buildExperience`
+- New variable: `fFlagBuildExperienceChatImageAttachmentsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatComposer.luau`
+- New variable: `fFlagComposerControlAlignment`
+- New variable: `iconButton`
+- New variable: `buttonVariant`
+- New variable: `iconName`
+- New variable: `useTokens`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatMessageItem.luau`
+- New function: `areUserImagesEqual`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatUserMessage.luau`
+- New variable: `fFlagBuildExperienceChatImageAttachmentsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/ChatSheet/ChatSheetView.luau`
+- New variable: `fFlagBuildExperienceUseFoundationSheetModule`
+- New variable: `fFlagBuildExperienceChatImageAttachmentsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MediaSelectionPage/CaptureGridItem.luau`
+- New function: `_`
+- New function: `CaptureGridItem`
+- New function: `onActivated`
+- New variable: `buildExperience`
+- New variable: `fFlagBuildExperienceChatImageAttachmentsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/VersionHistory/VersionHistoryContainer.luau`
+- New parameter added to `_` (1 -> 2 params)
+- New upvalue captured by `_`: `localizationStringsModule`
+- New upvalue captured by `_`: `versionHistoryUtilsModule`
+- Upvalue no longer captured by `mapVersionToEntry`: `formatCreatedDate`
+- New parameter added to `_` (1 -> 2 params)
+- New upvalue captured by `_`: `localizationStringsModule`
+- New upvalue captured by `formatLocalizedCreatedDate`: `versionHistoryUtilsModule`
+- New parameter added to `_` (2 -> 3 params)
+- New upvalue captured by `_`: `dataStatus`
+- New upvalue captured by `_`: `localizationStringsModule`
+- New parameter added to `_` (2 -> 4 params)
+- Removed function: `formatCreatedDate`
+- Removed function: `_`
+- Removed function: `_`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/VersionHistory/VersionHistoryUtils.luau`
+- New function: `_`
+- New function: `getCreatedDateParts`
+- New function: `getVersionNumber`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/FoundationFork/TextArea/ChatInternalTextInput.luau`
+- New variable: `parent_1`
+- New variable: `fFlagComposerControlAlignment`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Stores/GetBuildOverflowMenuStore/createBuildOverflowMenuStore.luau`
+- Parameter removed from `onActivated` (1 -> 0 params)
+- Upvalue no longer captured by `onActivated`: `fFlagBuildExperiencePrivateInvitesModule`
+- Upvalue no longer captured by `onActivated`: `onShareActivated`
+- New upvalue captured by `onActivated`: `fFlagBuildExperiencePrivateInvitesModule`
+- New upvalue captured by `onActivated`: `onShareActivated`
+- Upvalue no longer captured by `onActivated`: `sendBuildExperienceEventModule`
+- New function: `onActivated`
+- New upvalue captured by `useItems`: `fFlagEnableBuildAdPromotionModule`
+- New variable: `fFlagEnableBuildAdPromotionModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorAgentChat/ResumeNotification.luau`
+- New function: `getToastCopy`
+- New upvalue captured by `_`: `getResumeDeepLink`
+- New upvalue captured by `_`: `httpService`
+- Parameter removed from `getToastVisualItems` (4 -> 3 params)
+- New upvalue captured by `buildToastNotification`: `getToastCopy`
+- Removed function: `_`
+- New variable: `localizationService`
+- New variable: `fFlagBuildResumeToastLocalizationModule`
+- New variable: `localization`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorAgentChat/createCreatorAgentChatStore.luau`
+- New parameter added to `rpcCall` (3 -> 4 params)
+- New parameter added to `rpcCallSync` (2 -> 3 params)
+- New upvalue captured by `rpcCallSync`: `var1 (write)`
+- Upvalue no longer captured by `rpcCallSync`: `var2 (write)`
+- New upvalue captured by `submitToolResult`: `var1 (write)`
+- Upvalue no longer captured by `submitToolResult`: `var2 (write)`
+- New upvalue captured by `refresh`: `var1 (write)`
+- Upvalue no longer captured by `refresh`: `var2 (write)`
+- New upvalue captured by `loadMore`: `var1 (write)`
+- Upvalue no longer captured by `loadMore`: `var2 (write)`
+- New upvalue captured by `sessionCancel`: `var1 (write)`
+- Upvalue no longer captured by `sessionCancel`: `var2 (write)`
+- New upvalue captured by `sessionDelete`: `var1 (write)`
+- Upvalue no longer captured by `sessionDelete`: `var12 (write)`
+- New function: `adCampaignEligibility`
+- New upvalue captured by `_`: `var1 (write)`
+- Upvalue no longer captured by `_`: `var14 (write)`
+- New upvalue captured by `sessionPrompt`: `var1 (write)`
+- Upvalue no longer captured by `sessionPrompt`: `var16 (write)`
+- New upvalue captured by `resumeTurnFromHistory`: `var1 (write)`
+- Upvalue no longer captured by `resumeTurnFromHistory`: `var21 (write)`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/DataHydrationUtils.luau`
+- New variable: `fFlagFriendsRequestsMergeListsWithoutDuplicates`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/Game/GameInfo/createGameInfoStore.luau`
+- New upvalue captured by `fetchFn`: `fFlagLuaAppDataHydrationTotalVisitsGameInfoStore`
+- New variable: `fFlagLuaAppDataHydrationTotalVisitsGameInfoStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/PlaceVersionHistory/createPlaceVersionHistoryStore.luau`
+- New function: `clear`
+- New function: `dispose`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/ExpChat/AppContainer/mapStateToProps.luau`
+- New variable: `fFlagExpChatFixInputBarOrphanBorderModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/ExpChat/AppLayout/AppLayout.luau`
+- New function: `var4`
+- Upvalue no longer captured by `debugInjectFakeMessages`: `fFlagExpChatEnableFriendsTab`
+- Removed function: `var6`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/ExpChat/installReducer/ChannelTabs.luau`
+- New function: `_`
+- New upvalue captured by `selectTextChannelTabByName`: `fFlagExpChatFriendsTabRequireDefaultChannels`
+- New variable: `fFlagExpChatFriendsTabRequireDefaultChannels`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/ExpChat/mountClientApp.luau`
+- New function: `var134`
+- New upvalue captured by `handleUserMessageIntentSent`: `var18 (write)`
+- Upvalue no longer captured by `handleUserMessageIntentSent`: `var17 (write)`
+- Removed function: `var133`
+- New variable: `fFlagExpChatEnableFriendsTab`
+- New variable: `fFlagExpChatFriendsTabRequireDefaultChannels`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChatShared/ExpChatShared/Reducers/TextChannels.luau`
+- Removed variable: `fFlagExpChatFixTeamChangeOverwriteChannelModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/FriendsChat/ConversationWindow/FriendsChatInputBarHost.luau`
+- New function: `onAppeal`
+- New variable: `fFlagAppChatUniversalFeatureRestriction`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/FriendsChat/Stores/GetFriendsTabVisibilityStore/createFriendsTabVisibilityStore.luau`
+- New variable: `fFlagExpChatFriendsTabRequireDefaultChannels`
+- New variable: `textChatService`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceIntervention/InExperienceIntervention/InExperienceInterventionEventReceiver.luau`
+- New upvalue captured by `InExperienceInterventionEventReceiver`: `fFlagAppChatUniversalFeatureRestriction`
+- New variable: `fFlagAppChatUniversalFeatureRestriction`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceIntervention/InExperienceIntervention/InterventionTreatmentConfigs/PartyChatDialogNudgeConfig.luau`
+- New function: `onPartyChatNudgeUFRAppeal`
+- New function: `onPartyChatNudgeUFRShown`
+- New upvalue captured by `onTriggerVisualTreatment`: `abuseVectorModule`
+- New upvalue captured by `onTriggerVisualTreatment`: `fFlagAppChatUniversalFeatureRestriction`
+- New upvalue captured by `onTriggerVisualTreatment`: `onPartyChatNudgeUFRAppeal`
+- New upvalue captured by `onTriggerVisualTreatment`: `onPartyChatNudgeUFRShown`
+- New upvalue captured by `onTriggerVisualTreatment`: `showFeatureRestrictionFromRealtimeModule`
+- New variable: `abuseVectorModule`
+- New variable: `interventionTreatmentShownSignal`
+- New variable: `showFeatureRestrictionFromRealtimeModule`
+- New variable: `fFlagAppChatUniversalFeatureRestriction`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceIntervention/InExperienceIntervention/InterventionTreatmentConfigs/PartyChatDialogTimeoutConfig.luau`
+- New function: `onPartyChatTimeoutUFRShown`
+- New function: `onPartyChatTimeoutUFRAppeal`
+- New upvalue captured by `onTriggerVisualTreatment`: `abuseVectorModule`
+- New upvalue captured by `onTriggerVisualTreatment`: `fFlagAppChatUniversalFeatureRestriction`
+- New upvalue captured by `onTriggerVisualTreatment`: `onPartyChatTimeoutUFRAppeal`
+- New upvalue captured by `onTriggerVisualTreatment`: `onPartyChatTimeoutUFRShown`
+- New upvalue captured by `onTriggerVisualTreatment`: `showFeatureRestrictionFromRealtimeModule`
+- New variable: `abuseVectorModule`
+- New variable: `interventionTreatmentShownSignal`
+- New variable: `showFeatureRestrictionFromRealtimeModule`
+- New variable: `fFlagAppChatUniversalFeatureRestriction`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceShop/InExperienceShop/Stores/createInExperienceShopStore.luau`
+- New upvalue captured by `runShopFetch`: `fFlagEnableUserOffers`
+- New upvalue captured by `runShopFetch`: `inExperienceOffersModule`
+- New upvalue captured by `runShopFetch`: `list`
+- New upvalue captured by `runPartialDisplayShopFetch`: `fFlagEnableUserOffers`
+- New upvalue captured by `runPartialDisplayShopFetch`: `inExperienceOffersModule`
+- New upvalue captured by `runPartialDisplayShopFetch`: `list`
+- New variable: `inExperienceOffersModule`
+- New variable: `fFlagEnableUserOffers`
+- New variable: `list`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InterventionShared/InterventionShared/Components/PartyChatNudgeCustomDialog.luau`
+- New variable: `IXPService`
+- New variable: `appUserLayers`
+- New variable: `fFlagUFRFriendsChatIXPExposureModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InterventionShared/InterventionShared/Components/PartyChatTimeoutCustomDialog.luau`
+- New variable: `IXPService`
+- New variable: `appUserLayers`
+- New variable: `fFlagUFRFriendsChatIXPExposureModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InterventionShared/InterventionShared/Components/genericComponents/UniversalFeatureRestrictionDialog.luau`
+- New variable: `parent`
+- New variable: `IXPService`
+- New variable: `appUserLayers`
+- New variable: `constantsModule`
+- New variable: `fFlagUFRFriendsChatIXPExposureModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/ProfilePlatform/Components/InspectAvatar/InspectAvatarSheet.luau`
+- New variable: `fFlagProfileInspectAvatarBackgroundModule`
+- New variable: `image`
+- New variable: `useTokens`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/ProfilePlatform/Components/InspectAvatar/InspectAvatarSheetContainer.luau`
+- New variable: `useAvatarBackgroundFromWrapperModule`
+- New variable: `fFlagProfileInspectAvatarBackgroundModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags.luau`
+- New variable: `homePageSduiPrefetch`
+
+
 ## 12571 - 2026-08-25 21:12
 
 ### New files

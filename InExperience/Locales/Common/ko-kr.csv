@@ -946,6 +946,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,이 체험이 내 아바타 아이템을 규정 준수 확인을 위해 제출하고 내 작품에 업로드하는 데 동의합니다.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,이 체험이 내 감정 표현을 규정 준수 확인을 제출하고 내 작품에 업로드하는 데 동의합니다.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,이 체험이 내 이미지를 규정 준수 팀에 제출하고 내 작품에 업로드하는 데 동의합니다.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,"만들어진 아이템은 검토를 거치게 되며, 커뮤니티 규정을 준수하지 않아서 거부된 아이템에 대해서는 환불을 받지 못할 수 있습니다."
 CoreScripts.PublishAssetPrompt.InvalidDescription,유효하지 않은 설명
 CoreScripts.PublishAssetPrompt.InvalidName,유효하지 않은 이름
@@ -960,6 +961,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,복장 제출
 CoreScripts.PublishAssetPrompt.TitleTextEmote,감정 표현 제출
+CoreScripts.PublishAssetPrompt.TitleTextImage,이미지 제출
 CoreScripts.PublishAssetPrompt.TitleTextModel,패키지 제출
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,오류가 발생했어요. 다시 시도하세요. 오류 코드: {RESULT_TYPE}
@@ -1836,6 +1838,7 @@ Feature.Build.Action.NotNow,나중에
 Feature.Build.Action.NotifyMe,알림 받기
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,설정 열기
+Feature.Build.Action.Play,
 Feature.Build.Action.Playtest,플레이테스트
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
@@ -1886,7 +1889,10 @@ Feature.Build.Header.ContentMaturity,콘텐츠 수위
 Feature.Build.Header.CustomAnswer,사용자 정의 답변
 Feature.Build.Header.GameDetails,게임 세부 정보
 Feature.Build.Header.Overview,
+Feature.Build.Header.PastCampaigns,과거 캠페인
 Feature.Build.Label.Access,액세스
+Feature.Build.Label.AdClicks,광고 클릭 수
+Feature.Build.Label.AdViews,광고 조회수
 Feature.Build.Label.AdditionalUsage,추가 Build 사용량
 Feature.Build.Label.AdditionalUsed,{LIMIT} 중 {USED} 사용됨
 Feature.Build.Label.All,
@@ -1900,6 +1906,7 @@ Feature.Build.Label.ContentRating,콘텐츠 등급
 Feature.Build.Label.Created,제작 정보
 Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
 Feature.Build.Label.CreatorHub,크리에이터 허브
+Feature.Build.Label.DateRange,{startDate}~{endDate}
 Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
 Feature.Build.Label.Description,
@@ -1908,6 +1915,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
+Feature.Build.Label.GamePlays,게임 플레이 횟수
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
 Feature.Build.Label.Hi,안녕하세요
 Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
@@ -1922,6 +1930,7 @@ Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
 Feature.Build.Label.Pending,보류 중
 Feature.Build.Label.PercentUsed,{PERCENT}% 사용됨
+Feature.Build.Label.PlayTime,플레이 시간
 Feature.Build.Label.PreviouslyPublished,이전에 게시됨
 Feature.Build.Label.Private,비공개
 Feature.Build.Label.Public,공개
@@ -2019,6 +2028,7 @@ Feature.Build.Label.VersionTitleDesc,버전 이름 및 설명
 Feature.Build.Label.Video,동영상
 Feature.Build.Message.AccountRequirements,회원님의 계정이 Build 사용 요건을 충족하지 않습니다.
 Feature.Build.Message.AccountTooNew,계정을 새로 만든 지 얼마 안 돼서 게시할 수 없습니다. 2일 후에 다시 시도해 보세요.
+Feature.Build.Message.AdPerformanceLoadFailed,광고 실적을 불러올 수 없습니다
 Feature.Build.Message.AllFriendsAdded,모든 친구를 플레이테스터로 추가했습니다.
 Feature.Build.Message.AnswerBuildQuestion,아래에서 Build의 질문에 답하세요.
 Feature.Build.Message.AssetDetailsUnavailable,애셋 세부 정보를 이용할 수 없습니다.
@@ -2086,6 +2096,10 @@ Feature.Build.Message.WhatToCreate,오늘 무엇을 만들어 보시겠어요?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES}분 {REM_SECONDS}초 동안 작업함
 Feature.Build.Message.WorkedSeconds,{SECONDS}초 동안 작업함
 Feature.Build.Message.WorkingOnTasks,작업 진행 중
+Feature.Build.Notification.Message.Continue,계속하려면 빌드 채팅을 다시 시작하세요.
+Feature.Build.Notification.Message.Review,결과를 검토하려면 빌드 채팅을 다시 시작하세요.
+Feature.Build.Notification.Title.Finished,빌드 완료
+Feature.Build.Notification.Title.NeedInput,빌드에 대한 의견 필요
 Feature.Build.Title.AdCampaignActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
 Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
@@ -2105,6 +2119,7 @@ Feature.Build.Title.FriendsOnlyPlay,친구만 플레이할 수 있습니다
 Feature.Build.Title.GameCreationDone,게임 제작 완료
 Feature.Build.Title.GamePrivate,비공개 게임입니다
 Feature.Build.Title.GenericError,오류 발생
+Feature.Build.Title.GetUsers,사용자 가져오기
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.Playtesters,플레이테스터
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다

@@ -105,6 +105,7 @@
 	FFlagAXCatalogCategoryTooltip = require(script.FFlagAXCatalogCategoryTooltip),
 	FFlagAXModeratedItemsFlow = require(script.FFlagAXModeratedItemsFlow),
 	FFlagAXModeratedItemIconUpdates = require(script.FFlagAXModeratedItemIconUpdates),
+	FFlagAXMakeupIECGrantFix = require(script.FFlagAXMakeupIECGrantFix),
 	FFlagAXManageOutfitsCatalogItemCard = require(script.FFlagAXManageOutfitsCatalogItemCard),
 	FFlagAXHideMenuOnScroll = require(script.FFlagAXHideMenuOnScroll),
 	FFlagAXDebugPanelImpressed = require(script.FFlagAXDebugPanelImpressed),

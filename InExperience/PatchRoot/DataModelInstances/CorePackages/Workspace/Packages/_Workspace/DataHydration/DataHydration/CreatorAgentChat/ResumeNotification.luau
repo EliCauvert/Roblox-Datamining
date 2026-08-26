@@ -1,7 +1,10 @@
 ﻿local httpService = game:GetService("HttpService")
+local localizationService = game:GetService("LocalizationService")
 local parent = script:FindFirstAncestor("DataHydration").Parent
 local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
+local fFlagBuildResumeToastLocalizationModule = require(script.Parent.FFlagBuildResumeToastLocalization)
 local fFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
+local localization = require(parent.RobloxAppLocales).Localization
 local fFlagBuildExperiencePinForBuild = require(parent.SharedFlags).FFlagBuildExperiencePinForBuild
 local parseFrameModule = require(script.Parent.Acp.parseFrame)
 local _ = require(script.Parent.types)
@@ -252,11 +255,26 @@ local function getResumeDeepLink(p2)
 	return `roblox://navigation/build?{table.concat(t, "&")}`
 end
 
-local _ = function(p2)
-	if p2.kind == "local_tool_call" then
-		return "Assistant needs your input", "Resume your build chat to continue."
+local function getToastCopy(p2)
+	-- upvalues: fFlagBuildResumeToastLocalizationModule (ref), localization (ref), localizationService (ref)
+	local isLocalToolCall = p2.kind == "local_tool_call"
+	
+	if fFlagBuildResumeToastLocalizationModule then
+		local var2 = localization.new(localizationService.RobloxLocaleId)
+		
+		return {
+			title = var2:Format(if isLocalToolCall then "Feature.Build.Notification.Title.NeedInput" else "Feature.Build.Notification.Title.Finished"),
+			label = var2:Format(if isLocalToolCall then "Feature.Build.Notification.Message.Continue" else "Feature.Build.Notification.Message.Review"),
+			dismiss = var2:Format("Feature.Build.Action.Dismiss"),
+			resume = var2:Format("Feature.Build.Action.Resume")
+		}
 	end
-	return "Assistant finished", "Resume your build chat to review the result."
+	return {
+		dismiss = "Dismiss",
+		resume = "Resume",
+		title = if isLocalToolCall then "Assistant needs your input" else "Assistant finished",
+		label = if isLocalToolCall then "Resume your build chat to continue." else "Resume your build chat to review the result."
+	}
 end
 
 local _ = function(p2)
@@ -269,7 +287,7 @@ local _ = function(p2)
 	})
 end
 
-local function getToastVisualItems(p2, p3, p4, p5)
+local function getToastVisualItems(p2, p3, p4)
 	local t = {}
 	
 	if p2.universeId ~= nil then
@@ -285,10 +303,10 @@ local function getToastVisualItems(p2, p3, p4, p5)
 		textBody = {
 			eventName = "CreatorAgentResume",
 			visualItemType = "textBody",
-			title = { text = p3 },
-			label = { text = p4 },
+			title = { text = p3.title },
+			label = { text = p3.label },
 			actions = {},
-			actionEventParams = p5
+			actionEventParams = p4
 		}
 	})
 	table.insert(t, {
@@ -296,7 +314,7 @@ local function getToastVisualItems(p2, p3, p4, p5)
 			buttonStyle = "Secondary",
 			eventName = "CreatorAgentResumeDismiss",
 			visualItemType = "button",
-			label = { text = "Dismiss" },
+			label = { text = p3.dismiss },
 			actions = { { actionType = "dismiss" } }
 		}
 	})
@@ -305,9 +323,9 @@ local function getToastVisualItems(p2, p3, p4, p5)
 			buttonStyle = "Primary",
 			eventName = "CreatorAgentResume",
 			visualItemType = "button",
-			label = { text = "Resume" },
+			label = { text = p3.resume },
 			actions = {},
-			actionEventParams = p5
+			actionEventParams = p4
 		}
 	})
 	
@@ -324,15 +342,7 @@ return {
 	getNotificationId = getNotificationId,
 	getResumeDeepLink = getResumeDeepLink,
 	buildToastNotification = function(p2)
-		-- upvalues: httpService (ref), getResumeDeepLink (ref), getToastVisualItems (ref)
-		local var2, var3
-		if p2.kind == "local_tool_call" then
-			var2 = "Assistant needs your input"
-			var3 = "Resume your build chat to continue."
-		else
-			var2 = "Assistant finished"
-			var3 = "Resume your build chat to review the result."
-		end
+		-- upvalues: getToastCopy (ref), httpService (ref), getResumeDeepLink (ref), getToastVisualItems (ref)
 		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
 		
 		return {
@@ -351,7 +361,7 @@ return {
 						layoutKey = "CreatorAgentResume",
 						name = "Default",
 						timeOnScreenMs = 12000,
-						visualItems = getToastVisualItems(p2, var2, var3, httpService:JSONEncode({
+						visualItems = getToastVisualItems(p2, getToastCopy(p2), httpService:JSONEncode({
 							sessionId = p2.sessionId,
 							universeId = p2.universeId,
 							kind = p2.kind,

@@ -12,7 +12,9 @@ local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationE
 local inputHandlersModule = require(parent.InputHandlers)
 local fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav
 local fFlagProfileInspectAvatarBuyAllModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarBuyAll)
+local fFlagProfileInspectAvatarBackgroundModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarBackground)
 local view = foundationModule.View
+local image = foundationModule.Image
 local text = foundationModule.Text
 local iconButton = foundationModule.IconButton
 local divider = foundationModule.Divider
@@ -20,6 +22,7 @@ local skeleton = foundationModule.Skeleton
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
+local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local _ = require(profilePlatform.Common.Types)
 local itemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
@@ -27,7 +30,7 @@ local catalogItemRowCardContainerModule = require(script.Parent.CatalogItemRowCa
 local isItemPurchasable = require(script.Parent.InspectAvatarUtils).isItemPurchasable
 
 return function(p1)
-	-- upvalues: useLocalization (ref), itemDisplayHelpersModule (ref), reactModule (ref), dashModule (ref), catalogItemRowCardContainerModule (ref), isItemPurchasable (ref), fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (ref), inputHandlersModule (ref), view (ref), displayBackground (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref), skeleton (ref), divider (ref), buyActionBar (ref), fFlagProfileInspectAvatarBuyAllModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref)
+	-- upvalues: useLocalization (ref), itemDisplayHelpersModule (ref), fFlagProfileInspectAvatarBackgroundModule (ref), useTokens (ref), reactModule (ref), dashModule (ref), catalogItemRowCardContainerModule (ref), isItemPurchasable (ref), fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (ref), inputHandlersModule (ref), view (ref), image (ref), displayBackground (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref), skeleton (ref), divider (ref), buyActionBar (ref), fFlagProfileInspectAvatarBuyAllModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref)
 	local var1 = useLocalization({
 		buyItems = "Feature.Catalog.Label.BuyItems",
 		buyWholeLook = "Feature.Profile.Header.BuyWholeLook",
@@ -43,16 +46,17 @@ return function(p1)
 		}
 	})
 	local var2 = useLocalization(itemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
-	local var3 = useLocalization(itemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
-	local var4 = useLocalization(itemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), dashModule (copy), var3 (ref), var4 (ref)
+	local var3 = if fFlagProfileInspectAvatarBackgroundModule then useTokens().Padding.XLarge else nil
+	local var4 = useLocalization(itemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
+	local var5 = useLocalization(itemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), dashModule (copy), var4 (ref), var5 (ref)
 		return {
 			bundleParts = nil,
 			bundle = var1.bundle,
-			assetTypeNames = dashModule.join(var3, var4)
+			assetTypeNames = dashModule.join(var4, var5)
 		}
-	end, { var1.bundle, var3, var4 })
+	end, { var1.bundle, var4, var5 })
 	local t = {}
 	
 	for i, v in p1.displayItems do
@@ -63,7 +67,7 @@ return function(p1)
 			index = i,
 			isChecked = p1.selectedItems[id] == true,
 			isPurchasable = isItemPurchasable(v),
-			localizedStrings = var5,
+			localizedStrings = var6,
 			priceStatusLocalized = var2,
 			onToggleItem = p1.onToggleItem,
 			openItemDetails = p1.openItemDetails
@@ -92,22 +96,55 @@ return function(p1)
 				LayoutOrder = 1,
 				Size = UDim2.new(1, 0, 0, p1.avatarViewportHeight)
 			}, {
+				BackgroundClipper = if fFlagProfileInspectAvatarBackgroundModule and p1.avatarBackgroundImage ~= nil then reactModule.createElement(view, {
+					ClipsDescendants = true,
+					ZIndex = 1,
+					Size = UDim2.new(1, var3 * 2, 1, 0),
+					Position = UDim2.new(0, -var3, 0, 0)
+				}, {
+					BackgroundImage = reactModule.createElement(image, {
+						Size = UDim2.fromScale(1.35, 1.35),
+						AnchorPoint = Vector2.new(0.5, 0.5),
+						Position = UDim2.fromScale(0.5, 0.5),
+						Image = p1.avatarBackgroundImage,
+						ScaleType = Enum.ScaleType.Crop
+					})
+				}) else nil,
 				Background = reactModule.createElement(displayBackground, {
 					height = p1.avatarViewportHeight,
 					userId = tonumber(p1.profileId),
 					userThumbnail = p1.avatarThumbnail
 				}),
 				TopBar = reactModule.createElement(view, {
-					tag = "row align-y-center size-full-0 auto-y padding-small",
-					ZIndex = 2
+					ZIndex = 2,
+					tag = {
+						["row align-y-center"] = fFlagProfileInspectAvatarBackgroundModule,
+						["row align-y-center size-full-0 auto-y padding-small"] = not fFlagProfileInspectAvatarBackgroundModule
+					},
+					Size = if fFlagProfileInspectAvatarBackgroundModule then UDim2.new(1, 0, 0, 56) else nil,
+					Position = if fFlagProfileInspectAvatarBackgroundModule then UDim2.new(0, 10 - var3, 0, 0) else nil
 				}, {
-					BackButton = reactModule.createElement(iconButton, {
+					BackButtonCircle = if fFlagProfileInspectAvatarBackgroundModule then reactModule.createElement(view, {
+						tag = "radius-circle bg-over-media-0",
+						Size = UDim2.fromOffset(36, 36)
+					}, {
+						BackButton = reactModule.createElement(iconButton, {
+							isCircular = true,
+							icon = iconName.ChevronLargeLeft,
+							size = iconSize.Small,
+							variant = buttonVariant.Utility,
+							onActivated = p1.onClose,
+							AnchorPoint = Vector2.new(0.5, 0.5),
+							Position = UDim2.fromScale(0.5, 0.5)
+						})
+					}) else nil,
+					BackButton = if not fFlagProfileInspectAvatarBackgroundModule then reactModule.createElement(iconButton, {
 						isCircular = true,
 						icon = iconName.ChevronLargeLeft,
 						size = iconSize.Medium,
 						variant = buttonVariant.Utility,
 						onActivated = p1.onClose
-					})
+					}) else nil
 				})
 			}),
 			Title = reactModule.createElement(text, {

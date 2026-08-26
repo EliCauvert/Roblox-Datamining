@@ -23,6 +23,15 @@ return {
 		
 		return var1
 	end,
+	Adopt = function(_, p1)
+		-- upvalues: var1 (write)
+		if p1 == "" then
+			return false
+		end
+		var1 = p1:lower()
+		
+		return true
+	end,
 	Commit = function(p1, p2)
 		-- upvalues: var2 (ref), var3 (ref)
 		local var4 = p1:Get()

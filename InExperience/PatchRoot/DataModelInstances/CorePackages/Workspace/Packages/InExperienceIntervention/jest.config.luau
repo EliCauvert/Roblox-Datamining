@@ -1,0 +1,1 @@
+﻿return require(script.Parent.Parent._Workspace.InExperienceIntervention.InExperienceIntervention["jest.config"])

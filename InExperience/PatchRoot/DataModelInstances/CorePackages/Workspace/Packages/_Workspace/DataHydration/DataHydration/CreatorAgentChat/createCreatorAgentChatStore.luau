@@ -100,35 +100,35 @@ return function(p3)
 		end
 	end
 	
-	local function rpcCall(p5, p6, p7)
-		-- upvalues: logger (ref), httpClientModule (copy), network (ref), baseUrl (ref), p5 (ref), rpcDecoderModule (copy)
+	local function rpcCall(p5, p6, p7, p8)
+		-- upvalues: logger (ref), httpClientModule (copy), network (ref), baseUrl (ref), p3 (ref), rpcDecoderModule (copy)
 		logger:debug(`[CAS] -> {p6} id={tostring(p5)}`)
 		
 		return httpClientModule.createRequest({
 			method = "POST",
 			networkImpl = network,
 			url = baseUrl,
-			headers = if p5.getAuthHeaders then p5.getAuthHeaders() else {},
+			headers = if p3.getAuthHeaders then p3.getAuthHeaders() else {},
 			body = { jsonrpc = "2.0", id = p5, method = p6, params = p7 or {} },
 			analyticsKey = "cas." .. p8:gsub("/", "-"):lower(),
-			decode = rpcDecoderModule()
+			decode = rpcDecoderModule(p8)
 		})
 	end
 	
-	local function rpcCallSync(p5, p6)
-		-- upvalues: rpcCall (ref), p5 (ref), var2 (write)
+	local function rpcCallSync(p5, p6, p7)
+		-- upvalues: rpcCall (ref), p3 (ref), var1 (write)
 		local var3
-		if p5.generateRequestId then
-			var3 = p5.generateRequestId()
+		if p3.generateRequestId then
+			var3 = p3.generateRequestId()
 		else
-			var3 += 1
-			var3 = var3
+			var1 += 1
+			var3 = var1
 		end
-		return rpcCall(var3, p5, p6)
+		return rpcCall(var3, p5, p6, p7)
 	end
 	
 	local function submitToolResult(p5)
-		-- upvalues: p5 (ref), var2 (write), acpProtocolModule (copy), httpClientModule (copy), network (ref), baseUrl (ref), rpcDecoderModule (copy)
+		-- upvalues: p3 (ref), var1 (write), acpProtocolModule (copy), httpClientModule (copy), network (ref), baseUrl (ref), rpcDecoderModule (copy)
 		local var3
 		assert(typeof(p5.sessionId) == "string" and p5.sessionId ~= "", "sessionId is required")
 		assert(typeof(p5.content) == "table" and typeof(p5.content.text) == "string", "content.text is required")
@@ -139,11 +139,11 @@ return function(p3)
 		if p5.referenceId ~= nil then
 			assert(typeof(p5.referenceId) == "string" and p5.referenceId ~= "", "referenceId must be a string")
 		end
-		if p5.generateRequestId then
-			var3 = p5.generateRequestId()
+		if p3.generateRequestId then
+			var3 = p3.generateRequestId()
 		else
-			var3 += 1
-			var3 = var3
+			var1 += 1
+			var3 = var1
 		end
 		local t = {
 			sessionId = p5.sessionId,
@@ -163,7 +163,7 @@ return function(p3)
 			analyticsKey = "cas.ask-tool-result",
 			networkImpl = network,
 			url = baseUrl,
-			headers = if p5.getAuthHeaders then p5.getAuthHeaders() else {},
+			headers = if p3.getAuthHeaders then p3.getAuthHeaders() else {},
 			body = { jsonrpc = "2.0", id = var3, result = t },
 			decode = rpcDecoderModule()
 		})
@@ -208,7 +208,7 @@ return function(p3)
 		getStatus = pending,
 		getLoadMoreStatus = var7,
 		refresh = function()
-			-- upvalues: var9 (write), var11 (write), var10 (write), pending_1 (ref), var8 (ref), acpProtocolModule (copy), rpcCall (ref), p4 (ref), var2 (write), onTerminalModule (copy), var4 (ref), var6 (ref)
+			-- upvalues: var9 (write), var11 (write), var10 (write), pending_1 (ref), var8 (ref), acpProtocolModule (copy), rpcCall (ref), p3 (ref), var1 (write), onTerminalModule (copy), var4 (ref), var6 (ref)
 			if var9 ~= nil then
 				if var9.state(false).status == "pending" then
 					return var9
@@ -224,22 +224,22 @@ return function(p3)
 			local sessionList = acpProtocolModule.Methods.SessionList
 			local t = {}
 			
-			if p4.generateRequestId then
-				var12 = p4.generateRequestId()
+			if p3.generateRequestId then
+				var12 = p3.generateRequestId()
 			else
-				var12 += 1
-				var12 = var12
+				var1 += 1
+				var12 = var1
 			end
-			local var14 = rpcCall(var12, sessionList, t)
+			local var14 = rpcCall(var12, sessionList, t, nil)
 			var9 = var14
 			onTerminalModule(var14.state, function(p5)
-				-- upvalues: var13 (ref), var11 (copy), var9 (copy), var14 (copy), var6 (copy), pending_1 (copy)
+				-- upvalues: var13 (ref), var11 (copy), var9 (copy), var4 (copy), var6 (copy), pending_1 (copy)
 				if var13 ~= var11 then return end
 				var9 = nil
 				local sessions = p5.sessions or {}
 				local nextPageToken = p5.nextPageToken
 				local var15 = if typeof(nextPageToken) == "string" and nextPageToken ~= "" then nextPageToken else nil
-				var14(sessions)
+				var4(sessions)
 				var6(var15)
 				pending_1("succeeded")
 			end, function(_)
@@ -255,7 +255,7 @@ return function(p3)
 			return var14
 		end,
 		loadMore = function()
-			-- upvalues: var5 (ref), var9 (write), var10 (write), pending (ref), var11 (write), var8 (ref), acpProtocolModule (copy), rpcCall (ref), p4 (ref), var2 (write), onTerminalModule (copy), appendSessionListEntries (copy), var3 (ref), var4 (ref), var6 (ref)
+			-- upvalues: var5 (ref), var9 (write), var10 (write), pending (ref), var11 (write), var8 (ref), acpProtocolModule (copy), rpcCall (ref), p3 (ref), var1 (write), onTerminalModule (copy), appendSessionListEntries (copy), var3 (ref), var4 (ref), var6 (ref)
 			local var12 = var5(false)
 			
 			if var12 == nil then
@@ -272,22 +272,22 @@ return function(p3)
 			local sessionList = acpProtocolModule.Methods.SessionList
 			local var14 = { pageToken = var12 } or {}
 			
-			if p4.generateRequestId then
-				var13 = p4.generateRequestId()
+			if p3.generateRequestId then
+				var13 = p3.generateRequestId()
 			else
-				var12 += 1
-				var13 = var12
+				var1 += 1
+				var13 = var1
 			end
-			local var15 = rpcCall(var13, sessionList, var14)
+			local var15 = rpcCall(var13, sessionList, var14, nil)
 			var10 = var15
 			onTerminalModule(var15.state, function(p5)
-				-- upvalues: var11 (ref), var11 (copy), var10 (copy), appendSessionListEntries (copy), var13 (copy), var14 (copy), var6 (copy), var8 (copy)
+				-- upvalues: var11 (ref), var11 (copy), var10 (copy), appendSessionListEntries (copy), var3 (copy), var4 (copy), var6 (copy), var8 (copy)
 				if var11 ~= var11 then return end
 				var10 = nil
 				local sessions = p5.sessions or {}
 				local nextPageToken = p5.nextPageToken
 				local var16 = if typeof(nextPageToken) == "string" and nextPageToken ~= "" then nextPageToken else nil
-				var14(appendSessionListEntries(var13(false), sessions))
+				var4(appendSessionListEntries(var3(false), sessions))
 				var6(var16)
 				var8("succeeded")
 			end, function(_)
@@ -337,19 +337,19 @@ return function(p3)
 	end
 	
 	local function sessionCancel(p5)
-		-- upvalues: acpProtocolModule (copy), rpcCall (ref), p5 (ref), var2 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
+		-- upvalues: acpProtocolModule (copy), rpcCall (ref), p3 (ref), var1 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var12
 		assert(typeof(p5) == "string" and p5 ~= "", "sessionId is required")
 		local sessionCancel = acpProtocolModule.Methods.SessionCancel
 		local t = { sessionId = p5 }
 		
-		if p5.generateRequestId then
-			var12 = p5.generateRequestId()
+		if p3.generateRequestId then
+			var12 = p3.generateRequestId()
 		else
-			var12 += 1
-			var12 = var12
+			var1 += 1
+			var12 = var1
 		end
-		local var13 = rpcCall(var12, sessionCancel, t)
+		local var13 = rpcCall(var12, sessionCancel, t, nil)
 		onTerminalModule(var13.state, function()
 			-- upvalues: t_1 (copy), p5 (ref), t_3 (copy), t_2 (copy)
 			local var14 = t_1[p5]
@@ -373,23 +373,23 @@ return function(p3)
 			end
 		end)
 		
-		return var15
+		return var13
 	end
 	
 	local function sessionDelete(p6)
-		-- upvalues: acpProtocolModule (copy), rpcCall (ref), p6 (ref), var12 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
+		-- upvalues: acpProtocolModule (copy), rpcCall (ref), p3 (ref), var1 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var14
 		assert(typeof(p6) == "string" and p6 ~= "", "sessionId is required")
 		local sessionDelete = acpProtocolModule.Methods.SessionDelete
 		local t = { sessionId = p6 }
 		
-		if p6.generateRequestId then
-			var14 = p6.generateRequestId()
+		if p3.generateRequestId then
+			var14 = p3.generateRequestId()
 		else
-			var14 += 1
-			var14 = var14
+			var1 += 1
+			var14 = var1
 		end
-		local var15 = rpcCall(var14, sessionDelete, t)
+		local var15 = rpcCall(var14, sessionDelete, t, nil)
 		onTerminalModule(var15.state, function()
 			-- upvalues: t_1 (copy), p6 (ref), acpProtocolModule (copy), t_3 (copy), t_2 (copy)
 			local var16 = t_1[p6]
@@ -413,7 +413,7 @@ return function(p3)
 			end
 		end)
 		
-		return var17
+		return var15
 	end
 	
 	local function sessionUpdateInfo(p7, p8)
@@ -433,22 +433,30 @@ return function(p3)
 		return rpcCallSync(acpProtocolModule.Methods.SessionSaveAndPublish, p7)
 	end
 	
+	local function adCampaignEligibility(p7)
+		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
+		assert(typeof(p7) == "table", "adCampaignEligibility requires params")
+		assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
+		
+		return rpcCallSync(acpProtocolModule.Methods.AdCampaignEligibility, p7, require(script.Parent.decodeAdCampaignEligibilityResult))
+	end
+	
 	local _ = function(p7, p8, p9, p10)
-		-- upvalues: createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), p7 (ref), var14 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
+		-- upvalues: createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), p3 (ref), var1 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var16, var17 = createTurnHandleModule(p7, p8, function()
-			-- upvalues: p7 (ref), acpProtocolModule (copy), rpcCall (copy), p7 (copy), var16 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
+			-- upvalues: p7 (ref), acpProtocolModule (copy), rpcCall (copy), p3 (copy), var1 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
 			local var18
 			assert(typeof(p7) == "string" and p7 ~= "", "sessionId is required")
 			local sessionCancel = acpProtocolModule.Methods.SessionCancel
 			local t = { sessionId = p7 }
 			
-			if p7.generateRequestId then
-				var18 = p7.generateRequestId()
+			if p3.generateRequestId then
+				var18 = p3.generateRequestId()
 			else
-				var18 += 1
-				var18 = var18
+				var1 += 1
+				var18 = var1
 			end
-			onTerminalModule(rpcCall(var18, sessionCancel, t).state, function()
+			onTerminalModule(rpcCall(var18, sessionCancel, t, nil).state, function()
 				-- upvalues: t_1 (copy), p7 (ref), t_3 (copy), t_2 (copy)
 				local var19 = t_1[p7]
 				
@@ -472,41 +480,41 @@ return function(p3)
 			end)
 		end, p9, p10)
 		t_1[p7] = var17
-		t_3[p7] = var18
+		t_3[p7] = var16
 		
 		if p8 ~= nil then
 			t_2[tostring(p8)] = var17
 		end
-		return var18
+		return var16
 	end
 	
 	local function sessionPrompt(p11)
-		-- upvalues: p11 (ref), var16 (write), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
+		-- upvalues: p3 (ref), var1 (write), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var18
 		assert(p11 and (typeof(p11.sessionId) == "string" and p11.sessionId ~= ""), "sessionId is required")
 		assert(p11.prompt, "prompt is required")
 		local sessionId = p11.sessionId
 		
-		if p11.generateRequestId then
-			var18 = p11.generateRequestId()
+		if p3.generateRequestId then
+			var18 = p3.generateRequestId()
 		else
-			var18 += 1
-			var18 = var18
+			var1 += 1
+			var18 = var1
 		end
 		local var19, var20 = createTurnHandleModule(sessionId, var18, function()
-			-- upvalues: sessionId (ref), acpProtocolModule (copy), rpcCall (copy), p11 (copy), var18 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
+			-- upvalues: sessionId (ref), acpProtocolModule (copy), rpcCall (copy), p3 (copy), var1 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
 			local var21
 			assert(typeof(sessionId) == "string" and sessionId ~= "", "sessionId is required")
 			local sessionCancel = acpProtocolModule.Methods.SessionCancel
 			local t = { sessionId = sessionId }
 			
-			if p11.generateRequestId then
-				var21 = p11.generateRequestId()
+			if p3.generateRequestId then
+				var21 = p3.generateRequestId()
 			else
-				var21 += 1
-				var21 = var21
+				var1 += 1
+				var21 = var1
 			end
-			onTerminalModule(rpcCall(var21, sessionCancel, t).state, function()
+			onTerminalModule(rpcCall(var21, sessionCancel, t, nil).state, function()
 				-- upvalues: t_1 (copy), sessionId (ref), t_3 (copy), t_2 (copy)
 				local var22 = t_1[sessionId]
 				
@@ -532,8 +540,8 @@ return function(p3)
 		t_1[sessionId] = var20
 		t_3[sessionId] = var19
 		
-		if var21 ~= nil then
-			t_2[tostring(var21)] = var20
+		if var18 ~= nil then
+			t_2[tostring(var18)] = var20
 		end
 		local var22 = t_1[sessionId]
 		local t = { sessionId = sessionId }
@@ -543,7 +551,7 @@ return function(p3)
 		if p11._meta then
 			t._meta = p11._meta
 		end
-		onTerminalModule(rpcCall(var21, acpProtocolModule.Methods.SessionPrompt, t).state, nil, function(p12, p13)
+		onTerminalModule(rpcCall(var18, acpProtocolModule.Methods.SessionPrompt, t).state, nil, function(p12, p13)
 			-- upvalues: var22 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
 			task.defer(function()
 				-- upvalues: var22 (copy), p12 (ref), p13 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
@@ -570,7 +578,7 @@ return function(p3)
 	end
 	
 	local function resumeTurnFromHistory(p12, p13, p14)
-		-- upvalues: t_3 (ref), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), p12 (ref), var21 (write), onTerminalModule (copy), t_1 (ref), t_2 (ref)
+		-- upvalues: t_3 (ref), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), p3 (ref), var1 (write), onTerminalModule (copy), t_1 (ref), t_2 (ref)
 		assert(typeof(p12) == "string" and p12 ~= "", "sessionId is required")
 		
 		if p13.isDone then
@@ -580,19 +588,19 @@ return function(p3)
 		
 		if var23 == nil then
 			local var24, var25 = createTurnHandleModule(p12, nil, function()
-				-- upvalues: p12 (ref), acpProtocolModule (copy), rpcCall (copy), p12 (copy), var23 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
+				-- upvalues: p12 (ref), acpProtocolModule (copy), rpcCall (copy), p3 (copy), var1 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
 				local var26
 				assert(typeof(p12) == "string" and p12 ~= "", "sessionId is required")
 				local sessionCancel = acpProtocolModule.Methods.SessionCancel
 				local t = { sessionId = p12 }
 				
-				if p12.generateRequestId then
-					var26 = p12.generateRequestId()
+				if p3.generateRequestId then
+					var26 = p3.generateRequestId()
 				else
-					var26 += 1
-					var26 = var26
+					var1 += 1
+					var26 = var1
 				end
-				onTerminalModule(rpcCall(var26, sessionCancel, t).state, function()
+				onTerminalModule(rpcCall(var26, sessionCancel, t, nil).state, function()
 					-- upvalues: t_1 (copy), p12 (ref), t_3 (copy), t_2 (copy)
 					local var27 = t_1[p12]
 					
@@ -668,6 +676,7 @@ return function(p3)
 		sessionDelete = sessionDelete,
 		sessionUpdateInfo = sessionUpdateInfo,
 		sessionSaveAndPublish = sessionSaveAndPublish,
+		adCampaignEligibility = adCampaignEligibility,
 		ingestSessionHistory = ingestSessionHistory,
 		ingestFrame = function(p15, p16)
 			-- upvalues: ingestFrameHandlerModule (copy), logger (ref), var26 (ref), t_1 (ref), t_2 (ref), unregisterHandle (ref)

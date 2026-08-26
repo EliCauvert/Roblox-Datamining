@@ -947,6 +947,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,Saya setuju bahwa pengalaman virtual ini akan mengirim item avatar saya ke moderasi lalu di-upload ke Kreasi Saya.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,Saya setuju bahwa pengalaman virtual ini akan mengirim emote saya ke moderasi lalu di-upload ke Kreasi Saya.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,Saya setuju bahwa pengalaman virtual ini akan mengirim gambar saya untuk dimoderasi dan di-upload ke Kreasi Saya.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Item yang dibuat akan di-review dan kamu mungkin tidak menerima pengembalian dana untuk item yang ditolak karena tidak mematuhi Standar Komunitas.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Deskripsi Tidak Valid
 CoreScripts.PublishAssetPrompt.InvalidName,Nama Tidak Valid
@@ -961,6 +962,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,Kirim Pakaian
 CoreScripts.PublishAssetPrompt.TitleTextEmote,Kirim Emote
+CoreScripts.PublishAssetPrompt.TitleTextImage,Kirim Gambar
 CoreScripts.PublishAssetPrompt.TitleTextModel,Kirim Paket
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,Terjadi kesalahan. Coba lagi. Kode Eror: {RESULT_TYPE}
@@ -2087,6 +2089,10 @@ Feature.Build.Message.WhatToCreate,Apa yang ingin kamu buat hari ini?
 Feature.Build.Message.WorkedMinutesSeconds,Bekerja selama {MINUTES}mnt{REM_SECONDS}dtk
 Feature.Build.Message.WorkedSeconds,Bekerja selama {SECONDS}dtk
 Feature.Build.Message.WorkingOnTasks,Mengerjakan tugasmu
+Feature.Build.Notification.Message.Continue,Teruskan chat build-mu untuk melanjutkan.
+Feature.Build.Notification.Message.Review,Teruskan chat build-mu untuk me-review hasilnya.
+Feature.Build.Notification.Title.Finished,Build selesai
+Feature.Build.Notification.Title.NeedInput,Build membutuhkan input darimu
 Feature.Build.Title.AdCampaignActive,Kampanye iklan aktif
 Feature.Build.Title.AddFriendsToPlaytest,Tambahkan teman untuk membantumu melakukan playtest
 Feature.Build.Title.ArchiveThisGame,Arsipkan game ini?

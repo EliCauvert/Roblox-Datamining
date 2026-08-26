@@ -145,7 +145,7 @@ local function createLocalToolControllers(p1, p2, p3)
 	local var3 = askUserControllerModule(p1, t, var2, p2)
 	local var4 = proposePlanControllerModule(p1, t, var2, p2)
 	local var5 = clientLogsControllerModule(p1, t, p3)
-	local var6 = if var2 ~= nil then nil else var2(p1, t, p3)
+	local var6 = if var1 ~= nil then nil else var1(p1, t, p3)
 	
 	return {
 		getOptimisticLocalTools = var2.getOptimisticLocalTools,
@@ -204,21 +204,21 @@ return {
 				}
 			},
 			onDroppedChatMessage = function(p7)
-				-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), p7 (ref)
+				-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), p1 (ref)
 				sendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
 					universeId = universeId,
-					placeId = p7.placeId,
-					conversationId = p7.getCasSessionId(),
+					placeId = p1.placeId,
+					conversationId = p1.getCasSessionId(),
 					messageId = p7
 				})
 			end,
 			onReceived = if fFlagBuildEventsUpdate1Module or fFlagBuildAgentRollbackModule and p6 ~= nil then function(p7)
-				-- upvalues: fFlagBuildEventsUpdate1Module (copy), sendBuildExperienceEventModule (copy), universeId (ref), p7 (ref), fFlagBuildAgentRollbackModule (copy), p6 (ref)
+				-- upvalues: fFlagBuildEventsUpdate1Module (copy), sendBuildExperienceEventModule (copy), universeId (ref), p1 (ref), fFlagBuildAgentRollbackModule (copy), p6 (ref)
 				if fFlagBuildEventsUpdate1Module then
 					sendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
 						universeId = universeId,
-						placeId = p7.placeId,
-						conversationId = p7.getCasSessionId(),
+						placeId = p1.placeId,
+						conversationId = p1.getCasSessionId(),
 						turnId = p7
 					})
 				end
@@ -227,7 +227,7 @@ return {
 				end
 			end else nil,
 			onCompleted = function(p7)
-				-- upvalues: resolvePromptFailure (copy), var3 (write), debug (copy), universeId (ref), p7 (ref), sendBuildExperienceEventModule (copy), getPromptFailureTelemetryParameters (copy), p3 (ref)
+				-- upvalues: resolvePromptFailure (copy), var3 (write), debug (copy), universeId (ref), p1 (ref), sendBuildExperienceEventModule (copy), getPromptFailureTelemetryParameters (copy), p3 (ref)
 				local var4 = resolvePromptFailure(p7, var3.getSetupError(false))
 				
 				if var4 ~= nil then
@@ -236,12 +236,12 @@ return {
 						isContentPolicy = var4.isContentPolicy,
 						setupStage = var4.setupStage,
 						universeId = universeId,
-						placeId = p7.placeId
+						placeId = p1.placeId
 					})
 					sendBuildExperienceEventModule("SEND_PROMPT_FAILED", {
 						universeId = universeId,
-						placeId = p7.placeId,
-						conversationId = p7.getCasSessionId()
+						placeId = p1.placeId,
+						conversationId = p1.getCasSessionId()
 					}, getPromptFailureTelemetryParameters(var4))
 				end
 				p3(var4)
@@ -335,11 +335,11 @@ return {
 				var4 = true
 				local t = {
 					onDroppedChatMessage = function(p7)
-						-- upvalues: sendBuildExperienceEventModule (copy), p7 (copy)
+						-- upvalues: sendBuildExperienceEventModule (copy), p1 (copy)
 						sendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
-							universeId = p7.universeId,
-							placeId = p7.placeId,
-							conversationId = p7.getCasSessionId(),
+							universeId = p1.universeId,
+							placeId = p1.placeId,
+							conversationId = p1.getCasSessionId(),
 							messageId = p7
 						})
 					end

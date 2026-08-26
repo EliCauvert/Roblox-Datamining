@@ -929,6 +929,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,मैं इस बात से सहमत हूँ कि यह एक्सपीरिएंस मेरे अवतार आइटम को मॉडरेशन में सबमिट करेगा और उसे 'मेरे क्रिएशन' पर अपलोड करेगा.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,मैं इस बात से सहमत हूँ कि यह एक्सपीरिएंस मेरे emote को मॉडरेशन में सबमिट करेगा और उसे 'मेरे क्रिएशन' पर अपलोड करेगा.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,मैं इससे सहमत हूँ कि यह एक्सपीरिएंस मेरी इमेज को मॉडरेशन में सबमिट करेगा और उसे 'मेरे क्रिएशन' पर अपलोड करेगा.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,"क्रिएट किए गए आइटम रिव्यू किए जाएँगे. हो सकता है कि आपको नामंज़ूर किए गए उन आइटम का रिफ़ंड न मिले, जो कम्यूनिटी स्टैंडर्ड का पालन नहीं करते हैं."
 CoreScripts.PublishAssetPrompt.InvalidDescription,विवरण अमान्य है
 CoreScripts.PublishAssetPrompt.InvalidName,अमान्य नाम
@@ -943,6 +944,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,कपड़े सबमिट करें
 CoreScripts.PublishAssetPrompt.TitleTextEmote,Emote सबमिट करें
+CoreScripts.PublishAssetPrompt.TitleTextImage,इमेज सबमिट करें
 CoreScripts.PublishAssetPrompt.TitleTextModel,पैकेज सबमिट करें
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,कुछ गड़बड़ी हुई. फिर से कोशिश करें. गड़बड़ी का कोड: {RESULT_TYPE}
@@ -2068,6 +2070,10 @@ Feature.Build.Message.WhatToCreate,आपको आज क्या क्रि
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} मिनट {REM_SECONDS} सेकंड तक काम किया
 Feature.Build.Message.WorkedSeconds,{SECONDS} सेकंड तक काम किया
 Feature.Build.Message.WorkingOnTasks,आपके टास्क पर काम चल रहा है
+Feature.Build.Notification.Message.Continue,"जारी रखने के लिए, अपनी बिल्ड चैट फिर से शुरू करें."
+Feature.Build.Notification.Message.Review,"रिज़ल्ट रिव्यू करने के लिए, अपनी बिल्ड चैट फिर से शुरू करें."
+Feature.Build.Notification.Title.Finished,बिल्ड पूरा हुआ
+Feature.Build.Notification.Title.NeedInput,बिल्ड के लिए आपके इनपुट की ज़रूरत है
 Feature.Build.Title.AdCampaignActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AddFriendsToPlaytest,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स जोड़ें
 Feature.Build.Title.ArchiveThisGame,इस गेम को आर्काइव में भेजना है?

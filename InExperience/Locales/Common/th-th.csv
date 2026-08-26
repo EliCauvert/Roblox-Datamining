@@ -930,6 +930,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,ฉันยอมรับว่าประสบการณ์นี้จะส่งไอเท็มสำหรับอวาตาร์ของฉันไปยังทีมกลั่นกรองและอัปโหลดไปยังการสร้างสรรค์ของฉัน
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,ฉันยอมรับว่าประสบการณ์นี้จะส่งท่าทางของฉันไปยังทีมกลั่นกรองและอัปโหลดไปยังการสร้างสรรค์ของฉัน
+CoreScripts.PublishAssetPrompt.DisclaimerImage,ฉันยอมรับว่าประสบการณ์นี้จะส่งภาพของฉันไปยังทีมกลั่นกรองและอัปโหลดไปยังการสร้างสรรค์ของฉัน
 CoreScripts.PublishAssetPrompt.DisclaimerModel,เราจะตรวจสอบไอเท็มที่สร้าง คุณอาจไม่ได้รับเงินคืนสำหรับไอเท็มที่ถูกปฏิเสธเนื่องจากไม่เป็นไปตามมาตรฐานชุมชน
 CoreScripts.PublishAssetPrompt.InvalidDescription,คำอธิบายไม่ถูกต้อง
 CoreScripts.PublishAssetPrompt.InvalidName,ชื่อไม่ถูกต้อง
@@ -944,6 +945,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,ส่งเสื้อผ้า
 CoreScripts.PublishAssetPrompt.TitleTextEmote,ส่งท่าทาง
+CoreScripts.PublishAssetPrompt.TitleTextImage,ส่งภาพ
 CoreScripts.PublishAssetPrompt.TitleTextModel,ส่งแพ็คเกจ
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,มีปัญหาบางอย่างเกิดขึ้น โปรดลองอีกครั้ง รหัสข้อผิดพลาด: {RESULT_TYPE}
@@ -1820,6 +1822,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,แจ้งเตือนฉัน
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,เปิดการตั้งค่า
+Feature.Build.Action.Play,เล่น
 Feature.Build.Action.Playtest,ทดลองเล่น
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
@@ -1870,7 +1873,10 @@ Feature.Build.Header.ContentMaturity,ระดับความเหมาะ�
 Feature.Build.Header.CustomAnswer,คำตอบที่กำหนดเอง
 Feature.Build.Header.GameDetails,รายละเอียดเกม
 Feature.Build.Header.Overview,ภาพรวม
+Feature.Build.Header.PastCampaigns,แคมเปญที่ผ่านมา
 Feature.Build.Label.Access,การเข้าถึง
+Feature.Build.Label.AdClicks,จำนวนการคลิกโฆษณา
+Feature.Build.Label.AdViews,จำนวนการดูโฆษณา
 Feature.Build.Label.AdditionalUsage,โควต้าการใช้งาน Build เพิ่มเติม
 Feature.Build.Label.AdditionalUsed,ใช้ไปแล้ว {USED} จาก {LIMIT}
 Feature.Build.Label.All,
@@ -1884,6 +1890,7 @@ Feature.Build.Label.ContentRating,การจัดระดับความ�
 Feature.Build.Label.Created,สร้างแล้ว
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,ศูนย์กลางครีเอเตอร์
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,ลบแล้ว
 Feature.Build.Label.DescribeIdea,อธิบายไอเดีย
 Feature.Build.Label.Description,
@@ -1892,6 +1899,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,โควต้าการใช้งาน Build ฟรี
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
+Feature.Build.Label.GamePlays,จำนวนการเล่นเกม
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
 Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
@@ -1906,6 +1914,7 @@ Feature.Build.Label.NoLimit,ไม่จำกัด
 Feature.Build.Label.NotStarted,ยังไม่ได้เริ่ม
 Feature.Build.Label.Pending,รอดำเนินการ
 Feature.Build.Label.PercentUsed,ใช้ไปแล้ว {PERCENT}%
+Feature.Build.Label.PlayTime,เวลาเล่น
 Feature.Build.Label.PreviouslyPublished,เผยแพร่ไปก่อนหน้านี้
 Feature.Build.Label.Private,ส่วนตัว
 Feature.Build.Label.Public,สาธารณะ
@@ -2003,6 +2012,7 @@ Feature.Build.Label.VersionTitleDesc,ชื่อและคำอธิบา�
 Feature.Build.Label.Video,วิดีโอ
 Feature.Build.Message.AccountRequirements,บัญชีของคุณมีคุณสมบัติไม่ตรงตามข้อกำหนดในการใช้ Build
 Feature.Build.Message.AccountTooNew,บัญชีของคุณยังใหม่เกินไปที่จะเผยแพร่ ลองอีกครั้งเมื่อบัญชีมีอายุ 2 วัน
+Feature.Build.Message.AdPerformanceLoadFailed,ไม่สามารถโหลดประสิทธิภาพโฆษณาได้
 Feature.Build.Message.AllFriendsAdded,คุณเพิ่มเพื่อนทั้งหมดของคุณเป็นผู้ทดลองเล่นแล้ว
 Feature.Build.Message.AnswerBuildQuestion,ตอบคำถามของ Build ด้านล่าง
 Feature.Build.Message.AssetDetailsUnavailable,รายละเอียดทรัพยากรไม่พร้อมใช้งาน
@@ -2070,6 +2080,10 @@ Feature.Build.Message.WhatToCreate,วันนี้คุณอยากสร
 Feature.Build.Message.WorkedMinutesSeconds,ใช้เวลาทำงานไป {MINUTES} นาที {REM_SECONDS} วินาที
 Feature.Build.Message.WorkedSeconds,ใช้เวลาทำงานไป {SECONDS} วินาที
 Feature.Build.Message.WorkingOnTasks,กำลังทำงานของคุณ
+Feature.Build.Notification.Message.Continue,กลับมาที่แชท Build อีกครั้งเพื่อดำเนินการต่อ
+Feature.Build.Notification.Message.Review,กลับมาที่แชท Build อีกครั้งเพื่อดูผลงาน
+Feature.Build.Notification.Title.Finished,Build ทำเสร็จแล้ว
+Feature.Build.Notification.Title.NeedInput,Build ต้องการอินพุตจากคุณ
 Feature.Build.Title.AdCampaignActive,แคมเปญโฆษณาเปิดใช้งานอยู่
 Feature.Build.Title.AddFriendsToPlaytest,เพิ่มเพื่อนที่จะช่วยคุณทดลองเล่น
 Feature.Build.Title.ArchiveThisGame,เก็บเกมนี้ถาวรใช่ไหม?
@@ -2089,6 +2103,7 @@ Feature.Build.Title.FriendsOnlyPlay,เฉพาะเพื่อนเท่�
 Feature.Build.Title.GameCreationDone,สร้างเกมเรียบร้อยแล้ว
 Feature.Build.Title.GamePrivate,เกมนี้เป็นแบบส่วนตัว
 Feature.Build.Title.GenericError,มีบางอย่างผิดปกติ
+Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.Playtesters,ผู้ทดลองเล่น
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
@@ -2779,7 +2794,7 @@ Feature.ExperienceDetails.Label.NotPlayable,ไม่สามารถเล่
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,การเล่นประสบการณ์นี้ถือเป็นการยอมรับการแจ้งเตือน
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,เล่น
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,เล่นเดโม
 Feature.ExperienceDetails.PlayButtonText.Unavailable,ไม่สามารถใช้งานได้
 Feature.ExperienceDetails.PlayButtonText.Unlock,ปลดล็อค

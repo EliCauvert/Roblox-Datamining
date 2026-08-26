@@ -145,6 +145,7 @@ return {
 	CreatorSuccessVirtualEvents = "CreatorSuccess.VirtualEvents",
 	AppBadgingLayer = game:DefineFastString("AppBadgingLayer", "Notifications.AppBadging"),
 	ConsoleVoiceLayer = "User.Communication.ConsoleVoice",
+	FriendsChatRestrictionUserIDLayer = "UserSafety.FriendsChatRestriction.UserID",
 	NotApprovedPageUserIDLayer = "UserSafety.NotApprovedPage.UserID",
 	EconomyDeveloperMonetizationEdpVirtualProductsRanking = "Economy.DeveloperMonetization.EdpVirtualProductsRanking",
 	RMLayer = sharedFlagsModule.FStringRMLayer,

@@ -1,5 +1,6 @@
 ﻿return {
 	CircuitRush = "CircuitRush",
+	Classic = "Classic",
 	CosmicDust = "CosmicDust",
 	Default = "Default",
 	ElectricLime = "ElectricLime",

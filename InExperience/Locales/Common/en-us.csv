@@ -839,6 +839,12 @@ CoreScripts.InGameMenu.GameSettings.SwitchToAdvancedSettings,Advanced Settings
 CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Custom Settings
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI Navigation Toggle
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Use the ""\"" key to enter and exit UI navigation mode"
+CoreScripts.InGameMenu.GameSettings.UIScale,UI Scale
+CoreScripts.InGameMenu.GameSettings.UIScaleLargest,Largest
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,UI Scale Mode
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Auto
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manual
+CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,Smallest
 CoreScripts.InGameMenu.GameSettings.VREnabled,VR Mode
 CoreScripts.InGameMenu.GameSettings.VRSmoothRotationEnabled,VR Smooth Rotation Enabled
 CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled,VR Stepped Rotation Enabled
@@ -948,6 +954,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,I agree that this experience will submit my avatar item to moderation and upload to My Creations.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,I agree that this experience will submit my emote to moderation and upload to My Creations.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,I agree that this experience will submit my image to moderation and upload to My Creations.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Created items will be reviewed and you may not receive a refund for rejected items that do not comply with Community Standards.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Invalid Description
 CoreScripts.PublishAssetPrompt.InvalidName,Invalid Name
@@ -962,6 +969,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,Submit Clothing
 CoreScripts.PublishAssetPrompt.TitleTextEmote,Submit Emote
+CoreScripts.PublishAssetPrompt.TitleTextImage,Submit Image
 CoreScripts.PublishAssetPrompt.TitleTextModel,Submit Package
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,Something went wrong. Please try again. Error Code: {RESULT_TYPE}
@@ -1183,7 +1191,7 @@ Feature.Accessibility.Heading.PreferredTransparency,Background transparency
 Feature.Accessibility.Heading.ReducedMotion,Reduce motion
 Feature.Accessibility.Heading.UiNavigationKeyBind,UI navigation toggle
 Feature.Accessibility.PreferredTextSize.Default,
-Feature.Accessibility.PreferredTextSize.Largest,Largest
+Feature.Accessibility.PreferredTextSize.Largest,
 Feature.Accessibility.PreferredTransparency.Opaque,Opaque
 Feature.Accessibility.PreferredTransparency.Transparent,Transparent
 Feature.AccountSecurityPrompt.Message.Error.Pin.IncorrectPin,Incorrect PIN.
@@ -1304,11 +1312,14 @@ Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Explore Styles
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,Stay here
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publish
 Feature.Avatar.BackgroundGeneration.Action.Upload,Upload
 Feature.Avatar.BackgroundGeneration.Action.View,View
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Create backgrounds with Plus.
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"If you leave now, this background will be discarded."
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Your creation is ready to use.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"This background was generated with AI. By publishing, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory, and published items can't be edited."
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"This background was generated with AI. By uploading, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory. Uploaded items can't be edited."
@@ -1329,6 +1340,7 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe your background�
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generating your background…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparing your background…
 Feature.Avatar.BackgroundGeneration.Title,Create Background
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,Discard this background?
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publish to inventory
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
@@ -1816,6 +1828,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Block {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Blocking this user will remove them as a Connection or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Blocking this user will remove them as a friend or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
+Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,Add friends
 Feature.Build.Action.AddPlaytester,Add playtester
 Feature.Build.Action.AddPlaytesters,Add playtesters
@@ -1829,6 +1842,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Copy text
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Don't ask again
 Feature.Build.Action.HideAutosaved,Hide autosaved
 Feature.Build.Action.ManageLimit,Manage limit
@@ -1837,22 +1851,33 @@ Feature.Build.Action.NotNow,Not now
 Feature.Build.Action.NotifyMe,Notify me
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Open settings
+Feature.Build.Action.Play,Play
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publish latest
 Feature.Build.Action.Restore,Restore
+Feature.Build.Action.Resume,
 Feature.Build.Action.Revert,
 Feature.Build.Action.SetDailyLimit,Set a daily limit
 Feature.Build.Action.SetLimit,Set limit
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Share link
+Feature.Build.Action.ShowMore,
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Update rating
 Feature.Build.Action.UpdateWithChanges,Update with changes
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,View usage
+Feature.Build.Analytics.DurationHours,{number} hrs
+Feature.Build.Analytics.Percent,{number}%
+Feature.Build.Analytics.Title.Arppu,ARPPU
+Feature.Build.Analytics.Title.D1Retention,D1 retention
+Feature.Build.Analytics.Title.DailyActiveUsers,Daily active users
+Feature.Build.Analytics.Title.PayerConversion,Payer conversion
+Feature.Build.Analytics.Title.PlaythroughRate,Playthrough rate
+Feature.Build.Analytics.Title.TotalPlaytime,Total playtime
 Feature.Build.Content.NewGame,New game
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use your Robux to automatically buy additional Build usage as you create. You can set a daily spend limit anytime.
@@ -1887,7 +1912,10 @@ Feature.Build.Header.ContentMaturity,Content maturity
 Feature.Build.Header.CustomAnswer,Custom answer
 Feature.Build.Header.GameDetails,Game details
 Feature.Build.Header.Overview,Overview
+Feature.Build.Header.PastCampaigns,Past campaigns
 Feature.Build.Label.Access,Access
+Feature.Build.Label.AdClicks,Ad clicks
+Feature.Build.Label.AdViews,Ad views
 Feature.Build.Label.AdditionalUsage,Additional Build usage
 Feature.Build.Label.AdditionalUsed,{USED} of {LIMIT} used
 Feature.Build.Label.All,
@@ -1897,10 +1925,12 @@ Feature.Build.Label.Available,available
 Feature.Build.Label.BackToBuild,Back to Build
 Feature.Build.Label.Building,Building...
 Feature.Build.Label.CaptureLibrary,Capture library
+Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} of {MAX_SELECTIONS} selected
 Feature.Build.Label.ContentRating,Content rating
 Feature.Build.Label.Created,Created
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,Deleted
 Feature.Build.Label.DescribeIdea,Describe an idea
 Feature.Build.Label.Description,
@@ -1909,6 +1939,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Free Build usage
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Friends only
+Feature.Build.Label.GamePlays,Game plays
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
 Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
@@ -1923,6 +1954,7 @@ Feature.Build.Label.NoLimit,No limit
 Feature.Build.Label.NotStarted,Not started
 Feature.Build.Label.Pending,Pending
 Feature.Build.Label.PercentUsed,{PERCENT}% used
+Feature.Build.Label.PlayTime,Play time
 Feature.Build.Label.PreviouslyPublished,Previously published
 Feature.Build.Label.Private,Private
 Feature.Build.Label.Public,Public
@@ -2020,6 +2052,7 @@ Feature.Build.Label.VersionTitleDesc,Version title & description
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirements to use Build.
 Feature.Build.Message.AccountTooNew,Your account is too new to publish. Try again when it's 2 days old.
+Feature.Build.Message.AdPerformanceLoadFailed,Couldn't load ad performance
 Feature.Build.Message.AllFriendsAdded,You've added all your friends as playtesters.
 Feature.Build.Message.AnswerBuildQuestion,Answer Build's question below.
 Feature.Build.Message.AssetDetailsUnavailable,Asset details are unavailable.
@@ -2049,12 +2082,14 @@ Feature.Build.Message.GamePublishFailed,Your game couldn't be published. Try aga
 Feature.Build.Message.GameShared,Game shared
 Feature.Build.Message.GameSharedWith,Game shared with {DISPLAY_NAME}
 Feature.Build.Message.HiDisplayName,"Hi, {DISPLAY_NAME}"
+Feature.Build.Message.ImageUploadFailed,Your images couldn't be uploaded. Try again.
 Feature.Build.Message.InvalidMessage,Something went wrong with your message. Edit it and try again.
 Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
 Feature.Build.Message.LimitBelowSpend,Limit can't be below the {ALREADY_SPENT} Robux already spent today.
 Feature.Build.Message.LinkCopied,Link copied to clipboard.
 Feature.Build.Message.LoadingVersions,Loading version history...
 Feature.Build.Message.NoAssetsFound,No assets found.
+Feature.Build.Message.NoCapturesAvailable,No captures available
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to add yet. Find people to connect with on Roblox first.
 Feature.Build.Message.NoResults,
@@ -2087,8 +2122,13 @@ Feature.Build.Message.WhatToCreate,What do you want to create today?
 Feature.Build.Message.WorkedMinutesSeconds,Worked for {MINUTES}m{REM_SECONDS}s
 Feature.Build.Message.WorkedSeconds,Worked for {SECONDS}s
 Feature.Build.Message.WorkingOnTasks,Working on your tasks
+Feature.Build.Notification.Message.Continue,Resume your build chat to continue.
+Feature.Build.Notification.Message.Review,Resume your build chat to review the result.
+Feature.Build.Notification.Title.Finished,Build finished
+Feature.Build.Notification.Title.NeedInput,Build needs your input
 Feature.Build.Title.AdCampaignActive,Ad campaign is active
 Feature.Build.Title.AddFriendsToPlaytest,Add friends to help you playtest
+Feature.Build.Title.AddImages,Add images
 Feature.Build.Title.ArchiveThisGame,Archive this game?
 Feature.Build.Title.AssetLibrary,Library
 Feature.Build.Title.Audience,Audience
@@ -2106,6 +2146,7 @@ Feature.Build.Title.FriendsOnlyPlay,Only friends can play
 Feature.Build.Title.GameCreationDone,Completed game creation
 Feature.Build.Title.GamePrivate,This game is private
 Feature.Build.Title.GenericError,
+Feature.Build.Title.GetUsers,Get users
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.Playtesters,Playtesters
 Feature.Build.Title.PlaytestersOnlyPlay,Only playtesters can play
@@ -2797,7 +2838,7 @@ Feature.ExperienceDetails.Label.NotPlayable,Not Playable
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,I agree to the notes by playing this experience
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,Play
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Play Demo
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Unlock
@@ -3251,6 +3292,14 @@ Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} left
 Feature.InExperienceShop.Label.BonusItem,Bonus item
 Feature.InExperienceShop.Label.NoDescription,No Description
 Feature.InExperienceShop.Label.PreviewBanner,This is a preview of your Shop in Roblox Studio. Players do not see this preview.
+Feature.InExperienceShop.Label.Timer.Day.Plural,{number} days
+Feature.InExperienceShop.Label.Timer.Day.Singular,1 day
+Feature.InExperienceShop.Label.Timer.Hour.Plural,{number} hours
+Feature.InExperienceShop.Label.Timer.Hour.Singular,1 hour
+Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minutes
+Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minute
+Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconds
+Feature.InExperienceShop.Label.Timer.Second.Singular,1 second
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Are you sure you want to permanently delete this item from your inventory? If you change your mind, you'll need to earn it again in an experience."
 Feature.Item.Label.DeleteItemUndercase,Delete item
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
@@ -3420,8 +3469,8 @@ Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 minutes
 Feature.Notifications.Action.SnoozeFourHours,4 hours
-Feature.Notifications.Action.SnoozeOneDay,1 day
-Feature.Notifications.Action.SnoozeOneHour,1 hour
+Feature.Notifications.Action.SnoozeOneDay,
+Feature.Notifications.Action.SnoozeOneHour,
 Feature.Notifications.Action.UntilITurnItBackOn,Until I turn it back on
 Feature.Notifications.Heading.PushUpsellChat,Stay connected
 Feature.Notifications.Heading.PushUpsellGeneric,Don't miss out
@@ -4473,7 +4522,7 @@ InGame.ConnectionError.CreatorBanMessage,"Moderation message:
 
 {RBX_STR}"
 InGame.ConnectionError.CreatorBanMinutesPlural,{RBX_TIME_MINUTES} minutes
-InGame.ConnectionError.CreatorBanMinutesSingular,1 minute
+InGame.ConnectionError.CreatorBanMinutesSingular,
 InGame.ConnectionError.CreatorBanNoTime,You were banned by this experience or its moderators.
 InGame.ConnectionError.CreatorBanWithTime,You were banned by this experience or its moderators for {RBX_TIME_REMAINING}.
 InGame.ConnectionError.Description.AgeCheckRequired,Complete an age check to see if you can play this game.

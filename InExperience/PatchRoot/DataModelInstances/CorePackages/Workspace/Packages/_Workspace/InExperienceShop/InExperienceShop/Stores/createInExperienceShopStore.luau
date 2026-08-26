@@ -5,6 +5,8 @@ local parent = inExperienceShop.Parent
 local promiseModule = require(parent.Promise)
 local sharedFlagsModule = require(parent.SharedFlags)
 local createSignal = require(parent.Signals).createSignal
+local inExperienceOffersModule = require(parent.InExperienceOffers)
+local fFlagEnableUserOffers = sharedFlagsModule.FFlagEnableUserOffers
 local constantsModule = require(inExperienceShop.Constants)
 local _ = require(inExperienceShop.Types)
 local errorsModule = require(inExperienceShop.Api.Errors)
@@ -35,6 +37,7 @@ local bonusPromotionEligibilityModule = require(inExperienceShop.Api.BonusPromot
 local sortRobuxPackagesByAmountDescendingModule = require(inExperienceShop.Utils.sortRobuxPackagesByAmountDescending)
 local fFlagEnableExperienceShopGlobalIconModule = require(inExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
 local fFlagInExperienceShopExpectStringMetadataValuesModule = require(inExperienceShop.Flags.FFlagInExperienceShopExpectStringMetadataValues)
+local list = { inExperienceOffersModule.FeatureKeys.RobloxShop }
 
 local function _(p1)
 	return type(p1) == "table" and (type(p1.categories) == "table" and type(p1.sections) == "table")
@@ -46,7 +49,7 @@ local _ = function()
 end
 
 return function()
-	-- upvalues: createSignal (ref), constantsModule (ref), sortRobuxPackagesByAmountDescendingModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableRobuxInExperienceShop (ref), bonusPromotionEligibilityModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassModule (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref), fFlagShopUseMockGamePassTrialAvailabilitiesModule (ref), mockGamePassTrialAvailabilitiesModule (ref), fetchGamePassTrialAvailabilitiesModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (ref), inExperienceShop (ref), fFlagShopUseMockDataModule (ref), fFlagShopUseMockMultiGetProductInfoModule (ref), mockMultiGetProductInfoModule (ref), streamMultiGetProductInfoModule (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), errorsModule (ref), fFlagEnablePartialDisplayInExperienceShopModule (ref), fetchShopWidgetsOnlyModule (ref), mockFetchAllShopDataModule (ref), fetchAllShopDataModule (ref), fFlagEnableShopProductInfoRefreshModule (ref), multiGetProductInfoModule (ref), promiseModule (ref), playersService (ref), marketplaceService (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref)
+	-- upvalues: createSignal (ref), constantsModule (ref), sortRobuxPackagesByAmountDescendingModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableRobuxInExperienceShop (ref), bonusPromotionEligibilityModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassModule (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref), fFlagShopUseMockGamePassTrialAvailabilitiesModule (ref), mockGamePassTrialAvailabilitiesModule (ref), fetchGamePassTrialAvailabilitiesModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (ref), inExperienceShop (ref), fFlagShopUseMockDataModule (ref), fFlagShopUseMockMultiGetProductInfoModule (ref), mockMultiGetProductInfoModule (ref), streamMultiGetProductInfoModule (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), errorsModule (ref), fFlagEnableUserOffers (ref), inExperienceOffersModule (ref), list (ref), fFlagEnablePartialDisplayInExperienceShopModule (ref), fetchShopWidgetsOnlyModule (ref), mockFetchAllShopDataModule (ref), fetchAllShopDataModule (ref), fFlagEnableShopProductInfoRefreshModule (ref), multiGetProductInfoModule (ref), promiseModule (ref), playersService (ref), marketplaceService (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref)
 	local var1, var2 = createSignal({})
 	local var3, var4 = createSignal({})
 	local var5, var6 = createSignal(false)
@@ -388,7 +391,7 @@ return function()
 	end
 	
 	local function runShopFetch(p4, p5, p6)
-		-- upvalues: var25 (write), var24 (write), var6 (ref), var8 (ref), hydrateGamePassTrialAvailabilities (ref), fFlagShopUseMockDataModule (copy), errorsModule (copy), var2 (ref), t_2 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (ref), var14 (ref), t_1 (write)
+		-- upvalues: var25 (write), var24 (write), var6 (ref), var8 (ref), hydrateGamePassTrialAvailabilities (ref), fFlagShopUseMockDataModule (copy), errorsModule (copy), var2 (ref), t_2 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (ref), var14 (ref), t_1 (write), fFlagEnableUserOffers (copy), inExperienceOffersModule (copy), list (copy)
 		if var25 or var24 then
 			return
 		end
@@ -397,7 +400,7 @@ return function()
 		var8(nil)
 		hydrateGamePassTrialAvailabilities();
 		(if fFlagShopUseMockDataModule then p5() else p4()):andThen(function(p7)
-			-- upvalues: errorsModule (copy), p6 (ref), var2 (copy), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (copy), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (copy), var14 (copy), t_1 (copy), var6 (copy), var24 (copy), var25 (copy)
+			-- upvalues: errorsModule (copy), p6 (ref), var2 (copy), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (copy), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (copy), var14 (copy), t_1 (copy), var6 (copy), var24 (copy), var25 (copy), fFlagEnableUserOffers (copy), inExperienceOffersModule (copy), list (copy)
 			if not (type(p7) == "table" and (type(p7.categories) == "table" and type(p7.sections) == "table")) then
 				return errorsModule.rejectSchema(string.format("createInExperienceShopStore: %s payload missing categories/sections", p6), p7)
 			end
@@ -425,6 +428,10 @@ return function()
 			var6(false)
 			var24 = false
 			var25 = true
+			
+			if fFlagEnableUserOffers then
+				inExperienceOffersModule.getOffersStore(false).fetchOffers(list)
+			end
 		end):catch(function(p7)
 			-- upvalues: var8 (copy), var2 (copy), var4 (copy), t_1 (copy), var6 (copy), var24 (copy)
 			var8(p7)
@@ -437,7 +444,7 @@ return function()
 	end
 	
 	local function runPartialDisplayShopFetch(p4, p5, p6)
-		-- upvalues: var25 (write), var24 (write), var6 (ref), var8 (ref), hydrateGamePassTrialAvailabilities (ref), fFlagShopUseMockDataModule (copy), errorsModule (copy), var2 (ref), t_2 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (ref), var14 (ref), t_1 (write), buildProductInfoRequestsForHydration (ref), streamProductInfoIntoSections (ref)
+		-- upvalues: var25 (write), var24 (write), var6 (ref), var8 (ref), hydrateGamePassTrialAvailabilities (ref), fFlagShopUseMockDataModule (copy), errorsModule (copy), var2 (ref), t_2 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (ref), var14 (ref), t_1 (write), fFlagEnableUserOffers (copy), inExperienceOffersModule (copy), list (copy), buildProductInfoRequestsForHydration (ref), streamProductInfoIntoSections (ref)
 		if var25 or var24 then
 			return
 		end
@@ -446,7 +453,7 @@ return function()
 		var8(nil)
 		hydrateGamePassTrialAvailabilities();
 		(if fFlagShopUseMockDataModule then p5() else p4()):andThen(function(p7)
-			-- upvalues: errorsModule (copy), p6 (ref), var2 (copy), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (copy), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (copy), var14 (copy), t_1 (copy), var6 (copy), var24 (copy), var25 (copy), buildProductInfoRequestsForHydration (copy), streamProductInfoIntoSections (copy)
+			-- upvalues: errorsModule (copy), p6 (ref), var2 (copy), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (copy), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (copy), var14 (copy), t_1 (copy), var6 (copy), var24 (copy), var25 (copy), fFlagEnableUserOffers (copy), inExperienceOffersModule (copy), list (copy), buildProductInfoRequestsForHydration (copy), streamProductInfoIntoSections (copy)
 			if not (type(p7) == "table" and (type(p7.categories) == "table" and type(p7.sections) == "table")) then
 				return errorsModule.rejectSchema(string.format("createInExperienceShopStore: %s payload missing categories/sections", p6), p7)
 			end
@@ -474,6 +481,10 @@ return function()
 			var6(false)
 			var24 = false
 			var25 = true
+			
+			if fFlagEnableUserOffers then
+				inExperienceOffersModule.getOffersStore(false).fetchOffers(list)
+			end
 			local var37 = t_2
 			streamProductInfoIntoSections(var37, buildProductInfoRequestsForHydration(var37, t_1), t_1, nil)
 		end):catch(function(p7)

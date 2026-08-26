@@ -41,11 +41,19 @@ local function createStyleSheet(p1, p2, p3, p4, p5)
 end
 
 local function createStyleRule(p1, p2)
+	-- upvalues: flagsModule (ref)
 	local text = "." .. p6
 	local var2 = if p1.modifier ~= nil then "" else ":" .. p5.modifier
 	local text_1 = text .. var24 .. (if p1.pseudo ~= nil then "" else " ::" .. p5.pseudo)
 	
-	if p1.pseudo ~= nil then
+	if flagsModule.FoundationStyleRulePseudoName then
+		if p1.pseudoName ~= nil then
+			text_1 ..= " #" .. p5.pseudoName
+		end
+		if p1.pseudo ~= nil and p1.pseudoName == nil then
+			text_1 ..= ", " .. text .. var24 .. " > " .. p5.pseudo
+		end
+	elseif p1.pseudo ~= nil then
 		text_1 ..= ", " .. text .. var24 .. " > " .. p5.pseudo
 	end
 	local styleRule = Instance.new("StyleRule")
@@ -72,12 +80,12 @@ local function applyAttributes(p1, p2)
 end
 
 local function addRegisteredStyleSheetTags(p3, p4)
-	-- upvalues: createStyleRule (ref), applyAttributes (ref)
+	-- upvalues: flagsModule (ref), createStyleRule (ref), applyAttributes (ref)
 	for i, v in p4 do
 		if not p3.tags[v] then
 			local var4 = p3.rules[v]
 			
-			if var4 then
+			if var4 and (flagsModule.FoundationStyleRulePseudoName or var4.pseudoName == nil) then
 				createStyleRule(var4, v).Parent = p3.instance
 				applyAttributes(p3, var4.attributes)
 				

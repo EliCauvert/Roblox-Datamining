@@ -1,8 +1,11 @@
 ﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
+local parent = inlineRichText.Parent
 local _ = require(inlineRichText.Types)
 local tokenNameModule = require(inlineRichText.Enums.TokenName)
 local parseXmlAttributesModule = require(inlineRichText.Parser.parseXmlAttributes)
 local escapeRichFormattingModule = require(inlineRichText.Utils.escapeRichFormatting)
+local unescapeRichFormattingModule = require(inlineRichText.Utils.unescapeRichFormatting)
+local fFlagInlineRichTextSkipPlaintextEscape = require(parent.SharedFlags).FFlagInlineRichTextSkipPlaintextEscape
 local _ = { Open = "OPEN", Close = "CLOSE", OpenClose = "OPEN_CLOSE" }
 local list = {
 	{ name = "OPEN_CLOSE", pattern = "^<([%w-]+)%s?([^>]*)/>" },
@@ -34,7 +37,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: list (ref), tokenNameModule (ref), escapeRichFormattingModule (ref), t (ref)
+	-- upvalues: list (ref), tokenNameModule (ref), fFlagInlineRichTextSkipPlaintextEscape (ref), unescapeRichFormattingModule (ref), escapeRichFormattingModule (ref), t (ref)
 	local var1, name, matchIndex, matchIndex_1, var2, var3
 	local var4 = 0
 	local var5 = 0
@@ -58,9 +61,10 @@ return function(p1)
 					
 					if var2 then
 						if var4 ~= var5 then
+							local substring = string.sub(replaced, var5, var4 - 1)
 							table.insert(t_1, {
 								name = tokenNameModule.Text,
-								text = escapeRichFormattingModule(string.sub(replaced, var5, var4 - 1)),
+								text = if fFlagInlineRichTextSkipPlaintextEscape then unescapeRichFormattingModule(substring) else escapeRichFormattingModule(substring),
 								attributes = {}
 							})
 						end
@@ -84,9 +88,10 @@ return function(p1)
 	var4 = #replaced + 1
 	
 	if var4 ~= var5 then
+		local substring = string.sub(replaced, var5, var4 - 1)
 		table.insert(t_1, {
 			name = tokenNameModule.Text,
-			text = escapeRichFormattingModule(string.sub(replaced, var5, var4 - 1)),
+			text = if fFlagInlineRichTextSkipPlaintextEscape then unescapeRichFormattingModule(substring) else escapeRichFormattingModule(substring),
 			attributes = {}
 		})
 	end

@@ -946,6 +946,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,我同意此體驗會將我的虛擬人偶道具送進審查過程並上傳到我的作品。
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,我同意此體驗會將我的動作送進審查過程並上傳到我的作品。
+CoreScripts.PublishAssetPrompt.DisclaimerImage,我同意讓這項體驗提交我的圖片以供審查，並上傳至「我的創作」。
 CoreScripts.PublishAssetPrompt.DisclaimerModel,建立的道具會經過審核，如果您的道具因不符合社群標準而被拒絕，您不會收到退款。
 CoreScripts.PublishAssetPrompt.InvalidDescription,無效說明
 CoreScripts.PublishAssetPrompt.InvalidName,無效名稱
@@ -960,6 +961,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,送出服飾
 CoreScripts.PublishAssetPrompt.TitleTextEmote,送出動作
+CoreScripts.PublishAssetPrompt.TitleTextImage,提交圖片
 CoreScripts.PublishAssetPrompt.TitleTextModel,送出套件
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,有地方出錯，請再試一次。錯誤代碼：{RESULT_TYPE}
@@ -1836,6 +1838,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知我
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,開啟設定
+Feature.Build.Action.Play,遊玩
 Feature.Build.Action.Playtest,試玩
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
@@ -1886,7 +1889,10 @@ Feature.Build.Header.ContentMaturity,成年適宜內容
 Feature.Build.Header.CustomAnswer,自訂答案
 Feature.Build.Header.GameDetails,遊戲詳情
 Feature.Build.Header.Overview,概覽
+Feature.Build.Header.PastCampaigns,過往的廣告活動
 Feature.Build.Label.Access,存取權
+Feature.Build.Label.AdClicks,廣告點擊次數
+Feature.Build.Label.AdViews,廣告觀看次數
 Feature.Build.Label.AdditionalUsage,額外組建使用量
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，上限 {LIMIT}
 Feature.Build.Label.All,
@@ -1900,6 +1906,7 @@ Feature.Build.Label.ContentRating,內容分級
 Feature.Build.Label.Created,已建立
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}，{YEAR}
 Feature.Build.Label.CreatorHub,創作者中心
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
 Feature.Build.Label.Description,
@@ -1908,6 +1915,7 @@ Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,免費組建使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,僅限好友
+Feature.Build.Label.GamePlays,遊戲遊玩次數
 Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
 Feature.Build.Label.Hi,嗨
 Feature.Build.Label.IconThumbnails,圖示和縮圖
@@ -1922,6 +1930,7 @@ Feature.Build.Label.NoLimit,無上限
 Feature.Build.Label.NotStarted,尚未開始
 Feature.Build.Label.Pending,擱置
 Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
+Feature.Build.Label.PlayTime,遊玩時間
 Feature.Build.Label.PreviouslyPublished,先前已發佈
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公開
@@ -2019,6 +2028,7 @@ Feature.Build.Label.VersionTitleDesc,版本標題和說明
 Feature.Build.Label.Video,影片
 Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
 Feature.Build.Message.AccountTooNew,你的帳號太新，無法發佈。請在 2 天後再試一次。
+Feature.Build.Message.AdPerformanceLoadFailed,無法載入廣告成效
 Feature.Build.Message.AllFriendsAdded,你已將所有好友新增為遊戲測試員。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答組建的問題。
 Feature.Build.Message.AssetDetailsUnavailable,無法取得素材詳細資訊。
@@ -2086,6 +2096,10 @@ Feature.Build.Message.WhatToCreate,今天你想要建立什麼呢？
 Feature.Build.Message.WorkedMinutesSeconds,已運作 {MINUTES} 分 {REM_SECONDS} 秒
 Feature.Build.Message.WorkedSeconds,已運作 {SECONDS} 秒
 Feature.Build.Message.WorkingOnTasks,正在處理你的任務
+Feature.Build.Notification.Message.Continue,若要繼續，請恢復組建聊天。
+Feature.Build.Notification.Message.Review,若要查看結果，請恢復組建聊天。
+Feature.Build.Notification.Title.Finished,組建完成
+Feature.Build.Notification.Title.NeedInput,組建需要你的輸入
 Feature.Build.Title.AdCampaignActive,廣告活動已生效
 Feature.Build.Title.AddFriendsToPlaytest,新增好友協助你試玩
 Feature.Build.Title.ArchiveThisGame,要封存此遊戲嗎？
@@ -2105,6 +2119,7 @@ Feature.Build.Title.FriendsOnlyPlay,只有好友可以遊玩
 Feature.Build.Title.GameCreationDone,已完成遊戲創作
 Feature.Build.Title.GamePrivate,此遊戲僅限私人存取
 Feature.Build.Title.GenericError,
+Feature.Build.Title.GetUsers,取得使用者
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.Playtesters,遊戲測試員
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
@@ -2795,7 +2810,7 @@ Feature.ExperienceDetails.Label.NotPlayable,無法遊玩
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,遊玩這項體驗即表示我同意注意事項
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,遊玩
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,播放示範
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,解鎖

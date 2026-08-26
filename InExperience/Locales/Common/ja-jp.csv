@@ -946,6 +946,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,このバーチャル空間が私のアバターアイテムを内容規制に送信し、自分の作品ページにアップロードすることに同意します。
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,このバーチャル空間が私のリアクションを内容規制に送信、自分の作品ページにアップロードすることに同意します。
+CoreScripts.PublishAssetPrompt.DisclaimerImage,私は、このバーチャル空間が私の画像を内容審査に送信し、自分の作品ページにアップロードすることに同意します。
 CoreScripts.PublishAssetPrompt.DisclaimerModel,作成されたアイテムは内容審査を受けます。コミュニティ基準に準拠していないため承認されなかったアイテムの払い戻しは受けられない場合があります。
 CoreScripts.PublishAssetPrompt.InvalidDescription,概要が無効です
 CoreScripts.PublishAssetPrompt.InvalidName,名前が無効です
@@ -960,6 +961,7 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,服装を送信
 CoreScripts.PublishAssetPrompt.TitleTextEmote,リアクションを送信
+CoreScripts.PublishAssetPrompt.TitleTextImage,画像を送信
 CoreScripts.PublishAssetPrompt.TitleTextModel,パッケージを提出
 CoreScripts.PublishAssetPrompt.TitleTextPackage,パッケージを送信
 CoreScripts.PublishAssetPrompt.UndefinedError,何らかの問題が発生しました。もう一度お試しください。エラーコード: {RESULT_TYPE}
@@ -2086,6 +2088,10 @@ Feature.Build.Message.WhatToCreate,今日は何を制作したいですか？
 Feature.Build.Message.WorkedMinutesSeconds,作業時間{MINUTES}分{REM_SECONDS}秒
 Feature.Build.Message.WorkedSeconds,作業時間{SECONDS}秒
 Feature.Build.Message.WorkingOnTasks,タスクを処理中
+Feature.Build.Notification.Message.Continue,続けるには、ビルドチャットを再開してください。
+Feature.Build.Notification.Message.Review,結果を確認するには、ビルドチャットを再開してください。
+Feature.Build.Notification.Title.Finished,ビルドが完了しました
+Feature.Build.Notification.Title.NeedInput,ビルドを続けるには入力が必要です
 Feature.Build.Title.AdCampaignActive,広告キャンペーンが有効です
 Feature.Build.Title.AddFriendsToPlaytest,プレイテストに協力してもらう友達を追加してください
 Feature.Build.Title.ArchiveThisGame,このゲームをアーカイブしますか？

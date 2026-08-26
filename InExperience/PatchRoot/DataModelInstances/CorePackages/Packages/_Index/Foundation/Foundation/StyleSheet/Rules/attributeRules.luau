@@ -3,6 +3,7 @@ local dashModule = require(foundation.Parent.Dash)
 local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(script.Parent.Types)
 local cornerRulesModule = require(script.Parent.cornerRules)
+local shadowRulesModule = require(script.Parent.shadowRules)
 local tokenAttributePascalNameModule = require(script.Parent.Parent.tokenAttributePascalName)
 
 local function kebabToPascal(p1)
@@ -86,6 +87,11 @@ local _ = function(p3)
 			attributes = { { name = `Radius{var3}`, value = p4.size } }
 		}
 	end)
+end
+
+local _ = function(p3)
+	-- upvalues: shadowRulesModule (ref)
+	return shadowRulesModule(p3)
 end
 
 local function SizeRules(p3)
@@ -252,6 +258,22 @@ local function DefaultRules(p8)
 			priority = -1,
 			properties = { BackgroundTransparency = 1 }
 		},
+		{
+			tag = "text-defaults",
+			priority = -1,
+			properties = { Font = "$FontBodyLarge" },
+			attributes = {
+				{
+					name = "FontBodyLarge",
+					value = p8.Typography.BodyLarge.Font
+				}
+			}
+		}
+	}
+end
+
+local function DefaultFontRules(p8)
+	return {
 		{
 			tag = "text-defaults",
 			priority = -1,
@@ -841,7 +863,7 @@ end
 
 return {
 	rulesGenerator = function(p15, p16)
-		-- upvalues: dashModule (ref), DefaultRules (ref), EngineDefaultBypassRules (ref), FlexItemRules (ref), TextRules (ref), AutomaticSizeRules (ref), PositionRules (ref), AnchorPointRules (ref), ClipsDescendantRules (ref), AspectRatioRules (ref), DefaultSizeRules (ref), ListLayoutRules (ref), ListLayoutSpacingRules (ref), cornerRulesModule (ref), kebabToPascal (ref), SizeRules (ref), StrokeSizeRules (ref), TypographyRules (ref), PaddingRules (ref), DefaultColorRules (ref), DeprecatedColorRules (ref), BackgroundRules (ref), StrokeRules (ref), ContentRules (ref)
+		-- upvalues: dashModule (ref), DefaultRules (ref), EngineDefaultBypassRules (ref), FlexItemRules (ref), TextRules (ref), AutomaticSizeRules (ref), PositionRules (ref), AnchorPointRules (ref), ClipsDescendantRules (ref), AspectRatioRules (ref), DefaultSizeRules (ref), ListLayoutRules (ref), ListLayoutSpacingRules (ref), cornerRulesModule (ref), kebabToPascal (ref), shadowRulesModule (ref), SizeRules (ref), StrokeSizeRules (ref), TypographyRules (ref), PaddingRules (ref), DefaultColorRules (ref), DeprecatedColorRules (ref), BackgroundRules (ref), StrokeRules (ref), ContentRules (ref), DefaultFontRules (ref)
 		local colors = p16.colors
 		local variants = p16.variants
 		local typography = p16.typography
@@ -854,6 +876,6 @@ return {
 				cornerValue = `$Radius{var19}`,
 				attributes = { { name = `Radius{var19}`, value = p17.size } }
 			}
-		end), SizeRules(p16.sizes), StrokeSizeRules(p16.strokes), TypographyRules(typography, p15.Config.Text.NominalScale), PaddingRules(p16.paddings, p16.margins)), dashModule.joinArrays(DefaultColorRules(p15), DeprecatedColorRules(colors), BackgroundRules(colors, variants), StrokeRules(colors, variants), ContentRules(colors, variants))
+		end), shadowRulesModule(p15), SizeRules(p16.sizes), StrokeSizeRules(p16.strokes), TypographyRules(typography, p15.Config.Text.NominalScale), PaddingRules(p16.paddings, p16.margins)), dashModule.joinArrays(DefaultColorRules(p15), DeprecatedColorRules(colors), BackgroundRules(colors, variants), StrokeRules(colors, variants), ContentRules(colors, variants)), dashModule.joinArrays(DefaultFontRules(p15), DefaultSizeRules(typography["body-large"], p15.Config.Text.NominalScale), TypographyRules(typography, p15.Config.Text.NominalScale))
 	end
 }
