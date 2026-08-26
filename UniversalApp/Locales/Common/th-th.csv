@@ -2214,13 +2214,16 @@ Feature.Build.Description.RaiseLimitOrWait,เพิ่มวงเงิน Rob
 Feature.Build.Description.RatingAgreement,การเผยแพร่จะถือว่าคุณยอมรับว่าการจัดระดับเนื้อหานี้ถูกต้อง
 Feature.Build.Description.RestoreLatest,เวอร์ชันนี้จะกลายเป็นเวอร์ชันที่เผยแพร่ล่าสุดของคุณ
 Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย้อนการเปลี่ยนแปลงล่าสุดและกลับไปใช้เวอร์ชัน {VERSION}
+Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Description.VersionChanges,บอกผู้เล่นว่าเวอร์ชันนี้มีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Header.AccessSharing,การเข้าถึงและการแชร์
+Feature.Build.Header.AllVersions,ทุกเวอร์ชัน
 Feature.Build.Header.ContentMaturity,ระดับความเหมาะสมของเนื้อหา
 Feature.Build.Header.CustomAnswer,คำตอบที่กำหนดเอง
 Feature.Build.Header.GameDetails,รายละเอียดเกม
 Feature.Build.Header.Overview,ภาพรวม
 Feature.Build.Header.PastCampaigns,แคมเปญที่ผ่านมา
+Feature.Build.Header.UpdateDetails,อัปเดตรายละเอียด
 Feature.Build.Label.Access,การเข้าถึง
 Feature.Build.Label.AdClicks,จำนวนการคลิกโฆษณา
 Feature.Build.Label.AdViews,จำนวนการดูโฆษณา
@@ -2351,6 +2354,7 @@ Feature.Build.Label.ToolThumbnailRunning,กำลังตั้งค่าภ
 Feature.Build.Label.UniverseNumber,ยูนิเวิร์ส {UNIVERSE_ID}
 Feature.Build.Label.Unknown,ไม่ทราบ
 Feature.Build.Label.UnlimitedUsed,ใช้ไปแล้ว {USED} • ไม่จำกัด
+Feature.Build.Label.UpdateTitleDesc,อัปเดตชื่อและคำอธิบาย
 Feature.Build.Label.Updated,อัปเดตเมื่อ
 Feature.Build.Label.Usage,โควต้าการใช้งาน
 Feature.Build.Label.UsageUsed,ใช้ไปแล้ว {USED}
@@ -2467,8 +2471,10 @@ Feature.Build.Title.RevertLastChange,แปลงกลับการเปล�
 Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.VersionHistory,ประวัติเวอร์ชัน
-Feature.Build.Title.VersionInformation,ข้อมูลเวอร์ชัน
+Feature.Build.Title.VersionInfo,ข้อมูลเวอร์ชัน
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,เวอร์ชัน {VERSION}
+Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,มีอะไรให้บ้าง?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
@@ -4421,6 +4427,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,แก้ไขชื่อ
 Feature.Profile.Heading.EditDisplayName,แก้ไขชื่อที่แสดง
 Feature.Profile.Heading.InsufficientFunds,เงินไม่เพียงพอ
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,กรอบโปรไฟล์
 Feature.Profile.Heading.ProfilePictureSaved,บันทึกภาพโปรไฟล์เรียบร้อยแล้ว
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,สถิติ

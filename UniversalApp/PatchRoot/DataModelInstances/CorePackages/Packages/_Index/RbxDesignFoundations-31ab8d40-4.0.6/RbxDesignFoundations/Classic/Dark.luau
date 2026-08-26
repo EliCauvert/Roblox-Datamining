@@ -2,9 +2,12 @@
 	return {
 		Color = {
 			ActionAlert = {
-				Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+				Background = {
+					Transparency = 0.88,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(217, 28, 21) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(240, 68, 51) }
 			},
 			ActionEmphasis = {
 				Background = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
@@ -14,51 +17,57 @@
 			ActionLink = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
 			ActionOverMedia = {
-				Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
-				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
-			},
-			ActionSoftEmphasis = {
-				Background = { Transparency = 0.7, Color3 = Color3.fromRGB(51, 95, 255) },
-				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(0, 20, 92) }
-			},
-			ActionStandard = {
-				Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+				Background = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
-			ActionSubEmphasis = {
-				Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+			ActionSoftEmphasis = {
+				Background = { Transparency = 0.6, Color3 = Color3.fromRGB(51, 95, 255) },
+				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(235, 241, 255) }
+			},
+			ActionStandard = {
+				Background = {
+					Transparency = 0.88,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
+			},
+			ActionSubEmphasis = {
+				Background = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			ActionSubtle = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Border = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+				Border = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
 			ActionUtility = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
 			Common = {
-				Backdrop = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
-				HeavyDivider = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
-				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-				Scrim = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
+				Backdrop = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
+				HeavyDivider = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
+				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(4, 35, 73) },
+				Scrim = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
 				Shadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-				Shimmer = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
+				Shimmer = {
+					Transparency = 0.88,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				}
 			},
 			Content = {
-				Default = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
-				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
-				Link = { Transparency = 0, Color3 = Color3.fromRGB(20, 70, 255) },
-				Muted = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) }
+				Default = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
+				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+				Link = { Transparency = 0, Color3 = Color3.fromRGB(82, 139, 255) },
+				Muted = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) }
 			},
 			Extended = {
 				Black = {
@@ -305,65 +314,83 @@
 			},
 			None = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 			OverMedia = {
-				OverMedia_0 = {
-					Transparency = 0.08,
-					Color3 = Color3.fromRGB(255, 255, 255)
-				},
-				OverMedia_100 = {
-					Transparency = 0.08,
-					Color3 = Color3.fromRGB(247, 247, 248)
-				},
-				OverMedia_200 = {
-					Transparency = 0.08,
-					Color3 = Color3.fromRGB(255, 255, 255)
-				},
-				OverMedia_300 = {
-					Transparency = 0.08,
-					Color3 = Color3.fromRGB(247, 247, 248)
-				}
+				OverMedia_0 = { Transparency = 0.08, Color3 = Color3.fromRGB(18, 18, 21) },
+				OverMedia_100 = { Transparency = 0.08, Color3 = Color3.fromRGB(25, 26, 31) },
+				OverMedia_200 = { Transparency = 0.08, Color3 = Color3.fromRGB(32, 34, 39) },
+				OverMedia_300 = { Transparency = 0.08, Color3 = Color3.fromRGB(39, 41, 48) }
 			},
 			Selection = {
-				End = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-				Start = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) }
+				End = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+				Start = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) }
 			},
 			Shift = {
-				Shift_100 = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
-				Shift_200 = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
-				Shift_300 = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
-				Shift_400 = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) }
+				Shift_100 = {
+					Transparency = 0.96,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
+				Shift_200 = {
+					Transparency = 0.92,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
+				Shift_300 = {
+					Transparency = 0.88,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
+				Shift_400 = {
+					Transparency = 0.84,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				}
 			},
 			State = {
-				Hover = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
-				Idle = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Press = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
+				Hover = {
+					Transparency = 0.92,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
+				Idle = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) },
+				Press = {
+					Transparency = 0.88,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				}
 			},
 			Stroke = {
-				Default = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
-				Emphasis = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
-				Muted = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) }
+				Default = {
+					Transparency = 0.88,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
+				Emphasis = {
+					Transparency = 0.84,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
+				Muted = {
+					Transparency = 0.92,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				}
 			},
 			Surface = {
-				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
+				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
+				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) }
 			},
 			System = {
 				Alert = { Transparency = 0, Color3 = Color3.fromRGB(223, 40, 31) },
-				Contrast = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+				Contrast = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
 				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-				Neutral = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+				Neutral = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) },
 				Success = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
 				Warning = { Transparency = 0, Color3 = Color3.fromRGB(242, 186, 42) }
 			}
 		},
 		Component = {
 			BaseMenu = {
-				BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+				BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 				BorderRadius = 8 * p1
 			},
 			ControllerBar = {
-				BackgroundColor = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
+				BackgroundColor = {
+					Transparency = 0.96,
+					Color3 = Color3.fromRGB(208, 217, 251)
+				},
 				BorderRadius = {
 					LeadingBottom = 9999 * p1,
 					LeadingTop = 9999 * p1,
@@ -380,7 +407,7 @@
 			},
 			ControllerBarShortcut = {
 				Container = {
-					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
 					Gap = 4 * p1
 				},
 				Icon = { Size = 36 * p1 },
@@ -396,7 +423,7 @@
 			Facepile = {
 				Badge = {
 					BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 					BorderRadius = 9999 * p1,
 					BorderWidth = 2 * p1,
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
@@ -412,8 +439,8 @@
 				},
 				Container = { Gap = 4 * p1 },
 				Face = {
-					BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
-					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+					BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
+					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 					BorderRadius = 9999 * p1,
 					BorderWidth = 2 * p1,
 					Height = 16 * p1,
@@ -421,7 +448,7 @@
 				},
 				FaceGroup = { Gap = -6 * p1 },
 				Label = {
-					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) },
+					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) },
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.2,
@@ -433,7 +460,7 @@
 			HelperText = {
 				Base = {
 					Opacity = 1,
-					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
 					Padding = { Top = 4 * p1 },
 					Typography = {
 						LetterSpacing = 0,
@@ -443,13 +470,13 @@
 					}
 				},
 				Error = {
-					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(217, 28, 21) }
+					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(240, 68, 51) }
 				}
 			},
 			InputLabel = {
 				Base = {
 					Opacity = 1,
-					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
 					Spacing = { Bottom = 4 * p1 },
 					Typography = {
 						LetterSpacing = 0,
@@ -469,15 +496,18 @@
 					CheckFrame = { Size = 32 * p1 },
 					Container = {
 						BorderWidth = 0,
-						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-						BorderColor = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
+						BorderColor = {
+							Transparency = 0.84,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						},
 						BorderRadius = {
 							BottomLeading = 0,
 							BottomTrailing = 0,
 							TopLeading = 0,
 							TopTrailing = 0
 						},
-						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
 						Height = 56 * p1,
 						Spacing = {
 							Bottom = 0,
@@ -506,7 +536,10 @@
 				},
 				Disabled = {
 					Container = {
-						ContentColor = { Transparency = 0.5, Color3 = Color3.fromRGB(32, 34, 39) }
+						ContentColor = {
+							Transparency = 0.5,
+							Color3 = Color3.fromRGB(247, 247, 248)
+						}
 					}
 				},
 				Divider = { Container = { BorderWidth = 1 * p1 } },
@@ -540,7 +573,7 @@
 						}
 					},
 					Content = {
-						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
 						Gap = 2 * p1,
 						Typography = {
 							LetterSpacing = 0,
@@ -551,18 +584,21 @@
 					},
 					Icon = { Size = 16 * p1 },
 					Image = {
-						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-						BorderColor = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
+						BorderColor = {
+							Transparency = 0.84,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						},
 						BorderRadius = 9999 * p1,
 						BorderWidth = 3 * p1,
 						Size = 96 * p1
 					},
 					Presence = {
-						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) }
+						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) }
 					},
 					Status = {
 						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
-						BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+						BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
 						BorderWidth = 2.5 * p1,
 						Size = 16 * p1
 					}
@@ -571,7 +607,10 @@
 			RateCount = {
 				ButtonGroup = { Gap = 8 * p1 },
 				Container = {
-					BackgroundColor = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+					BackgroundColor = {
+						Transparency = 0.84,
+						Color3 = Color3.fromRGB(208, 217, 251)
+					},
 					BorderRadius = 8 * p1,
 					Gap = 8 * p1,
 					Spacing = 8 * p1
@@ -581,15 +620,15 @@
 				Inset = 0,
 				BorderWidth = 3 * p1,
 				Gradient = {
-					End = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-					Start = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) }
+					End = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+					Start = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) }
 				},
 				Offset = 6 * p1
 			},
 			StatGroup = { Gap = 8 * p1 },
 			StatItem = {
 				Container = {
-					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) },
+					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) },
 					Gap = 2 * p1
 				},
 				Icon = { Size = 16 * p1 },
@@ -604,7 +643,7 @@
 			},
 			StatWidget = {
 				Container = {
-					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
 					Gap = 8 * p1
 				},
 				Data = {
@@ -653,34 +692,25 @@
 				},
 				Inverse = {
 					Default = {
-						Color = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) }
+						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
 					},
 					Disabled = {
-						Color = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) }
+						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
 					},
 					Hover = {
-						Color = {
-							Transparency = 0.92,
-							Color3 = Color3.fromRGB(208, 217, 251)
-						}
+						Color = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) }
 					},
 					Initialize = {
-						Color = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) }
+						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
 					},
 					Pressed = {
-						Color = {
-							Transparency = 0.88,
-							Color3 = Color3.fromRGB(208, 217, 251)
-						}
+						Color = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 					},
 					Selected = {
-						Color = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) }
+						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
 					},
 					SelectedPressed = {
-						Color = {
-							Transparency = 0.88,
-							Color3 = Color3.fromRGB(208, 217, 251)
-						}
+						Color = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 					}
 				},
 				Lighten = {
@@ -717,25 +747,34 @@
 				},
 				Standard = {
 					Default = {
-						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
+						Color = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) }
 					},
 					Disabled = {
-						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
+						Color = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) }
 					},
 					Hover = {
-						Color = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) }
+						Color = {
+							Transparency = 0.92,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						}
 					},
 					Initialize = {
-						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
+						Color = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) }
 					},
 					Pressed = {
-						Color = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
+						Color = {
+							Transparency = 0.88,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						}
 					},
 					Selected = {
-						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
+						Color = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) }
 					},
 					SelectedPressed = {
-						Color = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
+						Color = {
+							Transparency = 0.88,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						}
 					}
 				}
 			},
@@ -743,7 +782,10 @@
 				Base = {
 					Field = {
 						Opacity = 1,
-						BorderColor = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+						BorderColor = {
+							Transparency = 0.84,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						},
 						BorderRadius = 8 * p1,
 						Gap = 8 * p1,
 						Spacing = { Leading = 12 * p1, Trailing = 12 * p1 },
@@ -755,14 +797,14 @@
 						}
 					},
 					FieldValue = {
-						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 					},
 					IconLeading = {
-						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) },
+						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) },
 						Size = 16 * p1
 					},
 					PlaceholderText = {
-						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) }
+						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) }
 					}
 				},
 				Disabled = { Field = { Opacity = 0.32 } },
@@ -775,9 +817,12 @@
 			VerticalScrollView = {
 				Base = {
 					Handle = {
-						BackgroundColor = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+						BackgroundColor = {
+							Transparency = 0.84,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						},
 						BorderRadius = 9999 * p1,
-						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 					},
 					Icon = { Size = 36 * p1 },
 					Track = { Opacity = 0, Spacing = { Bottom = 4 * p1, Top = 4 * p1 } }
@@ -792,8 +837,11 @@
 			VerticalTile = {
 				Base = {
 					Container = {
-						Background = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-						BorderColor = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+						Background = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
+						BorderColor = {
+							Transparency = 0.84,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						},
 						BorderRadius = {
 							LeadingBottom = 8 * p1,
 							LeadingTop = 8 * p1,
@@ -804,7 +852,7 @@
 						DropShadow = {
 							X = 0,
 							Blur = 8 * p1,
-							Color = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
+							Color = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
 							Y = 4 * p1
 						}
 					},
@@ -823,7 +871,7 @@
 			}
 		},
 		Config = {
-			ColorMode = { Name = "Light", IsDark = "false", IsLight = "true" },
+			ColorMode = { Name = "Dark", IsDark = "true", IsLight = "false" },
 			Text = {
 				Font = "Cartoon",
 				InverseScale = 0.827129859388,
@@ -908,7 +956,7 @@
 			Common = {
 				Backdrop = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
 				HeavyDivider = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
+				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(4, 35, 73) },
 				Scrim = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
 				Shadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
 				Shimmer = {
@@ -1170,12 +1218,9 @@
 		},
 		Inverse = {
 			ActionAlert = {
-				Background = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				},
+				Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(240, 68, 51) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(217, 28, 21) }
 			},
 			ActionEmphasis = {
 				Background = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
@@ -1185,123 +1230,102 @@
 			ActionLink = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			ActionOverMedia = {
-				Background = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
-			},
-			ActionSoftEmphasis = {
-				Background = { Transparency = 0.6, Color3 = Color3.fromRGB(51, 95, 255) },
-				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(235, 241, 255) }
-			},
-			ActionStandard = {
-				Background = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				},
+				Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
-			ActionSubEmphasis = {
-				Background = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+			ActionSoftEmphasis = {
+				Background = { Transparency = 0.7, Color3 = Color3.fromRGB(51, 95, 255) },
+				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(0, 20, 92) }
+			},
+			ActionStandard = {
+				Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+			},
+			ActionSubEmphasis = {
+				Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
 			ActionSubtle = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Border = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
+				Border = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			ActionUtility = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			Common = {
-				Backdrop = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
-				HeavyDivider = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
-				Scrim = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
+				Backdrop = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
+				HeavyDivider = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
+				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(214, 240, 255) },
+				Scrim = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
 				Shadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-				Shimmer = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				}
+				Shimmer = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Content = {
-				Default = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
-				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-				Link = { Transparency = 0, Color3 = Color3.fromRGB(82, 139, 255) },
-				Muted = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) }
+				Default = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+				Link = { Transparency = 0, Color3 = Color3.fromRGB(20, 70, 255) },
+				Muted = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) }
 			},
 			None = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 			OverMedia = {
-				OverMedia_0 = { Transparency = 0.08, Color3 = Color3.fromRGB(18, 18, 21) },
-				OverMedia_100 = { Transparency = 0.08, Color3 = Color3.fromRGB(25, 26, 31) },
-				OverMedia_200 = { Transparency = 0.08, Color3 = Color3.fromRGB(32, 34, 39) },
-				OverMedia_300 = { Transparency = 0.08, Color3 = Color3.fromRGB(39, 41, 48) }
+				OverMedia_0 = {
+					Transparency = 0.08,
+					Color3 = Color3.fromRGB(255, 255, 255)
+				},
+				OverMedia_100 = {
+					Transparency = 0.08,
+					Color3 = Color3.fromRGB(247, 247, 248)
+				},
+				OverMedia_200 = {
+					Transparency = 0.08,
+					Color3 = Color3.fromRGB(255, 255, 255)
+				},
+				OverMedia_300 = {
+					Transparency = 0.08,
+					Color3 = Color3.fromRGB(247, 247, 248)
+				}
 			},
 			Selection = {
-				End = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-				Start = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) }
+				End = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
+				Start = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) }
 			},
 			Shift = {
-				Shift_100 = {
-					Transparency = 0.96,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				},
-				Shift_200 = {
-					Transparency = 0.92,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				},
-				Shift_300 = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				},
-				Shift_400 = {
-					Transparency = 0.84,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				}
+				Shift_100 = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_200 = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_300 = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_400 = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			State = {
-				Hover = {
-					Transparency = 0.92,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				},
-				Idle = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) },
-				Press = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				}
+				Hover = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
+				Idle = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
+				Press = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Stroke = {
-				Default = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				},
-				Emphasis = {
-					Transparency = 0.84,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				},
-				Muted = {
-					Transparency = 0.92,
-					Color3 = Color3.fromRGB(208, 217, 251)
-				}
+				Default = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+				Emphasis = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+				Muted = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Surface = {
-				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
-				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
-				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
-				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) }
+				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
 			System = {
 				Alert = { Transparency = 0, Color3 = Color3.fromRGB(223, 40, 31) },
-				Contrast = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+				Contrast = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
 				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-				Neutral = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) },
+				Neutral = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
 				Success = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
 				Warning = { Transparency = 0, Color3 = Color3.fromRGB(242, 186, 42) }
 			}
@@ -1356,7 +1380,7 @@
 			Common = {
 				Backdrop = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
 				HeavyDivider = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
-				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(214, 240, 255) },
 				Scrim = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
 				Shadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
 				Shimmer = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
@@ -1456,14 +1480,17 @@
 			Color = {
 				Action = {
 					Alert = {
-						Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+						Background = {
+							Transparency = 0.88,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						},
 						Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-						Content = { Transparency = 0, Color3 = Color3.fromRGB(217, 28, 21) }
+						Content = { Transparency = 0, Color3 = Color3.fromRGB(240, 68, 51) }
 					},
 					Primary = {
-						Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+						Background = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
 						Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-						Content = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
+						Content = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 					},
 					PrimaryBrand = {
 						Background = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
@@ -1472,51 +1499,60 @@
 					},
 					Secondary = {
 						Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-						Border = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
-						Content = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+						Border = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
+						Content = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 					},
 					Subtle = {
 						Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 						Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-						Content = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+						Content = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 					}
 				},
 				Background = {
-					Contrast = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-					Default = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-					Muted = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-					OnHover = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
-					OnPress = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
+					Contrast = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+					Default = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
+					Muted = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+					OnHover = {
+						Transparency = 0.92,
+						Color3 = Color3.fromRGB(208, 217, 251)
+					},
+					OnPress = {
+						Transparency = 0.88,
+						Color3 = Color3.fromRGB(208, 217, 251)
+					}
 				},
 				BackgroundUi = {
-					Contrast = {
-						Transparency = 0.08,
-						Color3 = Color3.fromRGB(255, 255, 255)
-					},
-					Default = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
+					Contrast = { Transparency = 0.08, Color3 = Color3.fromRGB(18, 18, 21) },
+					Default = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) }
 				},
 				Common = {
 					Alert = { Transparency = 0, Color3 = Color3.fromRGB(223, 40, 31) },
-					Badge = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
-					BadgeContent = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-					Divider = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+					Badge = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+					BadgeContent = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+					Divider = {
+						Transparency = 0.84,
+						Color3 = Color3.fromRGB(208, 217, 251)
+					},
 					DropShadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-					NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-					Offline = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+					NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(4, 35, 73) },
+					Offline = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) },
 					Online = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
-					Overlay = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
-					Placeholder = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+					Overlay = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
+					Placeholder = {
+						Transparency = 0.88,
+						Color3 = Color3.fromRGB(208, 217, 251)
+					},
 					Success = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) }
 				},
 				Focus = {
-					End = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-					Gradient = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-					Start = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) }
+					End = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+					Gradient = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+					Start = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) }
 				},
 				Icon = {
-					Default = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
-					Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
-					OnHover = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+					Default = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
+					Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+					OnHover = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 				},
 				State = {
 					Darken = {
@@ -1525,15 +1561,9 @@
 						Pressed = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 					},
 					Inverse = {
-						Default = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) },
-						Hover = {
-							Transparency = 0.92,
-							Color3 = Color3.fromRGB(208, 217, 251)
-						},
-						Pressed = {
-							Transparency = 0.88,
-							Color3 = Color3.fromRGB(208, 217, 251)
-						}
+						Default = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
+						Hover = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
+						Pressed = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 					},
 					Lighten = {
 						Default = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) },
@@ -1547,22 +1577,37 @@
 						}
 					},
 					Standard = {
-						Default = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-						Hover = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
-						Pressed = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
+						Default = { Transparency = 1, Color3 = Color3.fromRGB(255, 255, 255) },
+						Hover = {
+							Transparency = 0.92,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						},
+						Pressed = {
+							Transparency = 0.88,
+							Color3 = Color3.fromRGB(208, 217, 251)
+						}
 					}
 				},
 				Text = {
-					Default = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
-					Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
-					Inverse = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
-					Link = { Transparency = 0, Color3 = Color3.fromRGB(20, 70, 255) },
-					Muted = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) }
+					Default = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
+					Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+					Inverse = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+					Link = { Transparency = 0, Color3 = Color3.fromRGB(82, 139, 255) },
+					Muted = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) }
 				},
 				Ui = {
-					Default = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
-					Emphasis = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
-					Muted = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) }
+					Default = {
+						Transparency = 0.92,
+						Color3 = Color3.fromRGB(208, 217, 251)
+					},
+					Emphasis = {
+						Transparency = 0.84,
+						Color3 = Color3.fromRGB(208, 217, 251)
+					},
+					Muted = {
+						Transparency = 0.96,
+						Color3 = Color3.fromRGB(208, 217, 251)
+					}
 				}
 			},
 			Icon = {

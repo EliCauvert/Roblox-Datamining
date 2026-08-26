@@ -31,6 +31,9 @@ return {
 		Kids = function()
 			return require(script.Kids)
 		end,
+		KidsClassic = function()
+			return require(script.KidsClassic)
+		end,
 		KineticEnergy = function()
 			return require(script.KineticEnergy)
 		end,

@@ -1169,6 +1169,7 @@ Feature.Accessibility.Action.ScrollUp,向上滚动
 Feature.Accessibility.AppTheme.CategoryCalm,平静
 Feature.Accessibility.AppTheme.CategoryDynamic,动态
 Feature.Accessibility.AppTheme.CircuitRush,电路疾驰
+Feature.Accessibility.AppTheme.Classic,
 Feature.Accessibility.AppTheme.CosmicDust,星尘
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,电光青柠
@@ -2208,14 +2209,56 @@ Feature.Build.Action.UpdateRating,更新评级
 Feature.Build.Action.UpdateWithChanges,应用更改
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用额度
+Feature.Build.Analytics.AnalyzeChatPrompt,
+Feature.Build.Analytics.AnalyzeName.Arppu,
+Feature.Build.Analytics.AnalyzeName.D1Retention,
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,
+Feature.Build.Analytics.AnalyzeName.PayerConversion,
+Feature.Build.Analytics.AnalyzeName.PlaythroughRate,
+Feature.Build.Analytics.AnalyzeName.TotalPlaytime,
+Feature.Build.Analytics.Description.Arppu,
+Feature.Build.Analytics.Description.D1Retention,
+Feature.Build.Analytics.Description.DailyActiveUsers,
+Feature.Build.Analytics.Description.PayerConversion,
+Feature.Build.Analytics.Description.PlaythroughRate,
+Feature.Build.Analytics.Description.TotalPlaytime,
 Feature.Build.Analytics.DurationHours,
+Feature.Build.Analytics.KeyStats,
+Feature.Build.Analytics.LastMonth,
+Feature.Build.Analytics.LastWeek,
+Feature.Build.Analytics.Likes,
+Feature.Build.Analytics.Month.Apr,
+Feature.Build.Analytics.Month.Aug,
+Feature.Build.Analytics.Month.Dec,
+Feature.Build.Analytics.Month.Feb,
+Feature.Build.Analytics.Month.Jan,
+Feature.Build.Analytics.Month.Jul,
+Feature.Build.Analytics.Month.Jun,
+Feature.Build.Analytics.Month.Mar,
+Feature.Build.Analytics.Month.May,
+Feature.Build.Analytics.Month.Nov,
+Feature.Build.Analytics.Month.Oct,
+Feature.Build.Analytics.Month.Sep,
+Feature.Build.Analytics.NoData,
+Feature.Build.Analytics.Overview,
 Feature.Build.Analytics.Percent,
+Feature.Build.Analytics.Players,
+Feature.Build.Analytics.Sheet.Analyze,
+Feature.Build.Analytics.Sheet.ViewInOverview,
+Feature.Build.Analytics.Summary.Arppu,
+Feature.Build.Analytics.Summary.D1Retention,
+Feature.Build.Analytics.Summary.DailyActiveUsers,
+Feature.Build.Analytics.Summary.PayerConversion,
+Feature.Build.Analytics.Summary.PlaythroughRate,
+Feature.Build.Analytics.Summary.TotalPlaytime,
 Feature.Build.Analytics.Title.Arppu,
+Feature.Build.Analytics.Title.ConcurrentUsers,
 Feature.Build.Analytics.Title.D1Retention,
 Feature.Build.Analytics.Title.DailyActiveUsers,
 Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.TotalPlaytime,
+Feature.Build.Analytics.Visits,
 Feature.Build.Content.NewGame,新游戏
 Feature.Build.Description.AdCampaignModerationReview,所有广告活动均由 Roblox 审核团队进行审核。此过程最多可能需要 24 小时。
 Feature.Build.Description.AdCampaignSheetRunDates,投放时间 {startDate} – {endDate}
@@ -2248,18 +2291,22 @@ Feature.Build.Description.RaiseLimitOrWait,提高你的每日 Robux 限额以继
 Feature.Build.Description.RatingAgreement,发布即表示你同意此内容评级准确无误。
 Feature.Build.Description.RestoreLatest,此版本将成为你的最新发布版本。
 Feature.Build.Description.RevertToVersion,确认以还原上次更改并返回到 {VERSION}。
+Feature.Build.Description.ShareLatest,分享最新版本的变化。
 Feature.Build.Description.VersionChanges,告诉玩家此版本的更新内容
 Feature.Build.Header.AccessSharing,访问权限和共享
+Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.ContentMaturity,内容成熟度
 Feature.Build.Header.CustomAnswer,自定义回答
 Feature.Build.Header.GameDetails,游戏详情
 Feature.Build.Header.Overview,概览
 Feature.Build.Header.PastCampaigns,过去的广告活动
+Feature.Build.Header.UpdateDetails,更新详情
 Feature.Build.Label.Access,访问权限
 Feature.Build.Label.AdClicks,广告点击次数
 Feature.Build.Label.AdViews,广告观看次数
 Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
+Feature.Build.Label.AdsManager,
 Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
 Feature.Build.Label.Autosaved,自动保存版本
@@ -2386,6 +2433,7 @@ Feature.Build.Label.ToolThumbnailRunning,正在设置游戏缩略图
 Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
 Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 无限额
+Feature.Build.Label.UpdateTitleDesc,更新标题和描述
 Feature.Build.Label.Updated,更新时间
 Feature.Build.Label.Usage,使用额度
 Feature.Build.Label.UsageUsed,已使用 {USED}
@@ -2506,8 +2554,10 @@ Feature.Build.Title.RevertLastChange,是否还原上次更改？
 Feature.Build.Title.Tasks,任务
 Feature.Build.Title.TurnActivity,轮次活动
 Feature.Build.Title.VersionHistory,版本历史记录
-Feature.Build.Title.VersionInformation,版本信息
+Feature.Build.Title.VersionInfo,版本信息
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,版本 {VERSION}
+Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些内容？
 Feature.BuyRobux.Heading.Banner,购买罗宝
 Feature.Call.Error.Description.Generic,
@@ -4486,6 +4536,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,个人资料边框
 Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,统计资料

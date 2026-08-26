@@ -2211,13 +2211,16 @@ Feature.Build.Description.RaiseLimitOrWait,قم بزيادة الحد اليوم
 Feature.Build.Description.RatingAgreement,من خلال النشر، فإنك توافق على دقة تصنيف هذا المحتوى.
 Feature.Build.Description.RestoreLatest,سيصبح هذا الإصدار أحدث إصدار منشور لك.
 Feature.Build.Description.RevertToVersion,تأكيد التراجع عن التغيير الأخير والرجوع إلى {VERSION}.
+Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
 Feature.Build.Description.VersionChanges,أخبر اللاعبين بما تغير في هذا الإصدار.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
+Feature.Build.Header.AllVersions,جميع الإصدارات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
 Feature.Build.Header.CustomAnswer,إجابة مخصصة
 Feature.Build.Header.GameDetails,تفاصيل اللعبة
 Feature.Build.Header.Overview,نظرة عامة
 Feature.Build.Header.PastCampaigns,الحملات السابقة
+Feature.Build.Header.UpdateDetails,تحديث التفاصيل
 Feature.Build.Label.Access,الوصول
 Feature.Build.Label.AdClicks,عدد مرات الضغط على الإعلان
 Feature.Build.Label.AdViews,عدد مرات عرض الإعلان
@@ -2348,6 +2351,7 @@ Feature.Build.Label.ToolThumbnailRunning,جارٍ إعداد الصورة الم
 Feature.Build.Label.UniverseNumber,الكون {UNIVERSE_ID}
 Feature.Build.Label.Unknown,غير معروف
 Feature.Build.Label.UnlimitedUsed,تم استخدام {USED} • بلا حد أقصى
+Feature.Build.Label.UpdateTitleDesc,حدِّث العنوان والوصف
 Feature.Build.Label.Updated,تم التحديث
 Feature.Build.Label.Usage,الاستخدام
 Feature.Build.Label.UsageUsed,تم استخدام {USED}
@@ -2464,8 +2468,10 @@ Feature.Build.Title.RevertLastChange,هل تريد التراجع عن التغ�
 Feature.Build.Title.Tasks,المهام
 Feature.Build.Title.TurnActivity,نشاط الدور
 Feature.Build.Title.VersionHistory,سجل الإصدارات
-Feature.Build.Title.VersionInformation,معلومات الإصدار
+Feature.Build.Title.VersionInfo,معلومات الإصدار
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,الإصدار {VERSION}
+Feature.Build.Title.Versions,الإصدارات
 Feature.Build.Title.WhatsIncluded,ما الذي تشمله الحملة؟
 Feature.BuyRobux.Heading.Banner,شراء Robux
 Feature.Call.Error.Description.Generic,
@@ -4418,6 +4424,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,تحرير الاسم
 Feature.Profile.Heading.EditDisplayName,تعديل اسم العرض
 Feature.Profile.Heading.InsufficientFunds,رصيد غير كافي
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,إطار الملف الشخصي
 Feature.Profile.Heading.ProfilePictureSaved,تم حفظ صورة الملف الشخصي بنجاح
 Feature.Profile.Heading.ProfileQRCode,مشاركة رمز QR
 Feature.Profile.Heading.Statistics,الإحصائيات

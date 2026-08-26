@@ -2212,13 +2212,16 @@ Feature.Build.Description.RaiseLimitOrWait,提高你的每日 Robux 限额以继
 Feature.Build.Description.RatingAgreement,发布即表示你同意此内容评级准确无误。
 Feature.Build.Description.RestoreLatest,此版本将成为你的最新发布版本。
 Feature.Build.Description.RevertToVersion,确认以还原上次更改并返回到 {VERSION}。
+Feature.Build.Description.ShareLatest,分享最新版本的变化。
 Feature.Build.Description.VersionChanges,告诉玩家此版本的更新内容
 Feature.Build.Header.AccessSharing,访问权限和共享
+Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.ContentMaturity,内容成熟度
 Feature.Build.Header.CustomAnswer,自定义回答
 Feature.Build.Header.GameDetails,游戏详情
 Feature.Build.Header.Overview,概览
 Feature.Build.Header.PastCampaigns,过去的广告活动
+Feature.Build.Header.UpdateDetails,更新详情
 Feature.Build.Label.Access,访问权限
 Feature.Build.Label.AdClicks,广告点击次数
 Feature.Build.Label.AdViews,广告观看次数
@@ -2349,6 +2352,7 @@ Feature.Build.Label.ToolThumbnailRunning,正在设置游戏缩略图
 Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
 Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 无限额
+Feature.Build.Label.UpdateTitleDesc,更新标题和描述
 Feature.Build.Label.Updated,更新时间
 Feature.Build.Label.Usage,使用额度
 Feature.Build.Label.UsageUsed,已使用 {USED}
@@ -2465,8 +2469,10 @@ Feature.Build.Title.RevertLastChange,是否还原上次更改？
 Feature.Build.Title.Tasks,任务
 Feature.Build.Title.TurnActivity,轮次活动
 Feature.Build.Title.VersionHistory,版本历史记录
-Feature.Build.Title.VersionInformation,版本信息
+Feature.Build.Title.VersionInfo,版本信息
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,版本 {VERSION}
+Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些内容？
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
@@ -4415,6 +4421,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,个人资料边框
 Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,统计资料

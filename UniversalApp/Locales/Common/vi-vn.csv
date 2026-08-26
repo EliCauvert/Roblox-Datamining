@@ -2231,13 +2231,16 @@ Feature.Build.Description.RaiseLimitOrWait,"Tăng hạn mức Robux hằng ngày
 Feature.Build.Description.RatingAgreement,"Bằng việc đăng, bạn đồng ý rằng mức phân loại nội dung này là chính xác."
 Feature.Build.Description.RestoreLatest,Phiên bản này sẽ trở thành phiên bản mới nhất được đăng của bạn.
 Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đổi gần nhất và quay lại {VERSION}.
+Feature.Build.Description.ShareLatest,Chia sẻ về những thay đổi trong phiên bản mới nhất của bạn.
 Feature.Build.Description.VersionChanges,Cho người chơi biết điều gì đã thay đổi trong phiên bản này.
 Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
+Feature.Build.Header.AllVersions,Tất cả các phiên bản
 Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
 Feature.Build.Header.CustomAnswer,Câu trả lời tùy chỉnh
 Feature.Build.Header.GameDetails,Chi tiết về trò chơi
 Feature.Build.Header.Overview,Tổng quan
 Feature.Build.Header.PastCampaigns,Các chiến dịch trước
+Feature.Build.Header.UpdateDetails,Chi tiết bản cập nhật
 Feature.Build.Label.Access,Quyền truy cập
 Feature.Build.Label.AdClicks,Lượt nhấp vào quảng cáo
 Feature.Build.Label.AdViews,Lượt xem quảng cáo
@@ -2368,6 +2371,7 @@ Feature.Build.Label.ToolThumbnailRunning,Đang đặt hình nhỏ cho trò chơi
 Feature.Build.Label.UniverseNumber,Vũ trụ {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Không xác định
 Feature.Build.Label.UnlimitedUsed,Đã dùng {USED} • Không giới hạn
+Feature.Build.Label.UpdateTitleDesc,Cập nhật tiêu đề và mô tả
 Feature.Build.Label.Updated,Thời gian cập nhật
 Feature.Build.Label.Usage,Sử dụng
 Feature.Build.Label.UsageUsed,Đã dùng {USED}
@@ -2484,8 +2488,10 @@ Feature.Build.Title.RevertLastChange,Trả về bản thay đổi gần nhất?
 Feature.Build.Title.Tasks,Nhiệm vụ
 Feature.Build.Title.TurnActivity,Hoạt động trong lượt
 Feature.Build.Title.VersionHistory,Lịch sử phiên bản
-Feature.Build.Title.VersionInformation,Thông tin phiên bản
+Feature.Build.Title.VersionInfo,Thông tin phiên bản
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
+Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Bao gồm những gì?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
@@ -4438,6 +4444,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Chỉnh Sửa Tên
 Feature.Profile.Heading.EditDisplayName,Chỉnh Sửa Tên Hiển Thị
 Feature.Profile.Heading.InsufficientFunds,Số Dư Không Đủ
 Feature.Profile.Heading.NicknameRequestSent,Đã Gửi Yêu Cầu Thêm Bạn Bè
+Feature.Profile.Heading.ProfileFrame,Khung hồ sơ
 Feature.Profile.Heading.ProfilePictureSaved,Đã lưu ảnh đại diện thành công
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Số Liệu

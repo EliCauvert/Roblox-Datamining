@@ -2231,13 +2231,16 @@ Feature.Build.Description.RaiseLimitOrWait,Aumente seu limite diário de Robux p
 Feature.Build.Description.RatingAgreement,"Ao publicar, você concorda que esta classificação de conteúdo está correta."
 Feature.Build.Description.RestoreLatest,Esta versão se tornará sua versão mais recente publicada.
 Feature.Build.Description.RevertToVersion,Confirme para reverter a última alteração e voltar para {VERSION}.
+Feature.Build.Description.ShareLatest,Compartilhe o que mudou na sua versão mais recente.
 Feature.Build.Description.VersionChanges,Diga aos jogadores o que mudou nesta versão.
 Feature.Build.Header.AccessSharing,Acesso e compartilhamento
+Feature.Build.Header.AllVersions,Todas as versões
 Feature.Build.Header.ContentMaturity,Maturidade do conteúdo
 Feature.Build.Header.CustomAnswer,Resposta personalizada
 Feature.Build.Header.GameDetails,Detalhes do jogo
 Feature.Build.Header.Overview,Visão geral
 Feature.Build.Header.PastCampaigns,Campanhas anteriores
+Feature.Build.Header.UpdateDetails,Atualizar detalhes
 Feature.Build.Label.Access,Acesso
 Feature.Build.Label.AdClicks,Cliques no anúncio
 Feature.Build.Label.AdViews,Visualizações de anúncios
@@ -2368,6 +2371,7 @@ Feature.Build.Label.ToolThumbnailRunning,Definindo a miniatura do jogo
 Feature.Build.Label.UniverseNumber,Universo {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Desconhecido
 Feature.Build.Label.UnlimitedUsed,{USED} usado(s) • Sem limite
+Feature.Build.Label.UpdateTitleDesc,Atualizar título e descrição
 Feature.Build.Label.Updated,Atualizado
 Feature.Build.Label.Usage,Limite de uso
 Feature.Build.Label.UsageUsed,Uso: {USED}
@@ -2484,8 +2488,10 @@ Feature.Build.Title.RevertLastChange,Reverter a última alteração?
 Feature.Build.Title.Tasks,Tarefas
 Feature.Build.Title.TurnActivity,Ações do assistente durante a resposta
 Feature.Build.Title.VersionHistory,Histórico do lançamento
-Feature.Build.Title.VersionInformation,Informações da versão
+Feature.Build.Title.VersionInfo,Informações da versão
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Versão {VERSION}
+Feature.Build.Title.Versions,Versões
 Feature.Build.Title.WhatsIncluded,O que está incluído?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,"Algo deu errado, tente novamente mais tarde."
@@ -4439,6 +4445,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Editar nome
 Feature.Profile.Heading.EditDisplayName,Editar nome de exibição
 Feature.Profile.Heading.InsufficientFunds,Saldo insuficiente
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Moldura do perfil
 Feature.Profile.Heading.ProfilePictureSaved,Imagem de perfil salva com sucesso
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Estatísticas

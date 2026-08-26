@@ -2230,13 +2230,16 @@ Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あた
 Feature.Build.Description.RatingAgreement,公開することで、このコンテンツレーティングが正確であることに同意したものとみなされます。
 Feature.Build.Description.RestoreLatest,このバージョンが、公開済みの最新バージョンになります。
 Feature.Build.Description.RevertToVersion,確認して最後の変更を元に戻し、{VERSION}に戻ります。
+Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
 Feature.Build.Description.VersionChanges,このバージョンで変更された点をプレイヤーに伝えましょう。
 Feature.Build.Header.AccessSharing,アクセスとシェア
+Feature.Build.Header.AllVersions,すべてのバージョン
 Feature.Build.Header.ContentMaturity,コンテンツ成熟度
 Feature.Build.Header.CustomAnswer,カスタムの回答
 Feature.Build.Header.GameDetails,ゲームの詳細
 Feature.Build.Header.Overview,概要
 Feature.Build.Header.PastCampaigns,過去のキャンペーン
+Feature.Build.Header.UpdateDetails,アップデート内容
 Feature.Build.Label.Access,アクセス
 Feature.Build.Label.AdClicks,広告クリック数
 Feature.Build.Label.AdViews,広告表示回数
@@ -2367,6 +2370,7 @@ Feature.Build.Label.ToolThumbnailRunning,ゲームのサムネイルを設定し
 Feature.Build.Label.UniverseNumber,ユニバース{UNIVERSE_ID}
 Feature.Build.Label.Unknown,不明
 Feature.Build.Label.UnlimitedUsed,{USED}使用済み • 制限なし
+Feature.Build.Label.UpdateTitleDesc,タイトルと詳細を更新
 Feature.Build.Label.Updated,最終更新
 Feature.Build.Label.Usage,使用量
 Feature.Build.Label.UsageUsed,{USED}使用済み
@@ -2483,8 +2487,10 @@ Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
 Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
 Feature.Build.Title.VersionHistory,バージョン履歴
-Feature.Build.Title.VersionInformation,バージョン情報
+Feature.Build.Title.VersionInfo,バージョン情報
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,バージョン{VERSION}
+Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,含まれるもの
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
@@ -4435,6 +4441,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,名前を編集
 Feature.Profile.Heading.EditDisplayName,表示名を編集
 Feature.Profile.Heading.InsufficientFunds,資金が足りません
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,プロフィールフレーム
 Feature.Profile.Heading.ProfilePictureSaved,プロフィール写真が正常に保存されました
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,統計
