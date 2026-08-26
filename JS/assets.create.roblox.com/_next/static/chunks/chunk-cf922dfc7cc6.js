@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "69dc1382-9958-dcd4-be94-de8f1070d67e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f042ccb0-6280-57fd-db3f-7e0f904d31ab")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -7156,15 +7156,6 @@
             contextType: "universe"
         }
     }, {
-        flag: ag.enableExpeditedReview,
-        metadata: {
-            namespace: "creator-gameops",
-            name: "enableExpeditedReview",
-            defaultValue: !1,
-            valueType: "boolean",
-            contextType: "static"
-        }
-    }, {
         flag: ag.enablePlayerHostedEvents,
         metadata: {
             namespace: "creator-gameops",
@@ -7461,7 +7452,7 @@
     var aZ = t.i(37819),
         aX = t.i(431346),
         aW = t.i(881670);
-    let aY = "".concat("".concat("https://assets.create.roblox.com/46bcd45c94eea53be19e5169a303451653ed5c4b/assets", "/opengraph"), "/global_og_image.png"),
+    let aY = "".concat("".concat("https://assets.create.roblox.com/4ac89191612fa2c50d538e41db4489ccd4d30d14/assets", "/opengraph"), "/global_og_image.png"),
         aJ = (0, tc.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -28385,5 +28376,5 @@
     n.exports = t.r(959610)
 }]);
 
-//# debugId=69dc1382-9958-dcd4-be94-de8f1070d67e
-//# sourceMappingURL=2rlpcbuo71rev.js.map
+//# debugId=f042ccb0-6280-57fd-db3f-7e0f904d31ab
+//# sourceMappingURL=16rdxg12kk-21.js.map

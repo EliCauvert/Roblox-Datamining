@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "8ca44be4-6ee0-a727-ca45-fa6355e78672")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "95893f6f-1313-1176-4b08-d424752f4cdf")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -160,20 +160,15 @@
         }),
         n = (0, t.defineFlag)({
             namespace: "creator-gameops",
-            name: "enableExpeditedReview",
+            name: "enablePlayerHostedEvents",
             defaultValue: !1
         }),
         i = (0, t.defineFlag)({
             namespace: "creator-gameops",
-            name: "enablePlayerHostedEvents",
-            defaultValue: !1
-        }),
-        r = (0, t.defineFlag)({
-            namespace: "creator-gameops",
             name: "enablePlayerSupportCreatorTicketReroute",
             defaultValue: !1
         });
-    e.s(["enableExpeditedReview", 0, n, "enablePlayerHostedEvents", 0, i, "enablePlayerSupport", 0, a, "enablePlayerSupportCreatorTicketReroute", 0, r])
+    e.s(["enablePlayerHostedEvents", 0, n, "enablePlayerSupport", 0, a, "enablePlayerSupportCreatorTicketReroute", 0, i])
 }, 360894, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -3274,5 +3269,5 @@
     }])
 }]);
 
-//# debugId=8ca44be4-6ee0-a727-ca45-fa6355e78672
-//# sourceMappingURL=1n829n1nr6yse.js.map
+//# debugId=95893f6f-1313-1176-4b08-d424752f4cdf
+//# sourceMappingURL=3p9vi7l1x3tn5.js.map
