@@ -191,6 +191,7 @@ Roblox.LangDynamic["Feature.Friends"] = {
     "Description.NotAFriend": "Not a friend",
     "Description.NoMutualFriends": "No mutual friends",
     "Heading.Friends": "Friends",
-    "TrustedFriend.Toast.LinkCopied": "Link copied to clipboard"
+    "TrustedFriend.Toast.LinkCopied": "Link copied to clipboard",
+    "Label.NoFriendsYet": "{name} doesn’t have any friends yet."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Friends");
